@@ -15,12 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    local_musi
- * @copyright  2023 Wunderbyte GmbH
+ * @package    local_berta
+ * @copyright  2024 Wunderbyte GmbH
  * @author     Christian Badusch
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-use local_musi\output\transactionslist;
+use local_berta\output\transactionslist;
 
 require_once('../../config.php');
 require_login();
@@ -31,15 +31,15 @@ if (!$context = context_system::instance()) {
 }
 
 $PAGE->set_context($context);
-$title = get_string('pluginname', 'local_musi');
+$title = get_string('pluginname', 'local_berta');
 $pagetitle = $title;
-$url = new moodle_url("/local/musi/transactionlist.php");
+$url = new moodle_url("/local/berta/transactionlist.php");
 
 $PAGE->set_url($url);
 $PAGE->set_title($title);
-$PAGE->set_heading(get_string('transactionslist', 'local_musi'));
+$PAGE->set_heading(get_string('transactionslist', 'local_berta'));
 
-$output = $PAGE->get_renderer('local_musi');
+$output = $PAGE->get_renderer('local_berta');
 
 echo $output->header();
 

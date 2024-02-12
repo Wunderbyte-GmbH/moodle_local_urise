@@ -17,64 +17,19 @@
 /**
  * Shortcodes for mod booking
  *
- * @package local_musi
+ * @package local_berta
  * @subpackage db
  * @since Moodle 3.11
- * @copyright 2022 Georg Maißer
+ * @copyright 2024 Georg Maißer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $shortcodes = [
-    'allekurseliste' => [
-        'callback' => 'local_musi\shortcodes::allcourseslist',
+    'unifiedlist' => [
+        'callback' => 'local_berta\shortcodes::unifiedlist',
         'wraps' => false,
-        'description' => 'shortcodeslistofbookingoptions'
-    ],
-    'allekursekarten' => [
-        'callback' => 'local_musi\shortcodes::allcoursescards',
-        'wraps' => false,
-        'description' => 'shortcodeslistofbookingoptionsascards'
-    ],
-    'allekursegrid' => [
-        'callback' => 'local_musi\shortcodes::allcoursesgrid',
-        'wraps' => false,
-        'description' => 'shortcodeslistofbookingoptionsascards'
-    ],
-    'meinekursekarten' => [
-        'callback' => 'local_musi\shortcodes::mycoursescards',
-        'wraps' => false,
-        'description' => 'shortcodeslistofmybookingoptionsascards'
-    ],
-    'trainerkursekarten' => [
-        'callback' => 'local_musi\shortcodes::mytaughtcoursescards',
-        'wraps' => false,
-        'description' => 'shortcodeslistofmytaughtbookingoptionsascards'
-    ],
-    'meinekurseliste' => [
-        'callback' => 'local_musi\shortcodes::mycourseslist',
-        'wraps' => false,
-        'description' => 'shortcodeslistofmybookingoptionsaslist'
-    ],
-    'alletrainerkarten' => [
-        'callback' => 'local_musi\shortcodes::allteacherscards',
-        'wraps' => false,
-        'description' => 'shortcodeslistofteachersascards'
-    ],
-    'userinformation' => [
-        'callback' => 'local_musi\shortcodes::userinformation',
-        'wraps' => false,
-        'description' => 'shortcodesuserinformation'
-    ],
-    'showallsports' => [
-        'callback' => 'local_musi\shortcodes::showallsports',
-        'wraps' => false,
-        'description' => 'shortcodesshowallsports'
-    ],
-    'sparten' => [
-        'callback' => 'local_musi\shortcodes::showallsports',
-        'wraps' => false,
-        'description' => 'shortcodesshowallsports'
-    ],
+        'description' => 'unified list of courses'
+    ]
 ];

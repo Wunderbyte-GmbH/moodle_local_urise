@@ -17,19 +17,19 @@
 /**
  * This file contains the definition for the renderable classes for transactions list
  *
- * @package   local_musi
- * @copyright 2023 Christian Badusch {@link http://www.wunderbyte.at}
+ * @package   local_berta
+ * @copyright 2024 Christian Badusch {@link http://www.wunderbyte.at}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_musi\output;
+namespace local_berta\output;
 
-use local_musi\table\musi_transactions_table;
+use local_berta\table\berta_transactions_table;
 use renderable;
 use renderer_base;
 use templatable;
 use stdClass;
-use local_musi\musi_payment_helper;
+use local_berta\berta_payment_helper;
 
 /**
  * This class prepares to data to render transactionstable in mustache template
@@ -41,21 +41,21 @@ class transactionslist implements renderable, templatable {
         global $DB;
 
         // Create instance of transactions wb_table and specify columns and headers.
-        $table = new musi_transactions_table('musi_transactions_table');
+        $table = new berta_transactions_table('berta_transactions_table');
 
         // Headers.
         $table->define_headers([
-            get_string('id', 'local_musi'),
+            get_string('id', 'local_berta'),
             get_string('timecreated', 'local_shopping_cart'),
             get_string('timemodified', 'local_shopping_cart'),
-            get_string('transactionid', 'local_musi'),
-            get_string('itemid', 'local_musi'),
-            get_string('username', 'local_musi'),
-            get_string('price', 'local_musi'),
-            get_string('gateway', 'local_musi'),
-            get_string('status', 'local_musi'),
-            get_string('names', 'local_musi'),
-            get_string('action', 'local_musi'),
+            get_string('transactionid', 'local_berta'),
+            get_string('itemid', 'local_berta'),
+            get_string('username', 'local_berta'),
+            get_string('price', 'local_berta'),
+            get_string('gateway', 'local_berta'),
+            get_string('status', 'local_berta'),
+            get_string('names', 'local_berta'),
+            get_string('action', 'local_berta'),
         ]);
 
         // Columns.
@@ -73,9 +73,9 @@ class transactionslist implements renderable, templatable {
         // Define Filters.
         $table->define_filtercolumns([
             'status' => [
-                'localizedname' => get_string('status', 'local_musi'),
-                '0' => get_string('openorder', 'local_musi'),
-                '3' => get_string('bookedorder', 'local_musi'),
+                'localizedname' => get_string('status', 'local_berta'),
+                '0' => get_string('openorder', 'local_berta'),
+                '3' => get_string('bookedorder', 'local_berta'),
             ]
         ]);
 
@@ -87,7 +87,7 @@ class transactionslist implements renderable, templatable {
         $table->define_sortablecolumns(['id', 'timecreated', 'timemodified', 'tid', 'itemid',
             'username', 'price', 'gateway', 'status', 'names']);
 
-        $table->define_cache('local_musi', 'cachedpaymenttable');
+        $table->define_cache('local_berta', 'cachedpaymenttable');
 
         $table->pageable(true);
 
@@ -121,7 +121,7 @@ class transactionslist implements renderable, templatable {
         $concatsql = $DB->sql_group_concat("sch.itemname", "<br>", "sch.itemname");
         $concatusername = $DB->sql_fullname("u.lastname", "u.firstname");
 
-        $gatewaynames = musi_payment_helper::get_supported_payment_gateways();
+        $gatewaynames = berta_payment_helper::get_supported_payment_gateways();
         $gatewayselectstring = "";
 
         foreach ($gatewaynames as $gwname) {

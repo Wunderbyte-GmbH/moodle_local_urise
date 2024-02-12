@@ -17,14 +17,14 @@
 /**
  * This class contains a list of webservice functions related to the Shopping Cart Module by Wunderbyte.
  *
- * @package    local_musi
- * @copyright  2022 Georg Maißer <info@wunderbyte.at>
+ * @package    local_berta
+ * @copyright  2024 Georg Maißer <info@wunderbyte.at>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 declare(strict_types=1);
 
-namespace local_musi\external;
+namespace local_berta\external;
 
 use context_system;
 use external_api;
@@ -41,8 +41,8 @@ require_once($CFG->libdir . '/externallib.php');
 /**
  * External Service for shopping cart.
  *
- * @package   local_musi
- * @copyright 2022 Wunderbyte GmbH {@link http://www.wunderbyte.at}
+ * @package   local_berta
+ * @copyright 2024 Wunderbyte GmbH {@link http://www.wunderbyte.at}
  * @author    Georg Maißer
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -84,9 +84,9 @@ class get_all_itemids extends external_api {
         // This webservice should only be usable by admin users.
         $context = context_system::instance();
         if (!has_capability('local/shopping_cart:cashier', $context)) {
-            throw new moodle_exception('norighttoaccess', 'local_musi');
+            throw new moodle_exception('norighttoaccess', 'local_berta');
         }
-        if (!$instanceid = get_config('local_musi', 'shortcodessetinstance')) {
+        if (!$instanceid = get_config('local_berta', 'shortcodessetinstance')) {
             return $returnarray;
         }
 

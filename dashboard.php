@@ -16,12 +16,12 @@
 /**
  * Add dates to option.
  *
- * @package local_musi
- * @copyright 2022 Georg Maißer <info@wunderbyte.at>
+ * @package local_berta
+ * @copyright 2024 Georg Maißer <info@wunderbyte.at>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use local_musi\output\dashboard;
+use local_berta\output\dashboard;
 
 require_once(__DIR__ . '/../../config.php');
 
@@ -36,7 +36,7 @@ if (!$context = context_system::instance()) {
 
 // Check if optionid is valid.
 $PAGE->set_context($context);
-$PAGE->set_url('/local/musi/dashboard.php');
+$PAGE->set_url('/local/berta/dashboard.php');
 
 if ((has_capability('mod/booking:updatebooking', $context) || has_capability('mod/booking:addeditownoption', $context)) == false) {
     echo $OUTPUT->header();
@@ -46,27 +46,27 @@ if ((has_capability('mod/booking:updatebooking', $context) || has_capability('mo
     die();
 }
 
-$title = get_string('pluginname', 'local_musi');
+$title = get_string('pluginname', 'local_berta');
 $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_heading($title);
 
 $PAGE->set_pagelayout('standard');
-$PAGE->add_body_class('local_musi-dashboard');
+$PAGE->add_body_class('local_berta-dashboard');
 
 echo $OUTPUT->header();
 
 $PAGE->requires->js_call_amd(
-    'local_musi/botagsmodal',
+    'local_berta/botagsmodal',
     'init',
     [
         '[data-action=openbotagsmodal]',
-        get_string('editbotags', 'local_musi')
+        get_string('editbotags', 'local_berta')
     ]
 );
 
 // Render the page content via mustache templates.
-$output = $PAGE->get_renderer('local_musi');
+$output = $PAGE->get_renderer('local_berta');
 $data = new dashboard();
 echo $output->render_dashboard($data);
 

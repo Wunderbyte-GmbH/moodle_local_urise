@@ -16,8 +16,8 @@
 /**
  * Add dates to option.
  *
- * @package local_musi
- * @copyright 2022 Georg Maißer <info@wunderbyte.at>
+ * @package local_berta
+ * @copyright 2024 Georg Maißer <info@wunderbyte.at>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 // phpcs:ignore moodle.Files.RequireLogin.Missing
@@ -38,14 +38,14 @@ $type = optional_param('type', 'liste', PARAM_TEXT);
 // Check if optionid is valid.
 $PAGE->set_context($context);
 
-$title = get_string('allcourses', 'local_musi');
+$title = get_string('allcourses', 'local_berta');
 
-$PAGE->set_url('/local/musi/allekurse.php');
+$PAGE->set_url('/local/berta/allekurse.php');
 $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_heading($title);
 $PAGE->set_pagelayout('base');
-$PAGE->add_body_class('local_musi-allcourses');
+$PAGE->add_body_class('local_berta-allcourses');
 
 echo $OUTPUT->header();
 

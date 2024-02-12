@@ -12,7 +12,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template local_musi/table
+    @template local_berta/table
     Template which defines a mooduell view page.
     Classes required for JS:
     * none
@@ -67,7 +67,7 @@
 {{/norecords}}
 {{^norecords}}
 <div class="wunderbyte_table_container_{{idstring}} {{#showcomponentstoggle}}wunderbyte_table_filter_on{{/showcomponentstoggle}}
-     mt-2 px-2 musi-courses-container local_musi-v081">
+     mt-2 px-2 berta-courses-container local_berta-v081">
      <div class="container-fluid ml-0">
           <div class="row mb-2">
                <div>
@@ -89,7 +89,7 @@
                {{> local_wunderbyte_table/component_infinitescroll }}
           </aside>
           <div class= "wunderbyteTableClass" id='a{{idstring}}'>
-               {{> local_musi/table_list }}
+               {{> local_berta/table_list }}
           </div>
      </div>
 </div>

@@ -17,9 +17,9 @@
 /**
  * Code to be executed after the plugin's database scheme has been installed is defined here.
  *
- * @package     local_musi
+ * @package     local_berta
  * @category    upgrade
- * @copyright   2022 Wunderbyte Gmbh <info@wunderbyte.at>
+ * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Custom code to be run on installing the plugin.
  */
-function xmldb_local_musi_install() {
+function xmldb_local_berta_install() {
 
     return true;
 }

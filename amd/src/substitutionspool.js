@@ -14,17 +14,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /*
- * @package    local_musi
+ * @package    local_berta
  * @author     Bernhard Fischer
- * @copyright  2023 Wunderbyte GmbH <info@wunderbyte.at>
+ * @copyright  2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
  * Substitutions pool modals for sports categories.
  *
- * @module     local_musi/substitutionspool
- * @copyright  2023 Wunderbyte GmbH
+ * @module     local_berta/substitutionspool
+ * @copyright  2024 Wunderbyte GmbH
  * @author     Bernhard Fischer
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -39,7 +39,7 @@ export const init = (sport, linkSelector, modalTitle) => {
         element.addEventListener('click', (e) => {
             e.preventDefault();
             const form = new ModalForm({
-                formClass: "local_musi\\form\\substitutionspool_form",
+                formClass: "local_berta\\form\\substitutionspool_form",
                 // Add as many arguments as you need, they will be passed to the form:
                 args: {
                     'sport': sport,

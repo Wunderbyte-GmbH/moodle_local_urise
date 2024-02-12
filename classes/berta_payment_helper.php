@@ -14,19 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_musi;
+namespace local_berta;
 
 use context_system;
 
 /**
  * Helper functions for payment stuff.
  *
- * @package local_musi
- * @copyright 2023 Wunderbyte GmbH <info@wunderbyte.at>
+ * @package local_berta
+ * @copyright 2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author Bernhard Fischer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class musi_payment_helper {
+class berta_payment_helper {
 
     /**
      * Helper function to get name of the orderid column for each gateway table.
@@ -48,7 +48,7 @@ class musi_payment_helper {
 
     /**
      * Get enabled payment gateways having an openorders tables.
-     * This means they are fully supported by M:USI.
+     * This means they are fully supported by BERTA.
      *
      * @return array    an array of strings containing the gateway names
      *                  of payment accounts which are supported
@@ -85,7 +85,7 @@ class musi_payment_helper {
 
     /**
      * Get payment accounts without openorders tables.
-     * This means they are not yet fully supported by M:USI.
+     * This means they are not yet fully supported by BERTA.
      *
      * @return array    an array of strings containing the gateway names
      *                  of payment accounts which are not fully supported

@@ -17,12 +17,12 @@
 /**
  * This file contains the definition for the renderable classes for the booking instance
  *
- * @package   local_musi
- * @copyright 2021 Georg Maißer {@link http://www.wunderbyte.at}
+ * @package   local_berta
+ * @copyright 2024 Georg Maißer {@link http://www.wunderbyte.at}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_musi\output;
+namespace local_berta\output;
 
 use renderer_base;
 use renderable;
@@ -35,8 +35,8 @@ require_once(__DIR__ . '/../../lib.php');
 /**
  * This class prepares data for displaying a booking option instance
  *
- * @package local_musi
- * @copyright 2021 Georg Maißer {@link http://www.wunderbyte.at}
+ * @package local_berta
+ * @copyright 2024 Georg Maißer {@link http://www.wunderbyte.at}
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class card_content_stats1 implements renderable, templatable {
@@ -60,7 +60,7 @@ class card_content_stats1 implements renderable, templatable {
     private static function return_booking_stats() {
         global $DB;
 
-        if ($activeinstance = get_config('local_musi', 'shortcodessetinstance')) {
+        if ($activeinstance = get_config('local_berta', 'shortcodessetinstance')) {
             $sql = "SELECT COUNT(*)
                 FROM {booking_options} bo
                 JOIN {course_modules} cm ON bo.bookingid=cm.instance
@@ -72,10 +72,10 @@ class card_content_stats1 implements renderable, templatable {
             $coursesavailable = 0;
         }
 
-        $coursesbooked = $DB->count_records('booking_answers', ['waitinglist' => LOCAL_MUSI_STATUSPARAM_BOOKED]);
-        $coursesincart = $DB->count_records('booking_answers', ['waitinglist' => LOCAL_MUSI_STATUSPARAM_RESERVED]);
-        // M:USI does not use the normal waiting list but observer list instead.
-        $bookinganswersdeleted = $DB->count_records('booking_answers', ['waitinglist' => LOCAL_MUSI_STATUSPARAM_DELETED]);
+        $coursesbooked = $DB->count_records('booking_answers', ['waitinglist' => LOCAL_berta_STATUSPARAM_BOOKED]);
+        $coursesincart = $DB->count_records('booking_answers', ['waitinglist' => LOCAL_berta_STATUSPARAM_RESERVED]);
+        // BERTA does not use the normal waiting list but observer list instead.
+        $bookinganswersdeleted = $DB->count_records('booking_answers', ['waitinglist' => LOCAL_berta_STATUSPARAM_DELETED]);
 
         $coursesboughtcard = $DB->count_records('local_shopping_cart_history', ['payment' => LOCAL_SHOPPING_CART_PAYMENT_SUCCESS]);
         $coursespending = $DB->count_records('local_shopping_cart_history', ['payment' => LOCAL_SHOPPING_CART_PAYMENT_PENDING]);
@@ -113,7 +113,7 @@ class card_content_stats1 implements renderable, templatable {
         foreach ($this->data as $key => $value) {
 
             $item = [
-                'key' => get_string($key, 'local_musi')
+                'key' => get_string($key, 'local_berta')
             ];
 
             // We only have value & link at the time as types, but might have more at one point.

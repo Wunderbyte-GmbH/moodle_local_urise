@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_musi\task;
+namespace local_berta\task;
 
 use core\task\scheduled_task;
-use local_musi\sap_daily_sums;
+use local_berta\sap_daily_sums;
 
 /**
  * Scheduled task creates SAP files in Moodle data directory.
@@ -29,7 +29,7 @@ class create_sap_files extends scheduled_task {
      * @return string
      */
     public function get_name() {
-        return get_string('create_sap_files', 'local_musi');
+        return get_string('create_sap_files', 'local_berta');
     }
 
     /**

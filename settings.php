@@ -17,9 +17,9 @@
 /**
  * Plugin administration pages are defined here.
  *
- * @package     local_musi
+ * @package     local_berta
  * @category    admin
- * @copyright   2022 Wunderbyte Gmbh <info@wunderbyte.at>
+ * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,15 +32,15 @@ if ($hassiteconfig) {
 
      // TODO: Define the plugin settings page - {@link https://docs.moodle.org/dev/Admin_settings}.
 
-     $settings = new admin_settingpage('Musi', '');
-     $ADMIN->add('localplugins', new admin_category('local_musi', get_string('pluginname', 'local_musi')));
-     $ADMIN->add('local_musi', $settings);
+     $settings = new admin_settingpage('berta', '');
+     $ADMIN->add('localplugins', new admin_category('local_berta', get_string('pluginname', 'local_berta')));
+     $ADMIN->add('local_berta', $settings);
 
     if ($ADMIN->fulltree) {
         $settings->add(
             new admin_setting_heading('shortcodessetdefaultinstance',
-                get_string('shortcodessetdefaultinstance', 'local_musi'),
-                get_string('shortcodessetdefaultinstancedesc', 'local_musi')));
+                get_string('shortcodessetdefaultinstance', 'local_berta'),
+                get_string('shortcodessetdefaultinstancedesc', 'local_berta')));
 
         $allowedinstances = [];
 
@@ -65,65 +65,65 @@ if ($hassiteconfig) {
             // If we have no instances, show an explanation text.
             $settings->add(new admin_setting_description(
                 'shortcodesnobookinginstance',
-                get_string('shortcodesnobookinginstance', 'local_musi'),
-                get_string('shortcodesnobookinginstancedesc', 'local_musi')
+                get_string('shortcodesnobookinginstance', 'local_berta'),
+                get_string('shortcodesnobookinginstancedesc', 'local_berta')
             ));
         } else {
             // Show select for cmids of booking instances.
             $settings->add(
-                new admin_setting_configselect('local_musi/shortcodessetinstance',
-                    get_string('shortcodessetinstance', 'local_musi'),
-                    get_string('shortcodessetinstancedesc', 'local_musi'),
+                new admin_setting_configselect('local_berta/shortcodessetinstance',
+                    get_string('shortcodessetinstance', 'local_berta'),
+                    get_string('shortcodessetinstancedesc', 'local_berta'),
                     $defaultcmid, $allowedinstances));
         }
 
         $settings->add(
-            new admin_setting_configtext('local_musi/shortcodesarchivecmids',
-                get_string('shortcodesarchivecmids', 'local_musi'),
-                get_string('shortcodesarchivecmids_desc', 'local_musi'), ''));
+            new admin_setting_configtext('local_berta/shortcodesarchivecmids',
+                get_string('shortcodesarchivecmids', 'local_berta'),
+                get_string('shortcodesarchivecmids_desc', 'local_berta'), ''));
 
         // Shortcode lists.
         $settings->add(
             new admin_setting_heading('shortcodelists',
-                get_string('shortcodelists', 'local_musi'),
-                get_string('shortcodelists_desc', 'local_musi')));
+                get_string('shortcodelists', 'local_berta'),
+                get_string('shortcodelists_desc', 'local_berta')));
 
         $settings->add(
-            new admin_setting_configcheckbox('local_musi/shortcodelists_showdescriptions',
-                get_string('shortcodelists_showdescriptions', 'local_musi'), '', 0));
+            new admin_setting_configcheckbox('local_berta/shortcodelists_showdescriptions',
+                get_string('shortcodelists_showdescriptions', 'local_berta'), '', 0));
 
         $settings->add(
-            new admin_setting_configcheckbox('local_musi/musishortcodesshowstart',
-                get_string('musishortcodes:showstart', 'local_musi'), '', 0));
+            new admin_setting_configcheckbox('local_berta/bertashortcodesshowstart',
+                get_string('bertashortcodes:showstart', 'local_berta'), '', 0));
 
         $settings->add(
-            new admin_setting_configcheckbox('local_musi/musishortcodesshowend',
-                get_string('musishortcodes:showend', 'local_musi'), '', 0));
+            new admin_setting_configcheckbox('local_berta/bertashortcodesshowend',
+                get_string('bertashortcodes:showend', 'local_berta'), '', 0));
 
         $settings->add(
-            new admin_setting_configcheckbox('local_musi/musishortcodesshowbookablefrom',
-                get_string('musishortcodes:showbookablefrom', 'local_musi'), '', 0));
+            new admin_setting_configcheckbox('local_berta/bertashortcodesshowbookablefrom',
+                get_string('bertashortcodes:showbookablefrom', 'local_berta'), '', 0));
 
         $settings->add(
-            new admin_setting_configcheckbox('local_musi/musishortcodesshowbookableuntil',
-                get_string('musishortcodes:showbookableuntil', 'local_musi'), '', 0));
+            new admin_setting_configcheckbox('local_berta/bertashortcodesshowbookableuntil',
+                get_string('bertashortcodes:showbookableuntil', 'local_berta'), '', 0));
 
-        $showfiltercoursetimesetting = new admin_setting_configcheckbox('local_musi/musishortcodesshowfiltercoursetime',
-            get_string('musishortcodes:showfiltercoursetime', 'local_musi'), '', 0);
+        $showfiltercoursetimesetting = new admin_setting_configcheckbox('local_berta/bertashortcodesshowfiltercoursetime',
+            get_string('bertashortcodes:showfiltercoursetime', 'local_berta'), '', 0);
         $showfiltercoursetimesetting->set_updatedcallback(function() {
             cache_helper::purge_by_event('setbackoptionstable');
         });
         $settings->add($showfiltercoursetimesetting);
 
-        $showfilterbookingtimesetting = new admin_setting_configcheckbox('local_musi/musishortcodesshowfilterbookingtime',
-            get_string('musishortcodes:showfilterbookingtime', 'local_musi'), '', 0);
+        $showfilterbookingtimesetting = new admin_setting_configcheckbox('local_berta/bertashortcodesshowfilterbookingtime',
+            get_string('bertashortcodes:showfilterbookingtime', 'local_berta'), '', 0);
         $showfilterbookingtimesetting->set_updatedcallback(function() {
             cache_helper::purge_by_event('setbackoptionstable');
         });
         $settings->add($showfilterbookingtimesetting);
 
         $collapsedescriptionoptions = [
-            0 => get_string('collapsedescriptionoff', 'local_musi'),
+            0 => get_string('collapsedescriptionoff', 'local_berta'),
             100 => "100",
             200 => "200",
             300 => "300",
@@ -135,21 +135,21 @@ if ($hassiteconfig) {
             900 => "900",
         ];
         $settings->add(
-            new admin_setting_configselect('local_musi/collapsedescriptionmaxlength',
-                get_string('collapsedescriptionmaxlength', 'local_musi'),
-                get_string('collapsedescriptionmaxlength_desc', 'local_musi'),
+            new admin_setting_configselect('local_berta/collapsedescriptionmaxlength',
+                get_string('collapsedescriptionmaxlength', 'local_berta'),
+                get_string('collapsedescriptionmaxlength_desc', 'local_berta'),
                 300, $collapsedescriptionoptions));
 
         // CONTRACT MANAGEMENT.
         // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
         /* $settings->add(
             new admin_setting_heading('contractmanagement_heading',
-                get_string('contractmanagementsettings', 'local_musi'),
-                get_string('contractmanagementsettings_desc', 'local_musi')));
+                get_string('contractmanagementsettings', 'local_berta'),
+                get_string('contractmanagementsettings_desc', 'local_berta')));
 
         $settings->add(
-            new admin_setting_configtextarea('local_musi/contractformula',
-                get_string('contractformula', 'local_musi'),
-                get_string('contractformula_desc', 'local_musi'), '', PARAM_TEXT, 60, 10)); */
+            new admin_setting_configtextarea('local_berta/contractformula',
+                get_string('contractformula', 'local_berta'),
+                get_string('contractformula_desc', 'local_berta'), '', PARAM_TEXT, 60, 10)); */
     }
 }

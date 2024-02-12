@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_musi\form;
+namespace local_berta\form;
 
 use context_system;
 use mod_booking\singleton_service;
@@ -24,8 +24,8 @@ use stdClass;
 /**
  * Modal form to allow editing of substitution pools for sports.
  *
- * @package     local_musi
- * @copyright   2023 Wunderbyte GmbH <info@wunderbyte.at>
+ * @package     local_berta
+ * @copyright   2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author      Bernhard Fischer
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -65,7 +65,7 @@ class substitutionspool_form extends \core_form\dynamic_form {
             }
         ];
         $mform->addElement('autocomplete', 'substitutionspoolteachers',
-            get_string('substitutionspool:infotext', 'local_musi', $sport), [], $options);
+            get_string('substitutionspool:infotext', 'local_berta', $sport), [], $options);
     }
 
     /**
@@ -77,8 +77,8 @@ class substitutionspool_form extends \core_form\dynamic_form {
 
         $context = $this->get_context_for_dynamic_submission();
         // Check if user has the capability to edit the substitutions pool.
-        if (!has_capability('local/musi:editsubstitutionspool', $context)) {
-            throw new moodle_exception('norighttoaccess', 'local_musi');
+        if (!has_capability('local/berta:editsubstitutionspool', $context)) {
+            throw new moodle_exception('norighttoaccess', 'local_berta');
         }
     }
 
@@ -87,7 +87,7 @@ class substitutionspool_form extends \core_form\dynamic_form {
         global $DB;
         $data = new stdClass();
         $data->sport = $this->_ajaxformdata['sport'];
-        if ($existingrecord = $DB->get_record('local_musi_substitutions', ['sport' => $data->sport])) {
+        if ($existingrecord = $DB->get_record('local_berta_substitutions', ['sport' => $data->sport])) {
             $data->substitutionspoolteachers = explode(',', $existingrecord->teachers);
         } else {
             $data->substitutionspoolteachers = [];
@@ -106,11 +106,11 @@ class substitutionspool_form extends \core_form\dynamic_form {
         $teacherids = trim(implode(',', $teacheridsarr), ',');
         $now = time();
 
-        if ($existingrecord = $DB->get_record('local_musi_substitutions', ['sport' => $sport])) {
+        if ($existingrecord = $DB->get_record('local_berta_substitutions', ['sport' => $sport])) {
             $existingrecord->teachers = $teacherids;
             $existingrecord->usermodified = $USER->id;
             $existingrecord->timemodified = $now;
-            $DB->update_record('local_musi_substitutions', $existingrecord);
+            $DB->update_record('local_berta_substitutions', $existingrecord);
             return true;
         } else {
             $newrecord = new stdClass();
@@ -120,7 +120,7 @@ class substitutionspool_form extends \core_form\dynamic_form {
             $newrecord->timecreated = $now;
             $newrecord->timemodified = $now;
             // It's a new sports category.
-            if ($DB->insert_record('local_musi_substitutions', $newrecord)) {
+            if ($DB->insert_record('local_berta_substitutions', $newrecord)) {
                 return true;
             } else {
                 return false;
@@ -137,6 +137,6 @@ class substitutionspool_form extends \core_form\dynamic_form {
     }
 
     protected function get_page_url_for_dynamic_submission(): \moodle_url {
-        return new \moodle_url('/local/musi/sparten.php');
+        return new \moodle_url('/local/berta/sparten.php');
     }
 }

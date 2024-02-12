@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_musi\table;
+namespace local_berta\table;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -46,7 +46,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Search results for managers are shown in a table (student search results use the template searchresults_student).
  */
-class musi_table extends wunderbyte_table {
+class berta_table extends wunderbyte_table {
 
     /** @var booking $booking */
     private $booking = null;
@@ -78,7 +78,7 @@ class musi_table extends wunderbyte_table {
 
         // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
         /* $this->outputbooking = $PAGE->get_renderer('mod_booking');
-        $this->outputmusi = $PAGE->get_renderer('local_musi'); */
+        $this->outputberta = $PAGE->get_renderer('local_berta'); */
 
         // We set buyforuser here for better performance.
         if (empty($buyforuserid)) {
@@ -127,7 +127,7 @@ class musi_table extends wunderbyte_table {
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
 
         if (!empty($settings->invisible)) {
-            return get_string('invisibleoption', 'local_musi');
+            return get_string('invisibleoption', 'local_berta');
         } else {
             return '';
         }
@@ -167,7 +167,7 @@ class musi_table extends wunderbyte_table {
                 $value['last'] = false;
             }
         }
-        $output = singleton_service::get_renderer('local_musi');
+        $output = singleton_service::get_renderer('local_berta');
         return $output->render_col_teacher($data);;
     }
 
@@ -214,7 +214,7 @@ class musi_table extends wunderbyte_table {
         }
 
         if (!$this->is_downloading()) {
-            $title = "<div class='musi-table-option-title'><a href='$url' target='_blank'>$title</a></div>";
+            $title = "<div class='berta-table-option-title'><a href='$url' target='_blank'>$title</a></div>";
         }
 
         return $title;
@@ -233,9 +233,9 @@ class musi_table extends wunderbyte_table {
         $fulldescription = $values->description;
         $ret = $fulldescription;
 
-        if (!empty(get_config('local_musi', 'collapsedescriptionmaxlength'))) {
+        if (!empty(get_config('local_berta', 'collapsedescriptionmaxlength'))) {
 
-            $maxlength = (int)get_config('local_musi', 'collapsedescriptionmaxlength');
+            $maxlength = (int)get_config('local_berta', 'collapsedescriptionmaxlength');
 
             // Show collapsible for long descriptions.
             $shortdescription = strip_tags($fulldescription, '<br>');
@@ -246,7 +246,7 @@ class musi_table extends wunderbyte_table {
                     '<div>' . $shortdescription .
                         '<a data-toggle="collapse" href="#collapseDescription' . $values->id . '" role="button"
                             aria-expanded="false" aria-controls="collapseDescription"> ' .
-                            get_string('showmore', 'local_musi') . '</a>
+                            get_string('showmore', 'local_berta') . '</a>
                     </div>
                     <div class="collapse" id="collapseDescription' . $values->id . '">
                         <div class="card card-body border-1 mt-1 mb-1 mr-3">' . $fulldescription . '</div>
@@ -275,7 +275,7 @@ class musi_table extends wunderbyte_table {
         if (!empty($this->displayoptions['showmaxanwers'])) {
             $data->showmaxanswers = $this->displayoptions['showmaxanwers'];
         }
-        $output = singleton_service::get_renderer('local_musi');
+        $output = singleton_service::get_renderer('local_berta');
         return $output->render_col_availableplaces($data);
     }
 
@@ -352,7 +352,7 @@ class musi_table extends wunderbyte_table {
         // The error message should only be shown to admins.
         if (has_capability('moodle/site:config', $this->context)) {
 
-            $message = get_string('youneedcustomfieldsport', 'local_musi');
+            $message = get_string('youneedcustomfieldsport', 'local_berta');
 
             $message = "<div class='alert alert-danger'>$message</div>";
 
@@ -380,7 +380,7 @@ class musi_table extends wunderbyte_table {
             return $values->sportsdivision;
         }
         // For normal table, we show it as a link to sparten.php.
-        return html_writer::link(new moodle_url('/local/musi/sparten.php'), $values->sportsdivision);
+        return html_writer::link(new moodle_url('/local/berta/sparten.php'), $values->sportsdivision);
     }
 
     /**
@@ -403,7 +403,7 @@ class musi_table extends wunderbyte_table {
                 foreach ($botagsarray as $botag) {
                     if (!empty($botag)) {
                         $botagsstring .=
-                            "<span class='musi-table-botag rounded-sm bg-info text-light pl-1 pr-1 pb-0 pt-0 mr-1'>
+                            "<span class='berta-table-botag rounded-sm bg-info text-light pl-1 pr-1 pb-0 pt-0 mr-1'>
                             $botag
                             </span>";
                     } else {
@@ -454,7 +454,7 @@ class musi_table extends wunderbyte_table {
             // ...has booked this option.
             // ...is a teacher of this option.
             // ...has the system-wide "updatebooking" capability (admins).
-            $gotomoodlecourse = get_string('tocoursecontent', 'local_musi');
+            $gotomoodlecourse = get_string('tocoursecontent', 'local_berta');
             $ret = "<a href='$courseurl' target='_self' class='btn btn-primary mt-2 mb-2 w-100'>
                 <i class='fa fa-graduation-cap fa-fw' aria-hidden='true'></i>&nbsp;&nbsp;$gotomoodlecourse
             </a>";
@@ -539,7 +539,7 @@ class musi_table extends wunderbyte_table {
                 'optionid' => $values->optionid
             ));
             // Use html_entity_decode to convert "&amp;" to a simple "&" character.
-            if ($CFG->version >= 2023042400) {
+            if ($CFG->version >= 2024042400) {
                 // Moodle 4.2 needs second param.
                 $link = html_entity_decode($link->out(), ENT_QUOTES);
             } else {
@@ -751,8 +751,8 @@ class musi_table extends wunderbyte_table {
                 $alloweditavailability = (
                     // Admin capability.
                     has_capability('mod/booking:updatebooking', $this->context) ||
-                    // Or: Everyone with the M:USI editavailability capability.
-                    has_capability('local/musi:editavailability', $this->context) ||
+                    // Or: Everyone with the BERTA editavailability capability.
+                    has_capability('local/berta:editavailability', $this->context) ||
                     // Or: Teachers can edit the availability of their own option.
                     (has_capability('mod/booking:addeditownoption', $this->context) && booking_check_if_teacher($values)) ||
                     (has_capability('mod/booking:limitededitownoption', $this->context) && booking_check_if_teacher($values))
@@ -823,8 +823,8 @@ class musi_table extends wunderbyte_table {
             $data->showundocancel = null;
         }
 
-        $output = singleton_service::get_renderer('local_musi');
-        return $output->render_musi_bookingoption_menu($data);
+        $output = singleton_service::get_renderer('local_berta');
+        return $output->render_berta_bookingoption_menu($data);
     }
 
     /**

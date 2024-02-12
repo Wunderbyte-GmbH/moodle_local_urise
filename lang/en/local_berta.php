@@ -17,22 +17,22 @@
 /**
  * Plugin strings are defined here.
  *
- * @package     local_musi
+ * @package     local_berta
  * @category    string
- * @copyright   2022 Wunderbyte Gmbh <info@wunderbyte.at>
+ * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'M:USI Plugin';
+$string['pluginname'] = 'BERTA Plugin';
 
 $string['dashboard'] = 'Dashboard';
 $string['messageprovider:sendmessages'] = 'Send messages';
-$string['musi:cansendmessages'] = 'Can send messages';
-$string['musi:editavailability'] = 'Can change availability and reservations';
-$string['musi:editsubstitutionspool'] = 'Can edit the substitutions pool of teachers for different sports';
-$string['musi:viewsubstitutionspool'] = 'Can view the substitutions pool of teachers for different sports and send emails to substitution pools';
+$string['berta:cansendmessages'] = 'Can send messages';
+$string['berta:editavailability'] = 'Can change availability and reservations';
+$string['berta:editsubstitutionspool'] = 'Can edit the substitutions pool of teachers for different sports';
+$string['berta:viewsubstitutionspool'] = 'Can view the substitutions pool of teachers for different sports and send emails to substitution pools';
 
 // Caches.
 $string['cachedef_cachedpaymenttable'] = 'Cached payment table (transaction list).';
@@ -48,12 +48,12 @@ $string['shortcodeslistofmybookingoptionsaslist'] = 'My courses as list';
 $string['shortcodeslistofteachersascards'] = 'List of teachers as cards';
 $string['shortcodeslistofmytaughtbookingoptionsascards'] = 'Courses I teach as cards';
 $string['shortcodesshowallsports'] = "List of all sports";
-$string['musishortcodes:showstart'] = 'Show "Start time of the course"';
-$string['musishortcodes:showend'] = 'Show "End time of the course"';
-$string['musishortcodes:showbookablefrom'] = 'Show "Bookable from"';
-$string['musishortcodes:showbookableuntil'] = 'Show "Bookable until"';
-$string['musishortcodes:showfiltercoursetime'] = 'Show filter "Course time"';
-$string['musishortcodes:showfilterbookingtime'] = 'Show filter "Booking time"';
+$string['bertashortcodes:showstart'] = 'Show "Start time of the course"';
+$string['bertashortcodes:showend'] = 'Show "End time of the course"';
+$string['bertashortcodes:showbookablefrom'] = 'Show "Bookable from"';
+$string['bertashortcodes:showbookableuntil'] = 'Show "Bookable until"';
+$string['bertashortcodes:showfiltercoursetime'] = 'Show filter "Course time"';
+$string['bertashortcodes:showfilterbookingtime'] = 'Show filter "Booking time"';
 
 // General strings.
 $string['campaigns'] = 'Campaigns';
@@ -107,7 +107,7 @@ $string['paymentsaborted'] = 'Aborted payments';
 $string['bookinganswersdeleted'] = "Deleted booking answers";
 
 $string['settingsandreports'] = 'Settings & Reports';
-$string['settingsandreports_desc'] = 'Various settings and reports relevant for M:USI.';
+$string['settingsandreports_desc'] = 'Various settings and reports relevant for BERTA.';
 $string['editentities'] = 'Edit entities';
 $string['editentitiescategories'] = 'Edit categories of entities';
 $string['importentities'] = 'Import entities';
@@ -135,7 +135,7 @@ $string['createbotag:helptext'] = '<p>
   <li><strong>Category: </strong>Tags</li>
   <li><strong>Name: </strong>Tags</li>
   <li><strong>Short name: </strong>botags</li>
-  <li><strong>SQL query: </strong><code>SELECT botag as id, botag as data FROM {local_musi_botags}</code></li>
+  <li><strong>SQL query: </strong><code>SELECT botag as id, botag as data FROM {local_berta_botags}</code></li>
   <li><strong>Auto-complete: </strong><span class="text-success">active</span></li>
   <li><strong>Multi select: </strong><span class="text-success">active</span></li>
   </ul>
@@ -172,14 +172,14 @@ $string['coursesiteach'] = '<i class="fa fa-graduation-cap" aria-hidden="true"><
 $string['coursesiteacharchive'] = 'Courses I taught in previous semesters:';
 
 // Access.php.
-$string['musi:canedit'] = 'User can edit';
+$string['berta:canedit'] = 'User can edit';
 
 // Filter.
 $string['sport'] = 'Sport';
 $string['location'] = 'Location';
 
 // Nav.
-$string['musi'] = 'MUSI';
+$string['berta'] = 'berta';
 $string['cashier'] = 'Cashiers desk';
 $string['entities'] = 'Sport locations';
 $string['coursename'] = "Coursename";
@@ -227,7 +227,7 @@ $string['easyavailability:overbook'] = 'Even if the course is fully booked';
 $string['easyavailability:previouslybooked'] = 'Users who already booked a specific USI course are always allowed to book';
 $string['easyavailability:selectusers'] = 'Selected users are allowed to book outside this timespan';
 $string['easyavailability:formincompatible'] = '<div class="alert alert-warning">This form uses availability conditions
- that are incompatible with this form. Please contact a M:USI admin.</div>';
+ that are incompatible with this form. Please contact a BERTA admin.</div>';
  $string['easyavailability:openingtime'] = 'Can be booked from';
 $string['easyavailability:closingtime'] = 'Can be booked until';
 $string['easyavailability:heading'] = '<div class="alert alert-info">You are editing the availability of "<b>{$a}</b>"</div>';

@@ -17,37 +17,37 @@
 /**
  * Plugin capabilities are defined here.
  *
- * @package     local_musi
+ * @package     local_berta
  * @category    access
- * @copyright   2022 Wunderbyte Gmbh <info@wunderbyte.at>
+ * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = [
-    'local/musi:canedit' => [
+    'local/berta:canedit' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
             'manager' => CAP_ALLOW
         ],
     ],
-    'local/musi:editavailability' => [
+    'local/berta:editavailability' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
             'manager' => CAP_ALLOW
         ],
     ],
-    'local/musi:editsubstitutionspool' => [
+    'local/berta:editsubstitutionspool' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
             'manager' => CAP_ALLOW
         ],
     ],
-    'local/musi:viewsubstitutionspool' => [
+    'local/berta:viewsubstitutionspool' => [
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
@@ -56,7 +56,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
         ],
     ],
-    'local/musi:cansendmessages' => [
+    'local/berta:cansendmessages' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [

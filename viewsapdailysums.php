@@ -16,8 +16,8 @@
 /**
  * Add dates to option.
  *
- * @package local_musi
- * @copyright 2022 Bernhard Fischer <info@wunderbyte.at>
+ * @package local_berta
+ * @copyright 2024 Bernhard Fischer <info@wunderbyte.at>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -48,7 +48,7 @@ $PAGE->set_context($context);
 
 $title = 'SAP-Textdateien mit Tagessummen';
 
-$PAGE->set_url('/local/musi/viewsapdailysums.php');
+$PAGE->set_url('/local/berta/viewsapdailysums.php');
 $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 
@@ -64,7 +64,7 @@ $fs = get_file_storage();
 
 // List all existing files as links.
 // Revert the order, so we have the newest files on top.
-$files = array_reverse($fs->get_area_files($context->id, 'local_musi', 'musi_sap_dailysums'));
+$files = array_reverse($fs->get_area_files($context->id, 'local_berta', 'berta_sap_dailysums'));
 
 $dataforsapfiletemplate = [];
 foreach ($files as $file) {

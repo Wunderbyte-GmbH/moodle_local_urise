@@ -17,9 +17,9 @@
 /**
  * Event observers.
  *
- * @package local_musi
+ * @package local_berta
  * @category event
- * @copyright 2023 Wunderbyte GmbH <info@wunderbyte.at>
+ * @copyright 2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author Bernhard Fischer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -35,42 +35,42 @@ $observers = [
     // Payunity payment plugin.
     [
         'eventname' => '\paygw_payunity\event\payment_added',
-        'callback' => '\local_musi\observer::payment_added',
+        'callback' => '\local_berta\observer::payment_added',
     ],
     [
         'eventname' => '\paygw_payunity\event\payment_completed',
-        'callback' => '\local_musi\observer::payment_completed',
+        'callback' => '\local_berta\observer::payment_completed',
     ],
     [
         'eventname' => '\paygw_payunity\event\payment_successful',
-        'callback' => '\local_musi\observer::payment_successful',
+        'callback' => '\local_berta\observer::payment_successful',
     ],
 
     // Mpay24 payment plugin.
     [
         'eventname' => '\paygw_mpay24\event\payment_added',
-        'callback' => '\local_musi\observer::payment_added',
+        'callback' => '\local_berta\observer::payment_added',
     ],
     [
         'eventname' => '\paygw_mpay24\event\payment_completed',
-        'callback' => '\local_musi\observer::payment_completed',
+        'callback' => '\local_berta\observer::payment_completed',
     ],
     [
         'eventname' => '\paygw_mpay24\event\payment_successful',
-        'callback' => '\local_musi\observer::payment_successful',
+        'callback' => '\local_berta\observer::payment_successful',
     ],
 
     // Unigraz payment plugin.
     [
         'eventname' => '\paygw_unigraz\event\payment_added',
-        'callback' => '\local_musi\observer::payment_added',
+        'callback' => '\local_berta\observer::payment_added',
     ],
     [
         'eventname' => '\paygw_unigraz\event\payment_completed',
-        'callback' => '\local_musi\observer::payment_completed',
+        'callback' => '\local_berta\observer::payment_completed',
     ],
     [
         'eventname' => '\paygw_unigraz\event\payment_successful',
-        'callback' => '\local_musi\observer::payment_successful',
+        'callback' => '\local_berta\observer::payment_successful',
     ],
 ];

@@ -17,9 +17,9 @@
 /**
  * Plugin message providers are defined here.
  *
- * @package     local_musi
+ * @package     local_berta
  * @category    message
- * @copyright   2022 Wunderbyte Gmbh <info@wunderbyte.at>
+ * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,6 +28,6 @@ defined('MOODLE_INTERNAL') || die();
 $messageproviders = [
 
     'sendmessages' => array(
-        'capability' => 'local/musi:cansendmessages'
+        'capability' => 'local/berta:cansendmessages'
     ),
 ];

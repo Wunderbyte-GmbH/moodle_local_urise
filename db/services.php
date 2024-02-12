@@ -17,17 +17,17 @@
 /**
  * Webservice to reload table.
  *
- * @package     local_musi
+ * @package     local_berta
  * @category    upgrade
- * @copyright   2021 Wunderbyte GmbH <info@wunderbyte.at>
+ * @copyright   2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $functions = array(
-        'local_musi_get_all_itemids' => array(
-                'classname' => 'local_musi\external\get_all_itemids',
+        'local_berta_get_all_itemids' => array(
+                'classname' => 'local_berta\external\get_all_itemids',
                 'classpath' => '',
                 'description' => 'Get all item ids',
                 'type' => 'write',

@@ -14,15 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_musi\output;
+namespace local_berta\output;
 use plugin_renderer_base;
 
 
 /**
  * A custom renderer class that extends the plugin_renderer_base and is used by the booking module.
  *
- * @package local_musi
- * @copyright 2022 Georg Maißer
+ * @package local_berta
+ * @copyright 2024 Georg Maißer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class renderer extends plugin_renderer_base {
@@ -34,7 +34,7 @@ class renderer extends plugin_renderer_base {
     public function render_dashboard(dashboard $data) {
         $o = '';
         $data = $data->export_for_template($this);
-        $o .= $this->render_from_template('local_musi/dashboard', $data);
+        $o .= $this->render_from_template('local_berta/dashboard', $data);
         return $o;
     }
 
@@ -45,7 +45,7 @@ class renderer extends plugin_renderer_base {
     public function render_card_content($data) {
         $o = '';
         $data = $data->export_for_template($this);
-        $o .= $this->render_from_template('local_musi/dashboard_card_content', $data);
+        $o .= $this->render_from_template('local_berta/dashboard_card_content', $data);
         return $o;
     }
 
@@ -57,7 +57,7 @@ class renderer extends plugin_renderer_base {
     public function render_userinformation($data) {
         $o = '';
         $data = $data->export_for_template($this);
-        $o .= $this->render_from_template('local_musi/userinformation', $data);
+        $o .= $this->render_from_template('local_berta/userinformation', $data);
         return $o;
     }
 
@@ -77,7 +77,7 @@ class renderer extends plugin_renderer_base {
         $o = '';
         $templatedata = $data->export_for_template($this);
         $templatedata['showmaxanswers'] = $data->showmaxanswers;
-        $o .= $this->render_from_template('local_musi/col_availableplaces', $templatedata);
+        $o .= $this->render_from_template('local_berta/col_availableplaces', $templatedata);
         return $o;
     }
 
@@ -88,7 +88,7 @@ class renderer extends plugin_renderer_base {
     public function render_col_teacher($data) {
         $o = '';
         $data = $data->export_for_template($this);
-        $o .= $this->render_from_template('local_musi/col_teacher', $data);
+        $o .= $this->render_from_template('local_berta/col_teacher', $data);
         return $o;
     }
 
@@ -99,7 +99,7 @@ class renderer extends plugin_renderer_base {
      */
     public function render_user_dashboard_overview($data) {
         $o = '';
-        $o .= $this->render_from_template('local_musi/userdashboardoverview', $data);
+        $o .= $this->render_from_template('local_berta/userdashboardoverview', $data);
         return $o;
     }
 
@@ -110,19 +110,19 @@ class renderer extends plugin_renderer_base {
     public function render_transactions_list($page): string {
         $o = '';
         $data = $page->export_for_template($this);
-        $o .= $this->render_from_template('local_musi/transactions_list', $data);
+        $o .= $this->render_from_template('local_berta/transactions_list', $data);
         return $o;
     }
 
     /**
-     * Function to render booking option menu for local_musi.
+     * Function to render booking option menu for local_berta.
      * @param any $data
      * @return string
      */
-    public function render_musi_bookingoption_menu($data): string {
+    public function render_berta_bookingoption_menu($data): string {
         $o = '';
         $data = (array)$data;
-        $o .= $this->render_from_template('local_musi/musi_bookingoption_menu', $data);
+        $o .= $this->render_from_template('local_berta/berta_bookingoption_menu', $data);
         return $o;
     }
 

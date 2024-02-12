@@ -17,18 +17,18 @@
 /**
  * Event observers.
  *
- * @package     local_musi
- * @copyright   2023 Wunderbyte GmbH <info@wunderbyte.at>
+ * @package     local_berta
+ * @copyright   2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author      Bernhard Fischer
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_musi;
+namespace local_berta;
 
 use cache_helper;
 
 /**
- * Event observer for local_musi.
+ * Event observer for local_berta.
  */
 class observer {
 

@@ -15,16 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Functions for SAP text files (daily SAP sums for M:USI).
+ * Functions for SAP text files (daily SAP sums for BERTA).
  *
- * @package local_musi
+ * @package local_berta
  * @since Moodle 4.0
- * @copyright 2022 Wunderbyte GmbH <info@wunderbyte.at>
+ * @copyright 2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author Bernhard Fischer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_musi;
+namespace local_berta;
 
 use context_system;
 use core_payment\account;
@@ -37,7 +37,7 @@ use stored_file;
  */
 class sap_daily_sums {
     /**
-     * Helper function to create SAP text files for M:USI.
+     * Helper function to create SAP text files for BERTA.
      *
      * @param int $daytimestamp timestamp of day to generate the SAP text file for
      * @return array [$content, $errorcontent] file content and content of the error file
@@ -142,7 +142,7 @@ class sap_daily_sums {
                 // Generate the SAP line (without line break).
                 $currentline = self::generate_sap_line_for_record($record);
 
-                // Gather data needed to write content to local_musi_sap table.
+                // Gather data needed to write content to local_berta_sap table.
                 $dbman = $DB->get_manager();
                 $openorderid = 0;
                 // Currently only payunity is supported for openorderid here...
@@ -157,7 +157,7 @@ class sap_daily_sums {
                     }
                 }
                 // We only insert if there is no existing (error-free) record for this identifier!
-                if ($DB->record_exists('local_musi_sap', ['identifier' => $record->identifier, 'error' => null])) {
+                if ($DB->record_exists('local_berta_sap', ['identifier' => $record->identifier, 'error' => null])) {
                     $linehaserrors = true;
                     $errorinfo = 'eintrag_fuer_identifier_existiert_bereits';
                 }
@@ -308,12 +308,12 @@ class sap_daily_sums {
             }
 
             // Es darf pro Identifier nur einen (fehlerfreien) Eintrag geben!
-            if ($DB->record_exists('local_musi_sap', ['identifier' => $record->identifier, 'error' => null])) {
+            if ($DB->record_exists('local_berta_sap', ['identifier' => $record->identifier, 'error' => null])) {
                 $linehaserrors = true;
                 $errorinfo = 'eintrag_fuer_identifier_existiert_bereits';
             }
 
-            // Zusätzliche Infos für Eintrag in local_musi_sap-Tabelle.
+            // Zusätzliche Infos für Eintrag in local_berta_sap-Tabelle.
             $currentrecorddata = new stdClass();
             $currentrecorddata->identifier = $record->identifier;
             $currentrecorddata->userid = $record->userid;
@@ -402,7 +402,7 @@ class sap_daily_sums {
         $currentline .= str_pad('', 10, " ", STR_PAD_LEFT) . '#';
 
         // Innenauftrag - 12 Stellen - USI Wien immer "ET592002".
-        /* MUSI-350: Dort, wo jetzt immer "ET592002" steht muss der Wert
+        /* berta-350: Dort, wo jetzt immer "ET592002" steht muss der Wert
         des optionalen Feldes Statistik-Kostenstelle geschrieben werden. */
         // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
         /* $currentline .= str_pad('ET592002', 12, " ", STR_PAD_LEFT) . '#'; */
@@ -533,7 +533,7 @@ class sap_daily_sums {
                 // Create the directory if it doesn't exist.
                 if (!make_upload_directory('sapfiles')) {
                     // Handle directory creation error (e.g., display an error message).
-                    throw new moodle_exception('errorcreatingdirectory', 'local_musi');
+                    throw new moodle_exception('errorcreatingdirectory', 'local_berta');
                 }
             }
             // Copy the file to the sapfiles directory.
@@ -541,7 +541,7 @@ class sap_daily_sums {
                 return;
             }
             if (!$file->copy_content_to($filepath)) {
-                throw new moodle_exception('errorcopyingfiles', 'local_musi');
+                throw new moodle_exception('errorcopyingfiles', 'local_berta');
             }
         } catch (moodle_exception $e) {
             // Exception handling.
@@ -577,8 +577,8 @@ class sap_daily_sums {
         $yesterday = strtotime('-1 day', $now);
         $fs = get_file_storage();
         $contextid = $context->id;
-        $component = 'local_musi';
-        $filearea = 'musi_sap_dailysums';
+        $component = 'local_berta';
+        $filearea = 'berta_sap_dailysums';
         $itemid = 0;
         $filepath = '/';
         while ($starttimestamp <= $yesterday) {
@@ -602,7 +602,7 @@ class sap_daily_sums {
                     $recordfordb->usermodified = $USER->id;
                     $recordfordb->timecreated = $now;
                     $recordfordb->timemodified = $now;
-                    $DB->insert_record('local_musi_sap', $recordfordb);
+                    $DB->insert_record('local_berta_sap', $recordfordb);
                 }
 
                 $file = $fs->create_file_from_string($fileinfo, $content);

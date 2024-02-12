@@ -16,12 +16,12 @@
 /**
  * Test the contract formula.
  *
- * @package local_musi
- * @copyright 2022 Georg Maißer <info@wunderbyte.at>
+ * @package local_berta
+ * @copyright 2024 Georg Maißer <info@wunderbyte.at>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use local_musi\contractmanager;
+use local_berta\contractmanager;
 
 require_once(__DIR__ . '/../../../config.php');
 
@@ -39,14 +39,14 @@ if (!$context = context_system::instance()) {
 }
 $PAGE->set_context($context);
 
-$title = get_string('contractformulatest', 'local_musi');
+$title = get_string('contractformulatest', 'local_berta');
 
-$PAGE->set_url('/local/musi/tests/contractformula_test.php');
+$PAGE->set_url('/local/berta/tests/contractformula_test.php');
 $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_heading($title);
 $PAGE->set_pagelayout('standard');
-$PAGE->add_body_class('local_musi-contractformula-test');
+$PAGE->add_body_class('local_berta-contractformula-test');
 
 echo $OUTPUT->header();
 

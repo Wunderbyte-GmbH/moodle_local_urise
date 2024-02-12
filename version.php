@@ -17,16 +17,16 @@
 /**
  * Plugin version and other meta-data are defined here.
  *
- * @package     local_musi
- * @copyright   2023 Wunderbyte Gmbh <info@wunderbyte.at>
+ * @package     local_berta
+ * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_musi';
-$plugin->release = '0.8.2';
-$plugin->version = 2024012900;
+$plugin->component = 'local_berta';
+$plugin->release = '0.1.0';
+$plugin->version = 2024020601;
 $plugin->requires = 2022041900; // Requires this Moodle version. Current: Moodle 4.0.0.
 $plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = [

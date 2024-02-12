@@ -12,7 +12,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template local_musi/table
+    @template local_berta/table
     Template which defines a mooduell view page.
     Classes required for JS:
     * none
@@ -58,14 +58,14 @@
                 {{#editsubstitutionspool}}
                   <button class="btn btn-sm btn-light ml-1" data-action="editsubstitutionspool-{{id}}" data-sport="{{name}}" data-id="{{id}}">
                     <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;
-                    {{#str}} editsubstitutionspool, local_musi {{/str}}
+                    {{#str}} editsubstitutionspool, local_berta {{/str}}
                   </button>
                   {{#js}}
-                    require(['local_musi/substitutionspool'], function(fn) {
+                    require(['local_berta/substitutionspool'], function(fn) {
                       fn.init(
                         '{{name}}',
                         '[data-action="editsubstitutionspool-{{id}}"]',
-                        '{{#str}} editsubstitutionspool, local_musi {{/str}}'
+                        '{{#str}} editsubstitutionspool, local_berta {{/str}}'
                       );
                     });
                   {{/js}}
@@ -74,13 +74,13 @@
                   {{#mailtolink}}
                     <a href="{{mailtolink}}" class="btn btn-sm btn-light ml-1" role="button">
                       <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;
-                      {{#str}} mailtosubstitutionspool, local_musi {{/str}}&nbsp;
+                      {{#str}} mailtosubstitutionspool, local_berta {{/str}}&nbsp;
                     </a>
                   {{/mailtolink}}
                   <button class="btn btn-sm btn-light ml-1" type="button" data-toggle="collapse" data-target="#substitutionteachers"
                     aria-expanded="false" aria-controls="substitutionteachers">
                     <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;
-                    {{#str}} viewsubstitutionspool, local_musi {{/str}}
+                    {{#str}} viewsubstitutionspool, local_berta {{/str}}
                   </button>
                   <div class="collapse" id="substitutionteachers">
                     <div class="card card-body mb-3">
@@ -88,7 +88,7 @@
                         <i class="fa fa-user"></i>&nbsp;
                         <i class="fa fa-exchange"></i>&nbsp;
                         <i class="fa fa-users"></i>&nbsp;
-                        {{#str}} substitutionspool, local_musi, {{name}} {{/str}}
+                        {{#str}} substitutionspool, local_berta, {{name}} {{/str}}
                       </h5>
                       <table class="border-0" style="width: fit-content;">
                       {{#substitutionteachers}}
@@ -113,11 +113,11 @@
                   {{#emailstring}}
                   <div>
                     <a class="small ml-3 mt-1 mb-3" data-toggle="collapse" href="#substitutionteachersemails" role="button" aria-expanded="false" aria-controls="substitutionteachersemails">
-                      <i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{#str}} substitutionspool:mailproblems, local_musi {{/str}}
+                      <i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{#str}} substitutionspool:mailproblems, local_berta {{/str}}
                     </a>
                     <div class="collapse" id="substitutionteachersemails">
                       <div class="mt-1 ml-3 mb-3">
-                        {{#str}} substitutionspool:copypastemails, local_musi {{/str}}<br>
+                        {{#str}} substitutionspool:copypastemails, local_berta {{/str}}<br>
                         <pre class="bg-light m-1 p-3">{{emailstring}}</pre>
                       </div>
                     </div>

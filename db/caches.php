@@ -17,8 +17,8 @@
 /**
  * Mobile cache definitions.
  *
- * @package    local_musi
- * @copyright  2022 Georg Maißer <info@wudnerbyte.at>
+ * @package    local_berta
+ * @copyright  2024 Georg Maißer <info@wudnerbyte.at>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

@@ -17,12 +17,12 @@
 /**
  * This file contains the definition for the renderable classes for the booking instance
  *
- * @package   local_musi
- * @copyright 2021 Georg Maißer {@link http://www.wunderbyte.at}
+ * @package   local_berta
+ * @copyright 2024 Georg Maißer {@link http://www.wunderbyte.at}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_musi\output;
+namespace local_berta\output;
 
 use moodle_url;
 use renderer_base;
@@ -33,8 +33,8 @@ use templatable;
 /**
  * This class prepares data for displaying sports categories data.
  *
- * @package local_musi
- * @copyright 2022 Wunderbyte GmbH {@link http://www.wunderbyte.at}
+ * @package local_berta
+ * @copyright 2024 Wunderbyte GmbH {@link http://www.wunderbyte.at}
  * @author Georg Maißer, Bernhard Fischer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -61,8 +61,8 @@ class card_content_sports implements renderable, templatable {
 
         $data = new stdClass();
 
-        $url = new moodle_url('/local/musi/sparten.php');
-        $sportsdivisions = get_string('sportsdivisions', 'local_musi');
+        $url = new moodle_url('/local/berta/sparten.php');
+        $sportsdivisions = get_string('sportsdivisions', 'local_berta');
         $data->{$sportsdivisions} = ['link' => $url->out(false)];
         $data->html = ['html' => '<hr>'];
 

@@ -14,13 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_musi;
+namespace local_berta;
 
 /**
  * Contract manager class.
  *
- * @package local_musi
- * @copyright 2022 Wunderbyte GmbH <info@wunderbyte.at>
+ * @package local_berta
+ * @copyright 2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author Bernhard Fischer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -48,7 +48,7 @@ class contractmanager {
         // Load custom user profile fields for user.
         profile_load_data($user);
 
-        $contractformula = get_config('local_musi', 'contractformula');
+        $contractformula = get_config('local_berta', 'contractformula');
 
         if (!$jsonobject = json_decode($contractformula)) {
             // We return an hour rate of 0 if the formula is invalid.

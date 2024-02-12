@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_musi\task;
+namespace local_berta\task;
 
 use cache_helper;
 use core\task\scheduled_task;
-use local_musi\sports;
+use local_berta\sports;
 use mod_booking\customfield\booking_handler;
 
 /**
@@ -31,7 +31,7 @@ class add_sports_division extends scheduled_task {
      * @return string
      */
     public function get_name() {
-        return get_string('add_sports_division', 'local_musi');
+        return get_string('add_sports_division', 'local_berta');
     }
 
     /**

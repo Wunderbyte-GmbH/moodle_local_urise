@@ -18,8 +18,8 @@
  * An overview of all courses the currently logged in user
  * either teacher or has booked.
  *
- * @package local_musi
- * @copyright 2023 Wunderbyte GmbH <info@wunderbyte.at>
+ * @package local_berta
+ * @copyright 2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author Bernhard Fischer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -42,18 +42,18 @@ $isteacher = false;
 // Check if optionid is valid.
 $PAGE->set_context($context);
 
-$title = get_string('mycourses', 'local_musi');
-$archive = get_string('archive', 'local_musi');
+$title = get_string('mycourses', 'local_berta');
+$archive = get_string('archive', 'local_berta');
 
-$PAGE->set_url('/local/musi/meinekurse.php');
+$PAGE->set_url('/local/berta/meinekurse.php');
 $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_pagelayout('base');
-$PAGE->add_body_class('local_musi-meinekurse');
+$PAGE->add_body_class('local_berta-meinekurse');
 
 // Get archive cmids.
 $archivecmids = [];
-$archivecmidsstring = get_config('local_musi', 'shortcodesarchivecmids');
+$archivecmidsstring = get_config('local_berta', 'shortcodesarchivecmids');
 if (!empty($archivecmidsstring)) {
     $archivecmidsstring = str_replace(';', ',', $archivecmidsstring);
     $archivecmidsstring = str_replace(' ', '', $archivecmidsstring);
@@ -67,11 +67,11 @@ echo "<hr class='w-100 border border-light'/>";
 
 if ($DB->get_records('booking_teachers', ['userid' => $USER->id])) {
     $isteacher = true;
-    echo html_writer::div(get_string('coursesiteach', 'local_musi'), 'h2 mt-2 mb-2 text-center');
+    echo html_writer::div(get_string('coursesiteach', 'local_berta'), 'h2 mt-2 mb-2 text-center');
     echo format_text("[trainerkursekarten]", FORMAT_HTML);
 }
 
-echo html_writer::div(get_string('coursesibooked', 'local_musi'), 'h2 mt-3 mb-2 text-center');
+echo html_writer::div(get_string('coursesibooked', 'local_berta'), 'h2 mt-3 mb-2 text-center');
 echo format_text("[meinekursekarten]", FORMAT_HTML);
 
 if (!empty($archivecmids)) {
@@ -80,7 +80,7 @@ if (!empty($archivecmids)) {
 
     // Archive: Courses I taught.
     if ($isteacher) {
-        echo html_writer::div(get_string('coursesiteacharchive', 'local_musi'), 'h2 mt-2 mb-2 text-center  text-secondary');
+        echo html_writer::div(get_string('coursesiteacharchive', 'local_berta'), 'h2 mt-2 mb-2 text-center  text-secondary');
 
         // Start accordion.
         $archivehtml = '<div class="accordion" id="coursesiteacharchive">';
@@ -116,7 +116,7 @@ if (!empty($archivecmids)) {
     }
 
     // Archive: Courses I booked.
-    echo html_writer::div(get_string('coursesibookedarchive', 'local_musi'), 'h2 mt-3 mb-2 text-center text-secondary');
+    echo html_writer::div(get_string('coursesibookedarchive', 'local_berta'), 'h2 mt-3 mb-2 text-center text-secondary');
     // Start accordion.
     $archivehtml = '<div class="accordion" id="coursesibookedarchive">';
     // Add a section for each cmid.

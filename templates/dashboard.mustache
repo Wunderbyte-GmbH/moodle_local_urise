@@ -15,18 +15,46 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template local_musi/dashboard
+    @template local_berta/dashboard
 
     Classes required for JS:
     * none
 
     Data attributes required for JS:
     * data-region
+
+    Example context (json):
+    {
+        "coursecategoriesnav": [
+            "label": "mylabel",
+            "identifier": "identifier"
+        ],
+        "coursecategories": [
+            "identifier": "identifier",
+            "label": "mylabel",
+            "cards" : [],
+            "showactive": "show active"
+        ]
+
+    }
 }}
 
+<ul class="nav nav-tabs" id="{{identifier}}" role="tablist">
+    {{#coursecategoriesnav}}
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="{{identifier}}-tab" data-toggle="tab" data-target="#{{identifier}}" type="button" role="tab" aria-controls="{{identifier}}" aria-selected="true">{{label}}</button>
+        </li>
+    {{/coursecategoriesnav}}
+</ul>
 
-<div class="card-group">
-    {{#cards}}
-        {{> local_musi/dashboard_card }}
-    {{/cards}}
-<div>
+<div class="tab-content" id="myTabContent">
+    {{#coursecategoriesnav}}
+        <div class="tab-pane fade {{showactive}}" id="{{identifier}}" role="tabpanel" aria-labelledby="{{identifier}}-tab">
+            <div class="card-group">
+                {{#cards}}
+                    {{> local_berta/dashboard_card }}
+                {{/cards}}
+            <div>
+        </div>
+  {{/coursecategoriesnav}}
+</div>

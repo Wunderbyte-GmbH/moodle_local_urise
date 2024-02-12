@@ -17,12 +17,12 @@
 /**
  * This file contains the definition for the renderable classes for the booking instance
  *
- * @package   local_musi
- * @copyright 2021 Georg Maißer {@link http://www.wunderbyte.at}
+ * @package   local_berta
+ * @copyright 2024 Georg Maißer {@link http://www.wunderbyte.at}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_musi\output;
+namespace local_berta\output;
 
 use renderer_base;
 use renderable;
@@ -32,8 +32,8 @@ use templatable;
 /**
  * This class prepares data for displaying a booking option instance
  *
- * @package local_musi
- * @copyright 2021 Georg Maißer {@link http://www.wunderbyte.at}
+ * @package local_berta
+ * @copyright 2024 Georg Maißer {@link http://www.wunderbyte.at}
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class dashboard implements renderable, templatable {
@@ -78,13 +78,13 @@ class dashboard implements renderable, templatable {
      */
     public function card_sports() {
         global $PAGE;
-        $output = $PAGE->get_renderer('local_musi');
+        $output = $PAGE->get_renderer('local_berta');
         $data = new card_content_sports();
 
         $card = new card(
-            get_string('listofsports', 'local_musi'),
+            get_string('listofsports', 'local_berta'),
             $output->render_card_content($data),
-            get_string('listofsports_desc', 'local_musi'),
+            get_string('listofsports_desc', 'local_berta'),
             'bg-light'
         );
         $this->add_card($card);
@@ -97,13 +97,13 @@ class dashboard implements renderable, templatable {
      */
     public function card_entities() {
         global $PAGE;
-        $output = $PAGE->get_renderer('local_musi');
+        $output = $PAGE->get_renderer('local_berta');
         $data = new card_content_entities();
 
         $card = new card(
-            get_string('entities', 'local_musi'),
+            get_string('entities', 'local_berta'),
             $output->render_card_content($data),
-            get_string('numberofentities_desc', 'local_musi'),
+            get_string('numberofentities_desc', 'local_berta'),
             'bg-light'
         );
         $this->add_card($card);
@@ -117,13 +117,13 @@ class dashboard implements renderable, templatable {
     public function card_stats1() {
         global $PAGE;
 
-        $output = $PAGE->get_renderer('local_musi');
+        $output = $PAGE->get_renderer('local_berta');
         $data = new card_content_stats1();
 
         $card = new card(
-            get_string('numberofcourses', 'local_musi'),
+            get_string('numberofcourses', 'local_berta'),
             $output->render_card_content($data),
-            get_string('numberofcourses_desc', 'local_musi'),
+            get_string('numberofcourses_desc', 'local_berta'),
             'bg-light'
         );
         $this->add_card($card);
@@ -137,13 +137,13 @@ class dashboard implements renderable, templatable {
     public function card_settings() {
         global $PAGE;
 
-        $output = $PAGE->get_renderer('local_musi');
+        $output = $PAGE->get_renderer('local_berta');
         $data = new card_content_settings();
 
         $card = new card(
-            get_string('settingsandreports', 'local_musi'),
+            get_string('settingsandreports', 'local_berta'),
             $output->render_card_content($data),
-            get_string('settingsandreports_desc', 'local_musi'),
+            get_string('settingsandreports_desc', 'local_berta'),
             'bg-light'
         );
         $this->add_card($card);
@@ -169,7 +169,26 @@ class dashboard implements renderable, templatable {
      */
     public function export_for_template(renderer_base $output) {
         $returnarray = array(
-                'cards' => (array)$this->cards
+                'coursecategoriesnav' => [
+                    [
+                        'label' => 'mylabelx',
+                        'identifier' => 'identifierx'
+                    ],
+                    [
+                        'label' => 'mylabely',
+                        'identifier' => 'identifiery'
+                    ],
+                ],
+                'coursecategories' => [
+                    [
+                        'identifier' => 'identifiery',
+                        'cards' => (array)$this->cards
+                    ],
+                    [
+                        'identifier' => 'identifiery',
+                        'cards' => (array)$this->cards
+                    ]
+                ]
         );
         return $returnarray;
     }

@@ -1,4 +1,4 @@
-# Musi Dashboard #
+# berta Dashboard #
 
 TODO Describe the plugin shortly here.
 
@@ -16,7 +16,7 @@ TODO Provide more detailed description here.
 
 The plugin can be also installed by putting the contents of this directory to
 
-    {your/moodle/dirroot}/local/musi
+    {your/moodle/dirroot}/local/berta
 
 Afterwards, log in to your Moodle site as an admin and go to _Site administration >
 Notifications_ to complete the installation.
@@ -29,7 +29,7 @@ to complete the installation from the command line.
 
 ## License ##
 
-2022 Wunderbyte Gmbh <info@wunderbyte.at>
+2024 Wunderbyte Gmbh <info@wunderbyte.at>
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software

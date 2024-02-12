@@ -16,13 +16,13 @@
 /**
  * Add dates to option.
  *
- * @package     local_musi
- * @copyright   2023 Wunderbyte GmbH <info@wunderbyte.at>
+ * @package     local_berta
+ * @copyright   2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author      Bernhard Fischer
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use local_musi\task\add_sports_division;
+use local_berta\task\add_sports_division;
 
 // phpcs:ignore moodle.Files.RequireLogin.Missing
 require_once(__DIR__ . '/../../config.php');
@@ -39,13 +39,13 @@ if (!$context = context_system::instance()) {
 
 // Check if optionid is valid.
 $PAGE->set_context($context);
-$title = get_string('sportsdivisions', 'local_musi');
-$PAGE->set_url('/local/musi/sparten.php');
+$title = get_string('sportsdivisions', 'local_berta');
+$PAGE->set_url('/local/berta/sparten.php');
 $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_heading($title);
 $PAGE->set_pagelayout('base');
-$PAGE->add_body_class('local_musi-sparten');
+$PAGE->add_body_class('local_berta-sparten');
 echo $OUTPUT->header();
 echo "<div style='margin-left: 3%'>";
 echo format_text("[sparten]", FORMAT_HTML);

@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_musi\table;
+namespace local_berta\table;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -33,7 +33,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Definitions for transactionstable iteration of wb_table
  */
-class musi_transactions_table extends wunderbyte_table {
+class berta_transactions_table extends wunderbyte_table {
 
 
     /**
@@ -58,13 +58,13 @@ class musi_transactions_table extends wunderbyte_table {
         // TODO: Comment cases.
         switch($values->status) {
             case 0:
-                return get_string('openorder', 'local_musi');
+                return get_string('openorder', 'local_berta');
             case 1:
                 return '1';
             case 2:
                 return '2';
             case 3:
-                return get_string('bookedorder', 'local_musi');
+                return get_string('bookedorder', 'local_berta');
         }
     }
 
@@ -215,7 +215,7 @@ class musi_transactions_table extends wunderbyte_table {
             // Transaction could not be verified.
             return [
                 'success' => 0,
-                'message' => get_string('statusnotchanged', 'local_musi') . " : " . $e->getMessage()
+                'message' => get_string('statusnotchanged', 'local_berta') . " : " . $e->getMessage()
             ];
         }
         // Delete cache if successfull -> data has been changed.
@@ -223,12 +223,12 @@ class musi_transactions_table extends wunderbyte_table {
             cache_helper::purge_by_event('setbackcachedpaymenttable');
             return [
                 'success' => 1,
-                'message' => get_string('statuschanged', 'local_musi')
+                'message' => get_string('statuschanged', 'local_berta')
             ];
         } else {
             return [
                 'success' => 0,
-                'message' => get_string('statusnotchanged', 'local_musi') . " : " . $result['message']
+                'message' => get_string('statusnotchanged', 'local_berta') . " : " . $result['message']
             ];
         }
     }

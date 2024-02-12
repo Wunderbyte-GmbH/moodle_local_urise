@@ -16,8 +16,8 @@
 /**
  * Add dates to option.
  *
- * @package local_musi
- * @copyright 2022 Georg Maißer <info@wunderbyte.at>
+ * @package local_berta
+ * @copyright 2024 Georg Maißer <info@wunderbyte.at>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,7 +34,7 @@ if (!$context = context_system::instance()) {
 
 // Check if optionid is valid.
 $PAGE->set_context($context);
-$PAGE->set_url('/local/musi/editsports.php');
+$PAGE->set_url('/local/berta/editsports.php');
 
 if ((has_capability('mod/booking:updatebooking', $context) || has_capability('mod/booking:addeditownoption', $context)) == false) {
     echo $OUTPUT->header();
@@ -44,13 +44,13 @@ if ((has_capability('mod/booking:updatebooking', $context) || has_capability('mo
     die();
 }
 
-$title = get_string('editsports', 'local_musi');
+$title = get_string('editsports', 'local_berta');
 
 $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_heading($title);
 $PAGE->set_pagelayout('standard');
-$PAGE->add_body_class('local_musi-editsports');
+$PAGE->add_body_class('local_berta-editsports');
 
 echo $OUTPUT->header();
 

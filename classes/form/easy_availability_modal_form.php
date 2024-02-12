@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_musi\form;
+namespace local_berta\form;
 
 use context_module;
 use MoodleQuickForm;
@@ -25,10 +25,10 @@ use moodle_exception;
 use stdClass;
 
 /**
- * Modal form to allow simplified access to availability conditions for M:USI.
+ * Modal form to allow simplified access to availability conditions for BERTA.
  *
- * @package     local_musi
- * @copyright   2023 Wunderbyte GmbH <info@wunderbyte.at>
+ * @package     local_berta
+ * @copyright   2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author      Bernhard Fischer
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -55,33 +55,33 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
         $settings = singleton_service::get_instance_of_booking_option_settings($optionid);
         $titlewithprefix = $settings->get_title_with_prefix();
 
-        $mform->addElement('html', get_string('easyavailability:heading', 'local_musi', $titlewithprefix));
+        $mform->addElement('html', get_string('easyavailability:heading', 'local_berta', $titlewithprefix));
 
         if (self::form_has_incompatible_conditions($optionid)) {
             // The form has incompatible conditions.
-            $mform->addElement('html', get_string('easyavailability:formincompatible', 'local_musi'));
+            $mform->addElement('html', get_string('easyavailability:formincompatible', 'local_berta'));
         }
 
         // EDIT AVAILABILITY.
-        $mform->addElement('header', 'availabilityheader', get_string('editavailability', 'local_musi'));
+        $mform->addElement('header', 'availabilityheader', get_string('editavailability', 'local_berta'));
         $mform->setExpanded('availabilityheader', false);
 
         // The form is not locked and can be used normally.
         $mform->addElement('date_time_selector', 'bookingopeningtime',
-            get_string('easyavailability:openingtime', 'local_musi'));
+            get_string('easyavailability:openingtime', 'local_berta'));
         $mform->setType('bookingopeningtime', PARAM_INT);
 
         $mform->addElement('date_time_selector', 'bookingclosingtime',
-            get_string('easyavailability:closingtime', 'local_musi'));
+            get_string('easyavailability:closingtime', 'local_berta'));
         $mform->setType('bookingclosingtime', PARAM_INT);
 
         $mform->addElement('html', '<hr>');
 
         // Add the selectusers condition:
         // Select users who can override booking_time condition.
-        $mform->addElement('advcheckbox', 'bo_cond_selectusers_restrict', get_string('easyavailability:selectusers', 'local_musi'));
+        $mform->addElement('advcheckbox', 'bo_cond_selectusers_restrict', get_string('easyavailability:selectusers', 'local_berta'));
 
-        $mform->addElement('checkbox', 'selectusersoverbookcheckbox', get_string('easyavailability:overbook', 'local_musi'));
+        $mform->addElement('checkbox', 'selectusersoverbookcheckbox', get_string('easyavailability:overbook', 'local_berta'));
         $mform->setDefault('selectusersoverbookcheckbox', 'checked');
         $mform->hideIf('selectusersoverbookcheckbox', 'bo_cond_selectusers_restrict', 'notchecked');
 
@@ -111,9 +111,9 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
         // Add the previouslybooked condition:
         // Users who previously booked a certain option can override booking_time condition.
         $mform->addElement('advcheckbox', 'bo_cond_previouslybooked_restrict',
-            get_string('easyavailability:previouslybooked', 'local_musi'));
+            get_string('easyavailability:previouslybooked', 'local_berta'));
         $mform->addElement('checkbox', 'previouslybookedoverbookcheckbox',
-            get_string('easyavailability:overbook', 'local_musi'));
+            get_string('easyavailability:overbook', 'local_berta'));
         $mform->setDefault('previouslybookedoverbookcheckbox', 'checked');
         $mform->hideIf('previouslybookedoverbookcheckbox', 'bo_cond_previouslybooked_restrict', 'notchecked');
 
@@ -143,7 +143,7 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
         $mform->hideIf('bo_cond_previouslybooked_optionid', 'bo_cond_previouslybooked_restrict', 'notchecked');
 
         // EDIT DESCRIPTION.
-        $mform->addElement('header', 'descriptionheader', get_string('editdescription', 'local_musi'));
+        $mform->addElement('header', 'descriptionheader', get_string('editdescription', 'local_berta'));
         $mform->setExpanded('descriptionheader', false);
 
         $mform->addElement('editor', 'description', get_string('description', 'core'));
@@ -164,14 +164,14 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
         $alloweditavailability = (
             // Admin capability.
             has_capability('mod/booking:updatebooking', $context) ||
-            // Or: Everyone with the M:USI editavailability capability.
-            has_capability('local/musi:editavailability', $context) ||
+            // Or: Everyone with the BERTA editavailability capability.
+            has_capability('local/berta:editavailability', $context) ||
             // Or: Teachers can edit the availability of their own option.
             (has_capability('mod/booking:limitededitownoption', $context) && $this->check_if_teacher($optionid)) ||
             (has_capability('mod/booking:addeditownoption', $context) && $this->check_if_teacher($optionid))
         );
         if (!$alloweditavailability) {
-            throw new moodle_exception('norighttoaccess', 'local_musi');
+            throw new moodle_exception('norighttoaccess', 'local_berta');
         }
     }
 
@@ -307,15 +307,15 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
         $errors = [];
 
         if ($data['bookingopeningtime'] >= $data['bookingclosingtime']) {
-            $errors['bookingopeningtime'] = get_string('error:starttime', 'local_musi');
-            $errors['bookingclosingtime'] = get_string('error:endtime', 'local_musi');
+            $errors['bookingopeningtime'] = get_string('error:starttime', 'local_berta');
+            $errors['bookingclosingtime'] = get_string('error:endtime', 'local_berta');
         }
 
         return $errors;
     }
 
     protected function get_page_url_for_dynamic_submission(): \moodle_url {
-        return new \moodle_url('/local/musi/dashboard.php');
+        return new \moodle_url('/local/berta/dashboard.php');
     }
 
     /**

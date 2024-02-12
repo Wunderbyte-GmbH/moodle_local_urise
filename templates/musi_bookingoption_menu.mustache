@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template local_musi/musi_bookingoption_menu
+    @template local_berta/berta_bookingoption_menu
 
     Classes required for JS:
     * none
@@ -26,7 +26,7 @@
     Example context (json):
     {
         "itemid" : 3,
-        "componentname" : "local_musi",
+        "componentname" : "local_berta",
         "modalcounter" : 1,
         "modaltitle" : "main",
         "userid" : 133,
@@ -59,7 +59,7 @@
       {{/sendmailtoallbookedusers}}
       {{#editavailability}}
       <a class="dropdown-item editavailability" href="#" target="_self" data-optionid="{{optionid}}">
-        <i class="fa fa-unlock-alt fa-fw" aria-hidden="true"></i> {{#str}} editavailabilityanddescription, local_musi {{/str}}
+        <i class="fa fa-unlock-alt fa-fw" aria-hidden="true"></i> {{#str}} editavailabilityanddescription, local_berta {{/str}}
       </a>
       {{/editavailability}}
       {{#manageresponsesurl}}
@@ -79,11 +79,11 @@
 {{/optiondatesteachersurl}}
 
 {{#js}}
-    require(['local_musi/easyavailabilitymodal'], function(fn) {
+    require(['local_berta/easyavailabilitymodal'], function(fn) {
         fn.init(
           '{{optionid}}',
           'a.editavailability[data-optionid="{{optionid}}"]',
-          '{{#str}} editavailabilityanddescription, local_musi {{/str}}'
+          '{{#str}} editavailabilityanddescription, local_berta {{/str}}'
         );
     });
 {{/js}}

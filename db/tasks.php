@@ -17,7 +17,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $tasks = [
-        ['classname' => '\local_musi\task\create_sap_files',
+        ['classname' => '\local_berta\task\create_sap_files',
             'blocking' => 0,
             'minute' => '30',
             'hour' => '4',
@@ -25,7 +25,7 @@ $tasks = [
             'dayofweek' => '*',
             'month' => '*'
         ],
-        ['classname' => '\local_musi\task\add_sports_division',
+        ['classname' => '\local_berta\task\add_sports_division',
             'blocking' => 0,
             'minute' => 'R',
             'hour' => '2',

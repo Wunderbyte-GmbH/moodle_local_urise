@@ -15,22 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Shortcodes for local_musi
+ * Shortcodes for local_berta
  *
- * @package local_musi
+ * @package local_berta
  * @subpackage db
  * @since Moodle 3.11
- * @copyright 2022 Georg Maißer
+ * @copyright 2024 Georg Maißer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_musi;
+namespace local_berta;
 
 use Closure;
 use context_system;
 use mod_booking\output\page_allteachers;
-use local_musi\output\userinformation;
-use local_musi\table\musi_table;
+use local_berta\output\userinformation;
+use local_berta\table\berta_table;
 use local_shopping_cart\shopping_cart;
 use local_shopping_cart\shopping_cart_credits;
 use mod_booking\booking;
@@ -65,12 +65,12 @@ class shortcodes {
 
         // If it's not set, we do nothing.
         if (empty($courseid)) {
-            return get_string('nosportsdivision', 'local_musi');
+            return get_string('nosportsdivision', 'local_berta');
         }
 
         $data = sports::get_all_sportsdivisions_data($courseid);
 
-        return $OUTPUT->render_from_template('local_musi/shortcodes_rendersportcategories', $data);
+        return $OUTPUT->render_from_template('local_berta/shortcodes_rendersportcategories', $data);
     }
 
     /**
@@ -105,7 +105,7 @@ class shortcodes {
         }
 
         $data = new userinformation($userid, $args['fields']);
-        $output = $PAGE->get_renderer('local_musi');
+        $output = $PAGE->get_renderer('local_berta');
         return $output->render_userinformation($data);
     }
 
@@ -120,7 +120,7 @@ class shortcodes {
      * @param Closure $next
      * @return void
      */
-    public static function allcourseslist($shortcode, $args, $content, $env, $next) {
+    public static function unifiedlist($shortcode, $args, $content, $env, $next) {
 
         self::fix_args($args);
 
@@ -186,7 +186,7 @@ class shortcodes {
         // This allows us to use infinite scrolling, No pages will be used.
         $table->infinitescroll = $infinitescrollpage;
 
-        $table->tabletemplate = 'local_musi/table_list';
+        $table->tabletemplate = 'local_berta/table_list';
         $table->showcountlabel = true;
 
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
@@ -199,436 +199,6 @@ class shortcodes {
 
         $out = $table->outhtml($perpage, true);
 
-        return $out;
-    }
-
-    /**
-     * Prints out grid of bookingoptions.
-     * Arguments can be 'category' or 'perpage'.
-     * Templates table_grid...
-     * Styles Tablegrid
-     * @param string $shortcode
-     * @param array $args
-     * @param string|null $content
-     * @param object $env
-     * @param Closure $next
-     * @return void
-     */
-    public static function allcoursesgrid($shortcode, $args, $content, $env, $next) {
-
-        self::fix_args($args);
-
-        $booking = self::get_booking($args);
-
-        if (!isset($args['category']) || !$category = ($args['category'])) {
-            $category = '';
-        }
-
-        $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
-
-        if (
-            !isset($args['perpage'])
-            || !is_int((int)$args['perpage'])
-            || !$perpage = ($args['perpage'])
-        ) {
-            $perpage = 1000;
-        }
-
-        $table = self::inittableforcourses($booking);
-
-        $wherearray = ['bookingid' => (int)$booking->id];
-
-        if (!empty($category)) {
-            $wherearray['sport'] = $category;
-        };
-
-        // If we want to find only the teacher relevant options, we chose different sql.
-        if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
-            $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
-            list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray);
-        } else {
-
-            list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray);
-        }
-
-        $table->set_filter_sql($fields, $from, $where, $filter, $params);
-
-        $table->use_pages = false;
-
-        $table->define_cache('mod_booking', 'bookingoptionstable');
-
-        $table->add_subcolumns('entrybody', ['text', 'dayofweektime', 'sport', 'sportsdivision',
-            'teacher', 'location', 'bookings', 'minanswers', 'price', 'action']);
-
-        // This avoids showing all keys in list view.
-        $table->add_classes_to_subcolumns('entrybody', ['columnkeyclass' => 'd-md-none']);
-
-        $table->add_classes_to_subcolumns('entrybody', ['columnclass' => 'grid-area-text'], ['text']);
-
-        $table->add_classes_to_subcolumns('entrybody', ['columnclass' => 'grid-area-dayofweektime'], ['dayofweektime']);
-        $table->add_classes_to_subcolumns('entrybody', ['columniclassbefore' => 'fa fa-clock-o'], ['dayofweektime']);
-
-        $table->add_classes_to_subcolumns('entrybody', ['columnclass' => 'grid-area-sport'], ['sport']);
-        $table->add_classes_to_subcolumns('entrybody', ['columnvalueclass' => 'sport-badge bg-info text-light'], ['sport']);
-
-        $table->add_classes_to_subcolumns('entrybody', ['columnclass' => 'grid-area-sportsdivision'], ['sportsdivision']);
-        $table->add_classes_to_subcolumns('entrybody', ['columnvalueclass' => 'sportsdivision-badge'], ['sportsdivision']);
-
-        $table->add_classes_to_subcolumns('entrybody', ['columnclass' => 'grid-area-teacher'], ['teacher']);
-
-        $table->add_classes_to_subcolumns('entrybody', ['columnclass' => 'grid-area-location'], ['location']);
-        $table->add_classes_to_subcolumns('entrybody', ['columniclassbefore' => 'fa fa-map-marker'], ['location']);
-
-        $table->add_classes_to_subcolumns('entrybody', ['columnclass' => 'grid-area-booking'], ['bookings']);
-
-        $table->add_classes_to_subcolumns('entrybody', ['columnclass' => 'grid-area-minanswers'], ['minanswers']);
-
-        $table->add_classes_to_subcolumns('entrybody', ['columnclass' => 'grid-area-price'], ['price']);
-
-        // Override naming for columns. one could use getstring for localisation here.
-        $table->add_classes_to_subcolumns(
-            'cardbody',
-            ['keystring' => get_string('tableheader_text', 'booking')],
-            ['text']
-        );
-        $table->add_classes_to_subcolumns(
-            'cardbody',
-            ['keystring' => get_string('tableheader_teacher', 'booking')],
-            ['teacher']
-        );
-        $table->add_classes_to_subcolumns(
-            'cardbody',
-            ['keystring' => get_string('tableheader_maxanswers', 'booking')],
-            ['maxanswers']
-        );
-        $table->add_classes_to_subcolumns(
-            'cardbody',
-            ['keystring' => get_string('tableheader_maxoverbooking', 'booking')],
-            ['maxoverbooking']
-        );
-
-        $table->is_downloading('', 'List of booking options');
-
-        self::set_table_options_from_arguments($table, $args);
-
-        // This allows us to use infinite scrolling, No pages will be used.
-        $table->infinitescroll = $infinitescrollpage;
-
-        $table->tabletemplate = 'local_musi/table_grid_list';
-
-        // If we find "nolazy='1'", we return the table directly, without lazy loading.
-        if (!empty($args['lazy'])) {
-
-            list($idstring, $encodedtable, $out) = $table->lazyouthtml($perpage, true);
-
-            return $out;
-        }
-
-        $out = $table->outhtml($perpage, true);
-
-        return $out;
-    }
-
-    /**
-     * Prints out list of bookingoptions.
-     * Arguments can be 'category' or 'perpage'.
-     *
-     * @param string $shortcode
-     * @param array $args
-     * @param string|null $content
-     * @param object $env
-     * @param Closure $next
-     * @return void
-     */
-    public static function allcoursescards($shortcode, $args, $content, $env, $next) {
-
-        // TODO: Define capability.
-        // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-        /* if (!has_capability('moodle/site:config', $env->context)) {
-            return '';
-        } */
-        self::fix_args($args);
-        $booking = self::get_booking($args);
-
-        if (!isset($args['category']) || !$category = ($args['category'])) {
-            $category = '';
-        }
-
-        $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
-
-        if (
-            !isset($args['perpage'])
-            || !is_int((int)$args['perpage'])
-            || !$perpage = ($args['perpage'])
-        ) {
-            $perpage = 1000;
-        }
-
-        $table = self::inittableforcourses($booking);
-
-        $wherearray = ['bookingid' => (int)$booking->id];
-
-        if (!empty($category)) {
-            $wherearray['sport'] = $category;
-        };
-
-        // If we want to find only the teacher relevant options, we chose different sql.
-        if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
-            $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
-            list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray);
-        } else {
-
-            list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray);
-        }
-
-        $table->set_filter_sql($fields, $from, $where, $filter, $params);
-
-        $table->use_pages = false;
-
-        self::generate_table_for_cards($table, $args);
-
-        self::set_table_options_from_arguments($table, $args);
-
-        // This allows us to use infinite scrolling, No pages will be used.
-        $table->infinitescroll = $infinitescrollpage;
-
-        $table->tabletemplate = 'local_musi/table_card';
-
-        // If we find "nolazy='1'", we return the table directly, without lazy loading.
-        if (!empty($args['lazy'])) {
-
-            list($idstring, $encodedtable, $out) = $table->lazyouthtml($perpage, true);
-
-            return $out;
-        }
-
-        $out = $table->outhtml($perpage, true);
-
-        return $out;
-    }
-
-
-    /**
-     * Prints out list of bookingoptions.
-     * Arguments can be 'id', 'category' or 'perpage'.
-     *
-     * @param string $shortcode
-     * @param array $args
-     * @param string|null $content
-     * @param object $env
-     * @param Closure $next
-     * @return void
-     */
-    public static function mycoursescards($shortcode, $args, $content, $env, $next) {
-
-        global $USER;
-        self::fix_args($args);
-        $booking = self::get_booking($args);
-
-        if (!isset($args['category']) || !$category = ($args['category'])) {
-            $category = '';
-        }
-
-        if (
-            !isset($args['perpage'])
-            || !is_int((int)$args['perpage'])
-            || !$perpage = ($args['perpage'])
-        ) {
-            $perpage = 1000;
-        }
-
-        $table = self::inittableforcourses($booking);
-
-        $wherearray = ['bookingid' => (int)$booking->id];
-
-        if (!empty($category)) {
-            $wherearray['sport'] = $category;
-        };
-
-        // If we want to find only the teacher relevant options, we chose different sql.
-        if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
-            $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
-            list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, $USER->id);
-        } else {
-
-            list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, $USER->id);
-        }
-
-        $table->set_filter_sql($fields, $from, $where, $filter, $params);
-
-        $table->use_pages = false;
-
-        self::generate_table_for_cards($table, $args);
-
-        self::set_table_options_from_arguments($table, $args);
-
-        $table->cardsort = true;
-
-        // This allows us to use infinite scrolling, No pages will be used.
-        $table->infinitescroll = 30;
-
-        $table->tabletemplate = 'local_musi/table_card';
-
-        // If we find "nolazy='1'", we return the table directly, without lazy loading.
-        if (!empty($args['lazy'])) {
-
-            list($idstring, $encodedtable, $out) = $table->lazyouthtml($perpage, true);
-
-            return $out;
-        }
-
-        $out = $table->outhtml($perpage, true);
-        return $out;
-    }
-
-    /**
-     * Prints out list of bookingoptions where the current user is a trainer.
-     * Arguments can be 'id', 'category' or 'perpage'.
-     *
-     * @param string $shortcode
-     * @param array $args
-     * @param string|null $content
-     * @param object $env
-     * @param Closure $next
-     * @return void
-     */
-    public static function mytaughtcoursescards($shortcode, $args, $content, $env, $next) {
-
-        global $USER;
-        self::fix_args($args);
-        $booking = self::get_booking($args);
-
-        if (
-            !isset($args['perpage'])
-            || !is_int((int)$args['perpage'])
-            || !$perpage = ($args['perpage'])
-        ) {
-            $perpage = 1000;
-        }
-
-        $table = self::inittableforcourses($booking);
-
-        // We want to check for the currently logged in user...
-        // ... if (s)he is teaching courses.
-        $teacherid = $USER->id;
-
-        // This is the important part: We only filter for booking options where the current user is a teacher!
-        // Also we only want to show courses for the currently set booking instance (semester instance).
-        list($fields, $from, $where, $params, $filter) =
-            booking::get_all_options_of_teacher_sql($teacherid, (int)$booking->id);
-
-        $table->set_filter_sql($fields, $from, $where, $filter, $params);
-
-        $table->use_pages = false;
-
-        self::generate_table_for_cards($table, $args);
-
-        self::set_table_options_from_arguments($table, $args);
-
-        $table->cardsort = true;
-
-        // This allows us to use infinite scrolling, No pages will be used.
-        $table->infinitescroll = 30;
-
-        $table->tabletemplate = 'local_musi/table_card';
-
-        // If we find "nolazy='1'", we return the table directly, without lazy loading.
-        if (!empty($args['lazy'])) {
-
-            list($idstring, $encodedtable, $out) = $table->lazyouthtml($perpage, true);
-
-            return $out;
-        }
-
-        $out = $table->outhtml($perpage, true);
-        return $out;
-    }
-
-    /**
-     * Prints out list of my booked bookingoptions.
-     * Arguments can be 'category' or 'perpage'.
-     *
-     * @param string $shortcode
-     * @param array $args
-     * @param string|null $content
-     * @param object $env
-     * @param Closure $next
-     * @return void
-     */
-    public static function mycourseslist($shortcode, $args, $content, $env, $next) {
-
-        global $USER;
-        self::fix_args($args);
-        $booking = self::get_booking($args);
-
-        if (!isset($args['category']) || !$category = ($args['category'])) {
-            $category = '';
-        }
-
-        if (
-            !isset($args['perpage'])
-            || !is_int((int)$args['perpage'])
-            || !$perpage = ($args['perpage'])
-        ) {
-            $perpage = 1000;
-        }
-
-        if (empty($args['countlabel'])) {
-            $args['countlabel'] = false;
-        }
-
-        $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
-
-        $table = self::inittableforcourses($booking);
-
-        $table->showcountlabel = $args['countlabel'];
-        $wherearray = ['bookingid' => (int)$booking->id];
-
-        if (!empty($category)) {
-            $wherearray['sport'] = $category;
-        };
-
-        // If we want to find only the teacher relevant options, we chose different sql.
-        if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
-            $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
-            list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, $USER->id);
-        } else {
-
-            list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, $USER->id);
-        }
-
-        $table->set_filter_sql($fields, $from, $where, $filter, $params);
-
-        $table->use_pages = false;
-
-        self::generate_table_for_list($table, $args);;
-
-        self::set_table_options_from_arguments($table, $args);
-
-        $table->cardsort = true;
-
-        // This allows us to use infinite scrolling, No pages will be used.
-        $table->infinitescroll = $infinitescrollpage;
-
-        $table->tabletemplate = 'local_musi/table_list';
-
-        // If we find "nolazy='1'", we return the table directly, without lazy loading.
-        if (!empty($args['lazy'])) {
-
-            list($idstring, $encodedtable, $out) = $table->lazyouthtml($perpage, true);
-
-            return $out;
-        }
-
-        $out = $table->outhtml($perpage, true);
         return $out;
     }
 
@@ -647,7 +217,7 @@ class shortcodes {
         self::fix_args($args);
         // If the id argument was not passed on, we have a fallback in the connfig.
         if (!isset($args['id'])) {
-            $args['id'] = get_config('local_musi', 'shortcodessetinstance');
+            $args['id'] = get_config('local_berta', 'shortcodessetinstance');
         }
 
         // To prevent misconfiguration, id has to be there and int.
@@ -670,45 +240,9 @@ class shortcodes {
         $data['teacher'] = count($asteacher);
         $data['credits'] = $credits[0];
 
-        $output = $PAGE->get_renderer('local_musi');
+        $output = $PAGE->get_renderer('local_berta');
         return $output->render_user_dashboard_overview($data);
 
-    }
-
-    /**
-     * Prints out all teachers as cards.
-     *
-     * @param string $shortcode
-     * @param array $args
-     * @param string|null $content
-     * @param object $env
-     * @param Closure $next
-     * @return void
-     */
-    public static function allteacherscards($shortcode, $args, $content, $env, $next) {
-        global $DB, $PAGE;
-        self::fix_args($args);
-        $teacherids = [];
-
-        // Now get all teachers that we're interested in.
-        $sqlteachers =
-            "SELECT DISTINCT bt.userid, u.firstname, u.lastname, u.email
-            FROM {booking_teachers} bt
-            LEFT JOIN {user} u
-            ON u.id = bt.userid
-            ORDER BY u.lastname ASC";
-
-        if ($teacherrecords = $DB->get_records_sql($sqlteachers)) {
-            foreach ($teacherrecords as $teacherrecord) {
-                $teacherids[] = $teacherrecord->userid;
-            }
-        }
-
-        // Now prepare the data for all teachers.
-        $data = new page_allteachers($teacherids);
-        $output = $PAGE->get_renderer('local_musi');
-        // And return the rendered page showing all teachers.
-        return $output->render_allteacherspage($data);
     }
 
     private static function inittableforcourses($booking) {
@@ -728,7 +262,7 @@ class shortcodes {
             $buyforuserid = $USER->id;
         }
 
-        $table = new musi_table($tablename, $booking, $buyforuserid);
+        $table = new berta_table($tablename, $booking, $buyforuserid);
 
         $table->define_baseurl($baseurl->out());
         $table->cardsort = true;
@@ -741,13 +275,13 @@ class shortcodes {
         $filtercolumns = [
             'id',
             'sport' => [
-                'localizedname' => get_string('sport', 'local_musi')
+                'localizedname' => get_string('sport', 'local_berta')
             ],
             'sportsdivision' => [
-                'localizedname' => get_string('sportsdivision', 'local_musi')
+                'localizedname' => get_string('sportsdivision', 'local_berta')
             ],
             'dayofweek' => [
-                'localizedname' => get_string('dayofweek', 'local_musi'),
+                'localizedname' => get_string('dayofweek', 'local_berta'),
                 'monday' => get_string('monday', 'mod_booking'),
                 'tuesday' => get_string('tuesday', 'mod_booking'),
                 'wednesday' => get_string('wednesday', 'mod_booking'),
@@ -764,7 +298,7 @@ class shortcodes {
             ],
         ];
 
-        if (get_config('local_musi', 'musishortcodesshowfiltercoursetime')) {
+        if (get_config('local_berta', 'bertashortcodesshowfiltercoursetime')) {
             $filtercolumns['coursestarttime'] = [
                 'localizedname' => get_string('timefilter:coursetime', 'mod_booking'),
                 'datepicker' => [
@@ -784,7 +318,7 @@ class shortcodes {
             ];
         }
 
-        if (get_config('local_musi', 'musishortcodesshowfilterbookingtime')) {
+        if (get_config('local_berta', 'bertashortcodesshowfilterbookingtime')) {
             $filtercolumns['bookingopeningtime'] = [
                 'localizedname' => get_string('timefilter:bookingtime', 'mod_booking'),
                 'datepicker' => [
@@ -809,7 +343,7 @@ class shortcodes {
         self::fix_args($args);
         // If the id argument was not passed on, we have a fallback in the connfig.
         if (!isset($args['id'])) {
-            $args['id'] = get_config('local_musi', 'shortcodessetinstance');
+            $args['id'] = get_config('local_berta', 'shortcodessetinstance');
         }
 
         // To prevent misconfiguration, id has to be there and int.
@@ -827,7 +361,7 @@ class shortcodes {
     private static function set_table_options_from_arguments(&$table, $args) {
         self::fix_args($args);
 
-        /** @var musi_table $table */
+        /** @var berta_table $table */
         $table->set_display_options($args);
 
         if (!empty($args['filter'])) {
@@ -842,22 +376,22 @@ class shortcodes {
 
         if (!empty($args['sort'])) {
             $sortablecolumns = [
-                'titleprefix' => get_string('titleprefix', 'local_musi'),
-                'text' => get_string('coursename', 'local_musi'),
-                'sportsdivision' => get_string('sportsdivision', 'local_musi'),
-                'sport' => get_string('sport', 'local_musi'),
-                'location' => get_string('location', 'local_musi'),
+                'titleprefix' => get_string('titleprefix', 'local_berta'),
+                'text' => get_string('coursename', 'local_berta'),
+                'sportsdivision' => get_string('sportsdivision', 'local_berta'),
+                'sport' => get_string('sport', 'local_berta'),
+                'location' => get_string('location', 'local_berta'),
             ];
-            if (get_config('local_musi', 'musishortcodesshowstart')) {
+            if (get_config('local_berta', 'bertashortcodesshowstart')) {
                 $sortablecolumns['coursestarttime'] = get_string('coursestarttime', 'mod_booking');
             }
-            if (get_config('local_musi', 'musishortcodesshowend')) {
+            if (get_config('local_berta', 'bertashortcodesshowend')) {
                 $sortablecolumns['courseendtime'] = get_string('courseendtime', 'mod_booking');
             }
-            if (get_config('local_musi', 'musishortcodesshowbookablefrom')) {
+            if (get_config('local_berta', 'bertashortcodesshowbookablefrom')) {
                 $sortablecolumns['bookingopeningtime'] = get_string('bookingopeningtime', 'mod_booking');
             }
-            if (get_config('local_musi', 'musishortcodesshowbookableuntil')) {
+            if (get_config('local_berta', 'bertashortcodesshowbookableuntil')) {
                 $sortablecolumns['bookingclosingtime'] = get_string('bookingclosingtime', 'mod_booking');
             }
             $table->define_sortablecolumns($sortablecolumns);
@@ -907,16 +441,16 @@ class shortcodes {
 
         // Subcolumns.
         $subcolumns = ['teacher', 'dayofweektime', 'location', 'institution'];
-        if (get_config('local_musi', 'musishortcodesshowstart')) {
+        if (get_config('local_berta', 'bertashortcodesshowstart')) {
             $subcolumns[] = 'coursestarttime';
         }
-        if (get_config('local_musi', 'musishortcodesshowend')) {
+        if (get_config('local_berta', 'bertashortcodesshowend')) {
             $subcolumns[] = 'courseendtime';
         }
-        if (get_config('local_musi', 'musishortcodesshowbookablefrom')) {
+        if (get_config('local_berta', 'bertashortcodesshowbookablefrom')) {
             $subcolumns[] = 'bookingopeningtime';
         }
-        if (get_config('local_musi', 'musishortcodesshowbookableuntil')) {
+        if (get_config('local_berta', 'bertashortcodesshowbookableuntil')) {
             $subcolumns[] = 'bookingclosingtime';
         }
         $subcolumns[] = 'bookings';
@@ -931,16 +465,16 @@ class shortcodes {
         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-map-marker'], ['location']);
         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-building-o'], ['institution']);
 
-        if (get_config('local_musi', 'musishortcodesshowstart')) {
+        if (get_config('local_berta', 'bertashortcodesshowstart')) {
             $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-play'], ['coursestarttime']);
         }
-        if (get_config('local_musi', 'musishortcodesshowend')) {
+        if (get_config('local_berta', 'bertashortcodesshowend')) {
             $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-stop'], ['courseendtime']);
         }
-        if (get_config('local_musi', 'musishortcodesshowbookablefrom')) {
+        if (get_config('local_berta', 'bertashortcodesshowbookablefrom')) {
             $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-forward'], ['bookingopeningtime']);
         }
-        if (get_config('local_musi', 'musishortcodesshowbookableuntil')) {
+        if (get_config('local_berta', 'bertashortcodesshowbookableuntil')) {
             $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-step-forward'],
                 ['bookingclosingtime']);
         }
@@ -952,11 +486,11 @@ class shortcodes {
         }
 
         // Set additional descriptions.
-        $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('teacheralt', 'local_musi')], ['teacher']);
-        $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('locationalt', 'local_musi')], ['location']);
-        $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('dayofweekalt', 'local_musi')], ['dayofweektime']);
-        $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('bookingsalt', 'local_musi')], ['bookings']);
-        $table->add_classes_to_subcolumns('cardimage', ['cardimagealt' => get_string('imagealt', 'local_musi')], ['image']);
+        $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('teacheralt', 'local_berta')], ['teacher']);
+        $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('locationalt', 'local_berta')], ['location']);
+        $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('dayofweekalt', 'local_berta')], ['dayofweektime']);
+        $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('bookingsalt', 'local_berta')], ['bookings']);
+        $table->add_classes_to_subcolumns('cardimage', ['cardimagealt' => get_string('imagealt', 'local_berta')], ['image']);
 
         $table->add_subcolumns('cardfooter', ['course', 'price']);
         $table->add_classes_to_subcolumns('cardfooter', ['columnkeyclass' => 'd-none']);
@@ -972,22 +506,22 @@ class shortcodes {
 
         $subcolumnsleftside = ['text'];
         $subcolumnsinfo = ['teacher', 'dayofweektime', 'location', 'institution'];
-        if (get_config('local_musi', 'musishortcodesshowstart')) {
+        if (get_config('local_berta', 'bertashortcodesshowstart')) {
             $subcolumnsinfo[] = 'coursestarttime';
         }
-        if (get_config('local_musi', 'musishortcodesshowend')) {
+        if (get_config('local_berta', 'bertashortcodesshowend')) {
             $subcolumnsinfo[] = 'courseendtime';
         }
-        if (get_config('local_musi', 'musishortcodesshowbookablefrom')) {
+        if (get_config('local_berta', 'bertashortcodesshowbookablefrom')) {
             $subcolumnsinfo[] = 'bookingopeningtime';
         }
-        if (get_config('local_musi', 'musishortcodesshowbookableuntil')) {
+        if (get_config('local_berta', 'bertashortcodesshowbookableuntil')) {
             $subcolumnsinfo[] = 'bookingclosingtime';
         }
         $subcolumnsinfo[] = 'bookings';
 
         // Check if we should add the description.
-        if (get_config('local_musi', 'shortcodelists_showdescriptions')) {
+        if (get_config('local_berta', 'shortcodelists_showdescriptions')) {
             $subcolumnsleftside[] = 'description';
         }
 
@@ -1016,7 +550,7 @@ class shortcodes {
 
         $table->add_classes_to_subcolumns('leftside', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-1 h3 col-md-auto'], ['text']);
-        if (get_config('local_musi', 'shortcodelists_showdescriptions')) {
+        if (get_config('local_berta', 'shortcodelists_showdescriptions')) {
             $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-3 col-md-auto'], ['description']);
         }
         $table->add_classes_to_subcolumns('info', ['columnkeyclass' => 'd-none']);
@@ -1025,16 +559,16 @@ class shortcodes {
         $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-clock-o'], ['dayofweektime']);
         $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-map-marker'], ['location']);
         $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-building-o'], ['institution']);
-        if (get_config('local_musi', 'musishortcodesshowstart')) {
+        if (get_config('local_berta', 'bertashortcodesshowstart')) {
             $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-play'], ['coursestarttime']);
         }
-        if (get_config('local_musi', 'musishortcodesshowend')) {
+        if (get_config('local_berta', 'bertashortcodesshowend')) {
             $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-stop'], ['courseendtime']);
         }
-        if (get_config('local_musi', 'musishortcodesshowbookablefrom')) {
+        if (get_config('local_berta', 'bertashortcodesshowbookablefrom')) {
             $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-forward'], ['bookingopeningtime']);
         }
-        if (get_config('local_musi', 'musishortcodesshowbookableuntil')) {
+        if (get_config('local_berta', 'bertashortcodesshowbookableuntil')) {
             $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-step-forward'], ['bookingclosingtime']);
         }
         $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-ticket'], ['bookings']);
@@ -1043,10 +577,10 @@ class shortcodes {
         }
 
         // Set additional descriptions.
-        $table->add_classes_to_subcolumns('info', ['columnalt' => get_string('teacheralt', 'local_musi')], ['teacher']);
-        $table->add_classes_to_subcolumns('info', ['columnalt' => get_string('dayofweekalt', 'local_musi')], ['dayofweektime']);
-        $table->add_classes_to_subcolumns('info', ['columnalt' => get_string('locationalt', 'local_musi')], ['location']);
-        $table->add_classes_to_subcolumns('info', ['columnalt' => get_string('bookingsalt', 'local_musi')], ['bookings']);
+        $table->add_classes_to_subcolumns('info', ['columnalt' => get_string('teacheralt', 'local_berta')], ['teacher']);
+        $table->add_classes_to_subcolumns('info', ['columnalt' => get_string('dayofweekalt', 'local_berta')], ['dayofweektime']);
+        $table->add_classes_to_subcolumns('info', ['columnalt' => get_string('locationalt', 'local_berta')], ['location']);
+        $table->add_classes_to_subcolumns('info', ['columnalt' => get_string('bookingsalt', 'local_berta')], ['bookings']);
 
         $table->add_classes_to_subcolumns('rightside',
             ['columnvalueclass' => 'text-right mb-auto align-self-end shortcodes_option_info_invisible '],
