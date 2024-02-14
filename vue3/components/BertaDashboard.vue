@@ -74,7 +74,7 @@
 
 <script setup>
   import { ref, onMounted, watch } from 'vue'
-  import Searchbar from '../components/Searchbar.vue'
+  import Searchbar from '../components/FilterSearchbar.vue'
   import { useStore } from 'vuex'
   import SkeletonTab from '../components/helper/SkeletonTab.vue';
   import SkeletonContent from '../components/helper/SkeletonContent.vue';

@@ -16,21 +16,23 @@
       >
         <span v-if="value.necessary">
           <input 
-            type="checkbox" 
+            :id="'checkbox_' + key"
+            type="checkbox"
             disabled 
             :checked="1"
           >
-          <label for="checkbox"><strong>{{ value.name }}</strong></label>
+          <label :for="'checkbox_' + key"><strong>{{ value.name }}</strong></label>
           <i> necessary</i>
         </span>
         <span v-else>
           <input 
+            :id="'checkbox_' + key"
             type="checkbox" 
             :checked="value.checked"
             :disabled="disableCheckbox(value)"
             @change="handleCheckboxChange(value)"
           >
-          <label for="checkbox"><strong>{{ value.name }}</strong></label>
+          <label :for="'checkbox_' + key"><strong>{{ value.name }}</strong></label>
         </span>
         <span class="blocked-message">{{ getBlockMessage(value) }}</span>
       </li>
