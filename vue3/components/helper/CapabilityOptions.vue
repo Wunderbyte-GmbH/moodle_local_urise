@@ -27,9 +27,12 @@
           <input 
             type="checkbox" 
             :checked="value.checked"
+            :disabled="disableCheckbox(value)"
+            @change="handleCheckboxChange(value)"
           >
-          <label for="checkbox"><strong>{{ value.name }}:</strong></label>
+          <label for="checkbox"><strong>{{ value.name }}</strong></label>
         </span>
+        <span class="blocked-message">{{ getBlockMessage(value) }}</span>
       </li>
     </ul>
   </div>
@@ -92,20 +95,59 @@ const handleDrop = (index, event) => {
   event.preventDefault();
   const droppedItemIndex = event.dataTransfer.getData('text/plain');
   const itemToMove = configurationList.value[droppedItemIndex];
-  const currentIndex = configurationList.value.findIndex(item => item.id === index);
   configurationList.value.splice(droppedItemIndex, 1);
-  configurationList.value.splice(currentIndex, 0, itemToMove);
+  configurationList.value.splice(index, 0, itemToMove);
   draggedOverIndex.value = null;
 }
 
 const handleDragEnd = () => {
   draggedItemIndex = null;
 }
+
+const disableCheckbox = (item) => {
+  if (item.incompatible && item.incompatible.length > 0) {
+    return item.incompatible.some(id => {
+      const incompatibleItem = configurationList.value.find(configItem => configItem.id === id);
+      return incompatibleItem && incompatibleItem.checked;
+    });
+  }
+  return false;
+}
+
+const getBlockMessage = (item) => {
+  if (item.incompatible && item.incompatible.length > 0) {
+    const incompatibleNames = item.incompatible
+      .map(id => configurationList.value.find(configItem => configItem.id === id))
+      .filter(incompatibleItem => incompatibleItem && incompatibleItem.checked)
+      .map(incompatibleItem => incompatibleItem.name);
+      if (incompatibleNames.length > 0) {
+      return ` Blocked by: ${incompatibleNames.join(', ')}`;
+    }
+  }
+  return '';
+};
+
+const handleCheckboxChange = (value) => {
+  configurationList.value.forEach((configuration) => {
+    if (value == configuration) {
+      configuration.checked = configuration.checked ? 0 : 1
+    }
+    const blocked = disableCheckbox(configuration)
+    if (blocked) {
+      configuration.checked = 0;
+    } 
+  })
+  saveConfigurationList(configurationList.value)
+};
 </script>
 
 <style scoped>
 li.drag-over {
   background-color: #cbc7c7;
   border-bottom: 2px dashed #333;
+}
+.blocked-message {
+  color: red;
+  font-size: 12px;
 }
 </style>
