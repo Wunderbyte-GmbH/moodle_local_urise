@@ -34,5 +34,21 @@ $functions = array(
                 'capabilities' => '',
                 'ajax' => 1
         ),
+        'local_berta_get_parent_categories' => array(
+                'classname' => 'local_berta\external\get_parent_categories',
+                'classpath' => '',
+                'description' => 'Get all parent categories',
+                'type' => 'read',
+                'capabilities' => '',
+                'ajax' => 1
+        ),
+        'local_berta_get_parent_content' => array(
+                'classname' => 'local_berta\external\get_parent_content',
+                'classpath' => '',
+                'description' => 'Get content of parent category',
+                'type' => 'read',
+                'capabilities' => '',
+                'ajax' => 1
+        ),
 );
 

@@ -190,6 +190,6 @@ class dashboard implements renderable, templatable {
                     ]
                 ]
         );
-        return $returnarray;
+        return null;
     }
 }

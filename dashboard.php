@@ -51,7 +51,7 @@ $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_heading($title);
 
-$PAGE->set_pagelayout('standard');
+$PAGE->set_pagelayout('mydashboard');
 $PAGE->add_body_class('local_berta-dashboard');
 
 echo $OUTPUT->header();
@@ -64,6 +64,12 @@ $PAGE->requires->js_call_amd(
         get_string('editbotags', 'local_berta')
     ]
 );
+$PAGE->requires->js_call_amd('local_berta/app-lazy', 'init');
+echo <<<EOT
+    <div id="local-berta-app" name="local-berta-app">
+    <router-view></router-view>
+    </div>
+  EOT;
 
 // Render the page content via mustache templates.
 $output = $PAGE->get_renderer('local_berta');

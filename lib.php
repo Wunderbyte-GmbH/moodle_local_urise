@@ -21,6 +21,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use core\event\capability_assigned;
 use mod_booking\singleton_service;
 
 // Define booking status parameters.
@@ -70,9 +71,8 @@ function local_berta_get_fontawesome_icon_map() {
  */
 function local_berta_render_navbar_output(\renderer_base $renderer) {
     global $CFG;
-
     // Early bail out conditions.
-    if (!isloggedin() || isguestuser() || !has_capability('local/berta:canedit', context_system::instance())) {
+    if (!isloggedin() || isguestuser() || !has_capability('local/berta:view', context_system::instance())) {
         return;
     }
 
@@ -96,7 +96,6 @@ function local_berta_render_navbar_output(\renderer_base $renderer) {
                 . get_string('mycourses', 'local_berta') . '</a>
         </div>
     </div>';
-
     return $output;
 }
 

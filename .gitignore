@@ -2,3 +2,5 @@
 .DS_Store
 ._*
 .idea
+/vue3/node_modules/
+/vue3/coverage
