@@ -30,6 +30,6 @@ $shortcodes = [
     'unifiedlist' => [
         'callback' => 'local_berta\shortcodes::unifiedlist',
         'wraps' => false,
-        'description' => 'unified list of courses'
+        'description' => 'shortcodes::unifiedlist'
     ]
 ];

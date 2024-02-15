@@ -238,3 +238,5 @@ $string['add_sports_division'] = 'Add sport divisions to sports';
 
 // Sports division.
 $string['nosportsdivision'] = 'No sports divisions set on this site';
+
+$string['shortcodes::unifiedlist'] = "Shortcode unified list";

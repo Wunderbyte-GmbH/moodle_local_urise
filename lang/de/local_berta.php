@@ -243,3 +243,5 @@ $string['add_sports_division'] = 'Die Sparten zu den Sportarten automatisch hinz
 
 // Sports division.
 $string['nosportsdivision'] = 'Keine Sparten auf dieser Website verfügbar';
+
+$string['shortcodes::unifiedlist'] = "Shortcode unified list";
