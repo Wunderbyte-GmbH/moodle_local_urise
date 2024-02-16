@@ -92,6 +92,9 @@
   onMounted(() => {
     store.dispatch('fetchTabs')
     store.dispatch('fetchParentContent', 0)
+    tabsstored.value = store.state.tabs;
+    tabs.value = store.state.tabs;
+    content.value = store.state.content;
   });
 
   watch(() => store.state.tabs, async () => {
