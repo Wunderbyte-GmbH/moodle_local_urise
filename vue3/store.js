@@ -97,6 +97,9 @@ export function createAppStore() {
                 const configlist = await ajax('mod_booking_get_option_field_config', params);
                 context.commit('setConfigList', configlist);
             },
+            async setParentContent(context, index) {
+              await ajax('local_berta_set_parent_content', index);
+            },
         }
     });
 }

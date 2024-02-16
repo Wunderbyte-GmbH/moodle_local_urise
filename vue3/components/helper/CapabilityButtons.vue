@@ -5,10 +5,16 @@
       <div class="row mt-2">
         <div class="col-md-12">
           <button 
-            class="btn btn-secondary"
+            class="btn btn-secondary mr-2"
             @click="showButtons = true; handleCapabilityClick(null)" 
           >
             Back
+          </button>
+          <button 
+            class="btn btn-primary"
+            @click="saveContent" 
+          >
+            Save
           </button>
         </div>
       </div>
@@ -60,5 +66,9 @@ watch(() => choosenCapability.value, async () => {
 
 const handleCapabilityClick = (capability) => {
   choosenCapability.value = capability;
+}
+
+const saveContent = () => {
+  store.dispatch('setParentContent', choosenCapability.value)
 }
 </script>
