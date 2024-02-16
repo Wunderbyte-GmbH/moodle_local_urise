@@ -26,13 +26,11 @@ declare(strict_types=1);
 
 namespace local_berta\external;
 
-use context_system;
 use external_api;
 use external_function_parameters;
 use external_multiple_structure;
 use external_value;
 use external_single_structure;
-use moodle_exception;
 use context_coursecat;
 use local_berta\dashboard;
 

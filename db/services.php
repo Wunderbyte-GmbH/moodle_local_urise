@@ -50,5 +50,13 @@ $functions = array(
                 'capabilities' => '',
                 'ajax' => 1
         ),
+        'local_berta_set_parent_content' => array(
+          'classname' => 'mod_booking\external\save_option_field_config',
+          'classpath' => '',
+          'description' => 'Set content of parent category',
+          'type' => 'read',
+          'capabilities' => '',
+          'ajax' => 1
+        ),
 );
 
