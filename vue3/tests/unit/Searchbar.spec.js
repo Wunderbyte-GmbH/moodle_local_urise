@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/vue';
-import Searchbar from '../../components/Searchbar.vue';
+import Searchbar from '../../components/FilterSearchbar.vue';
 
 describe('Searchbar', () => {
   it('filters tabs based on user input', async () => {
@@ -9,7 +9,7 @@ describe('Searchbar', () => {
       { id: 3, name: 'Tab 3' },
     ];
 
-    const { emitted } = render(Searchbar, {
+    const { container, emitted } = render(Searchbar, {
       props: {
         tabs: tabs,
       },

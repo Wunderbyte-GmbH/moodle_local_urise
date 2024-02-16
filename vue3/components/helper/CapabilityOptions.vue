@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useStore } from 'vuex'
 
 const store = useStore()
@@ -54,13 +54,22 @@ const props = defineProps({
 });
 const draggedOverIndex = ref(null);
 
+
+onMounted(() => {
+  getConfigurationList()
+});
+
 watch(() => props.selectedcapability, async () => {
+  getConfigurationList()
+}, { deep: true } );
+
+const getConfigurationList = (() => {
   if (props.selectedcapability && props.selectedcapability.json) {
     configurationList.value = JSON.parse(props.selectedcapability.json)
   } else {
     configurationList.value = null
   }
-}, { deep: true } );
+})
 
 watch(() => configurationList.value, async () => {
   saveConfigurationList(configurationList.value)
@@ -69,6 +78,7 @@ watch(() => configurationList.value, async () => {
 let draggedItemIndex = null;
 
 const handleDragStart = (index, event) => {
+  console.log(event)
   draggedItemIndex = index;
   event.dataTransfer.effectAllowed = 'move';
   event.dataTransfer.setData('text/plain', draggedItemIndex);
