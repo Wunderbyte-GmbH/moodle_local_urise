@@ -39,6 +39,7 @@
 
 <script setup>
 import { onMounted, ref, watch, defineEmits } from 'vue'
+import { notify } from "@kyvg/vue3-notification"
 import { useStore } from 'vuex'
 
 const store = useStore()
@@ -68,7 +69,20 @@ const handleCapabilityClick = (capability) => {
   choosenCapability.value = capability;
 }
 
-const saveContent = () => {
-  store.dispatch('setParentContent', choosenCapability.value)
+const saveContent = async () => {
+  const result = await store.dispatch('setParentContent', choosenCapability.value)
+  if(result.status == 'success'){
+    notify({
+      title: 'Configuration was saved',
+      text: 'Configuration was saved successfully.',
+      type: 'success'
+    });
+  }else {
+    notify({
+      title: 'Configuration was saved',
+      text: 'Something went wrong while saving. The changes have not been changed.',
+      type: 'warn'
+    });
+  }
 }
 </script>

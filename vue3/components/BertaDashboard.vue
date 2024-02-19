@@ -1,5 +1,6 @@
 <template>
   <div>
+    <notifications width="100%" />
     <Searchbar 
       :tabs="tabsstored" 
       @filteredTabs="updateFilteredTabs"
@@ -104,6 +105,7 @@
 
   watch(() => store.state.content, async () => {
     content.value = null
+    selectedCapability.value = null
     setTimeout(() => {
       content.value = store.state.content
     }, 200);
