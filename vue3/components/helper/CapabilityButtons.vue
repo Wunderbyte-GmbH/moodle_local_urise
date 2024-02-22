@@ -1,7 +1,7 @@
 <template>
   <div class="mt-4">
     <div v-if="!showButtons">
-      <p><strong>Capability: {{ choosenCapability.capability }}</strong></p>
+      <p><strong>Capability: {{ choosenCapability.name }}</strong></p>
       <div class="row mt-2">
         <div class="col-md-12">
           <button 
@@ -29,7 +29,7 @@
             class="btn btn-outline-primary mr-2 mb-2"
             @click="showButtons = false; handleCapabilityClick(capability)"
           >
-            {{ capability.capability }}
+            {{ capability.name }}
           </button>
         </div>
       </div>
