@@ -98,7 +98,11 @@ export function createAppStore() {
                 context.commit('setConfigList', configlist);
             },
             async setParentContent(context, index) {
-              return await ajax('local_berta_set_parent_content', index);
+              return await ajax('local_berta_set_parent_content', {
+                capability: index.capability,
+                id: index.id,
+                json: index.json,
+              });
             },
         }
     });
