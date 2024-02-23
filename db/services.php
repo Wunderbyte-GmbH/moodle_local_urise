@@ -26,14 +26,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 $functions = array(
-        'local_berta_get_all_itemids' => array(
-                'classname' => 'local_berta\external\get_all_itemids',
-                'classpath' => '',
-                'description' => 'Get all item ids',
-                'type' => 'write',
-                'capabilities' => '',
-                'ajax' => 1
-        ),
         'local_berta_get_parent_categories' => array(
                 'classname' => 'local_berta\external\get_parent_categories',
                 'classpath' => '',
@@ -42,21 +34,13 @@ $functions = array(
                 'capabilities' => '',
                 'ajax' => 1
         ),
-        'local_berta_get_parent_content' => array(
-                'classname' => 'local_berta\external\get_parent_content',
+        'local_berta_set_parent_content' => array(
+                'classname' => 'mod_booking\external\save_option_field_config',
                 'classpath' => '',
-                'description' => 'Get content of parent category',
+                'description' => 'Set content of parent category',
                 'type' => 'read',
                 'capabilities' => '',
                 'ajax' => 1
-        ),
-        'local_berta_set_parent_content' => array(
-          'classname' => 'mod_booking\external\save_option_field_config',
-          'classpath' => '',
-          'description' => 'Set content of parent category',
-          'type' => 'read',
-          'capabilities' => '',
-          'ajax' => 1
         ),
 );
 

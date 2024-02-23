@@ -56,14 +56,6 @@ $PAGE->add_body_class('local_berta-dashboard');
 
 echo $OUTPUT->header();
 
-$PAGE->requires->js_call_amd(
-    'local_berta/botagsmodal',
-    'init',
-    [
-        '[data-action=openbotagsmodal]',
-        get_string('editbotags', 'local_berta')
-    ]
-);
 $PAGE->requires->js_call_amd('local_berta/app-lazy', 'init');
 echo <<<EOT
     <div id="local-berta-app" name="local-berta-app">

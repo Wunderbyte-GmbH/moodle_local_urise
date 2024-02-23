@@ -26,15 +26,13 @@ declare(strict_types=1);
 
 namespace local_berta\external;
 
-use context_system;
 use external_api;
 use external_function_parameters;
 use external_multiple_structure;
 use external_value;
 use external_single_structure;
-use moodle_exception;
 use context_coursecat;
-use local_berta\dashboard;
+use local_berta\coursecategories;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -56,7 +54,9 @@ class get_parent_categories extends external_api {
      * @return external_function_parameters
      */
     public static function execute_parameters(): external_function_parameters {
-        return new external_function_parameters([]);
+        return new external_function_parameters([
+          'coursecategoryid'  => new external_value(PARAM_INT, 'coursecategoryid', VALUE_DEFAULT, 0),
+        ]);
     }
 
     /**
@@ -67,29 +67,48 @@ class get_parent_categories extends external_api {
      *
      * @return array
      */
-    public static function execute(): array {
+    public static function execute(int $coursecategoryid): array {
         global $DB;
 
         require_login();
 
-        $returnarray = [[
-            'id' => 0,
-            'name' => 'General',
-            'coursecount' => 0,
-        ]];
+        $params = self::validate_parameters(self::execute_parameters(), [
+            'coursecategoryid' => $coursecategoryid,
+        ]);
 
-        $records = dashboard::return_all_parents();
+        $records = coursecategories::return_course_categories($params['coursecategoryid']);
+
+        $coursecount = 0;
+
+        if (empty($params['coursecategoryid'])) {
+            $returnarray = [
+                [
+                    'id' => 0,
+                    'name' => get_string('summary', 'local_berta'),
+                    'contextid' => 1,
+                    'coursecount' => $coursecount,
+                    'description' => get_string('summarydescription', 'local_berta'),
+                    'path' => '',
+                ],
+            ];
+        } else {
+            $returnarray = [];
+        }
 
         foreach ($records as $record) {
 
-          $context = context_coursecat::instance($record->id);
+            $context = context_coursecat::instance($record->id);
 
             if (!has_capability('local/berta:view', $context)) {
                 continue;
             }
-            $returnarray[0]['coursecount'] += $record->coursecount;
+            $coursecount += $record->coursecount;
             $returnarray[] = (array)$record;
         }
+
+        // We set the combined coursecount.
+        $returnarray[0]['coursecount'] = $coursecount;
+
         return $returnarray;
     }
 
@@ -102,9 +121,12 @@ class get_parent_categories extends external_api {
         return new external_multiple_structure(
             new external_single_structure(
                 array(
-                    'id' => new external_value(PARAM_INT, 'Item id'),
-                    'name' => new external_value(PARAM_TEXT, 'Item name'),
-                    'coursecount' => new external_value(PARAM_TEXT, 'Coursecount'),
+                    'id' => new external_value(PARAM_INT, 'Item id', VALUE_DEFAULT, 0),
+                    'name' => new external_value(PARAM_TEXT, 'Item name', VALUE_DEFAULT, ''),
+                    'contextid' => new external_value(PARAM_TEXT, 'Contextid', VALUE_DEFAULT, 1),
+                    'coursecount' => new external_value(PARAM_TEXT, 'Coursecount', VALUE_DEFAULT, 0),
+                    'description' => new external_value(PARAM_TEXT, 'description', VALUE_DEFAULT, ''),
+                    'path' => new external_value(PARAM_TEXT, 'path', VALUE_DEFAULT, ''),
                 )
             )
         );

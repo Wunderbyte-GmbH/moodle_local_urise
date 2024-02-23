@@ -1,31 +1,31 @@
 <template>
   <div class="mt-4">
     <div v-if="!showButtons">
-      <p><strong>Capability: {{ choosenCapability.name }}</strong></p>
+      <p><strong>Capability: (LOKALIZE!) {{ choosenCapability.name }}</strong></p>
       <div class="row mt-2">
         <div class="col-md-12">
-          <button 
+          <button
             class="btn btn-secondary mr-2"
-            @click="showButtons = true; handleCapabilityClick(null)" 
+            @click="showButtons = true; handleCapabilityClick(null)"
           >
-            Back
+            Back (LOKALIZE!)
           </button>
-          <button 
+          <button
             class="btn btn-primary"
-            @click="saveContent" 
+            @click="saveContent"
           >
-            Save
+            Save (LOKALIZE!)
           </button>
         </div>
       </div>
     </div>
     <div v-else>
-      <p><strong>Capabilites</strong></p>
+      <p><strong>Capabilites (LOKALIZE!)</strong></p>
       <div class="row">
         <div class="col-md-12">
           <button
             v-for="capability in configCapability"
-            :key="capability.id" 
+            :key="capability.id"
             class="btn btn-outline-primary mr-2 mb-2"
             @click="showButtons = false; handleCapabilityClick(capability)"
           >

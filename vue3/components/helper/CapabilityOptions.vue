@@ -1,9 +1,9 @@
 <template>
   <div v-if="configurationList && configurationList.length > 0">
-    <p>Capability Configuration:</p>
+    <p>Capability Configuration: (LOKALIZE!)</p>
     <ul>
-      <li 
-        v-for="(value, key) in configurationList" 
+      <li
+        v-for="(value, key) in configurationList"
         :key="key"
         draggable="true"
         style="cursor: move"
@@ -15,19 +15,19 @@
         @dragend="handleDragEnd"
       >
         <span v-if="value.necessary">
-          <input 
+          <input
             :id="'checkbox_' + key"
             type="checkbox"
-            disabled 
+            disabled
             :checked="1"
           >
           <label :for="'checkbox_' + key"><strong>{{ value.name }}</strong></label>
           <i> necessary</i>
         </span>
         <span v-else>
-          <input 
+          <input
             :id="'checkbox_' + key"
-            type="checkbox" 
+            type="checkbox"
             :checked="value.checked"
             :disabled="disableCheckbox(value)"
             @change="handleCheckboxChange(value)"
@@ -147,7 +147,7 @@ const handleCheckboxChange = (value) => {
     const blocked = disableCheckbox(configuration)
     if (blocked) {
       configuration.checked = 0;
-    } 
+    }
   })
   saveConfigurationList(configurationList.value)
 };
