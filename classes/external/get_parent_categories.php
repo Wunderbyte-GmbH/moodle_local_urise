@@ -89,6 +89,7 @@ class get_parent_categories extends external_api {
                     'coursecount' => $coursecount,
                     'description' => get_string('summarydescription', 'local_berta'),
                     'path' => '',
+                    'json' => '',
                 ],
             ];
         } else {
@@ -103,6 +104,15 @@ class get_parent_categories extends external_api {
                 continue;
             }
             $coursecount += $record->coursecount;
+
+            if ($bookingoptions
+                    = coursecategories::return_booking_information_for_coursecategory((int)$record->contextid)) {
+
+                $record->json = json_encode([
+                    'booking' => $bookingoptions
+                ]);
+            }
+
             $returnarray[] = (array)$record;
         }
 
@@ -127,6 +137,7 @@ class get_parent_categories extends external_api {
                     'coursecount' => new external_value(PARAM_TEXT, 'Coursecount', VALUE_DEFAULT, 0),
                     'description' => new external_value(PARAM_TEXT, 'description', VALUE_DEFAULT, ''),
                     'path' => new external_value(PARAM_TEXT, 'path', VALUE_DEFAULT, ''),
+                    'json' => new external_value(PARAM_RAW, 'json', VALUE_DEFAULT, '{}'),
                 )
             )
         );

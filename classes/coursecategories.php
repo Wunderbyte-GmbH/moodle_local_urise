@@ -64,4 +64,61 @@ class coursecategories {
 
         return $DB->get_records_sql($sql);
     }
+
+    /**
+     * Returns specific booking information for any course category.
+     * @param int $contextid
+     * @return array
+     * @throws dml_exception
+     */
+    public static function return_booking_information_for_coursecategory(int $contextid) {
+
+        global $DB;
+
+        $where = [
+            "m.name = 'booking'",
+            "c.contextlevel = " . CONTEXT_MODULE
+        ];
+
+        if (!empty($contextid)) {
+            $from = " JOIN {context} c ON c.instanceid = cm.id ";
+            $where[] = "c.path LIKE :path";
+            $params['path'] = "/1/$contextid/%";
+        }
+
+        $sql = "SELECT cm.id,
+                       b.name,
+                       b.intro,
+                       COUNT(bo.id) bookingoptions,
+                       SUM(booked) booked,
+                       SUM(waitinglist) waitinglist,
+                       SUM(reserved) reserved
+        FROM {course_modules} cm
+        JOIN {modules} m ON cm.module = m.id
+        JOIN {booking} b on cm.instance = b.id
+        LEFT JOIN {booking_options} bo ON b.id = bo.bookingid
+        LEFT JOIN (SELECT ba.optionid, COUNT(ba.id) as booked
+              FROM {booking_answers} ba
+              WHERE ba.waitinglist = 0
+              GROUP BY ba.optionid
+              ) s1 ON s1.optionid = bo.id
+        $from
+        LEFT JOIN (SELECT ba.optionid, COUNT(ba.id) as waitinglist
+              FROM {booking_answers} ba
+              WHERE ba.waitinglist = 1
+              GROUP BY ba.optionid
+              ) s2 ON s2.optionid = bo.id
+        LEFT JOIN (SELECT ba.optionid, COUNT(ba.id) as reserved
+              FROM {booking_answers} ba
+              WHERE ba.waitinglist = 2
+              GROUP BY ba.optionid
+              ) s3 ON s3.optionid = bo.id
+        WHERE " . implode(' AND ', $where) .
+        " GROUP BY cm.id, b.name, b.intro  ";
+
+        $records = $DB->get_records_sql($sql, $params);
+
+        return $records;
+    }
+
 }
