@@ -61,7 +61,6 @@
           <strong>Path: (LOKALIZE!)</strong> {{ content.path }}
         </p>
         <p
-          v-if="content.name"
           class="mb-0"
         >
           <a href="http://10.111.0.2:8000/course/editcategory.php?parent=0">
@@ -69,11 +68,20 @@
           </a>
         </p>
         <p
-          v-if="content.name"
+          v-if="content.contextid"
           class="mb-0"
         >
           <a :href="'http://10.111.0.2:8000/admin/roles/assign.php?contextid=' + content.contextid">
-            Assign Roles (LOKALIZE!)
+            Assign Roles (LOKALIZE!)  {{ content.json }}
+          </a>
+        </p>
+        <p
+          v-for="bookingStat in bookingStats"
+          :key="bookingStat.id"
+          class="mb-0"
+        >
+          <a :href="'http://10.111.0.2:8000/admin/roles/assign.php?contextid=' + content.contextid">
+            {{ bookingStat.json }}
           </a>
         </p>
         <CapabilityButtons @capabilityClicked="handleCapabilityClicked" />
@@ -98,16 +106,17 @@
   import CapabilityButtons from '../components/helper/CapabilityButtons.vue';
   import CapabilityOptions from '../components/helper/CapabilityOptions.vue';
 
-  const content = ref()
-  const store = useStore()
+  const content = ref();
+  const store = useStore();
   const tabsstored = ref([]);
   const tabs = ref([]);
   const activeTab = ref(0);
-  const selectedCapability = ref(null)
+  const selectedCapability = ref(null);
+  const bookingStats = ref([]);
 
   // Trigger web services on mount
   onMounted(() => {
-    store.dispatch('fetchTab', 0)
+    store.dispatch('fetchTab', 0);
     tabsstored.value = store.state.tabs;
     tabs.value = store.state.tabs;
     content.value = store.state.content;
