@@ -240,3 +240,6 @@ $string['add_sports_division'] = 'Add sport divisions to sports';
 $string['nosportsdivision'] = 'No sports divisions set on this site';
 
 $string['shortcodes::unifiedlist'] = "Shortcode unified list";
+
+$string['summary'] = 'General';
+$string['summary_desc'] = 'Contains the settings and stats for the whole Moodle site';
