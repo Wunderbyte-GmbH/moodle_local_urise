@@ -25,8 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_berta';
-$plugin->release = '0.1.1';
-$plugin->version = 2024022600;
+$plugin->release = '0.1.2';
+$plugin->version = 2024022601;
 $plugin->requires = 2022041900; // Requires this Moodle version. Current: Moodle 4.0.0.
 $plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = [
