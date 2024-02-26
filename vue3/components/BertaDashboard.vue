@@ -72,18 +72,11 @@
           class="mb-0"
         >
           <a :href="'http://10.111.0.2:8000/admin/roles/assign.php?contextid=' + content.contextid">
-            Assign Roles (LOKALIZE!)  {{ content.json }}
+            Assign Roles (LOKALIZE!)
           </a>
         </p>
-        <p
-          v-for="bookingStat in bookingStats"
-          :key="bookingStat.id"
-          class="mb-0"
-        >
-          <a :href="'http://10.111.0.2:8000/admin/roles/assign.php?contextid=' + content.contextid">
-            {{ bookingStat.json }}
-          </a>
-        </p>
+          
+        <BookingStats :bookingstats="content" />
         <CapabilityButtons @capabilityClicked="handleCapabilityClicked" />
         <CapabilityOptions :selectedcapability="selectedCapability" />
       </div>
@@ -105,6 +98,7 @@
   import SkeletonContent from '../components/helper/SkeletonContent.vue';
   import CapabilityButtons from '../components/helper/CapabilityButtons.vue';
   import CapabilityOptions from '../components/helper/CapabilityOptions.vue';
+  import BookingStats from '../components/dashboard/BookingStats.vue';
 
   const content = ref();
   const store = useStore();
@@ -112,14 +106,13 @@
   const tabs = ref([]);
   const activeTab = ref(0);
   const selectedCapability = ref(null);
-  const bookingStats = ref([]);
 
   // Trigger web services on mount
   onMounted(() => {
     store.dispatch('fetchTab', 0);
-    tabsstored.value = store.state.tabs;
-    tabs.value = store.state.tabs;
-    content.value = store.state.content;
+    tabsstored.value = store.state.tabs
+    tabs.value = store.state.tabs
+    content.value = store.state.content
   });
 
   watch(() => store.state.tabs, async () => {
@@ -128,11 +121,8 @@
   }, { deep: true } );
 
   watch(() => store.state.content, async () => {
-    content.value = null
-    selectedCapability.value = null
-    setTimeout(() => {
-      content.value = store.state.content
-    }, 200);
+    content.value = store.state.content
+
   }, { deep: true } );
 
   function changeTab(index) {

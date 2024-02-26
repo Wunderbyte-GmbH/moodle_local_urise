@@ -109,7 +109,7 @@ class get_parent_categories extends external_api {
                     = coursecategories::return_booking_information_for_coursecategory((int)$record->contextid)) {
 
                 $record->json = json_encode([
-                    'booking' => $bookingoptions
+                    'booking' => array_values($bookingoptions)
                 ]);
             }
 
