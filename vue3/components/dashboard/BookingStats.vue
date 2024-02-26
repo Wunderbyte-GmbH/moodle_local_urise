@@ -13,7 +13,7 @@
       <tbody>
         <tr v-for="bookingStat in bookingstats.json.booking" :key="'bookingstats' + bookingStat.id">
           <td>
-            <a :href="'http://10.111.0.2:8000/mod/booking/view.php?id=' + bookingStat.id">
+            <a :href="'/mod/booking/view.php?id=' + bookingStat.id">
               {{ bookingStat.name }}
             </a>
           </td>
