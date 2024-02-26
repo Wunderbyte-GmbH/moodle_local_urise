@@ -63,7 +63,7 @@
         <p
           class="mb-0"
         >
-          <a href="http://10.111.0.2:8000/course/editcategory.php?parent=0">
+          <a href="/course/editcategory.php?parent=0">
             Create new OE (LOKALIZE!)
           </a>
         </p>
@@ -71,11 +71,11 @@
           v-if="content.contextid"
           class="mb-0"
         >
-          <a :href="'http://10.111.0.2:8000/admin/roles/assign.php?contextid=' + content.contextid">
+          <a :href="'/admin/roles/assign.php?contextid=' + content.contextid">
             Assign Roles (LOKALIZE!)
           </a>
         </p>
-          
+
         <BookingStats :bookingstats="content" />
         <CapabilityButtons @capabilityClicked="handleCapabilityClicked" />
         <CapabilityOptions :selectedcapability="selectedCapability" />
