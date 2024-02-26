@@ -27,7 +27,9 @@
 namespace local_berta;
 
 use Closure;
+use coding_exception;
 use context_system;
+use dml_exception;
 use mod_booking\output\page_allteachers;
 use local_berta\output\userinformation;
 use local_berta\table\berta_table;
@@ -42,36 +44,6 @@ use stdClass;
  * Deals with local_shortcodes regarding booking.
  */
 class shortcodes {
-
-    /**
-     * Prints out list of bookingoptions.
-     * Arguments can be 'category' or 'perpage'.
-     *
-     * @param string $shortcode
-     * @param array $args
-     * @param string|null $content
-     * @param object $env
-     * @param Closure $next
-     * @return void
-     */
-    public static function showallsports($shortcode, $args, $content, $env, $next) {
-
-        global $OUTPUT;
-
-        self::fix_args($args);
-
-        // Get the ID of the course containing the sports categories.
-        $courseid = sports::return_courseid();
-
-        // If it's not set, we do nothing.
-        if (empty($courseid)) {
-            return get_string('nosportsdivision', 'local_berta');
-        }
-
-        $data = sports::get_all_sportsdivisions_data($courseid);
-
-        return $OUTPUT->render_from_template('local_berta/shortcodes_rendersportcategories', $data);
-    }
 
     /**
      * Prints out list of bookingoptions.
@@ -122,9 +94,16 @@ class shortcodes {
      */
     public static function unifiedlist($shortcode, $args, $content, $env, $next) {
 
+        global $DB;
+
         self::fix_args($args);
 
         $booking = self::get_booking($args);
+
+        // TODO: Here we retrieve the ids from the selected Booking instances.
+        // For the moment, we just get all of them.
+
+        $bookingids = $DB->get_fieldset_select('booking', 'id', '', []);
 
         if (!isset($args['category']) || !$category = ($args['category'])) {
             $category = '';
@@ -151,7 +130,7 @@ class shortcodes {
         $table = self::inittableforcourses($booking);
 
         $table->showcountlabel = $args['countlabel'];
-        $wherearray = ['bookingid' => (int)$booking->id];
+        $wherearray = ['bookingid' => $bookingids];
 
         if (!empty($category)) {
             $wherearray['sport'] = $category;
@@ -170,7 +149,7 @@ class shortcodes {
 
         $table->set_filter_sql($fields, $from, $where, $filter, $params);
 
-        $table->use_pages = false;
+        $table->use_pages = true;
 
         if ($showimage !== false) {
             $table->set_tableclass('cardimageclass', 'pr-0 pl-1');
@@ -188,6 +167,7 @@ class shortcodes {
 
         $table->tabletemplate = 'local_berta/table_list';
         $table->showcountlabel = true;
+        $table->showreloadbutton = true;
 
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
@@ -414,92 +394,14 @@ class shortcodes {
         }
     }
 
-    private static function generate_table_for_cards(&$table, $args) {
-        self::fix_args($args);
-        $table->define_cache('mod_booking', 'bookingoptionstable');
-
-        // We define it here so we can pass it with the mustache template.
-        $table->add_subcolumns('optionid', ['id']);
-
-        $table->add_subcolumns('cardimage', ['image']);
-        $table->add_subcolumns('optioninvisible', ['invisibleoption']);
-
-        $table->add_subcolumns('cardbody', ['action', 'invisibleoption', 'sportsdivision', 'sport', 'text', 'botags']);
-        $table->add_classes_to_subcolumns('cardbody', ['columnkeyclass' => 'd-none']);
-        $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' => 'float-right m-1'], ['action']);
-        $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' => 'font-size-sm'], ['botags']);
-        $table->add_classes_to_subcolumns(
-            'cardbody',
-            ['columnvalueclass' => 'text-center shortcodes_option_info_invisible'],
-            ['invisibleoption']
-        );
-        $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' =>
-            'sportsdivision-badge'], ['sportsdivision']);
-        $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' => 'sport-badge rounded-sm text-gray-800 mt-2'],
-            ['sport']);
-        $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' => 'm-0 mt-1 mb-1 h5'], ['text']);
-
-        // Subcolumns.
-        $subcolumns = ['teacher', 'dayofweektime', 'location', 'institution'];
-        if (get_config('local_berta', 'bertashortcodesshowstart')) {
-            $subcolumns[] = 'coursestarttime';
-        }
-        if (get_config('local_berta', 'bertashortcodesshowend')) {
-            $subcolumns[] = 'courseendtime';
-        }
-        if (get_config('local_berta', 'bertashortcodesshowbookablefrom')) {
-            $subcolumns[] = 'bookingopeningtime';
-        }
-        if (get_config('local_berta', 'bertashortcodesshowbookableuntil')) {
-            $subcolumns[] = 'bookingclosingtime';
-        }
-        $subcolumns[] = 'bookings';
-        if (!empty($args['showminanswers'])) {
-            $subcolumns[] = 'minanswers';
-        }
-
-        $table->add_subcolumns('cardlist', $subcolumns);
-        $table->add_classes_to_subcolumns('cardlist', ['columnkeyclass' => 'd-none']);
-        $table->add_classes_to_subcolumns('cardlist', ['columnvalueclass' => 'text-secondary']);
-        $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'text-secondary']);
-        $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-map-marker'], ['location']);
-        $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-building-o'], ['institution']);
-
-        if (get_config('local_berta', 'bertashortcodesshowstart')) {
-            $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-play'], ['coursestarttime']);
-        }
-        if (get_config('local_berta', 'bertashortcodesshowend')) {
-            $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-stop'], ['courseendtime']);
-        }
-        if (get_config('local_berta', 'bertashortcodesshowbookablefrom')) {
-            $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-forward'], ['bookingopeningtime']);
-        }
-        if (get_config('local_berta', 'bertashortcodesshowbookableuntil')) {
-            $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-step-forward'],
-                ['bookingclosingtime']);
-        }
-
-        $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-clock-o'], ['dayofweektime']);
-        $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-users'], ['bookings']);
-        if (!empty($args['showminanswers'])) {
-            $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-arrow-up'], ['minanswers']);
-        }
-
-        // Set additional descriptions.
-        $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('teacheralt', 'local_berta')], ['teacher']);
-        $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('locationalt', 'local_berta')], ['location']);
-        $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('dayofweekalt', 'local_berta')], ['dayofweektime']);
-        $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('bookingsalt', 'local_berta')], ['bookings']);
-        $table->add_classes_to_subcolumns('cardimage', ['cardimagealt' => get_string('imagealt', 'local_berta')], ['image']);
-
-        $table->add_subcolumns('cardfooter', ['course', 'price']);
-        $table->add_classes_to_subcolumns('cardfooter', ['columnkeyclass' => 'd-none']);
-        $table->add_classes_to_subcolumns('cardfooter', ['columnclass' => 'theme-text-color bold '], ['price']);
-        $table->set_tableclass('cardimageclass', 'w-100');
-
-        $table->is_downloading('', 'List of booking options');
-    }
-
+    /**
+     * Generate table for list.
+     * @param mixed $table
+     * @param mixed $args
+     * @return void
+     * @throws dml_exception
+     * @throws coding_exception
+     */
     private static function generate_table_for_list(&$table, $args) {
 
         self::fix_args($args);

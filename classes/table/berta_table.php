@@ -28,8 +28,6 @@ use context_system;
 use dml_exception;
 use html_writer;
 use local_wunderbyte_table\wunderbyte_table;
-use mod_booking\bo_availability\bo_info;
-use mod_booking\booking;
 use mod_booking\booking_bookit;
 use mod_booking\booking_option;
 use mod_booking\option\dates_handler;
@@ -48,47 +46,8 @@ defined('MOODLE_INTERNAL') || die();
  */
 class berta_table extends wunderbyte_table {
 
-    /** @var booking $booking */
-    private $booking = null;
-
-    /** @var stdClass $buyforuser */
-    private $buyforuser = null;
-
-    /** @var context_module $buyforuser */
-    private $context = null;
-
     /** @var array $displayoptions */
     private $displayoptions = [];
-
-    /**
-     * Constructor
-     * @param string $uniqueid all tables have to have a unique id, this is used
-     *      as a key when storing table properties like sort order in the session.
-     * @param booking $booking the booking instance
-     * @param int $buyforuserid optional id of the user to buy for
-     */
-    public function __construct(string $uniqueid, booking $booking = null, int $buyforuserid = null) {
-        parent::__construct($uniqueid);
-
-        global $PAGE;
-
-        if ($booking) {
-            $this->booking = $booking;
-        }
-
-        // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-        /* $this->outputbooking = $PAGE->get_renderer('mod_booking');
-        $this->outputberta = $PAGE->get_renderer('local_berta'); */
-
-        // We set buyforuser here for better performance.
-        if (empty($buyforuserid)) {
-            $this->buyforuser = price::return_user_to_buy_for();
-        } else {
-            $this->buyforuser = singleton_service::get_instance_of_user($buyforuserid);
-        }
-
-        // Columns and headers are not defined in constructor, in order to keep things as generic as possible.
-    }
 
     public function set_display_options($displayoptions) {
 
@@ -182,8 +141,9 @@ class berta_table extends wunderbyte_table {
     public function col_price($values) {
         // Render col_price using a template.
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
+        $buyforuser = price::return_user_to_buy_for();
 
-        return booking_bookit::render_bookit_button($settings, $this->buyforuser->id);
+        return booking_bookit::render_bookit_button($settings, $buyforuser->id);
     }
 
     /**
@@ -196,14 +156,13 @@ class berta_table extends wunderbyte_table {
      */
     public function col_text($values) {
 
-        if (!$this->booking) {
-            $this->booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid);
-        }
+        $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid);
+        $buyforuser = price::return_user_to_buy_for();
 
-        if ($this->booking) {
+        if ($booking) {
             $url = new moodle_url('/mod/booking/optionview.php', ['optionid' => $values->id,
-                                                                  'cmid' => $this->booking->cmid,
-                                                                  'userid' => $this->buyforuser->id]);
+                                                                  'cmid' => $booking->cmid,
+                                                                  'userid' => $buyforuser->id]);
         } else {
             $url = '#';
         }
@@ -243,10 +202,11 @@ class berta_table extends wunderbyte_table {
                 $shortdescription = substr($shortdescription, 0, $maxlength) . '...';
 
                 $ret =
-                    '<div>' . $shortdescription .
-                        '<a data-toggle="collapse" href="#collapseDescription' . $values->id . '" role="button"
-                            aria-expanded="false" aria-controls="collapseDescription"> ' .
-                            get_string('showmore', 'local_berta') . '</a>
+                    '<div>
+                        <a data-toggle="collapse" href="#collapseDescription' . $values->id . '" role="button"
+                            aria-expanded="false" aria-controls="collapseDescription">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;' .
+                            get_string('showdescription', 'local_berta') . '...</a>
                     </div>
                     <div class="collapse" id="collapseDescription' . $values->id . '">
                         <div class="card card-body border-1 mt-1 mb-1 mr-3">' . $fulldescription . '</div>
@@ -271,7 +231,10 @@ class berta_table extends wunderbyte_table {
 
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
         // Render col_bookings using a template.
-        $data = new col_availableplaces($values, $settings, $this->buyforuser);
+
+        $buyforuser = price::return_user_to_buy_for();
+
+        $data = new col_availableplaces($values, $settings, $buyforuser);
         if (!empty($this->displayoptions['showmaxanwers'])) {
             $data->showmaxanswers = $this->displayoptions['showmaxanwers'];
         }
@@ -344,13 +307,10 @@ class berta_table extends wunderbyte_table {
             }
         }
 
-        // Normally we won't arrive here, but if so, we want to show a meaningful error message.
-        if (!$this->context) {
-            $this->context = context_module::instance($settings->cmid);
-        }
+        $context = context_module::instance($settings->cmid);
 
         // The error message should only be shown to admins.
-        if (has_capability('moodle/site:config', $this->context)) {
+        if (has_capability('moodle/site:config', $context)) {
 
             $message = get_string('youneedcustomfieldsport', 'local_berta');
 
@@ -400,6 +360,10 @@ class berta_table extends wunderbyte_table {
         if (isset($settings->customfields) && isset($settings->customfields['botags'])) {
             $botagsarray = $settings->customfields['botags'];
             if (!empty($botagsarray)) {
+
+                if (!is_array($botagsarray)) {
+                    $botagsarray = (array)$botagsarray;
+                }
                 foreach ($botagsarray as $botag) {
                     if (!empty($botag)) {
                         $botagsstring .=
@@ -429,7 +393,6 @@ class berta_table extends wunderbyte_table {
      * @throws coding_exception
      */
     public function col_course($values) {
-        global $USER;
 
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
         $ret = '';
@@ -441,21 +404,25 @@ class berta_table extends wunderbyte_table {
             return $courseurl;
         }
 
+        $buyforuser = price::return_user_to_buy_for();
+
         $answersobject = singleton_service::get_instance_of_booking_answers($settings);
-        $status = $answersobject->user_status($USER->id);
+        $status = $answersobject->user_status($buyforuser->id);
 
         $isteacherofthisoption = booking_check_if_teacher($values);
 
+        $context = $this->get_context();
+
         if (!empty($settings->courseid) && (
                 $status == 0 // MOD_BOOKING_STATUSPARAM_BOOKED.
-                || has_capability('mod/booking:updatebooking', context_system::instance()) ||
+                || has_capability('mod/booking:updatebooking', $context) ||
                 $isteacherofthisoption)) {
             // The link will be shown to everyone who...
             // ...has booked this option.
             // ...is a teacher of this option.
             // ...has the system-wide "updatebooking" capability (admins).
             $gotomoodlecourse = get_string('tocoursecontent', 'local_berta');
-            $ret = "<a href='$courseurl' target='_self' class='btn btn-primary mt-2 mb-2 w-100'>
+            $ret = "<a href='$courseurl' target='_self' class='btn btn-primary p-1 mt-2 mb-2 w-100'>
                 <i class='fa fa-graduation-cap fa-fw' aria-hidden='true'></i>&nbsp;&nbsp;$gotomoodlecourse
             </a>";
         }
@@ -539,7 +506,7 @@ class berta_table extends wunderbyte_table {
                 'optionid' => $values->optionid
             ));
             // Use html_entity_decode to convert "&amp;" to a simple "&" character.
-            if ($CFG->version >= 2024042400) {
+            if ($CFG->version >= 2023042400) {
                 // Moodle 4.2 needs second param.
                 $link = html_entity_decode($link->out(), ENT_QUOTES);
             } else {
@@ -685,6 +652,34 @@ class berta_table extends wunderbyte_table {
 
     /**
      * This function is called for each data row to allow processing of the
+     * responsiblecontact value.
+     *
+     * @param object $values Contains object with all the values of record.
+     * @return string $string Return a link to the responsible contact's user profile.
+     * @throws dml_exception
+     */
+    public function col_responsiblecontact($values) {
+        $settings = singleton_service::get_instance_of_booking_option_settings($values->id);
+        $ret = '';
+        if (empty($settings->responsiblecontact)) {
+            return $ret;
+        }
+        if ($user = singleton_service::get_instance_of_user($settings->responsiblecontact)) {
+            $userstring = "$user->firstname $user->lastname";
+            $emailstring = " ($user->email)";
+            if ($this->is_downloading()) {
+                $ret = $userstring . $emailstring;
+            } else {
+                $profileurl = new moodle_url('/user/profile.php', ['id' => $settings->responsiblecontact]);
+                $ret = get_string('responsible', 'mod_booking')
+                    . ":&nbsp;" . html_writer::link($profileurl, $userstring);
+            }
+        }
+        return $ret;
+    }
+
+    /**
+     * This function is called for each data row to allow processing of the
      * action button.
      *
      * @param object $values Contains object with all the values of record.
@@ -694,36 +689,32 @@ class berta_table extends wunderbyte_table {
      */
     public function col_action($values) {
 
-        if (!$this->booking) {
-            $this->booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid, $values);
-        }
+        $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid, $values);
 
         $data = new stdClass();
 
         $data->optionid = $values->id;
         $data->componentname = 'mod_booking';
-
-        if ($this->booking) {
-            $data->cmid = $this->booking->cmid;
-        }
+        $data->cmid = $booking->cmid;
 
         // We will have a number of modals on this site, therefore we have to distinguish them.
         // This is in case we render modal.
         $data->modalcounter = $values->id;
         $data->modaltitle = $values->text;
-        $data->userid = $this->buyforuser->id;
+
+        $buyforuser = price::return_user_to_buy_for();
+
+        $data->userid = $buyforuser->id;
 
         // Get the URL to edit the option.
         if (!empty($values->id)) {
             $bosettings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
             if (!empty($bosettings)) {
 
-                if (!$this->context) {
-                    $this->context = context_module::instance($bosettings->cmid);
-                }
+                $context = context_module::instance($bosettings->cmid);
 
                 // ONLY users with the mod/booking:updatebooking capability can edit options.
-                $allowedit = has_capability('mod/booking:updatebooking', $this->context);
+                $allowedit = has_capability('mod/booking:updatebooking', $context);
                 if ($allowedit) {
                     if (isset($bosettings->editoptionurl)) {
                         // Get the URL to edit the option.
@@ -734,9 +725,9 @@ class berta_table extends wunderbyte_table {
                 // Send e-mail to all booked users menu entry.
                 $allowsendmailtoallbookedusers = (
                     get_config('booking', 'teachersallowmailtobookedusers') && (
-                        has_capability('mod/booking:updatebooking', $this->context) ||
-                        (has_capability('mod/booking:addeditownoption', $this->context) && booking_check_if_teacher($values)) ||
-                        (has_capability('mod/booking:limitededitownoption', $this->context) && booking_check_if_teacher($values))
+                        has_capability('mod/booking:updatebooking', $context) ||
+                        (has_capability('mod/booking:addeditownoption', $context) && booking_check_if_teacher($values)) ||
+                        (has_capability('mod/booking:limitededitownoption', $context) && booking_check_if_teacher($values))
                     )
                 );
                 if ($allowsendmailtoallbookedusers) {
@@ -749,22 +740,19 @@ class berta_table extends wunderbyte_table {
 
                 // The simplified availability menu.
                 $alloweditavailability = (
-                    // Admin capability.
-                    has_capability('mod/booking:updatebooking', $this->context) ||
-                    // Or: Everyone with the BERTA editavailability capability.
-                    has_capability('local/berta:editavailability', $this->context) ||
-                    // Or: Teachers can edit the availability of their own option.
-                    (has_capability('mod/booking:addeditownoption', $this->context) && booking_check_if_teacher($values)) ||
-                    (has_capability('mod/booking:limitededitownoption', $this->context) && booking_check_if_teacher($values))
+                    has_capability('local/berta:editavailability', $context) &&
+                    (has_capability('mod/booking:updatebooking', $context) ||
+                    (has_capability('mod/booking:addeditownoption', $context) && booking_check_if_teacher($values)) ||
+                    (has_capability('mod/booking:limitededitownoption', $context) && booking_check_if_teacher($values)))
                 );
                 if ($alloweditavailability) {
                     $data->editavailability = true;
                 }
 
                 $canviewreports = (
-                    has_capability('mod/booking:viewreports', $this->context)
-                    || (has_capability('mod/booking:limitededitownoption', $this->context) && booking_check_if_teacher($values))
-                    || has_capability('mod/booking:updatebooking', $this->context)
+                    has_capability('mod/booking:viewreports', $context)
+                    || (has_capability('mod/booking:limitededitownoption', $context) && booking_check_if_teacher($values))
+                    || has_capability('mod/booking:updatebooking', $context)
                 );
 
                 // If the user has no capability to editoptions, the URLs will not be added.
@@ -783,7 +771,7 @@ class berta_table extends wunderbyte_table {
             }
         }
 
-        if (has_capability('local/shopping_cart:cashier', $this->context)) {
+        if (has_capability('local/shopping_cart:cashier', $context)) {
             // If booking option is already cancelled, we want to show the "undo cancel" button instead.
             if ($values->status == 1) {
                 $data->showundocancel = true;
