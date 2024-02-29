@@ -56,9 +56,9 @@ $PAGE->add_body_class('local_berta-dashboard');
 
 echo $OUTPUT->header();
 
-$PAGE->requires->js_call_amd('local_berta/app-lazy', 'init');
+$PAGE->requires->js_call_amd('mod_booking/app-lazy', 'init');
 echo <<<EOT
-    <div id="local-berta-app" name="local-berta-app">
+    <div id="mod-booking-app" name="mod-booking-app">
     <router-view></router-view>
     </div>
   EOT;
