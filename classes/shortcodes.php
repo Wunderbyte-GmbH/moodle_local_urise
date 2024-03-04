@@ -257,13 +257,13 @@ class shortcodes {
 
         $filtercolumns = [];
 
-        $standardfilter = new standardfilter('sport', get_string('sport', 'local_musi'));
+        $standardfilter = new standardfilter('sport', get_string('sport', 'local_berta'));
         $standardfilter->add_filter($filtercolumns);
 
-        $standardfilter = new standardfilter('sportsdivision', get_string('sportsdivision', 'local_musi'));
+        $standardfilter = new standardfilter('sportsdivision', get_string('sportsdivision', 'local_berta'));
         $standardfilter->add_filter($filtercolumns);
 
-        $standardfilter = new standardfilter('dayofweek', get_string('dayofweek', 'local_musi'));
+        $standardfilter = new standardfilter('dayofweek', get_string('dayofweek', 'local_berta'));
         $standardfilter->add_options([
             'monday' => get_string('monday', 'mod_booking'),
             'tuesday' => get_string('tuesday', 'mod_booking'),
@@ -281,7 +281,7 @@ class shortcodes {
         $standardfilter = new standardfilter('botags', get_string('tags', 'core'));
         $standardfilter->add_filter($filtercolumns);
 
-        if (get_config('local_musi', 'musishortcodesshowfiltercoursetime')) {
+        if (get_config('local_berta', 'musishortcodesshowfiltercoursetime')) {
 
             $datepicker = new datepicker(
                 'coursestarttime',
@@ -299,7 +299,7 @@ class shortcodes {
             $datepicker->add_filter($filtercolumns);
         }
 
-        if (get_config('local_musi', 'musishortcodesshowfilterbookingtime')) {
+        if (get_config('local_berta', 'musishortcodesshowfilterbookingtime')) {
 
             $datepicker = new datepicker(
                 'bookingopeningtime',
