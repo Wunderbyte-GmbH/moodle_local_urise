@@ -31,5 +31,10 @@ $shortcodes = [
         'callback' => 'local_berta\shortcodes::unifiedlist',
         'wraps' => false,
         'description' => 'shortcodes::unifiedlist'
+    ],
+    'unifiedmybookingslist' => [
+        'callback' => 'local_berta\shortcodes::unifiedmybookingslist',
+        'wraps' => false,
+        'description' => 'shortcodes::unifiedlist'
     ]
 ];

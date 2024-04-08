@@ -126,7 +126,7 @@ class shortcodes {
             || !is_int((int)$args['perpage'])
             || !$perpage = ($args['perpage'])
         ) {
-            $perpage = 1000;
+            $perpage = 100;
         }
 
         $table = self::inittableforcourses($booking);
@@ -147,6 +147,137 @@ class shortcodes {
 
             list($fields, $from, $where, $params, $filter) =
                 booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray);
+        }
+
+        $table->set_filter_sql($fields, $from, $where, $filter, $params);
+
+        $table->use_pages = true;
+
+        if ($showimage !== false) {
+            $table->set_tableclass('cardimageclass', 'pr-0 pl-1');
+
+            $table->add_subcolumns('cardimage', ['image']);
+        }
+
+        self::set_table_options_from_arguments($table, $args);
+        self::generate_table_for_list($table, $args);
+
+        $table->cardsort = true;
+
+        // This allows us to use infinite scrolling, No pages will be used.
+        $table->infinitescroll = $infinitescrollpage;
+
+        $table->tabletemplate = 'local_berta/table_list';
+        $table->showcountlabel = true;
+        $table->showreloadbutton = true;
+
+        // If we find "nolazy='1'", we return the table directly, without lazy loading.
+        if (!empty($args['lazy'])) {
+
+            list($idstring, $encodedtable, $out) = $table->lazyouthtml($perpage, true);
+
+            return $out;
+        }
+
+        $out = $table->outhtml($perpage, true);
+
+        return $out;
+    }
+
+    /**
+     * Prints out list of bookingoptions.
+     * Arguments can be 'category' or 'perpage'.
+     *
+     * @param string $shortcode
+     * @param array $args
+     * @param string|null $content
+     * @param object $env
+     * @param Closure $next
+     * @return void
+     */
+    public static function unifiedmybookingslist($shortcode, $args, $content, $env, $next) {
+
+        global $DB, $USER, $CFG;
+
+        require_once($CFG->dirroot . '/mod/booking/lib.php');
+
+        self::fix_args($args);
+
+        $booking = self::get_booking($args);
+
+        // TODO: Here we retrieve the ids from the selected Booking instances.
+        // For the moment, we just get all of them.
+
+        $bookingids = $DB->get_fieldset_select('booking', 'id', '', []);
+
+        if (!isset($args['category']) || !$category = ($args['category'])) {
+            $category = '';
+        }
+
+        if (!isset($args['image']) || !$showimage = ($args['image'])) {
+            $showimage = false;
+        }
+
+        if (empty($args['countlabel'])) {
+            $args['countlabel'] = false;
+        }
+
+        $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
+
+        if (
+            !isset($args['perpage'])
+            || !is_int((int)$args['perpage'])
+            || !$perpage = ($args['perpage'])
+        ) {
+            $perpage = 100;
+        }
+
+        $table = self::inittableforcourses($booking);
+
+        $table->showcountlabel = $args['countlabel'];
+        $wherearray = ['bookingid' => $bookingids];
+
+        if (!empty($category)) {
+            $wherearray['sport'] = $category;
+        };
+
+        // If we want to find only the teacher relevant options, we chose different sql.
+        if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
+            $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
+            list($fields, $from, $where, $params, $filter) =
+                booking::get_options_filter_sql(0,
+                    0,
+                    '',
+                    null,
+                    $booking->context,
+                    [],
+                    $wherearray,
+                    $USER->id,
+                    [
+                        MOD_BOOKING_STATUSPARAM_BOOKED,
+                        MOD_BOOKING_STATUSPARAM_RESERVED,
+                        MOD_BOOKING_STATUSPARAM_WAITINGLIST,
+                        MOD_BOOKING_STATUSPARAM_NOTIFYMELIST,
+                    ]
+                );
+        } else {
+
+            list($fields, $from, $where, $params, $filter) =
+                booking::get_options_filter_sql(0,
+                    0,
+                    '',
+                    null,
+                    $booking->context,
+                    [],
+                    $wherearray,
+                    $USER->id,
+                    [
+                        MOD_BOOKING_STATUSPARAM_BOOKED,
+                        MOD_BOOKING_STATUSPARAM_RESERVED,
+                        MOD_BOOKING_STATUSPARAM_WAITINGLIST,
+                        MOD_BOOKING_STATUSPARAM_NOTIFYMELIST,
+                    ]
+                );
         }
 
         $table->set_filter_sql($fields, $from, $where, $filter, $params);
