@@ -56,7 +56,7 @@ class shortcodes {
      * @param string|null $content
      * @param object $env
      * @param Closure $next
-     * @return void
+     * @return string
      */
     public static function userinformation($shortcode, $args, $content, $env, $next) {
 
@@ -375,7 +375,7 @@ class shortcodes {
             $buyforuserid = $USER->id;
         }
 
-        $table = new berta_table($tablename, $booking, $buyforuserid);
+        $table = new berta_table($tablename);
 
         $table->define_baseurl($baseurl->out());
         $table->cardsort = true;
