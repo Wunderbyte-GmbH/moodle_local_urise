@@ -83,11 +83,8 @@ function local_berta_render_navbar_output(\renderer_base $renderer) {
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="'
-            . $CFG->wwwroot . '/local/berta/dashboard.php">'
-            . get_string('dashboard', 'local_berta') . '</a>
-            <a class="dropdown-item" href="'
-                . $CFG->wwwroot . '/local/shopping_cart/cashier.php"">'
-                . get_string('cashier', 'local_berta') . '</a>
+                . $CFG->wwwroot . '/local/berta/dashboard.php">'
+                . get_string('dashboard', 'local_berta') . '</a>
             <a class="dropdown-item" href="'
                 . $CFG->wwwroot . '/local/entities/entities.php">'
                 . get_string('entities', 'local_berta') . '</a>

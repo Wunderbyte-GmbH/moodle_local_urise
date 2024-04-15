@@ -31,8 +31,8 @@ $string['dashboard'] = 'Dashboard';
 $string['messageprovider:sendmessages'] = 'Verschicke Nachrichten';
 $string['berta:cansendmessages'] = 'Kann Nachrichten schicken.';
 $string['berta:editavailability'] = 'Kann die Verfügbarkeit von Buchungsoptionen ändern und Vorreservierungen anlegen';
-$string['berta:editsubstitutionspool'] = 'Kann den Vertretungspool für einzelne Sportarten bearbeiten';
-$string['berta:viewsubstitutionspool'] = 'Kann den Vertretungspool für einzelne Sportarten sehen und E-Mails an den Vertretungspool senden';
+$string['berta:editsubstitutionspool'] = 'Kann den Vertretungspool für einzelne Kursarten bearbeiten';
+$string['berta:viewsubstitutionspool'] = 'Kann den Vertretungspool für einzelne Kursarten sehen und E-Mails an den Vertretungspool senden';
 
 // Caches.
 $string['cachedef_cachedpaymenttable'] = 'Zahlungstransaktionen (Cache)';
@@ -88,14 +88,14 @@ $string['error:endtime'] = 'Ende muss nach dem Start sein.';
 $string['allcourses'] = 'Alle Kurse';
 
 // Cards.
-$string['listofsports'] = 'Sportarten';
-$string['listofsports_desc'] = 'Zeige und editiere die Liste der Sportarten auf diesem System.';
+$string['listofsports'] = 'Kursarten';
+$string['listofsports_desc'] = 'Zeige und editiere die Liste der Kursarten auf diesem System.';
 
 $string['numberofcourses'] = 'Kurse';
 $string['numberofcourses_desc'] = 'Informationen über die Kurse und Buchungen auf der Plattform.';
 
-$string['numberofentities'] = 'Anzahl der Sportstätten';
-$string['numberofentities_desc'] = 'Informationen über die Sportstätten auf der Plattform.';
+$string['numberofentities'] = 'Anzahl der Organisations-Einheiten';
+$string['numberofentities_desc'] = 'Informationen über die Organisations-Einheiten auf der Plattform.';
 
 $string['coursesavailable'] = "Buchbare Kurse";
 $string['coursesbooked'] = 'Gebuchte Kurse';
@@ -109,16 +109,16 @@ $string['bookinganswersdeleted'] = "Gelöschte Buchungen";
 
 $string['settingsandreports'] = 'Einstellungen & Berichte';
 $string['settingsandreports_desc'] = 'Verschiedene Einstellungen und Berichte, die für BERTA relevant sind.';
-$string['editentities'] = 'Sportstätten bearbeiten';
-$string['editentitiescategories'] = 'Kategorien der Sportstätten bearbeiten';
-$string['importentities'] = 'Sportstätten importieren';
-$string['editbookinginstance'] = 'Semester-Instanz bearbeiten';
+$string['editentities'] = 'Organisations-Einheiten bearbeiten';
+$string['editentitiescategories'] = 'Kategorien der Organisations-Einheiten bearbeiten';
+$string['importentities'] = 'Organisations-Einheiten importieren';
+$string['editbookinginstance'] = 'Buchungs-Instanz bearbeiten';
 $string['editbookings'] = 'Kurs-Übersicht';
 $string['viewteachers'] = 'Trainer:innen-Übersicht';
 $string['teachersinstancereport'] = 'Trainer:innen-Gesamtbericht (Kurse, Fehlstunden, Vertretungen)';
 $string['sapdailysums'] = 'SAP-Buchungsdateien';
 
-$string['addbookinginstance'] = '<span class="bg-danger font-weight-bold">Keine Semester-Instanz! Hier klicken, um eine einzustellen.</span>';
+$string['addbookinginstance'] = '<span class="bg-danger font-weight-bold">Keine Buchungs-Instanz! Hier klicken, um eine einzustellen.</span>';
 $string['editpricecategories'] = 'Preiskategorien bearbeiten';
 $string['editsemesters'] = 'Semester bearbeiten';
 $string['changebookinginstance'] = 'Standard-Semester-Instanz setzen';
@@ -145,7 +145,6 @@ $string['createbotag:helptext'] = '<p>
 </div>';
 
 // Edit sports.
-$string['editsports'] = 'Sportarten bearbeiten';
 $string['youneedcustomfieldsport'] = 'Das benutzerdefinierte Feld mit dem Shortname "sport" ist bei dieser Buchungsoption nicht gesetzt.';
 
 // Shortcodes.
@@ -177,13 +176,12 @@ $string['coursesiteacharchive'] = 'Kurse, die ich in vergangenen Semestern unter
 $string['berta:canedit'] = 'Nutzer:in darf verwalten';
 
 // Filter.
-$string['sport'] = 'Sportart';
+$string['sport'] = 'Kursarten';
 $string['location'] = 'Ort';
 
 // Nav.
 $string['berta'] = 'berta';
-$string['cashier'] = 'Kassa';
-$string['entities'] = 'Sportstätten';
+$string['entities'] = 'Organisations-Einheiten';
 $string['coursename'] = 'Kursname';
 
 // Contract management.

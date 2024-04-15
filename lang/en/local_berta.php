@@ -31,8 +31,8 @@ $string['dashboard'] = 'Dashboard';
 $string['messageprovider:sendmessages'] = 'Send messages';
 $string['berta:cansendmessages'] = 'Can send messages';
 $string['berta:editavailability'] = 'Can change availability and reservations';
-$string['berta:editsubstitutionspool'] = 'Can edit the substitutions pool of teachers for different sports';
-$string['berta:viewsubstitutionspool'] = 'Can view the substitutions pool of teachers for different sports and send emails to substitution pools';
+$string['berta:editsubstitutionspool'] = 'Can edit the substitutions pool of teachers for different courses';
+$string['berta:viewsubstitutionspool'] = 'Can view the substitutions pool of teachers for different courses and send emails to substitution pools';
 
 // Caches.
 $string['cachedef_cachedpaymenttable'] = 'Cached payment table (transaction list).';
@@ -47,7 +47,7 @@ $string['shortcodeslistofmybookingoptionsascards'] = 'My courses as cards';
 $string['shortcodeslistofmybookingoptionsaslist'] = 'My courses as list';
 $string['shortcodeslistofteachersascards'] = 'List of teachers as cards';
 $string['shortcodeslistofmytaughtbookingoptionsascards'] = 'Courses I teach as cards';
-$string['shortcodesshowallsports'] = "List of all sports";
+$string['shortcodesshowallsports'] = "List of all courses";
 $string['bertashortcodes:showstart'] = 'Show "Start time of the course"';
 $string['bertashortcodes:showend'] = 'Show "End time of the course"';
 $string['bertashortcodes:showbookablefrom'] = 'Show "Bookable from"';
@@ -74,8 +74,8 @@ $string['substitutionspool:copypastemails'] = 'You can copy the emails manually 
 $string['gateway'] = 'Gateway';
 $string['invisibleoption'] = '<i class="fa fa-eye-slash" aria-hidden="true"></i>';
 $string['showmore'] = 'Show more';
-$string['sportsdivision'] = 'Sports division';
-$string['sportsdivisions'] = 'Sports divisions';
+$string['sportsdivision'] = 'Type of courses';
+$string['sportsdivisions'] = 'Types of courses';
 $string['titleprefix'] = 'Course number';
 $string['unknown'] = 'Unknown';
 
@@ -87,14 +87,14 @@ $string['error:endtime'] = 'End has to be after start.';
 $string['allcourses'] = 'All courses';
 
 // Cards.
-$string['listofsports'] = 'Sports';
-$string['listofsports_desc'] = 'View and edit the list of sports on this system';
+$string['listofsports'] = 'Types of courses';
+$string['listofsports_desc'] = 'View and edit the list of courses on this system';
 
 $string['numberofcourses'] = 'Courses';
 $string['numberofcourses_desc'] = 'Information about courses and bookings on this platform.';
 
 $string['numberofentities'] = 'Number of entities';
-$string['numberofentities_desc'] = 'Information about the sport facilities on the platform.';
+$string['numberofentities_desc'] = 'Information about the entities on the platform.';
 
 $string['coursesavailable'] = 'Courses available';
 $string['coursesbooked'] = 'Courses booked';
@@ -144,7 +144,6 @@ $string['createbotag:helptext'] = '<p>
 </div>';
 
 // Edit sports.
-$string['editsports'] = 'Edit sports';
 $string['youneedcustomfieldsport'] = 'The customfield with the shortname "sport" is not set for this booking option.';
 
 // Shortcodes.
@@ -175,13 +174,12 @@ $string['coursesiteacharchive'] = 'Courses I taught in previous semesters:';
 $string['berta:canedit'] = 'User can edit';
 
 // Filter.
-$string['sport'] = 'Sport';
+$string['sport'] = 'Course type';
 $string['location'] = 'Location';
 
 // Nav.
 $string['berta'] = 'berta';
-$string['cashier'] = 'Cashiers desk';
-$string['entities'] = 'Sport locations';
+$string['entities'] = 'Entities';
 $string['coursename'] = "Coursename";
 
 // Contract management.
@@ -193,16 +191,16 @@ $string['contractformulatest'] = 'Test the contract formula';
 $string['editcontractformula'] = 'Edit contract formula';
 
 // Userinformation.mustache.
-$string['userinformation'] = 'Benutzer-Information';
+$string['userinformation'] = 'User Information';
 
 // My Courses List.
 $string['tocoursecontent'] = 'Course content';
 
 // Shortlist section information.
-$string['dayofweekalt'] = 'Day of week and the time slot, where a course will take place';
+$string['dayofweekalt'] = 'Day of week and the time slot, when a course will take place';
 $string['locationalt'] = 'Location of the course';
 $string['bookingsalt'] = 'Available course slots and maximum capacity';
-$string['teacheralt'] = 'Course instructor';
+$string['teacheralt'] = 'Teacher';
 $string['imagealt'] = 'Course cover image';
 
 // Transactions List.
@@ -224,7 +222,7 @@ $string['action'] = 'Action';
 
 // Easy availability feature.
 $string['easyavailability:overbook'] = 'Even if the course is fully booked';
-$string['easyavailability:previouslybooked'] = 'Users who already booked a specific USI course are always allowed to book';
+$string['easyavailability:previouslybooked'] = 'Users who already booked a specific course are always allowed to book';
 $string['easyavailability:selectusers'] = 'Selected users are allowed to book outside this timespan';
 $string['easyavailability:formincompatible'] = '<div class="alert alert-warning">This form uses availability conditions
  that are incompatible with this form. Please contact a BERTA admin.</div>';
@@ -234,10 +232,10 @@ $string['easyavailability:heading'] = '<div class="alert alert-info">You are edi
 
 // Task.
 $string['create_sap_files'] = 'Create the daily SAP files';
-$string['add_sports_division'] = 'Add sport divisions to sports';
+$string['add_sports_division'] = 'Add course type';
 
 // Sports division.
-$string['nosportsdivision'] = 'No sports divisions set on this site';
+$string['nosportsdivision'] = 'No course types set on this site';
 
 $string['shortcodes::unifiedlist'] = "Shortcode unified list";
 
