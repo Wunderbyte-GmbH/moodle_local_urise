@@ -295,15 +295,15 @@ class berta_table extends wunderbyte_table {
      * @return string $sports Returns rendered sport.
      * @throws coding_exception
      */
-    public function col_sport($values) {
+    public function col_organisation($values) {
 
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
 
-        if (isset($settings->customfields) && isset($settings->customfields['sport'])) {
-            if (is_array($settings->customfields['sport'])) {
-                return implode(", ", $settings->customfields['sport']);
+        if (isset($settings->customfields) && isset($settings->customfields['organisation'])) {
+            if (is_array($settings->customfields['organisation'])) {
+                return implode(", ", $settings->customfields['organisation']);
             } else {
-                return $settings->customfields['sport'];
+                return $settings->customfields['organisation'];
             }
         }
 
@@ -321,26 +321,6 @@ class berta_table extends wunderbyte_table {
 
         // Normal users won't notice the problem.
         return '';
-    }
-
-    /**
-     * This function is called for each data row to allow processing of the
-     * sportsdivision value.
-     *
-     * @param object $values Contains object with all the values of record.
-     * @return string $sports Returns rendered sports division.
-     * @throws coding_exception
-     */
-    public function col_sportsdivision($values) {
-        // If sports division is missing, we return an empty string to avoid errors.
-        if (empty($values->sportsdivision)) {
-            return '';
-        }
-        if ($this->is_downloading()) {
-            return $values->sportsdivision;
-        }
-        // For normal table, we show it as a link to sparten.php.
-        return html_writer::link(new moodle_url('/local/berta/sparten.php'), $values->sportsdivision);
     }
 
     /**

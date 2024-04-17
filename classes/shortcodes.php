@@ -107,8 +107,8 @@ class shortcodes {
 
         $bookingids = $DB->get_fieldset_select('booking', 'id', '', []);
 
-        if (!isset($args['category']) || !$category = ($args['category'])) {
-            $category = '';
+        if (!isset($args['organisation']) || !$category = ($args['organisation'])) {
+            $organisation = '';
         }
 
         if (!isset($args['image']) || !$showimage = ($args['image'])) {
@@ -127,6 +127,8 @@ class shortcodes {
             || !$perpage = ($args['perpage'])
         ) {
             $perpage = 100;
+        } else {
+            $infinitescrollpage = 0;
         }
 
         $table = self::inittableforcourses($booking);
@@ -134,8 +136,8 @@ class shortcodes {
         $table->showcountlabel = $args['countlabel'];
         $wherearray = ['bookingid' => $bookingids];
 
-        if (!empty($category)) {
-            $wherearray['sport'] = $category;
+        if (!empty($organisation)) {
+            $wherearray['organisation'] = $category;
         };
 
         // If we want to find only the teacher relevant options, we chose different sql.
@@ -238,7 +240,7 @@ class shortcodes {
         $wherearray = ['bookingid' => $bookingids];
 
         if (!empty($category)) {
-            $wherearray['sport'] = $category;
+            $wherearray['organisation'] = $category;
         };
 
         // If we want to find only the teacher relevant options, we chose different sql.
@@ -386,10 +388,7 @@ class shortcodes {
 
     private static function define_filtercolumns(&$table) {
 
-        $standardfilter = new standardfilter('sport', get_string('sport', 'local_berta'));
-        $table->add_filter($standardfilter);
-
-        $standardfilter = new standardfilter('sportsdivision', get_string('sportsdivision', 'local_berta'));
+        $standardfilter = new standardfilter('organisation', get_string('organisation', 'local_berta'));
         $table->add_filter($standardfilter);
 
         $standardfilter = new standardfilter('dayofweek', get_string('dayofweek', 'local_berta'));
@@ -479,7 +478,7 @@ class shortcodes {
 
         if (!empty($args['search'])) {
             $table->define_fulltextsearchcolumns([
-                'titleprefix', 'text', 'sportsdivision', 'sport', 'description', 'location',
+                'titleprefix', 'text', 'organisation', 'description', 'location',
                 'teacherobjects', 'botags']);
         }
 
@@ -487,8 +486,7 @@ class shortcodes {
             $sortablecolumns = [
                 'titleprefix' => get_string('titleprefix', 'local_berta'),
                 'text' => get_string('coursename', 'local_berta'),
-                'sportsdivision' => get_string('sportsdivision', 'local_berta'),
-                'sport' => get_string('sport', 'local_berta'),
+                'organisation' => get_string('organisation', 'local_berta'),
                 'location' => get_string('location', 'local_berta'),
             ];
             if (get_config('local_berta', 'bertashortcodesshowstart')) {
@@ -565,18 +563,16 @@ class shortcodes {
         // We define it here so we can pass it with the mustache template.
         $table->add_subcolumns('optionid', ['id']);
 
-        $table->add_subcolumns('top', ['sportsdivision', 'sport', 'action']);
+        $table->add_subcolumns('top', ['organisation', 'action']);
         $table->add_subcolumns('leftside', $subcolumnsleftside);
         $table->add_subcolumns('info', $subcolumnsinfo);
 
         $table->add_subcolumns('rightside', ['botags', 'invisibleoption', 'course', 'price']);
 
         $table->add_classes_to_subcolumns('top', ['columnkeyclass' => 'd-none']);
-        $table->add_classes_to_subcolumns('top', ['columnclass' => 'text-left col-md-8'], ['sport', 'sportsdivision']);
+        $table->add_classes_to_subcolumns('top', ['columnclass' => 'text-left col-md-8'], ['organisation']);
         $table->add_classes_to_subcolumns('top', ['columnvalueclass' =>
-            'sport-badge rounded-sm text-gray-800 mt-2'], ['sport']);
-        $table->add_classes_to_subcolumns('top', ['columnvalueclass' =>
-            'sportsdivision-badge'], ['sportsdivision']);
+            'organisation-badge rounded-sm text-gray-800 mt-2'], ['organisation']);
         $table->add_classes_to_subcolumns('top', ['columnclass' => 'text-right col-md-2 position-relative pr-0'], ['action']);
 
         $table->add_classes_to_subcolumns('leftside', ['columnkeyclass' => 'd-none']);
@@ -624,7 +620,7 @@ class shortcodes {
         $table->add_classes_to_subcolumns(
             'top',
             ['keystring' => get_string('tableheader_text', 'booking')],
-            ['sport']
+            ['organisation']
         );
         $table->add_classes_to_subcolumns(
             'leftside',

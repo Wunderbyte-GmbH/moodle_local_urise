@@ -22,6 +22,7 @@
  */
 
 use local_berta\output\dashboard;
+use local_berta\permissions;
 
 require_once(__DIR__ . '/../../config.php');
 
@@ -38,7 +39,7 @@ if (!$context = context_system::instance()) {
 $PAGE->set_context($context);
 $PAGE->set_url('/local/berta/dashboard.php');
 
-if ((has_capability('mod/booking:updatebooking', $context) || has_capability('mod/booking:addeditownoption', $context)) == false) {
+if (!permissions::has_capability_anywhere()) {
     echo $OUTPUT->header();
     echo $OUTPUT->heading(get_string('accessdenied', 'mod_booking'), 4);
     echo get_string('nopermissiontoaccesspage', 'mod_booking');

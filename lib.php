@@ -22,6 +22,7 @@
  */
 
 use core\event\capability_assigned;
+use local_berta\permissions;
 use mod_booking\singleton_service;
 
 // Define booking status parameters.
@@ -70,11 +71,17 @@ function local_berta_get_fontawesome_icon_map() {
  * @return string The HTML
  */
 function local_berta_render_navbar_output(\renderer_base $renderer) {
-    global $CFG;
+    global $CFG, $DB;
     // Early bail out conditions.
-    if (!isloggedin() || isguestuser() || !has_capability('local/berta:view', context_system::instance())) {
+    if (!isloggedin() || isguestuser()) {
         return;
     }
+
+    // Here, we need to check the capability, but user will not have it on system, but only on coursecategory level.
+    if (!permissions::has_capability_anywhere()) {
+        return true;
+    }
+
 
     $output = '<div class="popover-region nav-link icon-no-margin dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -116,11 +123,6 @@ function local_berta_pluginfile($course, $cm, $context, $filearea, $args, $force
     // Check the contextlevel is as expected - if your plugin is a block.
     // We need context course if wee like to acces template files.
     if (!in_array($context->contextlevel, array(CONTEXT_SYSTEM))) {
-        return false;
-    }
-
-    // Make sure the filearea is one of those used by the plugin.
-    if ($filearea !== 'berta_sap_dailysums') {
         return false;
     }
 

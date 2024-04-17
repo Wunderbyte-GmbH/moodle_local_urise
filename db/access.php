@@ -40,22 +40,6 @@ $capabilities = [
             'manager' => CAP_ALLOW
         ],
     ],
-    'local/berta:editsubstitutionspool' => [
-        'captype' => 'write',
-        'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => [
-            'manager' => CAP_ALLOW
-        ],
-    ],
-    'local/berta:viewsubstitutionspool' => [
-        'captype' => 'read',
-        'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => [
-            'manager' => CAP_ALLOW,
-            'editingteacher' => CAP_ALLOW,
-            'teacher' => CAP_ALLOW,
-        ],
-    ],
     'local/berta:cansendmessages' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
@@ -77,4 +61,11 @@ $capabilities = [
           'manager' => CAP_ALLOW
       ],
     ],
+    'local/berta:viewdashboard' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [
+            'manager' => CAP_ALLOW
+        ],
+      ],
 ];

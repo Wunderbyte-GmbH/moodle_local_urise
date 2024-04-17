@@ -145,7 +145,7 @@ $string['createbotag:helptext'] = '<p>
 </div>';
 
 // Edit sports.
-$string['youneedcustomfieldsport'] = 'Das benutzerdefinierte Feld mit dem Shortname "sport" ist bei dieser Buchungsoption nicht gesetzt.';
+$string['youneedcustomfieldsport'] = 'Diese Veranstaltung ist keiner Organisation zugeordnet';
 
 // Shortcodes.
 $string['shortcodeslistofbookingoptions'] = 'Liste der buchbaren Kurse';
@@ -176,7 +176,7 @@ $string['coursesiteacharchive'] = 'Kurse, die ich in vergangenen Semestern unter
 $string['berta:canedit'] = 'Nutzer:in darf verwalten';
 
 // Filter.
-$string['sport'] = 'Kursarten';
+$string['organisation'] = 'Organisationseinheit';
 $string['location'] = 'Ort';
 
 // Nav.
@@ -246,3 +246,7 @@ $string['shortcodes::unifiedlist'] = "Shortcode unified list";
 
 $string['summary'] = 'Allgemein';
 $string['summary_desc'] = 'Enthält die Einstellungsmöglichkeiten und Statistiken der gesamten Plattform';
+
+// Rolls.
+$string['berta:create'] = "Erstelle";
+$string['berta:view'] = "Ansehen";

@@ -144,7 +144,7 @@ $string['createbotag:helptext'] = '<p>
 </div>';
 
 // Edit sports.
-$string['youneedcustomfieldsport'] = 'The customfield with the shortname "sport" is not set for this booking option.';
+$string['youneedcustomfieldsport'] = 'The customfield with the shortname "organisation" is not set for this booking option.';
 
 // Shortcodes.
 $string['shortcodeslistofbookingoptions'] = 'List of booking options';
@@ -174,7 +174,7 @@ $string['coursesiteacharchive'] = 'Courses I taught in previous semesters:';
 $string['berta:canedit'] = 'User can edit';
 
 // Filter.
-$string['sport'] = 'Course type';
+$string['organisation'] = 'Organisation';
 $string['location'] = 'Location';
 
 // Nav.
@@ -241,3 +241,7 @@ $string['shortcodes::unifiedlist'] = "Shortcode unified list";
 
 $string['summary'] = 'General';
 $string['summary_desc'] = 'Contains the settings and stats for the whole Moodle site';
+
+// Rolls.
+$string['berta:create'] = "Create";
+$string['berta:view'] = "View";
