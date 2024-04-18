@@ -65,14 +65,14 @@ echo $OUTPUT->header();
 echo "<div class='text-center h1'>$title</div>";
 echo "<hr class='w-100 border border-light'/>";
 
-if ($DB->get_records('booking_teachers', ['userid' => $USER->id])) {
+if ($DB->record_exists('booking_teachers', ['userid' => $USER->id])) {
     $isteacher = true;
     echo html_writer::div(get_string('coursesiteach', 'local_berta'), 'h2 mt-2 mb-2 text-center');
     echo format_text("[trainerkursekarten]", FORMAT_HTML);
 }
 
 echo html_writer::div(get_string('coursesibooked', 'local_berta'), 'h2 mt-3 mb-2 text-center');
-echo format_text("[meinekursekarten]", FORMAT_HTML);
+echo format_text("[unifiedmybookingslist cards=1]", FORMAT_HTML);
 
 if (!empty($archivecmids)) {
     echo "<hr class='w-100 border border-light'/>";
