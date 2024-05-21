@@ -102,10 +102,7 @@ class shortcodes {
 
         $booking = self::get_booking($args);
 
-        // TODO: Here we retrieve the ids from the selected Booking instances.
-        // For the moment, we just get all of them.
-
-        $bookingids = $DB->get_fieldset_select('booking', 'id', '', []);
+        $bookingids = explode(',', get_config('local_berta', 'multibookinginstances'));
 
         if (!isset($args['organisation']) || !$category = ($args['organisation'])) {
             $organisation = '';
@@ -207,10 +204,7 @@ class shortcodes {
 
         $booking = self::get_booking($args);
 
-        // TODO: Here we retrieve the ids from the selected Booking instances.
-        // For the moment, we just get all of them.
-
-        $bookingids = $DB->get_fieldset_select('booking', 'id', '', []);
+        $bookingids = explode(',', get_config('local_berta', 'multibookinginstances'));
 
         if (!isset($args['category']) || !$category = ($args['category'])) {
             $category = '';

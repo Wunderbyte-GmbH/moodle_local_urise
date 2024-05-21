@@ -245,3 +245,7 @@ $string['summary_desc'] = 'Contains the settings and stats for the whole Moodle 
 // Rolls.
 $string['berta:create'] = "Create";
 $string['berta:view'] = "View";
+
+// Settings.
+$string['multibookinginstances'] = "List of default activeted booking instances";
+$string['multibookinginstances_desc'] = "Choose which booking instances are activated by default.";

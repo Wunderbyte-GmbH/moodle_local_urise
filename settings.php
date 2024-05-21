@@ -43,9 +43,10 @@ if ($hassiteconfig) {
                 get_string('shortcodessetdefaultinstancedesc', 'local_berta')));
 
         $allowedinstances = [];
+        $multiinstances = [];
 
         if ($records = $DB->get_records_sql(
-            "SELECT cm.id cmid, b.name bookingname
+            "SELECT cm.id cmid, b.id bookingid, b.name bookingname
             FROM {course_modules} cm
             LEFT JOIN {booking} b
             ON b.id = cm.instance
@@ -57,6 +58,7 @@ if ($hassiteconfig) {
         )) {
             foreach ($records as $record) {
                 $allowedinstances[$record->cmid] = "$record->bookingname (ID: $record->cmid)";
+                $multiinstances[$record->bookingid] = $record->bookingname;
                 $defaultcmid = $record->cmid; // Last cmid will be the default one.
             }
         }
@@ -76,6 +78,16 @@ if ($hassiteconfig) {
                     get_string('shortcodessetinstancedesc', 'local_berta'),
                     $defaultcmid, $allowedinstances));
         }
+
+        // Booking default instances.
+        $componentname = 'local_berta';
+        $settings->add(new admin_setting_configmultiselect(
+                  $componentname . '/multibookinginstances',
+                  get_string('multibookinginstances', $componentname),
+                  get_string('multibookinginstances_desc', $componentname),
+                  [],
+                  $multiinstances)
+        );
 
         $settings->add(
             new admin_setting_configtext('local_berta/shortcodesarchivecmids',
