@@ -55,6 +55,8 @@ $string['bertashortcodes:showbookableuntil'] = 'Show "Bookable until"';
 $string['bertashortcodes:showfiltercoursetime'] = 'Show filter "Course time"';
 $string['bertashortcodes:showfilterbookingtime'] = 'Show filter "Booking time"';
 
+$string['nobookinginstancesselected'] = "Currently, no booking instances are selected to provide booking options.";
+
 // General strings.
 $string['campaigns'] = 'Campaigns';
 $string['collapsedescriptionoff'] = 'Do not collapse descriptions';

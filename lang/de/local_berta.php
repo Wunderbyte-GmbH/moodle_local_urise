@@ -55,6 +55,8 @@ $string['bertashortcodes:showbookableuntil'] = '"Buchbar bis" anzeigen';
 $string['bertashortcodes:showfiltercoursetime'] = 'Filter "Kurszeiten" anzeigen';
 $string['bertashortcodes:showfilterbookingtime'] = 'Filter "Anmeldezeiten" anzeigen';
 
+$string['nobookinginstancesselected'] = "Aktuell sind keine Buchungsinstanzen ausgewählt, um Buchungsoptionen anzuzeigen";
+
 // General strings.
 $string['campaigns'] = 'Kampagnen';
 $string['collapsedescriptionoff'] = 'Beschreibungen nicht einklappen';
