@@ -104,11 +104,7 @@ class shortcodes {
 
         $bookingids = explode(',', get_config('local_berta', 'multibookinginstances'));
 
-        foreach ($bookingids as $key => $value) {
-            if (empty($value)) {
-                unset($bookingids[$key]);
-            }
-        }
+        $bookingids = array_filter($bookingids, fn($a) => !empty($a));
 
         if (empty($bookingids)) {
             return get_string('nobookinginstancesselected', 'local_berta');
