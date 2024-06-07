@@ -79,15 +79,17 @@ if ($hassiteconfig) {
                     $defaultcmid, $allowedinstances));
         }
 
-        // Booking default instances.
-        $componentname = 'local_berta';
-        $settings->add(new admin_setting_configmultiselect(
-                  $componentname . '/multibookinginstances',
-                  get_string('multibookinginstances', $componentname),
-                  get_string('multibookinginstances_desc', $componentname),
-                  [],
-                  $multiinstances)
-        );
+        if (!empty($multiinstances)) {
+            // Booking default instances.
+            $componentname = 'local_berta';
+            $settings->add(new admin_setting_configmultiselect(
+                    $componentname . '/multibookinginstances',
+                    get_string('multibookinginstances', $componentname),
+                    get_string('multibookinginstances_desc', $componentname),
+                    [],
+                    $multiinstances)
+            );
+        }
 
         $settings->add(
             new admin_setting_configtext('local_berta/shortcodesarchivecmids',
