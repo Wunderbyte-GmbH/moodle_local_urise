@@ -244,3 +244,235 @@ div.columnclass.titleprefix {
 div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     position: fixed;
 }
+
+
+.card.listcard {
+    min-height: 350px;
+    max-height: fit-content;
+    border-radius: 2px;
+    padding: 0;
+    width: 100%;
+    margin: 0 auto;
+    border: none;
+    color: black
+}
+
+.row.optionrow  {
+    min-height: 350px;
+    max-height: fit-content;
+}
+
+.row.optionrow .list-img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.filterheader {
+    margin-left: -5em;
+    margin-right: -5em;
+}
+
+.toprow {
+    height: fit-content;
+    padding-top: 1em;
+    justify-content: space-between;
+}
+
+.berta-table-option-title a {
+    color: #0B131F
+}
+
+.customimg .img-fluid.list-img {
+    max-height: fit-content;
+    width: 100%;
+}
+
+/* Some of this needs important because the buttons are styled inline in booking template */
+
+.booking-button-area .booking-button-mainarea, .booking-button-area .booking-button-area {
+    /* eslint-disable-next-line */
+    width: fit-content !important;
+    /* eslint-disable-next-line */
+    padding: 0 10px !important;
+    /* eslint-disable-next-line */
+    padding: 10px !important;
+    /* eslint-disable-next-line */
+    height: 3rem !important;
+}
+
+.booking-button-area .booking-button-area {
+    background: transparent;
+    border: black 2px solid;
+    position: relative;
+    /* eslint-disable-next-line */
+    padding-right: 2rem !important;
+}
+
+.booking-button-area .booking-button-area::after {
+    font: var(--fa-font-solid);
+    content: '\f061';
+    right: 10px;
+    position: absolute;
+    font-size: 18px;
+    top: calc(50% - 8px);
+}
+
+.bookit-addtocartbtn-area {
+    /* eslint-disable-next-line */
+    width: fit-content !important;
+}
+
+.booking-button-area .booking-button-toparea {
+    border-radius: 0.5rem;
+    /* eslint-disable */
+    height: 3rem !important;
+    padding: 0 !important;
+    margin: 0 0.25rem !important;
+    font-size: .9375rem !important;
+    font-weight: bold !important;
+    /* eslint-enable */
+}
+
+/* eslint-disable */
+.allprices {
+    display: flex !important;
+    margin-bottom: 1.5rem !important;
+}
+/* eslint-enable */
+
+.booking-button-area {
+    display: flex;
+    justify-content: end;
+}
+
+.pricecontainer {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.pricecurrency {
+    margin: 0 10px;
+    margin-top: 0.5rem;
+}
+
+.orga {
+    border-radius: 10px;
+    height: fit-content;
+    padding: 5px;
+}
+
+.orga:empty {
+    display: none;
+}
+
+.title {
+    font-size: 1.5rem;
+}
+
+.berta-table-botag {
+    font-weight: bold;
+}
+
+.booking-showdates-collapse .fa.fa-calendar.fa-fw {
+    display: none;
+}
+
+.booking-showdates-collapse {
+    /* eslint-disable-next-line */
+    margin-bottom: 0.25rem;
+    margin-right: 0.5rem;
+}
+
+.booking-showdates-title {
+    margin-bottom: 0.25rem;
+}
+
+.booking-showdates-collapse span a {
+    /* eslint-disable-next-line */
+    color: black !important
+}
+
+.berta-avail {
+    border: 2px solid black;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+}
+
+.avail {
+    border-color: green;
+    color: green;
+}
+
+.lowavail {
+    border-color: orange;
+    color: orange;
+}
+
+.fullavail {
+    border-color: red;
+    color: red;
+}
+
+.placeholderimage {
+    background: lightgray;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-style: italic;
+}
+
+.placeholdericon {
+    font-size: 5em;
+}
+
+.local_berta-allcourses .wunderbyte_table_filter_on .wunderbyte_table_container {
+    margin-left: -5em;
+    grid-template-columns: 1fr 4fr;
+}
+
+.local_berta-allcourses .wunderbyte_table_filter_on.inactivefilter .wunderbyte_table_container {
+    grid-template-columns: max-content;
+    margin-left: 0;
+}
+
+.local_berta-allcourses .wunderbyte_table_filter_on .wunderbyte_table_container.showontop {
+    margin-left: 0;
+}
+
+.wunderbyte-table-grid .list-group-item {
+    /* eslint-disable-next-line */
+    border: none !important;
+}
+
+.berta-table-option-title {
+    font-size: 1.4rem;
+}
+
+.wunderbyte-table-grid .list-group-item {
+    border-radius: 7px;
+}
+
+.wunderbyte-table-grid .list-group-item  img {
+    border-radius: 7px 7px 0 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.wunderbyte-table-grid .imagecontainer {
+    height: 220px;
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .row.optionrow, .card.listcard {
+        max-height: fit-content;
+    }
+
+    .local_berta-allcourses .wunderbyte_table_filter_on .wunderbyte_table_container {
+        margin-left: 0;
+    }
+}

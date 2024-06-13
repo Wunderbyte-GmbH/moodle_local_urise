@@ -30,11 +30,16 @@ $shortcodes = [
     'unifiedlist' => [
         'callback' => 'local_berta\shortcodes::unifiedlist',
         'wraps' => false,
-        'description' => 'shortcodes::unifiedlist'
+        'description' => 'shortcodes::unifiedlist',
+    ],
+    'unifiedcards' => [
+        'callback' => 'local_berta\shortcodes::unifiedcards',
+        'wraps' => false,
+        'description' => 'shortcodes::unifiedlist',
     ],
     'unifiedmybookingslist' => [
         'callback' => 'local_berta\shortcodes::unifiedmybookingslist',
         'wraps' => false,
-        'description' => 'shortcodes::unifiedlist'
+        'description' => 'shortcodes::unifiedlist',
     ]
 ];

@@ -32,25 +32,21 @@
 
 {{! Booking places }}
 {{#maxanswers}}
-        <span class="col-ap-availableplaces {{#bookingplacesclass}}{{.}}{{/bookingplacesclass}}">
-        {{^showbookingplacesinfotext}}
+        <span class="col-ap-availableplaces berta-avail d-block {{#bookingplacesclass}}{{.}}{{/bookingplacesclass}} text-dark font-weight-bold">
+        <i class="fa-solid fa-people-group {{#bookingplacesclass}}{{.}}{{/bookingplacesclass}}" aria-hidden="true"></i>
             {{#fullybooked}}
-                <span class="text-danger font-weight-bold">{{booked}}</span>
+                <span class="font-weight-bold text-dark">Voll</span>
             {{/fullybooked}}
             {{^fullybooked}}
-                <span class="text-success font-weight-bold">{{booked}}</span>
-            {{/fullybooked}}
+                <span class="font-weight-bold text-dark">{{booked}}</span>
         {{#showmaxanswers}}
             / {{maxanswers}}
         {{/showmaxanswers}}
-        {{/showbookingplacesinfotext}}
-            {{#showbookingplacesinfotext}}
-                {{bookingplacesinfotext}}
-            {{/showbookingplacesinfotext}}
+         {{/fullybooked}}
     </span>
 {{/maxanswers}}
 {{^maxanswers}}
-        <span class="text-success font-weight-bold">{{booked}}</span>
+        <span class="text-dark font-weight-bold">{{booked}}</span>
         / {{#str}} unlimitedplaces, mod_booking {{/str}}
 {{/maxanswers}}
 

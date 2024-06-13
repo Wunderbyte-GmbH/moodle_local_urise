@@ -66,11 +66,13 @@
     </div>
 {{/norecords}}
 {{^norecords}}
-<div class="wunderbyte_table_container_{{idstring}} {{#showcomponentstoggle}}wunderbyte_table_filter_on{{/showcomponentstoggle}}
-     mt-2 px-2 berta-courses-container local_berta-v081">
-     <div class="container-fluid mw-100">
-          <div class="row mb-2">
-               <div class="col-md-6">
+     <div class="wunderbyte_table_container_{{idstring}} {{uniqueid}}{{!
+          }}{{#showfilterbutton}} wunderbyte_table_filter_on{{/showfilterbutton}}{{!
+          }}{{#filterdeactivated}} inactivefilter{{/filterdeactivated}}{{!
+          }}{{#nofilteratall}} nofilter{{/nofilteratall}} mt-2">
+          <div class="container-fluid mw-100">
+               <div class="row mb-2">
+                    <div class="col-md-6">
                          <div>
                               {{> local_wunderbyte_table/component_toggle }}
                               {{> local_wunderbyte_table/component_reload }}
@@ -83,23 +85,31 @@
                          {{> local_wunderbyte_table/component_sort }}
                          {{> local_wunderbyte_table/component_search }}
                     </div>
+               </div>
           </div>
-     </div>
-
-
-     <div class="wunderbyte_table_container">
-          <aside class="wunderbyte_table_components {{^showcomponentstoggle}} inactive {{/showcomponentstoggle}}">
-               {{> local_wunderbyte_table/component_filter }}
-               {{> local_wunderbyte_table/component_infinitescroll }}
-          </aside>
-          <div class= "wunderbyteTableClass" id='a{{idstring}}'>
-               {{> local_berta/table_list }}
+          <div class="wunderbyte_table_container {{uniqueid}} {{#showfitlerontop}}showontop{{/showfitlerontop}}">
+               {{#showfitlerontop}}
+               <div class="filterheader">
+                <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
+                    {{> local_wunderbyte_table/component_filter }}
+                    {{> local_wunderbyte_table/component_infinitescroll }}
+               </aside>
+               </div>
+               {{/showfitlerontop}}
+               {{^showfitlerontop}}
+               <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
+                    {{> local_wunderbyte_table/component_filter }}
+                    {{> local_wunderbyte_table/component_infinitescroll }}
+               </aside>
+               {{/showfitlerontop}}
+               <div class= "wunderbyteTableClass {{uniqueid}}" id="a{{idstring}}">
+                              {{> local_berta/table_list }}
+               </div>
           </div>
-     </div>
-</div>
-{{#js}}
-    require(['local_wunderbyte_table/init'], function(init) {
-    init.init('{{idstring}}', '{{encodedtable}}');
-    });
-{{/js}}
+    </div>
+    {{#js}}
+        require(['local_wunderbyte_table/init'], function(init) {
+            init.init('{{idstring}}', '{{encodedtable}}');
+        });
+    {{/js}}
 {{/norecords}}
