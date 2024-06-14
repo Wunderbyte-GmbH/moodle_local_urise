@@ -180,8 +180,8 @@ $string['organisation'] = 'Organisation';
 $string['location'] = 'Location';
 
 // Nav.
-$string['berta'] = 'berta';
-$string['entities'] = 'Entities';
+$string['berta'] = 'u:Skills';
+$string['entities'] = 'Manage locations';
 $string['coursename'] = "Coursename";
 
 // Contract management.

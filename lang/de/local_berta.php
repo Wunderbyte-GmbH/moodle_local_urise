@@ -182,8 +182,8 @@ $string['organisation'] = 'Organisationseinheit';
 $string['location'] = 'Ort';
 
 // Nav.
-$string['berta'] = 'berta';
-$string['entities'] = 'Organisations-Einheiten';
+$string['berta'] = 'u:Skills';
+$string['entities'] = 'Räume verwalten';
 $string['coursename'] = 'Kursname';
 
 // Contract management.
