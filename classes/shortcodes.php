@@ -29,7 +29,9 @@ namespace local_berta;
 use Closure;
 use coding_exception;
 use context_system;
+use context_module;
 use dml_exception;
+use local_wunderbyte_table\wunderbyte_table;
 use mod_booking\output\page_allteachers;
 use local_berta\output\userinformation;
 use local_berta\table\berta_table;
@@ -100,8 +102,6 @@ class shortcodes {
 
         self::fix_args($args);
 
-        $booking = self::get_booking($args);
-
         $bookingids = explode(',', get_config('local_berta', 'multibookinginstances'));
 
         $bookingids = array_filter($bookingids, fn($a) => !empty($a));
@@ -134,7 +134,7 @@ class shortcodes {
             $infinitescrollpage = 0;
         }
 
-        $table = self::inittableforcourses($booking);
+        $table = self::inittableforcourses();
 
         $table->showcountlabel = $args['countlabel'];
         $wherearray = ['bookingid' => $bookingids];
@@ -147,11 +147,11 @@ class shortcodes {
         if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
             $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
             list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray);
+                booking::get_options_filter_sql(0, 0, '', null, null, [], $wherearray);
         } else {
 
             list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray);
+                booking::get_options_filter_sql(0, 0, '', null, null, [], $wherearray);
         }
 
         $table->set_filter_sql($fields, $from, $where, $filter, $params);
@@ -208,8 +208,6 @@ class shortcodes {
 
         self::fix_args($args);
 
-        $booking = self::get_booking($args);
-
         $bookingids = explode(',', get_config('local_berta', 'multibookinginstances'));
 
         $bookingids = array_filter($bookingids, fn($a) => !empty($a));
@@ -240,7 +238,7 @@ class shortcodes {
             $perpage = 100;
         }
 
-        $table = self::inittableforcourses($booking);
+        $table = self::inittableforcourses();
 
         $table->showcountlabel = $args['countlabel'];
         $wherearray = ['bookingid' => $bookingids];
@@ -275,7 +273,7 @@ class shortcodes {
                     0,
                     '',
                     null,
-                    $booking->context,
+                    null,
                     [],
                     $wherearray,
                     $USER->id,
@@ -371,7 +369,13 @@ class shortcodes {
 
     }
 
-    private static function inittableforcourses($booking) {
+    /**
+     * Init the table.
+     *
+     * @return wunderbyte_table
+     *
+     */
+    private static function inittableforcourses() {
 
         global $PAGE, $USER;
 
@@ -397,6 +401,14 @@ class shortcodes {
         return $table;
     }
 
+    /**
+     * Define filtercolumns.
+     *
+     * @param mixed $table
+     *
+     * @return void
+     *
+     */
     private static function define_filtercolumns(&$table) {
 
         $standardfilter = new standardfilter('organisation', get_string('organisation', 'local_berta'));
@@ -458,6 +470,14 @@ class shortcodes {
         }
     }
 
+    /**
+     * Get booking from shortcode arguments.
+     *
+     * @param mixed $args
+     *
+     * @return [type]
+     *
+     */
     private static function get_booking($args) {
         self::fix_args($args);
         // If the id argument was not passed on, we have a fallback in the connfig.
@@ -477,6 +497,15 @@ class shortcodes {
         return $booking;
     }
 
+    /**
+     * Set table from shortcodes arguments.
+     *
+     * @param mixed $table
+     * @param mixed $args
+     *
+     * @return [type]
+     *
+     */
     private static function set_table_options_from_arguments(&$table, $args) {
         self::fix_args($args);
 

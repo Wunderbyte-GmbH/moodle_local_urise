@@ -24,6 +24,7 @@
 
 namespace local_berta\output;
 
+use moodle_url;
 use renderer_base;
 use renderable;
 use stdClass;
@@ -39,18 +40,18 @@ use templatable;
 class card implements renderable, templatable {
 
     /** @var string $title */
-    public $titel = null;
+    public $titel = '';
 
     /** @var string $content */
-    public $content = null;
+    public $content = '';
 
     /** @var string $footer */
-    public $footer = null;
+    public $footer = '';
 
-     /** @var modle_url $img */
+     /** @var moodle_url $img */
      public $img = null;
 
-     /** @var modle_url $img */
+     /** @var moodle_url $img */
      public $link = null;
 
      /** @var string $headerbgcolor */
@@ -59,7 +60,7 @@ class card implements renderable, templatable {
     /**
      * Constructor.
      */
-    public function __construct($title = null, $content = null, $footer = null, $headerbgcolor = "bg-primary") {
+    public function construct($title = null, $content = null, $footer = null, $headerbgcolor = "bg-primary") {
 
         $this->title = $title ?? "dummy title";
         $this->content = $content ?? "dummy content";
@@ -68,17 +69,18 @@ class card implements renderable, templatable {
     }
 
     /**
+     * Export for template.
      * @param renderer_base $output
      * @return array
      */
     public function export_for_template(renderer_base $output) {
 
-        $returnarray = array(
+        $returnarray = [
                 'title' => $this->title,
                 'content' => $this->content,
                 'footer' => $this->footer,
-                'headerbgcolor' => $this->headerbgcolor
-        );
+                'headerbgcolor' => $this->headerbgcolor,
+        ];
 
         return $returnarray;
     }
