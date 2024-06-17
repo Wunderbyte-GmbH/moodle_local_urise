@@ -28,7 +28,7 @@ use plugin_renderer_base;
  * @copyright 2024 Georg Maißer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class renderer extends OutputRenderer {
+class renderer extends plugin_renderer_base {
     /**
      * Function to print booking option single view on optionview.php
      * @param bookingoption_description $data
@@ -41,7 +41,8 @@ class renderer extends OutputRenderer {
         return $o;
     }
 
-    /** Function to render the dashboard
+    /**
+     * Function to render the dashboard
      * @param dashboard $data
      * @return string
      */
@@ -52,7 +53,8 @@ class renderer extends OutputRenderer {
         return $o;
     }
 
-    /** Function to render the card_content_stats1
+    /**
+     * Function to render the card_content_stats1
      * @param mixed $data
      * @return string
      */

@@ -181,15 +181,23 @@ class berta_table extends wunderbyte_table {
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
 
         if (isset($settings->customfields) && isset($settings->customfields['category'])) {
-            if (is_array($settings->customfields['category'])) {
-                $implode = implode(", ", $settings->customfields['organisation']);
-                $string = "<span class='bg-secondary pl-1 pr-1 rounded'>
-                $implode
-                </span>";
+            if (strpos($settings->customfields['category'], ',') !== false) {
+                // Split the string by commas into an array
+                $values = explode(',', $settings->customfields['category']);
+                // Loop over each value in the array
+                $string = '';
+                foreach ($values as $value) {
+                    // Optionally trim whitespace from each value
+                    $value = trim($value);
+                    $stringpart = "<span class='bg-secondary pl-1 pr-1 mr-1 rounded category'>
+                    $value
+                    </span>";
+                    $string = $string . $stringpart;
+                }
                 return $string;
             } else {
                 $value = $settings->customfields['category'];
-                $string = "<span class='bg-secondary pl-1 pr-1 rounded'>
+                $string = "<span class='bg-secondary pl-1 pr-1 mr-1 rounded category'>
                 $value
                 </span>";
                 return $string;
