@@ -695,83 +695,13 @@ class shortcodes {
         $table->add_classes_to_subcolumns('cardheader', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'mr-auto'], ['botags']);
         $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'ml-auto'], ['bookings']);
-        // $table->add_subcolumns('optioninvisible', ['invisibleoption']);
-        // $table->add_subcolumns('cardlist', ['text']);
+
+
         $table->add_subcolumns('cardbody', ['text', 'description']);
         $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' => 'mr-auto'], ['text']);
-        // $table->add_classes_to_subcolumns('cardbody', ['columnkeyclass' => 'd-none']);
-        // $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' => 'float-right  m-1'], ['action']);
-        // $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' => 'font-size-sm'], ['botags']);
-        // $table->add_classes_to_subcolumns(
-        //     'cardbody',
-        //     ['columnvalueclass' => 'text-center shortcodes_option_info_invisible'],
-        //     ['invisibleoption']
-        // );
-        // $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' => 'organisation-badge rounded-sm text-gray-800 mt-2'],
-        //     ['organisation']);
-        // $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' => 'm-0 mt-1 mb-1 h5'], ['text']);
 
-        // Subcolumns.
-        // $subcolumns = ['title'];
-        // if (get_config('local_berta', 'bertashortcodesshowstart')) {
-        //     $subcolumns[] = 'coursestarttime';
-        // }
-        // if (get_config('local_berta', 'bertashortcodesshowend')) {
-        //     $subcolumns[] = 'courseendtime';
-        // }
-        // if (get_config('local_berta', 'bertashortcodesshowbookablefrom')) {
-        //     $subcolumns[] = 'bookingopeningtime';
-        // }
-        // if (get_config('local_berta', 'bertashortcodesshowbookableuntil')) {
-        //     $subcolumns[] = 'bookingclosingtime';
-        // }
-        // $subcolumns[] = 'bookings';
-        // if (!empty($args['showminanswers'])) {
-        //     $subcolumns[] = 'minanswers';
-        // }
-
-        // $table->add_subcolumns('cardlist', $subcolumns);
         $table->add_classes_to_subcolumns('cardlist', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('cardbody', ['columnkeyclass' => 'd-none']);
-        // $table->add_classes_to_subcolumns('cardlist', ['columnvalueclass' => 'text-secondary']);
-        // $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'text-secondary']);
-        // $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-map-marker'], ['location']);
-        // $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-building-o'], ['institution']);
-        // $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-user'], ['responsiblecontact']);
-
-        // if (get_config('local_berta', 'bertashortcodesshowstart')) {
-        //     $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-play'], ['coursestarttime']);
-        // }
-        // if (get_config('local_berta', 'bertashortcodesshowend')) {
-        //     $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-stop'], ['courseendtime']);
-        // }
-        // if (get_config('local_berta', 'bertashortcodesshowbookablefrom')) {
-        //     $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-forward'], ['bookingopeningtime']);
-        // }
-        // if (get_config('local_berta', 'bertashortcodesshowbookableuntil')) {
-        //     $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-step-forward'],
-        //         ['bookingclosingtime']);
-        // }
-
-        // $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-clock-o'], ['dayofweektime']);
-        // $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-users'], ['bookings']);
-        // if (!empty($args['showminanswers'])) {
-        //     $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-fw fa-arrow-up'], ['minanswers']);
-        // }
-
-        // // Set additional descriptions.
-        // $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('teacheralt', 'local_berta')], ['teacher']);
-        // $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('locationalt', 'local_berta')], ['location']);
-        // $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('dayofweekalt', 'local_berta')], ['dayofweektime']);
-        // $table->add_classes_to_subcolumns('cardlist', ['columnalt' => get_string('bookingsalt', 'local_berta')], ['bookings']);
-        // $table->add_classes_to_subcolumns('cardimage', ['cardimagealt' => get_string('imagealt', 'local_berta')], ['image']);
-
-        // $table->add_subcolumns('cardfooter', ['course', 'price']);
-        // $table->add_classes_to_subcolumns('cardfooter', ['columnkeyclass' => 'd-none']);
-        // $table->add_classes_to_subcolumns('cardfooter', ['columnclass' => 'theme-text-color bold '], ['price']);
-        // $table->set_tableclass('cardimageclass', 'w-100');
-
-        // $table->is_downloading('', 'List of booking options');
     }
 
     /**
@@ -791,21 +721,6 @@ class shortcodes {
         $subcolumnsleftside = ['text', 'description'];
         $subcolumnsfooter = ['kurssprache', 'format', 'category'];
         $subcolumnsinfo = ['showdates'];
-
-        // $subcolumnsinfo = ['teacher', 'dayofweektime', 'location', 'institution'];
-        // if (get_config('local_berta', 'bertashortcodesshowstart')) {
-        //     $subcolumnsinfo[] = 'coursestarttime';
-        // }
-        // if (get_config('local_berta', 'bertashortcodesshowend')) {
-        //     $subcolumnsinfo[] = 'courseendtime';
-        // }
-        // if (get_config('local_berta', 'bertashortcodesshowbookablefrom')) {
-        //     $subcolumnsinfo[] = 'bookingopeningtime';
-        // }
-        // if (get_config('local_berta', 'bertashortcodesshowbookableuntil')) {
-        //     $subcolumnsinfo[] = 'bookingclosingtime';
-        // }
-        // $subcolumnsinfo[] = 'bookings';
 
         // Check if we should add the description.
         if (get_config('local_berta', 'shortcodelists_showdescriptions')) {
@@ -848,35 +763,16 @@ class shortcodes {
         if (get_config('local_berta', 'shortcodelists_showdescriptions')) {
             $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-3 col-md-auto'], ['description']);
         }
-        // $table->add_classes_to_subcolumns('info', ['columnkeyclass' => 'd-none']);
-        // $table->add_classes_to_subcolumns('info', ['columnclass' => 'text-left text-secondary font-size-sm pr-2']);
-        // $table->add_classes_to_subcolumns('info', ['columnvalueclass' => 'd-flex'], ['teacher']);
+
         $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-clock-o text-primary
         showdatesicon'], ['showdates']);
         $table->add_classes_to_subcolumns('info', ['columnclassinner' => 'align-items-center'], ['showdates']);
-        // $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-map-marker'], ['location']);
-        // $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-building-o'], ['institution']);
-        // if (get_config('local_berta', 'bertashortcodesshowstart')) {
-        //     $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-play'], ['coursestarttime']);
-        
-        // }
         if (get_config('local_berta', 'bertashortcodesshowend')) {
             $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-stop'], ['courseendtime']);
         }
         if (get_config('local_berta', 'bertashortcodesshowbookablefrom')) {
             $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-forward'], ['bookingopeningtime']);
         }
-        // if (get_config('local_berta', 'bertashortcodesshowbookableuntil')) {
-        //     $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-step-forward'], ['bookingclosingtime']);
-        // }
-        // $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa-solid fa-people-group'], ['bookings']);
-        // if (!empty($args['showminanswers'])) {
-        //     $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-arrow-up'], ['minanswers']);
-        // }
-
-        // Set additional descriptions.
-        // $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-clock-o text-primary'], ['dayofweektime']);
-        // $table->add_classes_to_subcolumns('info', ['columnclass' => 'mt-3'], ['dayofweektime']);
         $table->add_classes_to_subcolumns('info', ['columnalt' => get_string('locationalt', 'local_berta')], ['location']);
         $table->add_classes_to_subcolumns('cardimage', ['cardimagealt' => get_string('imagealt', 'local_berta')], ['image']);
 
@@ -894,27 +790,7 @@ class shortcodes {
          ['format']);
          $table->add_classes_to_subcolumns('footer', ['columniclassbefore' => 'fa-solid fa-hashtag text-primary'],
          ['category']);
-        // Override naming for columns. one could use getstring for localisation here.
-        // $table->add_classes_to_subcolumns(
-        //     'top',
-        //     ['keystring' => get_string('tableheader_text', 'booking')],
-        //     ['organisation']
-        // );
-        // $table->add_classes_to_subcolumns(
-        //     'leftside',
-        //     ['keystring' => get_string('tableheader_text', 'booking')],
-        //     ['text']
-        // );
-        // $table->add_classes_to_subcolumns(
-        //     'info',
-        //     ['keystring' => get_string('tableheader_maxanswers', 'booking')],
-        //     ['maxanswers']
-        // );
-        // $table->add_classes_to_subcolumns(
-        //     'info',
-        //     ['keystring' => get_string('tableheader_maxoverbooking', 'booking')],
-        //     ['maxoverbooking']
-        // );
+
 
         $table->is_downloading('', 'List of booking options');
     }

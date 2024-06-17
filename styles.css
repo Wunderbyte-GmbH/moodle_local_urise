@@ -431,18 +431,18 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
 }
 
 .avail {
-    border-color: green;
-    color: green;
+    border-color: var(--success);
+    color: var(--success);
 }
 
 .lowavail {
-    border-color: orange;
-    color: orange;
+    border-color: var(--warning);
+    color: var(--warning);
 }
 
 .fullavail {
-    border-color: red;
-    color: red;
+    border-color: var(--danger);
+    color: var(--danger);
 }
 
 .placeholderimage {
