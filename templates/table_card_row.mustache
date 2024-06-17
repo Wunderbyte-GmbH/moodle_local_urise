@@ -141,7 +141,7 @@
     <div class="{{cardlistclass}}">
       <ul class="infolist">
       {{#cardlist}}
-        <li {{#columnalt}}title="{{.}}"{{/columnalt}}>
+        <li class="d-flex" {{#columnalt}}title="{{.}}"{{/columnalt}}>
         {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
               <span {{^value}} style="display:none" {{/value}}>
               {{#columniclassbefore}}

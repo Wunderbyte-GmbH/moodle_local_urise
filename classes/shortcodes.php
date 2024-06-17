@@ -684,7 +684,14 @@ class shortcodes {
         $table->set_tableclass('cardimageclass', 'imagecontainer');
         $table->add_subcolumns('cardheader', ['botags', 'bookings']);
         $table->add_subcolumns('cardlist', ['showdates', 'kurssprache', 'format', 'category']);
-        $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-clock-o text-primary'], ['showdates']);
+
+        $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-regular fa-message text-primary'],
+         ['kurssprache']);
+         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-solid fa-computer text-primary'],
+         ['format']);
+         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-solid fa-hashtag text-primary'],
+         ['category']);
+        $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-clock-o text-primary showdatesicon mr-2'], ['showdates']);
         $table->add_classes_to_subcolumns('cardheader', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'mr-auto'], ['botags']);
         $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'ml-auto'], ['bookings']);
@@ -845,7 +852,8 @@ class shortcodes {
         // $table->add_classes_to_subcolumns('info', ['columnkeyclass' => 'd-none']);
         // $table->add_classes_to_subcolumns('info', ['columnclass' => 'text-left text-secondary font-size-sm pr-2']);
         // $table->add_classes_to_subcolumns('info', ['columnvalueclass' => 'd-flex'], ['teacher']);
-        $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-clock-o text-primary'], ['showdates']);
+        $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-clock-o text-primary
+        showdatesicon'], ['showdates']);
         $table->add_classes_to_subcolumns('info', ['columnclassinner' => 'align-items-center'], ['showdates']);
         // $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-map-marker'], ['location']);
         // $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-building-o'], ['institution']);

@@ -46,21 +46,14 @@
     </span>
 {{/maxanswers}}
 {{^maxanswers}}
+        <span class="berta-avail avail text-dark font-weight-bold">
         <span class="text-dark font-weight-bold">{{booked}}</span>
         / {{#str}} unlimitedplaces, mod_booking {{/str}}
+        </span>
 {{/maxanswers}}
 
 {{! Waiting list places }}
-{{#maxoverbooking}}
-        <span class="col-ap-waitingplacesavailable {{#waitinglistplacesclass}}{{.}}{{/waitinglistplacesclass}}">
-        {{^showwaitinglistplacesinfotext}}
-            ({{#str}} waitinglist, mod_booking {{/str}}: {{waiting}}/{{maxoverbooking}})
-        {{/showwaitinglistplacesinfotext}}
-            {{#showwaitinglistplacesinfotext}}
-                {{waitinglistplacesinfotext}}
-            {{/showwaitinglistplacesinfotext}}
-    </span>
-{{/maxoverbooking}}
+
 
 {{#showmanageresponses}}
     </a>
