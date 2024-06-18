@@ -462,6 +462,12 @@ class berta_table extends wunderbyte_table {
             return $courseurl;
         }
 
+        // When we have this seeting, we never show the link here:
+
+        if (get_config('booking', 'linktomoodlecourseonbookedbutton')) {
+            return '';
+        }
+
         $buyforuser = price::return_user_to_buy_for();
 
         $answersobject = singleton_service::get_instance_of_booking_answers($settings);

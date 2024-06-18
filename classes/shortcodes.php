@@ -228,6 +228,10 @@ class shortcodes {
             $args['countlabel'] = false;
         }
 
+        if (empty($args['reload'])) {
+            $args['reload'] = false;
+        }
+
         $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
 
         if (
@@ -243,6 +247,8 @@ class shortcodes {
         $table = self::inittableforcourses();
 
         $table->showcountlabel = $args['countlabel'];
+        $table->showreloadbutton = $args['reload'];
+
         $wherearray = ['bookingid' => $bookingids];
 
         if (!empty($organisation)) {
@@ -279,8 +285,7 @@ class shortcodes {
         $table->infinitescroll = $infinitescrollpage;
 
         $table->tabletemplate = 'local_berta/table_list';
-        $table->showcountlabel = true;
-        $table->showreloadbutton = true;
+        $table->showfilterontop = true;
 
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
@@ -334,6 +339,10 @@ class shortcodes {
             $args['countlabel'] = false;
         }
 
+        if (empty($args['reload'])) {
+            $args['reload'] = false;
+        }
+
         $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
 
         if (
@@ -347,6 +356,8 @@ class shortcodes {
         $table = self::inittableforcourses();
 
         $table->showcountlabel = $args['countlabel'];
+        $table->showreloadbutton = $args['reload'];
+
         $wherearray = ['bookingid' => $bookingids];
 
         if (!empty($category)) {
@@ -415,9 +426,6 @@ class shortcodes {
 
         // This allows us to use infinite scrolling, No pages will be used.
         $table->infinitescroll = $infinitescrollpage;
-
-        $table->showcountlabel = true;
-        $table->showreloadbutton = true;
 
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
