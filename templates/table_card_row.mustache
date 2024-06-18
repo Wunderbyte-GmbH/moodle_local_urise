@@ -1,5 +1,5 @@
 {{!
-    This file is part of Moodle - http://moodle.org/
+    This file is part of Moodle - http://moodle.mt-2 text-center/
     Moodle is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -60,7 +60,7 @@
     }
 }}
 
-<div class="list-group-item wunderbyteTableJavascript search-data-element p-0 justify-content-start"
+<div class="d-flex flex-column list-group-item wunderbyteTableJavascript search-data-element p-0 justify-content-start"
 {{#datafields}}
     data-{{key}}="{{value}}"
 {{/datafields}}
@@ -80,7 +80,7 @@
         {{/value}} 
     {{/cardimage}}
   </div>
-
+  <div class="d-flex flex-column flex-grow-1">
   <div class="mt-4 row w-100 mx-auto d-flex align-items-center mt-1 px-2">
      {{#cardheader}}
       {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
@@ -141,7 +141,7 @@
     <div class="{{cardlistclass}}">
       <ul class="infolist">
       {{#cardlist}}
-        <li class="d-flex" {{#columnalt}}title="{{.}}"{{/columnalt}}>
+        <li class="d-flex mt-2" {{#columnalt}}title="{{.}}"{{/columnalt}}>
         {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
               <span {{^value}} style="display:none" {{/value}}>
               {{#columniclassbefore}}
@@ -170,7 +170,7 @@
       </ul>
     </div>
   </div>
-  <div class="mt-2 text-center">
+  <div class="px-5 text-center mt-auto mb-2 pt-2">
     {{#cardfooter}}
       {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
             <span {{^value}} style="display:none" {{/value}}>
@@ -196,6 +196,7 @@
             </span>
       {{#columnclass}}</div>{{/columnclass}}
     {{/cardfooter}}
+  </div>
   </div>
 </div>
 {{^norecords}}

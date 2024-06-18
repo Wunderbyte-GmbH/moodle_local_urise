@@ -528,7 +528,7 @@ class shortcodes {
             'thursday' => get_string('thursday', 'mod_booking'),
             'friday' => get_string('friday', 'mod_booking'),
             'saturday' => get_string('saturday', 'mod_booking'),
-            'sunday' => get_string('sunday', 'mod_booking')
+            'sunday' => get_string('sunday', 'mod_booking'),
         ]);
         $table->add_filter($standardfilter);
 
@@ -684,6 +684,7 @@ class shortcodes {
         $table->set_tableclass('cardimageclass', 'imagecontainer');
         $table->add_subcolumns('cardheader', ['botags', 'bookings']);
         $table->add_subcolumns('cardlist', ['showdates', 'kurssprache', 'format', 'category', 'organisation']);
+        $table->add_subcolumns('cardfooter', ['price']);
 
         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-regular fa-message fa-fw text-primary mr-2'],
          ['kurssprache']);
@@ -692,16 +693,20 @@ class shortcodes {
          $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-solid fa-hashtag fa-fw  text-primary mr-2'],
          ['category']);
         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-clock-o text-primary fa-fw  showdatesicon mr-2'], ['showdates']);
+        $table->add_classes_to_subcolumns('cardlist', ['columnclass' => 'd-flex align-item-center'], ['showdates']);
+        // $table->add_classes_to_subcolumns('cardfooter', ['columnclass' => 'mt-auto'], ['price']);
         $table->add_classes_to_subcolumns('cardheader', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'mr-auto'], ['botags']);
         $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'ml-auto'], ['bookings']);
-
+        // $table->add_classes_to_subcolumns('cardlist', ['columnvalueclass' =>
+        // 'bg-secondary orga'], ['organisation']);
 
         $table->add_subcolumns('cardbody', ['text', 'description']);
         $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' => 'mr-auto'], ['text']);
 
         $table->add_classes_to_subcolumns('cardlist', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('cardbody', ['columnkeyclass' => 'd-none']);
+        $table->add_classes_to_subcolumns('cardfooter', ['columnkeyclass' => 'd-none']);
     }
 
     /**
@@ -748,6 +753,7 @@ class shortcodes {
         $table->add_subcolumns('footer', $subcolumnsfooter );
 
         $table->add_subcolumns('rightside', ['organisation', 'invisibleoption', 'course', 'price']);
+        $table->add_subcolumns('rightside', ['organisation', 'invisibleoption', 'price']);
 
         $table->add_classes_to_subcolumns('top', ['columnkeyclass' => 'd-none']);
         // $table->add_classes_to_subcolumns('top', ['columniclassbefore' => 'fa-solid fa-people-group'], ['bookings']);
@@ -781,8 +787,8 @@ class shortcodes {
             ['invisibleoption']);
         $table->add_classes_to_subcolumns('rightside', ['columnclass' =>
              'theme-text-color bold ml-auto'], ['price']);
-             $table->add_classes_to_subcolumns('rightside', ['columnvalueclass' =>
-             'bg-secondary orga'], ['organisation']);
+            //  $table->add_classes_to_subcolumns('rightside', ['columnvalueclass' =>
+            //  'bg-secondary orga mb-2'], ['organisation']);
 
         $table->add_classes_to_subcolumns('footer', ['columniclassbefore' => 'fa-regular fa-message text-primary'],
          ['kurssprache']);
@@ -790,7 +796,6 @@ class shortcodes {
          ['format']);
          $table->add_classes_to_subcolumns('footer', ['columniclassbefore' => 'fa-solid fa-hashtag text-primary'],
          ['category']);
-
 
         $table->is_downloading('', 'List of booking options');
     }

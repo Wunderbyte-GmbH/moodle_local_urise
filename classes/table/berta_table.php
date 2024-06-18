@@ -379,7 +379,9 @@ class berta_table extends wunderbyte_table {
             if (is_array($settings->customfields['organisation'])) {
                 return implode(", ", $settings->customfields['organisation']);
             } else {
-                return $settings->customfields['organisation'];
+                $value = $settings->customfields['organisation'];
+                $message = "<span class='bg-secondary orga'>$value</span>";
+                return $message;
             }
         }
 
@@ -478,7 +480,7 @@ class berta_table extends wunderbyte_table {
             // ...is a teacher of this option.
             // ...has the system-wide "updatebooking" capability (admins).
             $gotomoodlecourse = get_string('tocoursecontent', 'local_berta');
-            $ret = "<a href='$courseurl' target='_self' class='btn btn-primary p-1 mt-2 mb-2 w-100'>
+            $ret = "<a href='$courseurl' target='_self' class='btn btn-primary p-1 ml-2 w-100'>
                 <i class='fa fa-graduation-cap fa-fw' aria-hidden='true'></i>&nbsp;&nbsp;$gotomoodlecourse
             </a>";
         }

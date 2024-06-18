@@ -385,13 +385,20 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
 .orga {
     border-radius: 10px;
     height: fit-content;
-    padding: 5px;
+    padding: 0 0.5em;
+}
+
+.orgacard {
+    border-radius: 10px;
+    height: fit-content;
+    padding: 0 0.5em;
 }
 
 .bg-secondary.orga, .bg-secondary.category {
     /* eslint-disable-next-line */
     background: var(--lightgrayberta) !important;
 }
+
 
 .orga:empty {
     display: none;
@@ -413,6 +420,11 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     /* eslint-disable-next-line */
     margin-bottom: 0.25rem;
     margin-right: 0.5rem;
+}
+
+.wunderbyte-table-grid .booking-showdates-collapse {
+    /* eslint-disable-next-line */
+    margin: 0 !important;
 }
 
 .booking-showdates-title {
@@ -454,6 +466,10 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     align-items: center;
     flex-direction: column;
     font-style: italic;
+}
+
+.wunderbyte-table-grid .placeholderimage {
+    border-radius: 7px 7px 0 0;
 }
 
 .placeholdericon {
@@ -499,14 +515,23 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     width: 100%;
 }
 
+.wunderbyte-table-grid .booking-button-mainarea.alert {
+    /* eslint-disable-next-line */
+    margin-bottom: 0.5rem !important;
+}   
+
 .booking-showdates-title .fa.fa-calendar.fa-fw {
     display: none;
 }
 
+.pricecontainer {
+    justify-content: space-between;
+}
+
 .showdatesicon{
     /* eslint-disable-next-line */
-    line-height: 32px !important;
-    font-size: 16px;
+    /* line-height: 32px !important;
+    font-size: 16px; */
 }
 
 @media screen and (max-width: 768px) {
