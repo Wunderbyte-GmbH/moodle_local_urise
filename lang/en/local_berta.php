@@ -174,6 +174,7 @@ $string['coursesiteacharchive'] = 'Courses I taught in previous semesters:';
 
 // Access.php.
 $string['berta:canedit'] = 'User can edit';
+$string['berta:viewdashboard'] = "User can see Dashboard";
 
 // Filter.
 $string['organisation'] = 'Organisation';
