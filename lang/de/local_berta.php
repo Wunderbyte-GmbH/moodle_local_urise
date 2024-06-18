@@ -183,7 +183,7 @@ $string['location'] = 'Ort';
 
 // Nav.
 $string['berta'] = 'u:Skills';
-$string['entities'] = 'Räume verwalten';
+$string['entities'] = 'Raum-Management';
 $string['coursename'] = 'Kursname';
 
 // Contract management.
