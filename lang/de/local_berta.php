@@ -181,6 +181,7 @@ $string['berta:viewdashboard'] = "User kann Dashboard sehen";
 // Filter.
 $string['organisation'] = 'Organisationseinheit';
 $string['location'] = 'Ort';
+$string['competency'] = 'Kompetenzen';
 
 // Nav.
 $string['berta'] = 'u:Skills';

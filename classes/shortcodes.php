@@ -31,6 +31,7 @@ use coding_exception;
 use context_system;
 use context_module;
 use dml_exception;
+use local_wunderbyte_table\filters\types\hierarchicalfilter;
 use local_wunderbyte_table\wunderbyte_table;
 use mod_booking\output\page_allteachers;
 use local_berta\output\userinformation;
@@ -48,6 +49,132 @@ use stdClass;
  * Deals with local_shortcodes regarding booking.
  */
 class shortcodes {
+
+    /**
+     * KOMPETENZEN
+     *
+     * @var array]
+     */
+    public const KOMPETENZEN = [
+        'Lehrkonzeption & -planung' => [
+            'parent' => 'Lehrkompetenzen',
+        ],
+        'Lehr- & Lernmethoden' => [
+            'parent' => 'Lehrkompetenzen',
+        ],
+        'Erstellung Lehr-/Lernmaterialien' => [
+            'parent' => 'Lehrkompetenzen',
+        ],
+        'Lehren mit digitalen Technologien' => [
+            'parent' => 'Lehrkompetenzen',
+        ],
+        'Prüfen & Beurteilen' => [
+            'parent' => 'Lehrkompetenzen',
+        ],
+        'Betreuung schriftlicher Arbeiten' => [
+            'parent' => 'Lehrkompetenzen',
+        ],
+        'Weiterentwicklung der Lehre' => [
+            'parent' => 'Lehrkompetenzen',
+        ],
+        'Wissenschaftliches Arbeiten' => [
+            'parent' => 'Forschungskompetenzen',
+        ],
+        'Wissenschaftliches Publizieren' => [
+            'parent' => 'Forschungskompetenzen',
+        ],
+        'Open Science' => [
+            'parent' => 'Forschungskompetenzen',
+        ],
+        'Wissensaustausch & Innovation' => [
+            'parent' => 'Forschungskompetenzen',
+        ],
+        'Wissenschaftliche Integrität' => [
+            'parent' => 'Forschungskompetenzen',
+        ],
+        'Networking in der Wissenschaft' => [
+            'parent' => 'Forschungskompetenzen',
+        ],
+        'Interdisziplinäre Forschung' => [
+            'parent' => 'Forschungskompetenzen',
+        ],
+        'Forschungsförderung' => [
+            'parent' => 'Forschungskompetenzen',
+        ],
+        'Karriereentwicklung & -planung' => [
+            'parent' => 'Forschungskompetenzen',
+        ],
+        'Präsentation' => [
+            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        ],
+        'Gesprächs- und Verhandlungsführung' => [
+            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        ],
+        'Feedback' => [
+            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        ],
+        'Moderation' => [
+            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        ],
+        'Sprachkenntnisse' => [
+            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        ],
+        'Konfliktmanagement' => [
+            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        ],
+        'Information & Kommunikation' => [
+            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        ],
+        'Gender- & Diversitätskompetenz' => [
+            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        ],
+        'Kooperationskompetenz' => [
+            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        ],
+        'Veranstaltungsorganisation' => [
+            'parent' => 'Selbst- und Arbeitsorganisation',
+        ],
+        'Arbeitsorganisation' => [
+            'parent' => 'Selbst- und Arbeitsorganisation',
+        ],
+        'Selbstorganisation' => [
+            'parent' => 'Selbst- und Arbeitsorganisation',
+        ],
+        'Service- & Kund*innenorientierung' => [
+            'parent' => 'Selbst- und Arbeitsorganisation',
+        ],
+        'Lösungs- & Zukunftsorientierung' => [
+            'parent' => 'Selbst- und Arbeitsorganisation',
+        ],
+        'Ressourceneffizienz' => [
+            'parent' => 'Selbst- und Arbeitsorganisation',
+        ],
+        'Change-Kompetenz' => [
+            'parent' => 'Selbst- und Arbeitsorganisation',
+        ],
+        'Gesundheitsorientierung' => [
+            'parent' => 'Selbst- und Arbeitsorganisation',
+        ],
+        'Lernkompetenz' => [
+            'parent' => 'Selbst- und Arbeitsorganisation',
+        ],
+        'IT Security' => [
+            'parent' => 'Digitalkompetenzen',
+        ],
+        'Digitale Interaktion' => [
+            'parent' => 'Digitalkompetenzen',
+        ],
+        'Umgang mit Informationen & Daten' => [
+            'parent' => 'Digitalkompetenzen',
+        ],
+        'Technologienutzung' => [
+            'parent' => 'Digitalkompetenzen',
+        ],
+        'Educational Leadership and Management' => [
+            'parent' => 'Führungskompetenzen',
+        ],
+    ];
+
 
     /**
      * Prints out list of bookingoptions.
@@ -285,7 +412,7 @@ class shortcodes {
         $table->infinitescroll = $infinitescrollpage;
 
         $table->tabletemplate = 'local_berta/table_list';
-        $table->showfilterontop = true;
+        $table->showfilterontop = false;
 
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
@@ -527,6 +654,10 @@ class shortcodes {
 
         $standardfilter = new standardfilter('organisation', get_string('organisation', 'local_berta'));
         $table->add_filter($standardfilter);
+
+        $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_berta'));
+        $hierarchicalfilter->add_options(self::KOMPETENZEN);
+        $table->add_filter($hierarchicalfilter);
 
         $standardfilter = new standardfilter('dayofweek', get_string('dayofweek', 'local_berta'));
         $standardfilter->add_options([
