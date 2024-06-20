@@ -41,5 +41,5 @@ $shortcodes = [
         'callback' => 'local_berta\shortcodes::unifiedmybookingslist',
         'wraps' => false,
         'description' => 'shortcodes::unifiedlist',
-    ]
+    ],
 ];

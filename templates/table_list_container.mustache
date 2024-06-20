@@ -70,9 +70,7 @@
           }}{{#showfilterbutton}} wunderbyte_table_filter_on{{/showfilterbutton}}{{!
           }}{{#filterdeactivated}} inactivefilter{{/filterdeactivated}}{{!
           }}{{#nofilteratall}} nofilter{{/nofilteratall}} mt-2">
-          <div class="container-fluid mw-100">
-               <div class="row mb-2">
-                    <div class="col-md-6">
+             <div class="col-md-6">
                          <div>
                               {{> local_wunderbyte_table/component_toggle }}
                               {{> local_wunderbyte_table/component_reload }}
@@ -82,10 +80,16 @@
                     </div>
                     <div class="col-md-6 text-right align-self-end">
                          {{> local_wunderbyte_table/component_spinner }}
-                         {{> local_wunderbyte_table/component_sort }}
-                         {{> local_wunderbyte_table/component_search }}
                     </div>
-               </div>
+          <div class="background d-flex justify-content-center align-items-center mt-2">
+          <div class="container mw-90 d-flex justify-content-center">
+               <div class="row mb-2 w-100 d-flex justify-content-center flex-column">
+                <h1 class="font-weight-light text-center mb-2 text-light">
+                  {{#str}} searchheadertext, local_berta {{/str}}
+                </h1>
+                {{> local_berta/component_search }}
+          </div>
+          </div>
           </div>
           <div class="wunderbyte_table_container {{uniqueid}} {{#showfitlerontop}}showontop{{/showfitlerontop}}">
                {{#showfitlerontop}}
@@ -103,7 +107,10 @@
                </aside>
                {{/showfitlerontop}}
                <div class= "wunderbyteTableClass {{uniqueid}}" id="a{{idstring}}">
-                              {{> local_berta/table_list }}
+               <div class="row w-100 d-flex justify-content-end mt-3">
+                         {{> local_wunderbyte_table/component_sort }}
+               </div>
+               {{> local_berta/table_list }}
                </div>
           </div>
     </div>

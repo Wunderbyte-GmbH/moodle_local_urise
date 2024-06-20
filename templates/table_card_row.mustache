@@ -74,7 +74,9 @@
             <div class="placeholderimage">
             <div class="m-3 d-flex justify-conten-center align-items-center flex-column">
               <i class="fa-regular fa-image placeholdericon"></i>
-              <h4 class="pt-2" >No Image</h4>
+              <h4 class="pt-2" >
+                {{#str}} option_noimage, mod_booking {{/str}}
+              </h4>
               </div>
             </div>
         {{/value}} 
@@ -170,7 +172,7 @@
       </ul>
     </div>
   </div>
-  <div class="px-5 text-center mt-auto mb-2 pt-2">
+  <div class="px-3 text-center mt-auto mb-2 pt-2">
     {{#cardfooter}}
       {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
             <span {{^value}} style="display:none" {{/value}}>

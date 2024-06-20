@@ -254,3 +254,5 @@ $string['summary_desc'] = 'Enthält die Einstellungsmöglichkeiten und Statistik
 // Rolls.
 $string['berta:create'] = "Erstelle";
 $string['berta:view'] = "Ansehen";
+
+$string['searchheadertext'] = "Was möchten sie lernen?";

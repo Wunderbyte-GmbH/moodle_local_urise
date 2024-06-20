@@ -300,24 +300,15 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     /* eslint-disable-next-line */
     padding: 10px !important;
     /* eslint-disable-next-line */
-    height: 3rem !important;
+    height: 2.5rem !important;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-.booking-button-area .booking-button-mainarea, .booking-button-area .booking-button-area {
-    /* eslint-disable-next-line */
-    width: fit-content !important;
-    /* eslint-disable-next-line */
-    padding: 0 10px !important;
-    /* eslint-disable-next-line */
-    padding: 10px !important;
-    /* eslint-disable-next-line */
-    height: 3rem !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.btn-secondary:disabled {
+     /* eslint-disable-next-line */
+    border: none !important;
+    background-color: #dadada !important;
 }
 
 .booking-button-area .booking-button-area.btn-secondary {
@@ -329,17 +320,17 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     border: black 2px solid;
     position: relative;
     /* eslint-disable-next-line */
-    padding-right: 2rem !important;
+    /* padding-right: 2rem !important; */
 }
 
-.booking-button-area .booking-button-area::after {
+/* .booking-button-area .booking-button-area::after {
     font: var(--fa-font-solid);
     content: '\f061';
     right: 10px;
     position: absolute;
     font-size: 18px;
     top: calc(50% - 8px);
-}
+} */
 
 .bookit-addtocartbtn-area {
     /* eslint-disable-next-line */
@@ -534,6 +525,36 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     font-size: 16px; */
 }
 
+.background {
+    margin-left: -10em;
+    margin-right: -10em;
+    background: linear-gradient(258.38deg, #0CBAC5 1.99%, #0063A6 98.96%);
+    min-height: 15em;
+
+}
+
+.wunderbyteTableSearch.berta {
+    width: 80%;
+    max-width: 100%;
+    margin: auto;
+}
+
+.search.berta {
+
+    height: 3em;
+}
+
+.shadowcustom {
+    box-shadow: 0 .5rem 1rem rgb(202 202 202 / 15%);
+}
+
+.linkbutton {
+    border: 2px solid black;
+    border-radius: 8px;
+    color: black;
+    font-weight: normal;
+}
+
 @media screen and (max-width: 768px) {
     .row.optionrow, .card.listcard {
         max-height: fit-content;
@@ -542,4 +563,12 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     .local_berta-allcourses .wunderbyte_table_filter_on .wunderbyte_table_container {
         margin-left: 0;
     }
+
+
+.background {
+    margin-left: 0;
+    margin-right: 0;
+
+}
+
 }

@@ -60,7 +60,7 @@
     }
 }}
 
-<div class="card listcard sk-fade mb-4 shadow flex-md-row align-items-center row gx-0" {{#datafields}} data-{{key}}="{{value}}" {{/datafields}}>
+<div class="card listcard sk-fade mb-4 shadowcustom flex-md-row align-items-center row gx-0" {{#datafields}} data-{{key}}="{{value}}" {{/datafields}}>
   <div class="content w-100">
     <div class="row optionrow foroptionid-{{#optionid}}{{#value}}{{.}}{{/value}}{{/optionid}}">
     {{#cardimage}}
@@ -73,7 +73,9 @@
                     <div class="placeholderimage">
                     <div class="m-3 d-flex justify-conten-center align-items-center flex-column">
                       <i class="fa-regular fa-image placeholdericon"></i>
-                      <h4 class="pt-2" >No Image</h4>
+                      <h4 class="pt-2" >
+                        {{#str}} option_noimage, mod_booking {{/str}}
+                      </h4>
                       </div>
                     </div>
                 {{/value}}

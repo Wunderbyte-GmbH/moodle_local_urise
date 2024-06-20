@@ -59,31 +59,50 @@
        ]
     }
 }}
-<div class="wunderbyte_table_container_{{idstring}} {{#showcomponentstoggle}}wunderbyte_table_filter_on{{/showcomponentstoggle}} mt-2 px-2 berta-courses-container">
-     <div class="container-fluid ml-0">
+<div class="wunderbyte_table_container_{{idstring}} {{#showcomponentstoggle}}wunderbyte_table_filter_on{{/showcomponentstoggle}} mt-2 berta-courses-container">
+     <div class="ml-0 header">
           <div class="row mb-2">
                <div class="">
                     <div>
                          {{> local_wunderbyte_table/component_toggle }}
                          {{> local_wunderbyte_table/component_reload }}
                          {{> local_wunderbyte_table/component_print }}
+                         {{> local_wunderbyte_table/component_edit }}
                     </div>
                </div>
-               <div class="ml-auto">
-                    {{> local_wunderbyte_table/component_sort }}
-                    {{> local_wunderbyte_table/component_search }}
-               </div>
+          </div>
+           <div class="background d-flex justify-content-center align-items-center mt-2">
+          <div class="container mw-90 d-flex justify-content-center">
+               <div class="row mb-2 w-100 d-flex justify-content-center flex-column">
+                <h1 class="font-weight-light text-center mb-2 text-light">
+               {{#str}} searchheadertext, local_berta {{/str}}
+                </h1>
+                {{> local_berta/component_search }}
+          </div>
           </div>
      </div>
 
-
-     <div class="wunderbyte_table_container">
-          <aside class="wunderbyte_table_components {{^showcomponentstoggle}} inactive {{/showcomponentstoggle}}">
-               {{> local_wunderbyte_table/component_filter }}
-               {{> local_wunderbyte_table/component_infinitescroll }}
-          </aside>
+     
+     <div class="wunderbyte_table_container {{#showfitlerontop}}showontop{{/showfitlerontop}}">
+             {{#showfitlerontop}}
+               <div class="filterheader">
+                <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
+                    {{> local_wunderbyte_table/component_filter }}
+                    {{> local_wunderbyte_table/component_infinitescroll }}
+               </aside>
+               </div>
+               {{/showfitlerontop}}
+               {{^showfitlerontop}}
+               <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
+                    {{> local_wunderbyte_table/component_filter }}
+                    {{> local_wunderbyte_table/component_infinitescroll }}
+               </aside>
+               {{/showfitlerontop}}
           <div class= "wunderbyteTableClass" id='a{{idstring}}'>
-          {{> local_berta/table_card }}
+               <div class="row w-100 d-flex justify-content-end mt-3">
+                         {{> local_wunderbyte_table/component_sort }}
+               </div>
+               {{> local_berta/table_card }}
           </div>
      </div>
 </div>
