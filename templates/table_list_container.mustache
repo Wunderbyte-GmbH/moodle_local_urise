@@ -83,6 +83,9 @@
                          </div>
                     </div>
                </div>
+               <div class="row w-100 d-flex justify-content-end mt-3">
+                         {{> local_wunderbyte_table/component_sort }}
+               </div>
                 <div class="text-left">
                     {{> local_wunderbyte_table/component_toggle }}
                     {{> local_wunderbyte_table/component_reload }}
@@ -105,9 +108,6 @@
                </aside>
                {{/showfitlerontop}}
                <div class= "wunderbyteTableClass {{uniqueid}}" id="a{{idstring}}">
-                    <div class="row w-100 d-flex justify-content-end mt-3">
-                              {{> local_wunderbyte_table/component_sort }}
-                    </div>
                {{> local_berta/table_list }}
                </div>
           </div>

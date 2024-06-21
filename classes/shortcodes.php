@@ -175,6 +175,187 @@ class shortcodes {
         ],
     ];
 
+    /**
+     * KOMPETENZEN
+     *
+     * @var array]
+     */
+    public const ORGANISATIONEN = [
+        'FB Afrikawissenschaften und Orientalistik' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Alte Geschichte' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Anglistik und Amerikanistik' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Archälogie und Numismatik' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Astronomie' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Bildungswissenschaft, Sprachwissenschaft und Vergleichende Literaturwissenschaft' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Biologie und Botanik, Standort Biologie' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Biologie und Botanik, Standort Botanik' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Byzantistik und Neogräzistik' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Geographie und Regionalforschung' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Germanistik, Nederlandistik und Skandinavistik' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Geschichtswissenschaften' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Klassische Philologie, Mittel - und Neulatein' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Kultur - und Sozialanthropologie' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Kunstgeschichte' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Musikwissenschaft' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Ostasienwissenschaften' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Osteuropäische Geschichte und Slawistik' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Pharmazie und Ernährungswissenschaften' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Philosophie und Psychologie' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'ZB Physik und Chemie' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Publizistik- und Kommunikationswissenschaft und Informatik' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Rechtswissenschaften' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Soziologie und Politikwissenschaft' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Sportwissenschaft' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Südasien-, Tibet- und Buddhismuskunde' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Theater-, Film- und Medienwissenschaft' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Theologie' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Translationswissenschaft' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Wirtschaftswissenschaften und Mathematik' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'FB Zeitgeschichte' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'Forschungsunterstützungs- und Publikationservices' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'Hauptbibliothek' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'Universitätsarchiv' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+        ],
+        'Advanced Research School in Law and Jurisprudence' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Doctoral School Microbiology and Environmental Science' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Doctoral School of Philological and Cultural Studies' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Oskar Morgenstern Doctoral School' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'UniVie Doctoral School Computer Science' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Vienna Doctoral School of Historical and Cultural Studies' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Vienna Doctoral School of Philosophy' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Vienna Doctoral School of Social Sciences' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Vienna Doctoral School in Chemistry' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Vienna Doctoral School of Ecology and Evolution' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Vienna International School in Earth and Space Sciences' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Vienna School of Mathematics | Joint Doctoral School mit der TU Wien' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Vienna Doctoral School in Physics' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Vienna Doctoral School of Pharmaceutical, Nutritional and Sport Sciences' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Vienna BioCenter PhD Program, joint doctoral school of the University of Vienna and the Medical University of Vienna' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Vienna Doctoral School in Cognition, Behavior, and Neuroscience - from Biology to Psychology and the Humanities' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Vienna Doctoral School of Theology and Research on Religion' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Vienna Doctoral School in Education' => [
+            'parent' => 'Doctoral Schools',
+        ],
+        'Forschungsservice und Nachwuchsförderung' => [
+            'parent' => 'Forschungsservice und Nachwuchsförderung',
+        ],
+        'Organisationskultur und Gleichstellung' => [
+            'parent' => 'Personalwesen und Frauenförderung',
+        ],
+        'Personalentwicklung und Recruiting' => [
+            'parent' => 'Personalwesen und Frauenförderung',
+        ],
+        'Center for Teaching and Learning' => [
+            'parent' => 'Studienservice und Lehrwesen',
+        ],
+        'Koordination Studienservices' => [
+            'parent' => 'Studienservice und Lehrwesen',
+        ],
+        'Zentraler Informatikdienst' => [
+            'parent' => 'Zentraler Informatikdienst',
+        ],
+    ];
 
     /**
      * Prints out list of bookingoptions.
@@ -652,8 +833,9 @@ class shortcodes {
      */
     private static function define_filtercolumns(&$table) {
 
-        $standardfilter = new standardfilter('organisation', get_string('organisation', 'local_berta'));
-        $table->add_filter($standardfilter);
+        $hierarchicalfilter = new hierarchicalfilter('organisation', get_string('organisation', 'local_berta'));
+        $hierarchicalfilter->add_options(self::ORGANISATIONEN);
+        $table->add_filter($hierarchicalfilter);
 
         $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_berta'));
         $hierarchicalfilter->add_options(self::KOMPETENZEN);
