@@ -290,9 +290,14 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     width: 100%;
 }
 
+.customimg .img-fluid.list-img {
+    /* eslint-disable-next-line */
+    border-radius: 0 !important;
+}
+
 /* Some of this needs important because the buttons are styled inline in booking template */
 
-.booking-button-area .booking-button-mainarea, .booking-button-area .booking-button-area {
+.booking-button-area .booking-button-mainarea.bertabutton, .booking-button-area .booking-button-area.bertabutton {
     /* eslint-disable-next-line */
     width: fit-content !important;
     /* eslint-disable-next-line */
@@ -315,10 +320,11 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     color: var(--text-dark);
 }
 
-.booking-button-area .booking-button-area {
-    background: transparent;
-    border: black 2px solid;
+.booking-button-area .booking-button-area, .bertabutton {
+    background: transparent !important;
+    border: black 2px solid !important;
     position: relative;
+    color: black !important;
     /* eslint-disable-next-line */
     /* padding-right: 2rem !important; */
 }
