@@ -77,13 +77,25 @@
 {{^norecords}}
 {{#js}}
     require(['local_wunderbyte_table/init'], function(init) {
-    init.init('{{idstring}}', '{{encodedtable}}');
+        init.init('{{idstring}}', '{{encodedtable}}');
+    });
+    require(['local_shopping_cart/cart'], function(cart) {
+        cart.buttoninit(null, 'mod_booking');
     });
     require(['mod_booking/modal_init'], function(init) {
-    init.init();
+        init.init();
     });
     require(['mod_booking/button_notifyme'], function(init) {
-    init.init();
+        init.init();
+    });
+    require(['mod_booking/bookit'], function(init) {
+        init.initprepagemodal(null, null, null, null);
+    });
+    require(['mod_booking/bookit'], function(init) {
+        init.initprepageinline(null, null, null, null);
+    });
+    require(['mod_booking/bookit'], function(init) {
+        init.initbookitbutton(null, null);
     });
 {{/js}}
 {{/norecords}}
