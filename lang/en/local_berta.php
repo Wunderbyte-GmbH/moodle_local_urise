@@ -256,3 +256,12 @@ $string['multibookinginstances_desc'] = "Choose which booking instances are acti
 
 $string['searchheadertext'] = "What would you like to learn?";
 $string['myspace'] = "My bookings";
+
+// Descriptionview.
+$string['requirements'] = "Requirements";
+$string['goals'] = "Goals";
+$string['coursecontent'] = "Content";
+$string['coursemethods'] = "Methods";
+$string['additionalinfo'] = "Additional information";
+$string['targetaud'] = "Target audience";
+$string['optiondates'] = "Date(s)";

@@ -257,3 +257,13 @@ $string['berta:view'] = "Ansehen";
 
 $string['searchheadertext'] = "Was möchten Sie lernen?";
 $string['myspace'] = "Mein Bereich";
+
+// Descriptionview.
+$string['requirements'] = "Vorraussetzungen";
+$string['goals'] = "Ziele";
+$string['coursecontent'] = "Inhalte";
+$string['coursemethods'] = "Methoden";
+$string['additionalinfo'] = "Sonstige Informationen";
+$string['targetaud'] = "Zielgruppe";
+$string['optiondates'] = "Termin(e)";
+
