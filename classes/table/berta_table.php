@@ -376,6 +376,58 @@ class berta_table extends wunderbyte_table {
 
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
 
+        if (isset($settings->customfields) && isset($settings->customfields['kompetenzen'])) {
+            if (is_array($settings->customfields['kompetenzen'])) {
+
+                $returnorgas = [];
+                foreach ($settings->customfields['kompetenzen'] as $orgaid) {
+                    $organisations = shortcodes::KOMPETENZEN;
+
+                    if (isset($organisations[$orgaid])) {
+                        $returnorgas[] = html_writer::tag(
+                            'span',
+                            $organisations[$orgaid]['localizedname'],
+                            ['class' => 'bg-secondary pl-1 pr-1 mr-1 rounded category']
+                        );
+
+                    }
+                }
+
+                return implode(", ", $returnorgas);
+            } else {
+                $value = $settings->customfields['kompetenzen'];
+                $message = "<span class='bg-secondary orga'>$value</span>";
+                return $message;
+            }
+        }
+
+        $context = context_module::instance($settings->cmid);
+
+        // The error message should only be shown to admins.
+        if (has_capability('moodle/site:config', $context)) {
+
+            $message = get_string('youneedcustomfieldsport', 'local_berta');
+
+            $message = "<div class='alert alert-danger'>$message</div>";
+
+            return $message;
+        }
+
+        // Normal users won't notice the problem.
+        return '';
+    }
+
+    /**
+     * This function is called for each data row to allow processing of the
+     * sports value.
+     *
+     * @param object $values Contains object with all the values of record.
+     * @return string $sports Returns rendered sport.
+     * @throws coding_exception
+     */
+    public function col_organisation($values) {
+        $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
+
         if (isset($settings->customfields) && isset($settings->customfields['organisation'])) {
             if (is_array($settings->customfields['organisation'])) {
 
@@ -414,18 +466,6 @@ class berta_table extends wunderbyte_table {
         }
 
         // Normal users won't notice the problem.
-        return '';
-    }
-
-    /**
-     * This function is called for each data row to allow processing of the
-     * sports value.
-     *
-     * @param object $values Contains object with all the values of record.
-     * @return string $sports Returns rendered sport.
-     * @throws coding_exception
-     */
-    public function col_organisation($values) {
         return '';
     }
 
