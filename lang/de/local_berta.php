@@ -255,4 +255,5 @@ $string['summary_desc'] = 'Enthält die Einstellungsmöglichkeiten und Statistik
 $string['berta:create'] = "Erstelle";
 $string['berta:view'] = "Ansehen";
 
-$string['searchheadertext'] = "Was möchten sie lernen?";
+$string['searchheadertext'] = "Was möchten Sie lernen?";
+$string['myspace'] = "Mein Bereich";

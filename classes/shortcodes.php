@@ -56,122 +56,162 @@ class shortcodes {
      * @var array]
      */
     public const KOMPETENZEN = [
-        'Lehrkonzeption & -planung' => [
+        'explode' => ',',
+        '1' => [
             'parent' => 'Lehrkompetenzen',
+            'localizedname' => 'Lehrkonzeption & -planung',
         ],
-        'Lehr- & Lernmethoden' => [
+        '2' => [
             'parent' => 'Lehrkompetenzen',
+            'localizedname' => 'Lehr- & Lernmethoden',
         ],
-        'Erstellung Lehr-/Lernmaterialien' => [
+        '3' => [
             'parent' => 'Lehrkompetenzen',
+            'localizedname' => 'Erstellung Lehr-/Lernmaterialien',
         ],
-        'Lehren mit digitalen Technologien' => [
+        '4' => [
             'parent' => 'Lehrkompetenzen',
+            'localizedname' => 'Lehren mit digitalen Technologien',
         ],
-        'Prüfen & Beurteilen' => [
+        '5' => [
             'parent' => 'Lehrkompetenzen',
+            'localizedname' => 'Prüfen & Beurteilen',
         ],
-        'Betreuung schriftlicher Arbeiten' => [
+        '6' => [
             'parent' => 'Lehrkompetenzen',
+            'localizedname' => 'Betreuung schriftlicher Arbeiten',
         ],
-        'Weiterentwicklung der Lehre' => [
+        '7' => [
             'parent' => 'Lehrkompetenzen',
+            'localizedname' => 'Weiterentwicklung der Lehre',
         ],
-        'Wissenschaftliches Arbeiten' => [
-            'parent' => 'Forschungskompetenzen',
+        '8' => [
+            'parent' => 'Wissenschaftskompetenzen',
+            'localizedname' => 'Wissenschaftliches Arbeiten',
         ],
-        'Wissenschaftliches Publizieren' => [
-            'parent' => 'Forschungskompetenzen',
+        '9' => [
+            'parent' => 'Wissenschaftskompetenzen',
+            'localizedname' => 'Wissenschaftliches Publizieren',
         ],
-        'Open Science' => [
-            'parent' => 'Forschungskompetenzen',
+        '10' => [
+            'parent' => 'Wissenschaftskompetenzen',
+            'localizedname' => 'Open Science',
         ],
-        'Wissensaustausch & Innovation' => [
-            'parent' => 'Forschungskompetenzen',
+        '11' => [
+            'parent' => 'Wissenschaftskompetenzen',
+            'localizedname' => 'Wissensaustausch & Innovation',
         ],
-        'Wissenschaftliche Integrität' => [
-            'parent' => 'Forschungskompetenzen',
+        '12' => [
+            'parent' => 'Wissenschaftskompetenzen',
+            'localizedname' => 'Wissenschaftliche Integrität',
         ],
-        'Networking in der Wissenschaft' => [
-            'parent' => 'Forschungskompetenzen',
+        '13' => [
+            'parent' => 'Wissenschaftskompetenzen',
+            'localizedname' => 'Networking in der Wissenschaft',
         ],
-        'Interdisziplinäre Forschung' => [
-            'parent' => 'Forschungskompetenzen',
+        '14' => [
+            'parent' => 'Wissenschaftskompetenzen',
+            'localizedname' => 'Interdisziplinäre Forschung',
         ],
-        'Forschungsförderung' => [
-            'parent' => 'Forschungskompetenzen',
+        '15' => [
+            'parent' => 'Wissenschaftskompetenzen',
+            'localizedname' => 'Forschungsförderung',
         ],
-        'Karriereentwicklung & -planung' => [
-            'parent' => 'Forschungskompetenzen',
+        '16' => [
+            'parent' => 'Karrierekompetenzen',
+            'localizedname' => 'Karriereentwicklung & -planung',
         ],
-        'Präsentation' => [
-            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        '17' => [
+            'parent' => 'Kommunikationskompetenzen',
+            'localizedname' => 'Präsentation',
         ],
-        'Gesprächs- und Verhandlungsführung' => [
-            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        '18' => [
+            'parent' => 'Kommunikationskompetenzen',
+            'localizedname' => 'Gesprächs- und Verhandlungsführung',
         ],
-        'Feedback' => [
-            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        '19' => [
+            'parent' => 'Kommunikationskompetenzen',
+            'localizedname' => 'Feedback',
         ],
-        'Moderation' => [
-            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        '20' => [
+            'parent' => 'Kommunikationskompetenzen',
+            'localizedname' => 'Moderation',
         ],
-        'Sprachkenntnisse' => [
-            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        '21' => [
+            'parent' => 'Kommunikationskompetenzen',
+            'localizedname' => 'Sprachkenntnisse',
         ],
-        'Konfliktmanagement' => [
-            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        '22' => [
+            'parent' => 'Soziale Kompetenzen',
+            'localizedname' => 'Konfliktmanagement',
         ],
-        'Information & Kommunikation' => [
-            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        '23' => [
+            'parent' => 'Soziale Kompetenzen',
+            'localizedname' => 'Information & Kommunikation',
         ],
-        'Gender- & Diversitätskompetenz' => [
-            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        '24' => [
+            'parent' => 'Soziale Kompetenzen',
+            'localizedname' => 'Gender- & Diversitätskompetenz',
         ],
-        'Kooperationskompetenz' => [
-            'parent' => 'Kommunikations- und Kooperationskompetenzen',
+        '25' => [
+            'parent' => 'Soziale Kompetenzen',
+            'localizedname' => 'Kooperationskompetenz',
         ],
-        'Veranstaltungsorganisation' => [
-            'parent' => 'Selbst- und Arbeitsorganisation',
+        '26' => [
+            'parent' => 'Organisationskompetenzen',
+            'localizedname' => 'Veranstaltungsorganisation',
         ],
-        'Arbeitsorganisation' => [
-            'parent' => 'Selbst- und Arbeitsorganisation',
+        '27' => [
+            'parent' => 'Organisationskompetenzen',
+            'localizedname' => 'Arbeitsorganisation',
         ],
-        'Selbstorganisation' => [
-            'parent' => 'Selbst- und Arbeitsorganisation',
+        '28' => [
+            'parent' => 'Organisationskompetenzen',
+            'localizedname' => 'Selbstorganisation',
         ],
-        'Service- & Kund*innenorientierung' => [
-            'parent' => 'Selbst- und Arbeitsorganisation',
+        '29' => [
+            'parent' => 'Servicekompetenzen',
+            'localizedname' => 'Service- & Kund*innenorientierung',
         ],
-        'Lösungs- & Zukunftsorientierung' => [
-            'parent' => 'Selbst- und Arbeitsorganisation',
+        '30' => [
+            'parent' => 'Persönliche Kompetenzen',
+            'localizedname' => 'Lösungs- & Zukunftsorientierung',
         ],
-        'Ressourceneffizienz' => [
-            'parent' => 'Selbst- und Arbeitsorganisation',
+        '31' => [
+            'parent' => 'Persönliche Kompetenzen',
+            'localizedname' => 'Ressourceneffizienz',
         ],
-        'Change-Kompetenz' => [
-            'parent' => 'Selbst- und Arbeitsorganisation',
+        '32' => [
+            'parent' => 'Persönliche Kompetenzen',
+            'localizedname' => 'Change-Kompetenz',
         ],
-        'Gesundheitsorientierung' => [
-            'parent' => 'Selbst- und Arbeitsorganisation',
+        '33' => [
+            'parent' => 'Gesundheitskompetenzen',
+            'localizedname' => 'Gesundheitsorientierung',
         ],
-        'Lernkompetenz' => [
-            'parent' => 'Selbst- und Arbeitsorganisation',
+        '34' => [
+            'parent' => 'Lernkompetenzen',
+            'localizedname' => 'Lernkompetenz',
         ],
-        'IT Security' => [
+        '35' => [
             'parent' => 'Digitalkompetenzen',
+            'localizedname' => 'IT Security',
         ],
-        'Digitale Interaktion' => [
+        '36' => [
             'parent' => 'Digitalkompetenzen',
+            'localizedname' => 'Digitale Interaktion',
         ],
-        'Umgang mit Informationen & Daten' => [
+        '37' => [
             'parent' => 'Digitalkompetenzen',
+            'localizedname' => 'Umgang mit Informationen & Daten',
         ],
-        'Technologienutzung' => [
+        '38' => [
             'parent' => 'Digitalkompetenzen',
+            'localizedname' => 'Technologienutzung',
         ],
-        'Educational Leadership and Management' => [
+        '39' => [
             'parent' => 'Führungskompetenzen',
+            'localizedname' => 'Educational Leadership and Management',
         ],
     ];
 
@@ -181,181 +221,241 @@ class shortcodes {
      * @var array]
      */
     public const ORGANISATIONEN = [
-        'FB Afrikawissenschaften und Orientalistik' => [
+        'explode' => ',',
+        '1' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'Educational Leadership and Management',
         ],
-        'FB Alte Geschichte' => [
+        '2' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Alte Geschichte',
         ],
-        'FB Anglistik und Amerikanistik' => [
+        '3' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Anglistik und Amerikanistik',
         ],
-        'FB Archälogie und Numismatik' => [
+        '4' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Archäologie und Numismatik',
         ],
-        'FB Astronomie' => [
+        '5' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Astronomie',
         ],
-        'FB Bildungswissenschaft, Sprachwissenschaft und Vergleichende Literaturwissenschaft' => [
+        '6' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Bildungswissenschaft, Sprachwissenschaft und Vergleichende Literaturwissenschaft',
         ],
-        'FB Biologie und Botanik, Standort Biologie' => [
+        '7' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Biologie und Botanik, Standort Biologie',
         ],
-        'FB Biologie und Botanik, Standort Botanik' => [
+        '8' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Biologie und Botanik, Standort Botanik',
         ],
-        'FB Byzantistik und Neogräzistik' => [
+        '9' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Byzantistik und Neogräzistik',
         ],
-        'FB Geographie und Regionalforschung' => [
+        '10' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Geographie und Regionalforschung',
         ],
-        'FB Germanistik, Nederlandistik und Skandinavistik' => [
+        '11' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Germanistik, Nederlandistik und Skandinavistik',
         ],
-        'FB Geschichtswissenschaften' => [
+        '12' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Geschichtswissenschaften',
         ],
-        'FB Klassische Philologie, Mittel - und Neulatein' => [
+        '13' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Klassische Philologie, Mittel - und Neulatein',
         ],
-        'FB Kultur - und Sozialanthropologie' => [
+        '14' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Kultur - und Sozialanthropologie',
         ],
-        'FB Kunstgeschichte' => [
+        '15' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Kunstgeschichte',
         ],
-        'FB Musikwissenschaft' => [
+        '16' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Musikwissenschaft',
         ],
-        'FB Ostasienwissenschaften' => [
+        '17' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Ostasienwissenschaften',
         ],
-        'FB Osteuropäische Geschichte und Slawistik' => [
+        '18' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Osteuropäische Geschichte und Slawistik',
         ],
-        'FB Pharmazie und Ernährungswissenschaften' => [
+        '19' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Pharmazie und Ernährungswissenschaften',
         ],
-        'FB Philosophie und Psychologie' => [
+        '20' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Philosophie und Psychologie',
         ],
-        'ZB Physik und Chemie' => [
+        '21' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'ZB Physik und Chemie',
         ],
-        'FB Publizistik- und Kommunikationswissenschaft und Informatik' => [
+        '22' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Publizistik- und Kommunikationswissenschaft und Informatik',
         ],
-        'FB Rechtswissenschaften' => [
+        '23' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Rechtswissenschaften',
         ],
-        'FB Soziologie und Politikwissenschaft' => [
+        '24' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Soziologie und Politikwissenschaft',
         ],
-        'FB Sportwissenschaft' => [
+        '25' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Sportwissenschaft',
         ],
-        'FB Südasien-, Tibet- und Buddhismuskunde' => [
+        '26' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Südasien-, Tibet- und Buddhismuskunde',
         ],
-        'FB Theater-, Film- und Medienwissenschaft' => [
+        '27' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Theater-, Film- und Medienwissenschaft',
         ],
-        'FB Theologie' => [
+        '28' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Theologie',
         ],
-        'FB Translationswissenschaft' => [
+        '29' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Translationswissenschaft',
         ],
-        'FB Wirtschaftswissenschaften und Mathematik' => [
+        '30' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Wirtschaftswissenschaften und Mathematik',
         ],
-        'FB Zeitgeschichte' => [
+        '31' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Zeitgeschichte',
         ],
-        'Forschungsunterstützungs- und Publikationservices' => [
+        '32' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'Forschungsunterstützungs- und Publikationservices',
         ],
-        'Hauptbibliothek' => [
+        '33' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'Hauptbibliothek',
         ],
-        'Universitätsarchiv' => [
+        '34' => [
             'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'Universitätsarchiv',
         ],
-        'Advanced Research School in Law and Jurisprudence' => [
+        '35' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Advanced Research School in Law and Jurisprudence',
         ],
-        'Doctoral School Microbiology and Environmental Science' => [
+        '36' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Doctoral School Microbiology and Environmental Science',
         ],
-        'Doctoral School of Philological and Cultural Studies' => [
+        '37' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Doctoral School of Philological and Cultural Studies',
         ],
-        'Oskar Morgenstern Doctoral School' => [
+        '38' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Oskar Morgenstern Doctoral School',
         ],
-        'UniVie Doctoral School Computer Science' => [
+        '39' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'UniVie Doctoral School Computer Science',
         ],
-        'Vienna Doctoral School of Historical and Cultural Studies' => [
+        '40' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Vienna Doctoral School of Historical and Cultural Studies',
         ],
-        'Vienna Doctoral School of Philosophy' => [
+        '41' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Vienna Doctoral School of Philosophy',
         ],
-        'Vienna Doctoral School of Social Sciences' => [
+        '42' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Vienna Doctoral School of Social Sciences',
         ],
-        'Vienna Doctoral School in Chemistry' => [
+        '43' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Vienna Doctoral School in Chemistry',
         ],
-        'Vienna Doctoral School of Ecology and Evolution' => [
+        '44' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Vienna Doctoral School of Ecology and Evolution',
         ],
-        'Vienna International School in Earth and Space Sciences' => [
+        '45' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Vienna International School in Earth and Space Sciences',
         ],
-        'Vienna School of Mathematics | Joint Doctoral School mit der TU Wien' => [
+        '46' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Vienna School of Mathematics | Joint Doctoral School mit der TU Wien',
         ],
-        'Vienna Doctoral School in Physics' => [
+        '47' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Vienna Doctoral School in Physics',
         ],
-        'Vienna Doctoral School of Pharmaceutical, Nutritional and Sport Sciences' => [
+        '48' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Vienna Doctoral School of Pharmaceutical, Nutritional and Sport Sciences',
         ],
-        'Vienna BioCenter PhD Program, joint doctoral school of the University of Vienna and the Medical University of Vienna' => [
+        '49' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Vienna BioCenter PhD Program, joint doctoral school of the University of Vienna and the Medical University of Vienna',
         ],
-        'Vienna Doctoral School in Cognition, Behavior, and Neuroscience - from Biology to Psychology and the Humanities' => [
+        '50' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Vienna Doctoral School in Cognition, Behavior, and Neuroscience - from Biology to Psychology and the Humanities',
         ],
-        'Vienna Doctoral School of Theology and Research on Religion' => [
+        '51' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Vienna Doctoral School of Theology and Research on Religion',
         ],
-        'Vienna Doctoral School in Education' => [
+        '52' => [
             'parent' => 'Doctoral Schools',
+            'localizedname' => 'Vienna Doctoral School in Education',
         ],
-        'Forschungsservice und Nachwuchsförderung' => [
+        '53' => [
             'parent' => 'Forschungsservice und Nachwuchsförderung',
+            'localizedname' => 'Forschungsservice und Nachwuchsförderung',
         ],
-        'Organisationskultur und Gleichstellung' => [
+        '54' => [
             'parent' => 'Personalwesen und Frauenförderung',
+            'localizedname' => 'Organisationskultur und Gleichstellung',
         ],
-        'Personalentwicklung und Recruiting' => [
+        '55' => [
             'parent' => 'Personalwesen und Frauenförderung',
+            'localizedname' => 'Personalentwicklung und Recruiting',
         ],
-        'Center for Teaching and Learning' => [
+        '56' => [
             'parent' => 'Studienservice und Lehrwesen',
+            'localizedname' => 'Center for Teaching and Learning',
         ],
-        'Koordination Studienservices' => [
+        '57' => [
             'parent' => 'Studienservice und Lehrwesen',
+            'localizedname' => 'Koordination Studienservices',
         ],
-        'Zentraler Informatikdienst' => [
+        '58' => [
             'parent' => 'Zentraler Informatikdienst',
+            'localizedname' => 'Zentraler Informatikdienst',
         ],
     ];
+
 
     /**
      * Prints out list of bookingoptions.
@@ -438,6 +538,10 @@ class shortcodes {
             $args['countlabel'] = false;
         }
 
+        if (empty($args['filterontop'])) {
+            $args['filterontop'] = false;
+        }
+
         $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
 
         if (
@@ -485,6 +589,8 @@ class shortcodes {
         self::set_table_options_from_arguments($table, $args);
 
         $table->tabletemplate = 'local_berta/table_card';
+
+        $table->showfilterontop = $args['filterontop'];
 
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
@@ -540,6 +646,10 @@ class shortcodes {
             $args['reload'] = false;
         }
 
+        if (empty($args['filterontop'])) {
+            $args['filterontop'] = false;
+        }
+
         $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
 
         if (
@@ -593,7 +703,7 @@ class shortcodes {
         $table->infinitescroll = $infinitescrollpage;
 
         $table->tabletemplate = 'local_berta/table_list';
-        $table->showfilterontop = false;
+        $table->showfilterontop = $args['filterontop'];
 
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
@@ -649,6 +759,10 @@ class shortcodes {
 
         if (empty($args['reload'])) {
             $args['reload'] = false;
+        }
+
+        if (empty($args['filterontop'])) {
+            $args['filterontop'] = false;
         }
 
         $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
@@ -734,6 +848,9 @@ class shortcodes {
 
         // This allows us to use infinite scrolling, No pages will be used.
         $table->infinitescroll = $infinitescrollpage;
+
+        $table->showfilterontop = $args['filterontop'];
+        $table->showfilterbutton = false;
 
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {

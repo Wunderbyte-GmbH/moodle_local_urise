@@ -255,3 +255,4 @@ $string['multibookinginstances'] = "List of default activeted booking instances"
 $string['multibookinginstances_desc'] = "Choose which booking instances are activated by default.";
 
 $string['searchheadertext'] = "What would you like to learn?";
+$string['myspace'] = "My bookings";

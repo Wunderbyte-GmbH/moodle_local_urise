@@ -46,7 +46,7 @@ $title = get_string('mycourses', 'local_berta');
 $archive = get_string('archive', 'local_berta');
 
 $PAGE->set_url('/local/berta/meinekurse.php');
-$PAGE->navbar->add($title);
+// $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_pagelayout('base');
 $PAGE->add_body_class('local_berta-meinekurse');
@@ -62,17 +62,25 @@ if (!empty($archivecmidsstring)) {
 
 echo $OUTPUT->header();
 
-echo "<div class='text-center h1'>$title</div>";
-echo "<hr class='w-100 border border-light'/>";
-
 if ($DB->record_exists('booking_teachers', ['userid' => $USER->id])) {
     $isteacher = true;
     echo html_writer::div(get_string('coursesiteach', 'local_berta'), 'h2 mt-2 mb-2 text-center');
     echo format_text("[trainerkursekarten]", FORMAT_HTML);
 }
 
-echo html_writer::div(get_string('coursesibooked', 'local_berta'), 'h2 mt-3 mb-2 text-center');
-echo format_text("[unifiedmybookingslist cards=1]", FORMAT_HTML);
+echo '<div class="background d-flex justify-content-center align-items-center mt-2">
+               <div class="container mw-90 d-flex justify-content-center">
+                    <div class="row mb-2 w-100 d-flex justify-content-center flex-column">
+                    <h1 class="font-weight-light text-center mb-2 text-light">
+                    ' . get_string('myspace', 'local_berta') . '
+                    </h1>
+               </div>
+          </div>
+     </div>
+';
+
+// echo html_writer::div(get_string('coursesibooked', 'local_berta'), 'h2 mt-3 mb-2 text-center');
+echo format_text("[unifiedmybookingslist cards=1 sort=1 filter=1 filterontop=1]", FORMAT_HTML);
 
 if (!empty($archivecmids)) {
     echo "<hr class='w-100 border border-light'/>";
