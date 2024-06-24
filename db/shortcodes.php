@@ -42,4 +42,9 @@ $shortcodes = [
         'wraps' => false,
         'description' => 'shortcodes::unifiedlist',
     ],
+    'unifiedtrainercourseslist' => [
+        'callback' => 'local_musi\shortcodes::mytaughtcourses',
+        'wraps' => false,
+        'description' => 'shortcodeslistofmytaughtbookingoptionsascards',
+    ],
 ];

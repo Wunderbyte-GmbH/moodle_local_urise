@@ -866,6 +866,123 @@ class shortcodes {
     }
 
     /**
+     * Prints out list of bookingoptions.
+     * Arguments can be 'category' or 'perpage'.
+     *
+     * @param string $shortcode
+     * @param array $args
+     * @param string|null $content
+     * @param object $env
+     * @param Closure $next
+     * @return void
+     */
+    public static function mytaughtcourses($shortcode, $args, $content, $env, $next) {
+
+        global $DB, $USER, $CFG;
+
+        require_once($CFG->dirroot . '/mod/booking/lib.php');
+
+        self::fix_args($args);
+
+        $bookingids = explode(',', get_config('local_berta', 'multibookinginstances'));
+
+        $bookingids = array_filter($bookingids, fn($a) => !empty($a));
+
+        if (empty($bookingids)) {
+            return get_string('nobookinginstancesselected', 'local_berta');
+        }
+
+        if (!isset($args['category']) || !$category = ($args['category'])) {
+            $category = '';
+        }
+
+        if (!isset($args['image']) || !$showimage = ($args['image'])) {
+            $showimage = false;
+        }
+
+        if (empty($args['countlabel'])) {
+            $args['countlabel'] = false;
+        }
+
+        if (empty($args['reload'])) {
+            $args['reload'] = false;
+        }
+
+        if (empty($args['filterontop'])) {
+            $args['filterontop'] = false;
+        }
+
+        $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
+
+        if (
+            !isset($args['perpage'])
+            || !is_int((int)$args['perpage'])
+            || !$perpage = ($args['perpage'])
+        ) {
+            $perpage = 100;
+        }
+
+        $table = self::inittableforcourses();
+
+        $table->showcountlabel = $args['countlabel'];
+        $table->showreloadbutton = $args['reload'];
+
+        $wherearray = ['bookingid' => $bookingids];
+
+        if (!empty($category)) {
+            $wherearray['organisation'] = $category;
+        };
+
+        // We want to check for the currently logged in user...
+        // ... if (s)he is teaching courses.
+        $teacherid = $USER->id;
+
+        // This is the important part: We only filter for booking options where the current user is a teacher!
+        // Also we only want to show courses for the currently set booking instance (semester instance).
+        list($fields, $from, $where, $params, $filter) =
+            booking::get_all_options_of_teacher_sql($teacherid, (int)$booking->id);
+
+        $table->set_filter_sql($fields, $from, $where, $filter, $params);
+
+        $table->use_pages = true;
+
+        if ($showimage !== false) {
+            $table->set_tableclass('cardimageclass', 'pr-0 pl-1');
+
+            $table->add_subcolumns('cardimage', ['image']);
+        }
+
+        self::set_table_options_from_arguments($table, $args);
+        if (!empty($args['cards'])) {
+            self::generate_table_for_cards($table, $args);
+            $table->tabletemplate = 'local_berta/table_card';
+        } else {
+            self::generate_table_for_list($table, $args);
+            $table->tabletemplate = 'local_berta/table_list';
+        }
+
+        $table->cardsort = true;
+
+        // This allows us to use infinite scrolling, No pages will be used.
+        $table->infinitescroll = $infinitescrollpage;
+
+        $table->showfilterontop = $args['filterontop'];
+        $table->showfilterbutton = false;
+
+        // If we find "nolazy='1'", we return the table directly, without lazy loading.
+        if (!empty($args['lazy'])) {
+
+            list($idstring, $encodedtable, $out) = $table->lazyouthtml($perpage, true);
+
+            return $out;
+        }
+
+        $out = $table->outhtml($perpage, true);
+
+        return $out;
+    }
+
+    /**
      * Prints out user dashboard overview as cards.
      *
      * @param string $shortcode
