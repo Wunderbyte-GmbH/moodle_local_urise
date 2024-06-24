@@ -1120,7 +1120,7 @@ class shortcodes {
 
         $table->add_subcolumns('cardimage', ['image']);
         $table->set_tableclass('cardimageclass', 'imagecontainer');
-        $table->add_subcolumns('cardheader', ['botags', 'bookings']);
+        $table->add_subcolumns('cardheader', ['botags', 'action', 'bookings']);
         $table->add_subcolumns('cardlist', ['showdates', 'kurssprache', 'format', 'category', 'organisation']);
         $table->add_subcolumns('cardfooter', ['price']);
 

@@ -271,8 +271,8 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
 }
 
 .filterheader {
-    margin-left: -5em;
-    margin-right: -5em;
+    /* margin-left: -5em;
+    margin-right: -5em; */
 }
 
 .toprow {
@@ -559,6 +559,12 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     border-radius: 8px;
     color: black;
     font-weight: normal;
+}
+
+
+.wunderbyte-table-container .pagination {
+     /* eslint-disable-next-line */
+    list-style-type: none !important;
 }
 
 @media screen and (max-width: 768px) {
