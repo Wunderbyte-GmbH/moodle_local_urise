@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace local_berta\table;
+use local_berta\shortcodes;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -168,43 +169,43 @@ class berta_table extends wunderbyte_table {
 
     }
 
-        /**
-         * This function is called for each data row to allow processing of the
-         * category value.
-         *
-         * @param object $values Contains object with all the values of record.
-         * @return string $string Return name of the booking option.
-         * @throws dml_exceptiond
-         */
-    public function col_category($values) {
+    //     /**
+    //      * This function is called for each data row to allow processing of the
+    //      * category value.
+    //      *
+    //      * @param object $values Contains object with all the values of record.
+    //      * @return string $string Return name of the booking option.
+    //      * @throws dml_exceptiond
+    //      */
+    // public function col_category($values) {
 
-        $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
+    //     $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
 
-        if (isset($settings->customfields) && isset($settings->customfields['category'])) {
-            if (strpos($settings->customfields['category'], ',') !== false) {
-                // Split the string by commas into an array
-                $values = explode(',', $settings->customfields['category']);
-                // Loop over each value in the array
-                $string = '';
-                foreach ($values as $value) {
-                    // Optionally trim whitespace from each value
-                    $value = trim($value);
-                    $stringpart = "<span class='bg-secondary pl-1 pr-1 mr-1 rounded category'>
-                    $value
-                    </span>";
-                    $string = $string . $stringpart;
-                }
-                return $string;
-            } else {
-                $value = $settings->customfields['category'];
-                $string = "<span class='bg-secondary pl-1 pr-1 mr-1 rounded category'>
-                $value
-                </span>";
-                return $string;
-            }
-        }
+    //     if (isset($settings->customfields) && isset($settings->customfields['category'])) {
+    //         if (strpos($settings->customfields['category'], ',') !== false) {
+    //             // Split the string by commas into an array
+    //             $values = explode(',', $settings->customfields['category']);
+    //             // Loop over each value in the array
+    //             $string = '';
+    //             foreach ($values as $value) {
+    //                 // Optionally trim whitespace from each value
+    //                 $value = trim($value);
+    //                 $stringpart = "<span class='bg-secondary pl-1 pr-1 mr-1 rounded category'>
+    //                 $value
+    //                 </span>";
+    //                 $string = $string . $stringpart;
+    //             }
+    //             return $string;
+    //         } else {
+    //             $value = $settings->customfields['category'];
+    //             $string = "<span class='bg-secondary pl-1 pr-1 mr-1 rounded category'>
+    //             $value
+    //             </span>";
+    //             return $string;
+    //         }
+    //     }
 
-    }
+    // }
 
     /**
      * This function is called for each data row to allow processing of the
@@ -371,13 +372,28 @@ class berta_table extends wunderbyte_table {
      * @return string $sports Returns rendered sport.
      * @throws coding_exception
      */
-    public function col_organisation($values) {
+    public function col_category($values) {
 
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
 
         if (isset($settings->customfields) && isset($settings->customfields['organisation'])) {
             if (is_array($settings->customfields['organisation'])) {
-                return implode(", ", $settings->customfields['organisation']);
+
+                $returnorgas = [];
+                foreach ($settings->customfields['organisation'] as $orgaid) {
+                    $organisations = shortcodes::ORGANISATIONEN;
+
+                    if (isset($organisations[$orgaid])) {
+                        $returnorgas[] = html_writer::tag(
+                            'span',
+                            $organisations[$orgaid]['localizedname'],
+                            ['class' => 'bg-secondary pl-1 pr-1 mr-1 rounded category']
+                        );
+
+                    }
+                }
+
+                return implode(", ", $returnorgas);
             } else {
                 $value = $settings->customfields['organisation'];
                 $message = "<span class='bg-secondary orga'>$value</span>";
@@ -400,6 +416,20 @@ class berta_table extends wunderbyte_table {
         // Normal users won't notice the problem.
         return '';
     }
+
+    /**
+     * This function is called for each data row to allow processing of the
+     * sports value.
+     *
+     * @param object $values Contains object with all the values of record.
+     * @return string $sports Returns rendered sport.
+     * @throws coding_exception
+     */
+    public function col_organisation($values) {
+        return '';
+    }
+
+
 
     /**
      * This function is called for each data row to allow processing of the
