@@ -572,6 +572,11 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     list-style-type: none !important;
 }
 
+.course-content .activity-altcontent ul  {
+    /* eslint-disable-next-line */
+    list-style-type: none !important;
+}
+
 @media screen and (max-width: 768px) {
     .row.optionrow, .card.listcard {
         max-height: fit-content;
