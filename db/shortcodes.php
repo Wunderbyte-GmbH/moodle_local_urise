@@ -43,7 +43,7 @@ $shortcodes = [
         'description' => 'shortcodes::unifiedlist',
     ],
     'unifiedtrainercourseslist' => [
-        'callback' => 'local_musi\shortcodes::mytaughtcourses',
+        'callback' => 'local_berta\shortcodes::mytaughtcourses',
         'wraps' => false,
         'description' => 'shortcodeslistofmytaughtbookingoptionsascards',
     ],

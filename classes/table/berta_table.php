@@ -147,7 +147,7 @@ class berta_table extends wunderbyte_table {
         if (isset($settings->customfieldsfortemplates) && isset($settings->customfieldsfortemplates['kurssprache'])) {
             $value = $settings->customfieldsfortemplates['kurssprache']['value'];
             return $value;
-    }
+        }
     }
 
     /**
