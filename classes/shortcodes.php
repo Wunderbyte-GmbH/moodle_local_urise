@@ -794,7 +794,7 @@ class shortcodes {
                     0,
                     '',
                     null,
-                    $booking->context,
+                    null,
                     [],
                     $wherearray,
                     $USER->id,
