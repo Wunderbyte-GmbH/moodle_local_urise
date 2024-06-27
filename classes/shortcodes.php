@@ -1238,7 +1238,7 @@ class shortcodes {
         $table->add_subcolumns('cardimage', ['image']);
         $table->set_tableclass('cardimageclass', 'imagecontainer');
         $table->add_subcolumns('cardheader', ['botags', 'action', 'bookings']);
-        $table->add_subcolumns('cardlist', ['showdates', 'kurssprache', 'format', 'category', 'organisation']);
+        $table->add_subcolumns('cardlist', ['showdates', 'kurssprache', 'format', 'kompetenzen', 'organisation']);
         $table->add_subcolumns('cardfooter', ['price']);
 
         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-regular fa-message fa-fw text-primary mr-2'],
@@ -1246,7 +1246,7 @@ class shortcodes {
          $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-solid fa-computer fa-fw  text-primary mr-2'],
          ['format']);
          $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-solid fa-hashtag fa-fw  text-primary mr-2'],
-         ['category']);
+         ['kompetenzen']);
         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-clock-o text-primary fa-fw  showdatesicon mr-2'], ['showdates']);
         $table->add_classes_to_subcolumns('cardlist', ['columnclass' => 'd-flex align-item-center'], ['showdates']);
         // $table->add_classes_to_subcolumns('cardfooter', ['columnclass' => 'mt-auto'], ['price']);
@@ -1279,7 +1279,7 @@ class shortcodes {
         // Columns.
 
         $subcolumnsleftside = ['text', 'description'];
-        $subcolumnsfooter = ['kurssprache', 'format', 'category'];
+        $subcolumnsfooter = ['kurssprache', 'format', 'kompetenzen'];
         $subcolumnsinfo = ['showdates'];
 
         // Check if we should add the description.
@@ -1350,7 +1350,7 @@ class shortcodes {
          $table->add_classes_to_subcolumns('footer', ['columniclassbefore' => 'fa-solid fa-computer text-primary'],
          ['format']);
          $table->add_classes_to_subcolumns('footer', ['columniclassbefore' => 'fa-solid fa-hashtag text-primary'],
-         ['category']);
+         ['kompetenzen']);
 
         $table->is_downloading('', 'List of booking options');
     }

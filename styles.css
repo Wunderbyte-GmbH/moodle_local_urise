@@ -297,7 +297,8 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
 
 /* Some of this needs important because the buttons are styled inline in booking template */
 
-.booking-button-area .booking-button-mainarea.bertabutton, .booking-button-area .booking-button-area.bertabutton {
+.booking-button-area .booking-button-mainarea.bertabutton:not(#page-mod-booking-optionview .booking-button-area .booking-button-mainarea.bertabutton),
+ .booking-button-area .booking-button-area.bertabutton:not(#page-mod-booking-optionview .booking-button-area .booking-button-area.bertabutton) {
     /* eslint-disable-next-line */
     width: fit-content !important;
     /* eslint-disable-next-line */
@@ -320,11 +321,12 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     color: var(--text-dark);
 }
 
-.booking-button-area .booking-button-area, .bertabutton {
+.booking-button-area .booking-button-area:not(#page-mod-booking-optionview .booking-button-area .booking-button-area), .bertabutton:not(#page-mod-booking-optionview .bertabutton) {
     background: transparent !important;
     border: black 2px solid !important;
     position: relative;
     color: black !important;
+    font-weight: normal;
     /* eslint-disable-next-line */
     /* padding-right: 2rem !important; */
 }
@@ -559,7 +561,7 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     box-shadow: 0 .5rem 1rem rgb(202 202 202 / 15%);
 }
 
-.linkbutton {
+.linkbutton:not(#page-mod-booking-optionview .linkbutton) {
     border: 2px solid black;
     border-radius: 8px;
     color: black;
@@ -577,6 +579,22 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     list-style-type: none !important;
 }
 
+.detailteacher .profile-icon-wrapper {
+    width: 100px;
+    height: 100px;
+    background-color: #e9ecef;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
+
+.detailteacher .profile-icon-wrapper i {
+    font-size: 50px;
+    color: #adb5bd;
+  }
+  
 @media screen and (max-width: 768px) {
     .row.optionrow, .card.listcard {
         max-height: fit-content;

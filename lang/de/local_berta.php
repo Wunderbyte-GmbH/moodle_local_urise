@@ -266,4 +266,13 @@ $string['coursemethods'] = "Methoden";
 $string['additionalinfo'] = "Sonstige Informationen";
 $string['targetaud'] = "Zielgruppe";
 $string['optiondates'] = "Termin(e)";
+$string['nolocation'] = "Kein Ort angegeben";
+$string['showdates'] = "Termine anzeigen";
+$string['teachers'] = "Trainer*in";
+$string['gotoprofile'] = "Zum Profil";
+$string['buchungsbedingungen'] = "Buchungsbedingungen";
+$string['orgacontact'] = "Kontakt der verantwortlichen Organisationseinheit";
+$string['aboutoffer'] = "Über das Angebot";
+
+
 

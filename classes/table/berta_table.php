@@ -372,7 +372,7 @@ class berta_table extends wunderbyte_table {
      * @return string $sports Returns rendered sport.
      * @throws coding_exception
      */
-    public function col_category($values) {
+    public function col_kompetenzen($values) {
 
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
 
