@@ -184,7 +184,7 @@ $string['location'] = 'Ort';
 $string['competency'] = 'Kompetenzen';
 
 // Nav.
-$string['berta'] = 'u:Skills';
+$string['berta'] = 'u:rise';
 $string['entities'] = 'Raum-Management';
 $string['coursename'] = 'Kursname';
 
