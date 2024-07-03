@@ -25,22 +25,22 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$functions = array(
-        'local_berta_get_parent_categories' => array(
+$functions = [
+        'local_berta_get_parent_categories' => [
                 'classname' => 'local_berta\external\get_parent_categories',
                 'classpath' => '',
                 'description' => 'Get all parent categories',
                 'type' => 'read',
                 'capabilities' => '',
-                'ajax' => 1
-        ),
-        'local_berta_set_parent_content' => array(
-                'classname' => 'mod_booking\external\save_option_field_config',
+                'ajax' => 1,
+        ],
+        'local_berta_set_parent_content' => [
+                                'classname' => 'mod_booking\external\save_option_field_config',
                 'classpath' => '',
                 'description' => 'Set content of parent category',
                 'type' => 'read',
                 'capabilities' => '',
-                'ajax' => 1
-        ),
-);
+                'ajax' => 1,
+        ],
+];
 
