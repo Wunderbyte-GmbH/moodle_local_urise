@@ -297,20 +297,6 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
 
 /* Some of this needs important because the buttons are styled inline in booking template */
 
-.booking-button-area .booking-button-mainarea.bertabutton:not(#page-mod-booking-optionview .booking-button-area .booking-button-mainarea.bertabutton),
- .booking-button-area .booking-button-area.bertabutton:not(#page-mod-booking-optionview .booking-button-area .booking-button-area.bertabutton) {
-    /* eslint-disable-next-line */
-    width: fit-content !important;
-    /* eslint-disable-next-line */
-    padding: 0 10px !important;
-    /* eslint-disable-next-line */
-    padding: 10px !important;
-    /* eslint-disable-next-line */
-    height: 2.5rem !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.btn-secondary:disabled {
      /* eslint-disable-next-line */
     border: none !important;
@@ -321,15 +307,6 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     color: var(--text-dark);
 }
 
-.booking-button-area .booking-button-area:not(#page-mod-booking-optionview .booking-button-area .booking-button-area), .bertabutton:not(#page-mod-booking-optionview .bertabutton) {
-    background: transparent !important;
-    border: black 2px solid !important;
-    position: relative;
-    color: black !important;
-    font-weight: normal;
-    /* eslint-disable-next-line */
-    /* padding-right: 2rem !important; */
-}
 
 /* .booking-button-area .booking-button-area::after {
     font: var(--fa-font-solid);
@@ -561,12 +538,6 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     box-shadow: 0 .5rem 1rem rgb(202 202 202 / 15%);
 }
 
-.linkbutton:not(#page-mod-booking-optionview .linkbutton) {
-    border: 2px solid black;
-    border-radius: 8px;
-    color: black;
-    font-weight: normal;
-}
 
 
 .wunderbyte-table-container .pagination {
