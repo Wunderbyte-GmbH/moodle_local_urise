@@ -852,6 +852,9 @@ class shortcodes {
         $table->showfilterontop = $args['filterontop'];
         $table->showfilterbutton = false;
 
+        // We override the cache, because the my cache has to be invalidated with every booking.
+        $table->define_cache('mod_booking', 'mybookingoptionstable');
+
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
 
