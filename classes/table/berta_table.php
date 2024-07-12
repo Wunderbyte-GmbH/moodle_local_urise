@@ -532,12 +532,6 @@ class berta_table extends wunderbyte_table {
             return $courseurl;
         }
 
-        // When we have this seeting, we never show the link here:
-
-        if (get_config('booking', 'linktomoodlecourseonbookedbutton')) {
-            return '';
-        }
-
         $buyforuser = price::return_user_to_buy_for();
 
         $answersobject = singleton_service::get_instance_of_booking_answers($settings);
@@ -545,7 +539,18 @@ class berta_table extends wunderbyte_table {
 
         $isteacherofthisoption = booking_check_if_teacher($values);
 
-        $context = $this->get_context();
+        if (!empty($settings->cmid)) {
+            $context = context_module::instance($settings->cmid);
+        } else {
+            $context = $this->get_context();
+        }
+
+        // When we have this seeting, we never show the link here:
+        if (get_config('booking', 'linktomoodlecourseonbookedbutton')
+            && (!has_capability('mod/booking:updatebooking', $context)
+            && !$isteacherofthisoption)) {
+            return '';
+        }
 
         if (!empty($settings->courseid) && (
                 $status == 0 // MOD_BOOKING_STATUSPARAM_BOOKED.

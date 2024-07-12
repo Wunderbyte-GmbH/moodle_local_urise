@@ -1241,7 +1241,7 @@ class shortcodes {
         $table->add_subcolumns('cardimage', ['image']);
         $table->set_tableclass('cardimageclass', 'imagecontainer');
         $table->add_subcolumns('cardheader', ['botags', 'action', 'bookings']);
-        $table->add_subcolumns('cardlist', ['showdates', 'kurssprache', 'format', 'kompetenzen', 'organisation']);
+        $table->add_subcolumns('cardlist', ['showdates', 'kurssprache', 'format', 'kompetenzen', 'organisation', 'course']);
         $table->add_subcolumns('cardfooter', ['price']);
 
         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-regular fa-message fa-fw text-primary mr-2'],
@@ -1311,7 +1311,7 @@ class shortcodes {
         $table->add_subcolumns('footer', $subcolumnsfooter );
 
         $table->add_subcolumns('rightside', ['organisation', 'invisibleoption', 'course', 'price']);
-        $table->add_subcolumns('rightside', ['organisation', 'invisibleoption', 'price']);
+        // $table->add_subcolumns('rightside', ['organisation', 'invisibleoption', 'price']);
 
         $table->add_classes_to_subcolumns('top', ['columnkeyclass' => 'd-none']);
         // $table->add_classes_to_subcolumns('top', ['columniclassbefore' => 'fa-solid fa-people-group'], ['bookings']);
