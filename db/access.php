@@ -30,42 +30,42 @@ $capabilities = [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
-            'manager' => CAP_ALLOW
+            'manager' => CAP_ALLOW,
         ],
     ],
     'local/berta:editavailability' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
-            'manager' => CAP_ALLOW
+            'manager' => CAP_ALLOW,
         ],
     ],
     'local/berta:cansendmessages' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
-            'manager' => CAP_ALLOW
+            'manager' => CAP_ALLOW,
         ],
     ],
     'local/berta:view' => [
       'captype' => 'read',
       'contextlevel' => CONTEXT_COURSECAT,
       'archetypes' => [
-          'manager' => CAP_ALLOW
+          'manager' => CAP_ALLOW,
       ],
     ],
     'local/berta:create' => [
       'captype' => 'write',
       'contextlevel' => CONTEXT_COURSECAT,
       'archetypes' => [
-          'manager' => CAP_ALLOW
+          'manager' => CAP_ALLOW,
       ],
     ],
     'local/berta:viewdashboard' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
-            'manager' => CAP_ALLOW
+            'manager' => CAP_ALLOW,
         ],
       ],
 ];
