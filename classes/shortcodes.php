@@ -86,111 +86,111 @@ class shortcodes {
             'localizedname' => 'Weiterentwicklung der Lehre',
         ],
         '8' => [
-            'parent' => 'Wissenschaftskompetenzen',
+            'parent' => 'Forschungskompetenzen',
             'localizedname' => 'Wissenschaftliches Arbeiten',
         ],
         '9' => [
-            'parent' => 'Wissenschaftskompetenzen',
+            'parent' => 'Forschungskompetenzen',
             'localizedname' => 'Wissenschaftliches Publizieren',
         ],
         '10' => [
-            'parent' => 'Wissenschaftskompetenzen',
+            'parent' => 'Forschungskompetenzen',
             'localizedname' => 'Open Science',
         ],
         '11' => [
-            'parent' => 'Wissenschaftskompetenzen',
+            'parent' => 'Forschungskompetenzen',
             'localizedname' => 'Wissensaustausch & Innovation',
         ],
         '12' => [
-            'parent' => 'Wissenschaftskompetenzen',
+            'parent' => 'Forschungskompetenzen',
             'localizedname' => 'Wissenschaftliche Integrität',
         ],
         '13' => [
-            'parent' => 'Wissenschaftskompetenzen',
+            'parent' => 'Forschungskompetenzen',
             'localizedname' => 'Networking in der Wissenschaft',
         ],
         '14' => [
-            'parent' => 'Wissenschaftskompetenzen',
+            'parent' => 'Forschungskompetenzen',
             'localizedname' => 'Interdisziplinäre Forschung',
         ],
         '15' => [
-            'parent' => 'Wissenschaftskompetenzen',
+            'parent' => 'Forschungskompetenzen',
             'localizedname' => 'Forschungsförderung',
         ],
         '16' => [
-            'parent' => 'Karrierekompetenzen',
+            'parent' => 'Forschungskompetenzen',
             'localizedname' => 'Karriereentwicklung & -planung',
         ],
         '17' => [
-            'parent' => 'Kommunikationskompetenzen',
+            'parent' => 'Kommunikation & Kooperation',
             'localizedname' => 'Präsentation',
         ],
         '18' => [
-            'parent' => 'Kommunikationskompetenzen',
-            'localizedname' => 'Gesprächs- und Verhandlungsführung',
+            'parent' => 'Kommunikation & Kooperation',
+            'localizedname' => 'Gesprächs- & Verhandlungsführung',
         ],
         '19' => [
-            'parent' => 'Kommunikationskompetenzen',
+            'parent' => 'Kommunikation & Kooperation',
             'localizedname' => 'Feedback',
         ],
         '20' => [
-            'parent' => 'Kommunikationskompetenzen',
+            'parent' => 'Kommunikation & Kooperation',
             'localizedname' => 'Moderation',
         ],
         '21' => [
-            'parent' => 'Kommunikationskompetenzen',
+            'parent' => 'Kommunikation & Kooperation',
             'localizedname' => 'Sprachkenntnisse',
         ],
         '22' => [
-            'parent' => 'Soziale Kompetenzen',
+            'parent' => 'Kommunikation & Kooperation',
             'localizedname' => 'Konfliktmanagement',
         ],
         '23' => [
-            'parent' => 'Soziale Kompetenzen',
-            'localizedname' => 'Information & Kommunikation',
+            'parent' => 'Kommunikation & Kooperation',
+            'localizedname' => 'Informations- & Kommunikation',
         ],
         '24' => [
-            'parent' => 'Soziale Kompetenzen',
+            'parent' => 'Kommunikation & Kooperation',
             'localizedname' => 'Gender- & Diversitätskompetenz',
         ],
         '25' => [
-            'parent' => 'Soziale Kompetenzen',
+            'parent' => 'Kommunikation & Kooperation',
             'localizedname' => 'Kooperationskompetenz',
         ],
         '26' => [
-            'parent' => 'Organisationskompetenzen',
+            'parent' => 'Selbst- & Arbeitsorganisation',
             'localizedname' => 'Veranstaltungsorganisation',
         ],
         '27' => [
-            'parent' => 'Organisationskompetenzen',
+            'parent' => 'Selbst- & Arbeitsorganisation',
             'localizedname' => 'Arbeitsorganisation',
         ],
         '28' => [
-            'parent' => 'Organisationskompetenzen',
+            'parent' => 'Selbst- & Arbeitsorganisation',
             'localizedname' => 'Selbstorganisation',
         ],
         '29' => [
-            'parent' => 'Servicekompetenzen',
+            'parent' => 'Selbst- & Arbeitsorganisation',
             'localizedname' => 'Service- & Kund*innenorientierung',
         ],
         '30' => [
-            'parent' => 'Persönliche Kompetenzen',
+            'parent' => 'Selbst- & Arbeitsorganisation',
             'localizedname' => 'Lösungs- & Zukunftsorientierung',
         ],
         '31' => [
-            'parent' => 'Persönliche Kompetenzen',
+            'parent' => 'Selbst- & Arbeitsorganisation',
             'localizedname' => 'Ressourceneffizienz',
         ],
         '32' => [
-            'parent' => 'Persönliche Kompetenzen',
+            'parent' => 'Selbst- & Arbeitsorganisation',
             'localizedname' => 'Change-Kompetenz',
         ],
         '33' => [
-            'parent' => 'Gesundheitskompetenzen',
+            'parent' => 'Selbst- & Arbeitsorganisation',
             'localizedname' => 'Gesundheitsorientierung',
         ],
         '34' => [
-            'parent' => 'Lernkompetenzen',
+            'parent' => 'Selbst- & Arbeitsorganisation',
             'localizedname' => 'Lernkompetenz',
         ],
         '35' => [
@@ -211,7 +211,7 @@ class shortcodes {
         ],
         '39' => [
             'parent' => 'Führungskompetenzen',
-            'localizedname' => 'Educational Leadership and Management',
+            'localizedname' => 'Educational Leadership & Management',
         ],
     ];
 
@@ -222,237 +222,277 @@ class shortcodes {
      */
     public const ORGANISATIONEN = [
         'explode' => ',',
-        '1' => [
+        '52' => [
             'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'Educational Leadership and Management',
+            'localizedname' => 'FB Afrikawissenschaften und Orientalistik',
         ],
-        '2' => [
+        '53' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Alte Geschichte',
         ],
-        '3' => [
+        '54' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Anglistik und Amerikanistik',
         ],
-        '4' => [
+        '55' => [
             'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Archäologie und Numismatik',
+            'localizedname' => 'FB Archälogie und Numismatik',
         ],
-        '5' => [
+        '56' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Astronomie',
         ],
-        '6' => [
+        '57' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Bildungswissenschaft, Sprachwissenschaft und Vergleichende Literaturwissenschaft',
         ],
-        '7' => [
+        '58' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Biologie und Botanik, Standort Biologie',
         ],
-        '8' => [
+        '59' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Biologie und Botanik, Standort Botanik',
         ],
-        '9' => [
+        '60' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Byzantistik und Neogräzistik',
         ],
-        '10' => [
+        '64' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Geographie und Regionalforschung',
         ],
-        '11' => [
+        '125' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Erdwissenschaften und Meteorologie',
+        ],
+        '126' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Europäische Ethnologie',
+        ],
+        '124' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Finno-Ugristik',
+        ],
+        '65' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Germanistik, Nederlandistik und Skandinavistik',
         ],
-        '12' => [
+        '66' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Geschichtswissenschaften',
         ],
-        '13' => [
+        '127' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Judaistik',
+        ],
+        '68' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Klassische Philologie, Mittel - und Neulatein',
         ],
-        '14' => [
+        '69' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Kultur - und Sozialanthropologie',
         ],
-        '15' => [
+        '70' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Kunstgeschichte',
         ],
-        '16' => [
+        '71' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Musikwissenschaft',
         ],
-        '17' => [
+        '72' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Ostasienwissenschaften',
         ],
-        '18' => [
+        '74' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Osteuropäische Geschichte und Slawistik',
         ],
-        '19' => [
+        '75' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Pharmazie und Ernährungswissenschaften',
         ],
-        '20' => [
+        '76' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Philosophie und Psychologie',
         ],
-        '21' => [
+        '77' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'ZB Physik und Chemie',
         ],
-        '22' => [
+        '78' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Publizistik- und Kommunikationswissenschaft und Informatik',
         ],
-        '23' => [
+        '79' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Rechtswissenschaften',
         ],
-        '24' => [
+        '128' => [
+            'parent' => 'Bibliotheks - und Archivwesen',
+            'localizedname' => 'FB Romanistik',
+        ],
+        '81' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Soziologie und Politikwissenschaft',
         ],
-        '25' => [
+        '82' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Sportwissenschaft',
         ],
-        '26' => [
+        '83' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Südasien-, Tibet- und Buddhismuskunde',
         ],
-        '27' => [
+        '84' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Theater-, Film- und Medienwissenschaft',
         ],
-        '28' => [
+        '85' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Theologie',
         ],
-        '29' => [
+        '86' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Translationswissenschaft',
         ],
-        '30' => [
+        '87' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Wirtschaftswissenschaften und Mathematik',
         ],
-        '31' => [
+        '88' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'FB Zeitgeschichte',
         ],
-        '32' => [
+        '121' => [
             'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'Forschungsunterstützungs- und Publikationservices',
+            'localizedname' => 'Forschungs- und Publikationsservices',
         ],
-        '33' => [
+        '51' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'Hauptbibliothek',
         ],
-        '34' => [
+        '43' => [
             'parent' => 'Bibliotheks - und Archivwesen',
             'localizedname' => 'Universitätsarchiv',
         ],
-        '35' => [
+        '91' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Advanced Research School in Law and Jurisprudence',
         ],
-        '36' => [
+        '101' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Doctoral School Microbiology and Environmental Science',
         ],
-        '37' => [
+        '110' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Doctoral School of Philological and Cultural Studies',
         ],
-        '38' => [
+        '109' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Oskar Morgenstern Doctoral School',
         ],
-        '39' => [
+        '95' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'UniVie Doctoral School Computer Science',
         ],
-        '40' => [
+        '92' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Vienna Doctoral School of Historical and Cultural Studies',
         ],
-        '41' => [
+        '93' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Vienna Doctoral School of Philosophy',
         ],
-        '42' => [
+        '94' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Vienna Doctoral School of Social Sciences',
         ],
-        '43' => [
+        '97' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Vienna Doctoral School in Chemistry',
         ],
-        '44' => [
+        '102' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Vienna Doctoral School of Ecology and Evolution',
         ],
-        '45' => [
+        '98' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Vienna International School in Earth and Space Sciences',
         ],
-        '46' => [
+        '99' => [
             'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna School of Mathematics | Joint Doctoral School mit der TU Wien',
+            'localizedname' => 'Vienna School of Mathematics | Joint Doctoral School with TU Wien',
         ],
-        '47' => [
+        '96' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Vienna Doctoral School in Physics',
         ],
-        '48' => [
+        '103' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Vienna Doctoral School of Pharmaceutical, Nutritional and Sport Sciences',
         ],
-        '49' => [
+        '105' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Vienna BioCenter PhD Program, joint doctoral school of the University of Vienna and the Medical University of Vienna',
         ],
-        '50' => [
+        '106' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Vienna Doctoral School in Cognition, Behavior, and Neuroscience - from Biology to Psychology and the Humanities',
         ],
-        '51' => [
+        '107' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Vienna Doctoral School of Theology and Research on Religion',
         ],
-        '52' => [
+        '108' => [
             'parent' => 'Doctoral Schools',
             'localizedname' => 'Vienna Doctoral School in Education',
         ],
-        '53' => [
-            'parent' => 'Forschungsservice und Nachwuchsförderung',
-            'localizedname' => 'Forschungsservice und Nachwuchsförderung',
-        ],
-        '54' => [
+        '49' => [
             'parent' => 'Personalwesen und Frauenförderung',
             'localizedname' => 'Organisationskultur und Gleichstellung',
         ],
-        '55' => [
+        '24' => [
             'parent' => 'Personalwesen und Frauenförderung',
             'localizedname' => 'Personalentwicklung und Recruiting',
         ],
-        '56' => [
+        '119' => [
             'parent' => 'Studienservice und Lehrwesen',
             'localizedname' => 'Center for Teaching and Learning',
         ],
-        '57' => [
+        '112' => [
             'parent' => 'Studienservice und Lehrwesen',
             'localizedname' => 'Koordination Studienservices',
         ],
-        '58' => [
+        '42' => [
             'parent' => 'Zentraler Informatikdienst',
             'localizedname' => 'Zentraler Informatikdienst',
+        ],
+        '131' => [
+            'parent' => 'Zusätzliche Clients für Landing Pages:',
+            'localizedname' => 'LP PostDoc',
+        ],
+        '132' => [
+            'parent' => 'Zusätzliche Clients für Landing Pages:',
+            'localizedname' => 'LP Führungskräfte',
+        ],
+        '133' => [
+            'parent' => 'Zusätzliche Clients für Landing Pages:',
+            'localizedname' => 'LP Allgemeines Universitätspersonal',
+        ],
+        '134' => [
+            'parent' => 'Zusätzliche Clients für Landing Pages:',
+            'localizedname' => 'LP Studierende',
+        ],
+        '135' => [
+            'parent' => 'Zusätzliche Clients für Landing Pages:',
+            'localizedname' => 'LP Externe',
+        ],
+        '136' => [
+            'parent' => 'Zusätzliche Clients für Landing Pages:',
+            'localizedname' => 'LP Bibliothek',
         ],
     ];
 
