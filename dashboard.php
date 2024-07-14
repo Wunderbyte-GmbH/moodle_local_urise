@@ -16,13 +16,13 @@
 /**
  * Add dates to option.
  *
- * @package local_berta
+ * @package local_urise
  * @copyright 2024 Georg Maißer <info@wunderbyte.at>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use local_berta\output\dashboard;
-use local_berta\permissions;
+use local_urise\output\dashboard;
+use local_urise\permissions;
 
 require_once(__DIR__ . '/../../config.php');
 
@@ -37,7 +37,7 @@ if (!$context = context_system::instance()) {
 
 // Check if optionid is valid.
 $PAGE->set_context($context);
-$PAGE->set_url('/local/berta/dashboard.php');
+$PAGE->set_url('/local/urise/dashboard.php');
 
 if (!permissions::has_capability_anywhere()) {
     echo $OUTPUT->header();
@@ -47,13 +47,13 @@ if (!permissions::has_capability_anywhere()) {
     die();
 }
 
-$title = get_string('pluginname', 'local_berta');
+$title = get_string('pluginname', 'local_urise');
 $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_heading($title);
 
 $PAGE->set_pagelayout('mydashboard');
-$PAGE->add_body_class('local_berta-dashboard');
+$PAGE->add_body_class('local_urise-dashboard');
 
 echo $OUTPUT->header();
 
@@ -65,7 +65,7 @@ echo <<<EOT
   EOT;
 
 // Render the page content via mustache templates.
-$output = $PAGE->get_renderer('local_berta');
+$output = $PAGE->get_renderer('local_urise');
 $data = new dashboard();
 echo $output->render_dashboard($data);
 

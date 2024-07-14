@@ -14,19 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_berta;
+namespace local_urise;
 
 use context_system;
 
 /**
  * Helper functions for payment stuff.
  *
- * @package local_berta
+ * @package local_urise
  * @copyright 2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author Bernhard Fischer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class berta_payment_helper {
+class urise_payment_helper {
 
     /**
      * Helper function to get name of the orderid column for each gateway table.
@@ -48,7 +48,7 @@ class berta_payment_helper {
 
     /**
      * Get enabled payment gateways having an openorders tables.
-     * This means they are fully supported by BERTA.
+     * This means they are fully supported by urise.
      *
      * @return array    an array of strings containing the gateway names
      *                  of payment accounts which are supported
@@ -85,7 +85,7 @@ class berta_payment_helper {
 
     /**
      * Get payment accounts without openorders tables.
-     * This means they are not yet fully supported by BERTA.
+     * This means they are not yet fully supported by urise.
      *
      * @return array    an array of strings containing the gateway names
      *                  of payment accounts which are not fully supported

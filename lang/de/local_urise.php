@@ -17,7 +17,7 @@
 /**
  * Plugin strings are defined here.
  *
- * @package     local_berta
+ * @package     local_urise
  * @category    string
  * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,14 +25,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'BERTA Plugin';
+$string['pluginname'] = 'urise Plugin';
 
 $string['dashboard'] = 'Dashboard';
 $string['messageprovider:sendmessages'] = 'Verschicke Nachrichten';
-$string['berta:cansendmessages'] = 'Kann Nachrichten schicken.';
-$string['berta:editavailability'] = 'Kann die Verfügbarkeit von Buchungsoptionen ändern und Vorreservierungen anlegen';
-$string['berta:editsubstitutionspool'] = 'Kann den Vertretungspool für einzelne Kursarten bearbeiten';
-$string['berta:viewsubstitutionspool'] = 'Kann den Vertretungspool für einzelne Kursarten sehen und E-Mails an den Vertretungspool senden';
+$string['urise:cansendmessages'] = 'Kann Nachrichten schicken.';
+$string['urise:editavailability'] = 'Kann die Verfügbarkeit von Buchungsoptionen ändern und Vorreservierungen anlegen';
+$string['urise:editsubstitutionspool'] = 'Kann den Vertretungspool für einzelne Kursarten bearbeiten';
+$string['urise:viewsubstitutionspool'] = 'Kann den Vertretungspool für einzelne Kursarten sehen und E-Mails an den Vertretungspool senden';
 
 // Caches.
 $string['cachedef_cachedpaymenttable'] = 'Zahlungstransaktionen (Cache)';
@@ -48,12 +48,12 @@ $string['shortcodeslistofmybookingoptionsaslist'] = 'Meine Kurse als Liste';
 $string['shortcodeslistofteachersascards'] = 'Liste aller Trainer als Karten';
 $string['shortcodeslistofmytaughtbookingoptionsascards'] = 'Kurse, die ich unterrichte, als Karten';
 $string['shortcodesshowallsports'] = "Liste aller sportarten";
-$string['bertashortcodes:showstart'] = 'Kursbeginn anzeigen';
-$string['bertashortcodes:showend'] = 'Kursende anzeigen';
-$string['bertashortcodes:showbookablefrom'] = '"Buchbar ab" anzeigen';
-$string['bertashortcodes:showbookableuntil'] = '"Buchbar bis" anzeigen';
-$string['bertashortcodes:showfiltercoursetime'] = 'Filter "Kurszeiten" anzeigen';
-$string['bertashortcodes:showfilterbookingtime'] = 'Filter "Anmeldezeiten" anzeigen';
+$string['uriseshortcodes:showstart'] = 'Kursbeginn anzeigen';
+$string['uriseshortcodes:showend'] = 'Kursende anzeigen';
+$string['uriseshortcodes:showbookablefrom'] = '"Buchbar ab" anzeigen';
+$string['uriseshortcodes:showbookableuntil'] = '"Buchbar bis" anzeigen';
+$string['uriseshortcodes:showfiltercoursetime'] = 'Filter "Kurszeiten" anzeigen';
+$string['uriseshortcodes:showfilterbookingtime'] = 'Filter "Anmeldezeiten" anzeigen';
 
 $string['nobookinginstancesselected'] = "Aktuell sind keine Buchungsinstanzen ausgewählt, um Buchungsoptionen anzuzeigen";
 
@@ -110,7 +110,7 @@ $string['paymentsaborted'] = 'Abgebrochene Zahlungen';
 $string['bookinganswersdeleted'] = "Gelöschte Buchungen";
 
 $string['settingsandreports'] = 'Einstellungen & Berichte';
-$string['settingsandreports_desc'] = 'Verschiedene Einstellungen und Berichte, die für BERTA relevant sind.';
+$string['settingsandreports_desc'] = 'Verschiedene Einstellungen und Berichte, die für urise relevant sind.';
 $string['editentities'] = 'Organisations-Einheiten bearbeiten';
 $string['editentitiescategories'] = 'Kategorien der Organisations-Einheiten bearbeiten';
 $string['importentities'] = 'Organisations-Einheiten importieren';
@@ -138,7 +138,7 @@ $string['createbotag:helptext'] = '<p>
   <li><strong>Kategorie: </strong>Tags</li>
   <li><strong>Name: </strong>Tags</li>
   <li><strong>Kurzname: </strong>botags</li>
-  <li><strong>SQL query: </strong><code>SELECT botag as id, botag as data FROM {local_berta_botags}</code></li>
+  <li><strong>SQL query: </strong><code>SELECT botag as id, botag as data FROM {local_urise_botags}</code></li>
   <li><strong>Auto-complete: </strong><span class="text-success">aktiviert</span></li>
   <li><strong>Multi select: </strong><span class="text-success">aktiviert</span></li>
   </ul>
@@ -175,8 +175,8 @@ $string['coursesiteach'] = '<i class="fa fa-graduation-cap" aria-hidden="true"><
 $string['coursesiteacharchive'] = 'Kurse, die ich in vergangenen Semestern unterrichtet habe:';
 
 // Access.php.
-$string['berta:canedit'] = 'Nutzer:in darf verwalten';
-$string['berta:viewdashboard'] = "User kann Dashboard sehen";
+$string['urise:canedit'] = 'Nutzer:in darf verwalten';
+$string['urise:viewdashboard'] = "User kann Dashboard sehen";
 
 // Filter.
 $string['organisation'] = 'Organisationseinheit';
@@ -184,7 +184,7 @@ $string['location'] = 'Ort';
 $string['competency'] = 'Kompetenzen';
 
 // Nav.
-$string['berta'] = 'u:rise';
+$string['urise'] = 'u:rise';
 $string['entities'] = 'Raum-Management';
 $string['coursename'] = 'Kursname';
 
@@ -234,7 +234,7 @@ $string['easyavailability:overbook'] = 'Sogar dann, wenn der Kurs <b>ausgebucht<
 $string['easyavailability:previouslybooked'] = 'Nutzer:innen, die bereits einen bestimmten USI-Kurs gebucht haben, dürfen immer buchen';
 $string['easyavailability:selectusers'] = 'Ausgewählte Nutzer:innen dürfen außerhalb der Buchungszeiten buchen';
 $string['easyavailability:formincompatible'] = '<div class="alert alert-warning">Diese Buchungsoption verwendet Einschränkungen,
- die mit diesem Formular nicht kompatibel sind. Bitte wenden Sie sich an einen BERTA-Admin.</div>';
+ die mit diesem Formular nicht kompatibel sind. Bitte wenden Sie sich an einen urise-Admin.</div>';
 $string['easyavailability:openingtime'] = 'Kann gebucht werden ab';
 $string['easyavailability:closingtime'] = 'Kann gebucht werden bis';
 $string['easyavailability:heading'] = '<div class="alert alert-info">Sie bearbeiten die Verfügbarkeit von "<b>{$a}</b>"</div>';
@@ -252,8 +252,8 @@ $string['summary'] = 'Allgemein';
 $string['summary_desc'] = 'Enthält die Einstellungsmöglichkeiten und Statistiken der gesamten Plattform';
 
 // Rolls.
-$string['berta:create'] = "Erstelle";
-$string['berta:view'] = "Ansehen";
+$string['urise:create'] = "Erstelle";
+$string['urise:view'] = "Ansehen";
 
 $string['searchheadertext'] = "Was möchten Sie lernen?";
 $string['myspace'] = "Mein Bereich";

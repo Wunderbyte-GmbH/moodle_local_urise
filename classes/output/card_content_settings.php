@@ -17,12 +17,12 @@
 /**
  * This file contains the definition for the renderable classes for the booking instance
  *
- * @package   local_berta
+ * @package   local_urise
  * @copyright 2024 Georg Maißer {@link http://www.wunderbyte.at}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_berta\output;
+namespace local_urise\output;
 
 use html_writer;
 use mod_booking\singleton_service;
@@ -35,7 +35,7 @@ use templatable;
 /**
  * This class prepares data for displaying a booking option instance
  *
- * @package local_berta
+ * @package local_urise
  * @copyright 2024 Georg Maißer {@link http://www.wunderbyte.at}
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -62,7 +62,7 @@ class card_content_settings implements renderable, templatable {
 
         $data = new stdClass();
 
-        $cmid = get_config('local_berta', 'shortcodessetinstance');
+        $cmid = get_config('local_urise', 'shortcodessetinstance');
 
         if ($cmid) {
             $url = new moodle_url('/course/modedit.php', ['update' => $cmid]);
@@ -72,7 +72,7 @@ class card_content_settings implements renderable, templatable {
             $data->editbookings = ['link' => $url->out(false)];
 
         } else {
-            $url = new moodle_url('/admin/category.php?category=local_berta');
+            $url = new moodle_url('/admin/category.php?category=local_urise');
             $data->addbookinginstance = ['link' => $url->out(false)];
         }
 
@@ -88,20 +88,20 @@ class card_content_settings implements renderable, templatable {
         $url = new moodle_url('/mod/booking/semesters.php');
         $data->editsemesters = ['link' => $url->out(false)];
 
-        $url = new moodle_url('/admin/category.php?category=local_berta');
+        $url = new moodle_url('/admin/category.php?category=local_urise');
         $data->changebookinginstance = ['link' => $url->out(false)];
 
         $url = new moodle_url('#');
         $data->editbotags = ['link' => $url->out(false), 'data-action' => 'openbotagsmodal'];
 
-        $url = new moodle_url('/local/berta/viewsapdailysums.php');
+        $url = new moodle_url('/local/urise/viewsapdailysums.php');
         $data->sapdailysums = ['link' => $url->out(false)];
 
         // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-        /* $url = new moodle_url('/admin/category.php?category=local_berta');
+        /* $url = new moodle_url('/admin/category.php?category=local_urise');
         $data->editcontractformula = ['link' => $url->out(false)]; */
 
-        $url = new moodle_url('/local/berta/transactionlist.php');
+        $url = new moodle_url('/local/urise/transactionlist.php');
         $data->transactionslist = ['link' => $url->out(false)];
 
         $url = new moodle_url('/mod/booking/edit_campaigns.php');
@@ -120,7 +120,7 @@ class card_content_settings implements renderable, templatable {
         foreach ($this->data as $key => $value) {
 
             $item = [
-                'key' => get_string($key, 'local_berta')
+                'key' => get_string($key, 'local_urise')
             ];
 
             // We only have value & link at the time as types, but might have more at one point.

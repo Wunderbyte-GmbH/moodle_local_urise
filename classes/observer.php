@@ -17,18 +17,18 @@
 /**
  * Event observers.
  *
- * @package     local_berta
+ * @package     local_urise
  * @copyright   2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author      Bernhard Fischer
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_berta;
+namespace local_urise;
 
 use cache_helper;
 
 /**
- * Event observer for local_berta.
+ * Event observer for local_urise.
  */
 class observer {
 

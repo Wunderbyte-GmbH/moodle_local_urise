@@ -14,14 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_berta;
+namespace local_urise;
 
 use dml_exception;
 
 /**
- * Manage coursecategories in berta.
+ * Manage coursecategories in urise.
  *
- * @package local_berta
+ * @package local_urise
  * @copyright 2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author Georg Maißer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_berta\form;
+namespace local_urise\form;
 
 use context_module;
 use stdClass;
@@ -42,15 +42,15 @@ class botags_modal_form extends \core_form\dynamic_form {
 
         $existingbotagsarray = self::get_existing_botags_array();
 
-        $mform->addElement('autocomplete', 'botags', get_string('editbotags', 'local_berta'),
+        $mform->addElement('autocomplete', 'botags', get_string('editbotags', 'local_urise'),
             $existingbotagsarray, [
                 'tags' => true,
                 'multiple' => true,
-                'placeholder' => get_string('createbotag', 'local_berta'),
+                'placeholder' => get_string('createbotag', 'local_urise'),
                 'showsuggestions' => false
             ]);
 
-        $mform->addElement('html', get_string('createbotag:helptext', 'local_berta'));
+        $mform->addElement('html', get_string('createbotag:helptext', 'local_urise'));
     }
 
     /**
@@ -59,7 +59,7 @@ class botags_modal_form extends \core_form\dynamic_form {
      * @return void
      */
     protected function check_access_for_dynamic_submission(): void {
-        require_capability('local/berta:canedit', $this->get_context_for_dynamic_submission());
+        require_capability('local/urise:canedit', $this->get_context_for_dynamic_submission());
     }
 
 
@@ -80,15 +80,15 @@ class botags_modal_form extends \core_form\dynamic_form {
 
         foreach (self::get_existing_botags_array() as $existingbotagrecord) {
             if (!in_array($existingbotagrecord, $data->botags)) {
-                $DB->delete_records('local_berta_botags', ['botag' => $existingbotagrecord]);
+                $DB->delete_records('local_urise_botags', ['botag' => $existingbotagrecord]);
             }
         }
 
         foreach ($data->botags as $key => $value) {
-            if (!$DB->get_record('local_berta_botags', ['botag' => $value])) {
+            if (!$DB->get_record('local_urise_botags', ['botag' => $value])) {
                 $newbotagrecord = new stdClass;
                 $newbotagrecord->botag = $value;
-                $DB->insert_record('local_berta_botags', $newbotagrecord);
+                $DB->insert_record('local_urise_botags', $newbotagrecord);
             }
         }
 
@@ -101,7 +101,7 @@ class botags_modal_form extends \core_form\dynamic_form {
     }
 
     protected function get_page_url_for_dynamic_submission(): \moodle_url {
-        return new \moodle_url('/local/berta/dashboard.php');
+        return new \moodle_url('/local/urise/dashboard.php');
     }
 
     /**
@@ -111,7 +111,7 @@ class botags_modal_form extends \core_form\dynamic_form {
      */
     private static function get_existing_botags_array (): array {
         global $DB;
-        $existingbotagrecords = $DB->get_records('local_berta_botags');
+        $existingbotagrecords = $DB->get_records('local_urise_botags');
         $existingbotagsarray = [];
         if (!empty($existingbotagrecords)) {
             foreach ($existingbotagrecords as $existingbotagrecord) {

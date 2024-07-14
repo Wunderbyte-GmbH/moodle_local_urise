@@ -75,7 +75,7 @@ class sports_form extends dynamic_form {
      * @return void
      */
     protected function check_access_for_dynamic_submission(): void {
-        require_capability('local/berta:canedit', $this->get_context_for_dynamic_submission());
+        require_capability('local/urise:canedit', $this->get_context_for_dynamic_submission());
     }
 
     /**
@@ -145,7 +145,7 @@ class sports_form extends dynamic_form {
         if (!$cmid) {
             $cmid = $this->optional_param('cmid', '', PARAM_RAW);
         }
-        return new moodle_url('/local/berta/editoptions', array('id' => $cmid));
+        return new moodle_url('/local/urise/editoptions', array('id' => $cmid));
     }
 
     /**

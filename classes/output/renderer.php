@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_berta\output;
+namespace local_urise\output;
 
 use mod_booking\output\bookingoption_description;
 use mod_booking\output\renderer as OutputRenderer;
@@ -24,7 +24,7 @@ use plugin_renderer_base;
 /**
  * A custom renderer class that extends the plugin_renderer_base and is used by the booking module.
  *
- * @package local_berta
+ * @package local_urise
  * @copyright 2024 Georg Maißer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -37,7 +37,7 @@ class renderer extends plugin_renderer_base {
     public function render_bookingoption_description_view(bookingoption_description $data) {
         $o = '';
         $data = $data->export_for_template($this);
-        $o .= $this->render_from_template('local_berta/bookingoption_description_view', $data);
+        $o .= $this->render_from_template('local_urise/bookingoption_description_view', $data);
         return $o;
     }
 
@@ -49,7 +49,7 @@ class renderer extends plugin_renderer_base {
     public function render_dashboard(dashboard $data) {
         $o = '';
         $data = $data->export_for_template($this);
-        $o .= $this->render_from_template('local_berta/dashboard', $data);
+        $o .= $this->render_from_template('local_urise/dashboard', $data);
         return $o;
     }
 
@@ -61,7 +61,7 @@ class renderer extends plugin_renderer_base {
     public function render_card_content($data) {
         $o = '';
         $data = $data->export_for_template($this);
-        $o .= $this->render_from_template('local_berta/dashboard_card_content', $data);
+        $o .= $this->render_from_template('local_urise/dashboard_card_content', $data);
         return $o;
     }
 
@@ -73,7 +73,7 @@ class renderer extends plugin_renderer_base {
     public function render_userinformation($data) {
         $o = '';
         $data = $data->export_for_template($this);
-        $o .= $this->render_from_template('local_berta/userinformation', $data);
+        $o .= $this->render_from_template('local_urise/userinformation', $data);
         return $o;
     }
 
@@ -93,7 +93,7 @@ class renderer extends plugin_renderer_base {
         $o = '';
         $templatedata = $data->export_for_template($this);
         $templatedata['showmaxanswers'] = $data->showmaxanswers;
-        $o .= $this->render_from_template('local_berta/col_availableplaces', $templatedata);
+        $o .= $this->render_from_template('local_urise/col_availableplaces', $templatedata);
         return $o;
     }
 
@@ -105,7 +105,7 @@ class renderer extends plugin_renderer_base {
     public function render_col_coursestarttime($data) {
         $o = '';
         $data = $data->export_for_template($this);
-        $o .= $this->render_from_template('local_berta/col_coursestarttime', $data);
+        $o .= $this->render_from_template('local_urise/col_coursestarttime', $data);
         return $o;
     }
 
@@ -116,7 +116,7 @@ class renderer extends plugin_renderer_base {
     public function render_col_teacher($data) {
         $o = '';
         $data = $data->export_for_template($this);
-        $o .= $this->render_from_template('local_berta/col_teacher', $data);
+        $o .= $this->render_from_template('local_urise/col_teacher', $data);
         return $o;
     }
 
@@ -127,7 +127,7 @@ class renderer extends plugin_renderer_base {
      */
     public function render_user_dashboard_overview($data) {
         $o = '';
-        $o .= $this->render_from_template('local_berta/userdashboardoverview', $data);
+        $o .= $this->render_from_template('local_urise/userdashboardoverview', $data);
         return $o;
     }
 
@@ -138,19 +138,19 @@ class renderer extends plugin_renderer_base {
     public function render_transactions_list($page): string {
         $o = '';
         $data = $page->export_for_template($this);
-        $o .= $this->render_from_template('local_berta/transactions_list', $data);
+        $o .= $this->render_from_template('local_urise/transactions_list', $data);
         return $o;
     }
 
     /**
-     * Function to render booking option menu for local_berta.
+     * Function to render booking option menu for local_urise.
      * @param any $data
      * @return string
      */
-    public function render_berta_bookingoption_menu($data): string {
+    public function render_urise_bookingoption_menu($data): string {
         $o = '';
         $data = (array)$data;
-        $o .= $this->render_from_template('local_berta/berta_bookingoption_menu', $data);
+        $o .= $this->render_from_template('local_urise/urise_bookingoption_menu', $data);
         return $o;
     }
 

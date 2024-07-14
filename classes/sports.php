@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_berta;
+namespace local_urise;
 
 use coding_exception;
 use context_system;
@@ -25,7 +25,7 @@ use HTMLPurifier_Exception;
 /**
  * Helper functions for payment stuff.
  *
- * @package local_berta
+ * @package local_urise
  * @copyright 2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author Georg Maißer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -98,8 +98,8 @@ class sports {
 
         $data['categories'] = [];
 
-        $caneditsubstitutionspool = has_capability('local/berta:editsubstitutionspool', context_system::instance());
-        $canviewsubstitutionspool = has_capability('local/berta:viewsubstitutionspool', context_system::instance());
+        $caneditsubstitutionspool = has_capability('local/urise:editsubstitutionspool', context_system::instance());
+        $canviewsubstitutionspool = has_capability('local/urise:viewsubstitutionspool', context_system::instance());
 
         // Iterate through sport categories.
         foreach ($sections as $section) {
@@ -119,7 +119,7 @@ class sports {
 
             // For performance.
             // Get all sport records.
-            $sportrecords = $DB->get_records_sql("SELECT sport, teachers FROM {local_berta_substitutions}");
+            $sportrecords = $DB->get_records_sql("SELECT sport, teachers FROM {local_urise_substitutions}");
             // Get all teacher records.
             $teachersarr = [];
             foreach ($sportrecords as $sportrecord) {

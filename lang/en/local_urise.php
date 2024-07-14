@@ -17,7 +17,7 @@
 /**
  * Plugin strings are defined here.
  *
- * @package     local_berta
+ * @package     local_urise
  * @category    string
  * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,14 +25,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'BERTA Plugin';
+$string['pluginname'] = 'urise Plugin';
 
 $string['dashboard'] = 'Dashboard';
 $string['messageprovider:sendmessages'] = 'Send messages';
-$string['berta:cansendmessages'] = 'Can send messages';
-$string['berta:editavailability'] = 'Can change availability and reservations';
-$string['berta:editsubstitutionspool'] = 'Can edit the substitutions pool of teachers for different courses';
-$string['berta:viewsubstitutionspool'] = 'Can view the substitutions pool of teachers for different courses and send emails to substitution pools';
+$string['urise:cansendmessages'] = 'Can send messages';
+$string['urise:editavailability'] = 'Can change availability and reservations';
+$string['urise:editsubstitutionspool'] = 'Can edit the substitutions pool of teachers for different courses';
+$string['urise:viewsubstitutionspool'] = 'Can view the substitutions pool of teachers for different courses and send emails to substitution pools';
 
 // Caches.
 $string['cachedef_cachedpaymenttable'] = 'Cached payment table (transaction list).';
@@ -48,12 +48,12 @@ $string['shortcodeslistofmybookingoptionsaslist'] = 'My courses as list';
 $string['shortcodeslistofteachersascards'] = 'List of teachers as cards';
 $string['shortcodeslistofmytaughtbookingoptionsascards'] = 'Courses I teach as cards';
 $string['shortcodesshowallsports'] = "List of all courses";
-$string['bertashortcodes:showstart'] = 'Show "Start time of the course"';
-$string['bertashortcodes:showend'] = 'Show "End time of the course"';
-$string['bertashortcodes:showbookablefrom'] = 'Show "Bookable from"';
-$string['bertashortcodes:showbookableuntil'] = 'Show "Bookable until"';
-$string['bertashortcodes:showfiltercoursetime'] = 'Show filter "Course time"';
-$string['bertashortcodes:showfilterbookingtime'] = 'Show filter "Booking time"';
+$string['uriseshortcodes:showstart'] = 'Show "Start time of the course"';
+$string['uriseshortcodes:showend'] = 'Show "End time of the course"';
+$string['uriseshortcodes:showbookablefrom'] = 'Show "Bookable from"';
+$string['uriseshortcodes:showbookableuntil'] = 'Show "Bookable until"';
+$string['uriseshortcodes:showfiltercoursetime'] = 'Show filter "Course time"';
+$string['uriseshortcodes:showfilterbookingtime'] = 'Show filter "Booking time"';
 
 $string['nobookinginstancesselected'] = "Currently, no booking instances are selected to provide booking options.";
 
@@ -109,7 +109,7 @@ $string['paymentsaborted'] = 'Aborted payments';
 $string['bookinganswersdeleted'] = "Deleted booking answers";
 
 $string['settingsandreports'] = 'Settings & Reports';
-$string['settingsandreports_desc'] = 'Various settings and reports relevant for BERTA.';
+$string['settingsandreports_desc'] = 'Various settings and reports relevant for urise.';
 $string['editentities'] = 'Edit entities';
 $string['editentitiescategories'] = 'Edit categories of entities';
 $string['importentities'] = 'Import entities';
@@ -137,7 +137,7 @@ $string['createbotag:helptext'] = '<p>
   <li><strong>Category: </strong>Tags</li>
   <li><strong>Name: </strong>Tags</li>
   <li><strong>Short name: </strong>botags</li>
-  <li><strong>SQL query: </strong><code>SELECT botag as id, botag as data FROM {local_berta_botags}</code></li>
+  <li><strong>SQL query: </strong><code>SELECT botag as id, botag as data FROM {local_urise_botags}</code></li>
   <li><strong>Auto-complete: </strong><span class="text-success">active</span></li>
   <li><strong>Multi select: </strong><span class="text-success">active</span></li>
   </ul>
@@ -173,8 +173,8 @@ $string['coursesiteach'] = '<i class="fa fa-graduation-cap" aria-hidden="true"><
 $string['coursesiteacharchive'] = 'Courses I taught in previous semesters:';
 
 // Access.php.
-$string['berta:canedit'] = 'User can edit';
-$string['berta:viewdashboard'] = "User can see Dashboard";
+$string['urise:canedit'] = 'User can edit';
+$string['urise:viewdashboard'] = "User can see Dashboard";
 
 // Filter.
 $string['organisation'] = 'Organisation';
@@ -182,7 +182,7 @@ $string['location'] = 'Location';
 $string['competency'] = 'Competency';
 
 // Nav.
-$string['berta'] = 'u:rise';
+$string['urise'] = 'u:rise';
 $string['entities'] = 'Manage locations';
 $string['coursename'] = "Coursename";
 
@@ -229,7 +229,7 @@ $string['easyavailability:overbook'] = 'Even if the course is fully booked';
 $string['easyavailability:previouslybooked'] = 'Users who already booked a specific course are always allowed to book';
 $string['easyavailability:selectusers'] = 'Selected users are allowed to book outside this timespan';
 $string['easyavailability:formincompatible'] = '<div class="alert alert-warning">This form uses availability conditions
- that are incompatible with this form. Please contact a BERTA admin.</div>';
+ that are incompatible with this form. Please contact a urise admin.</div>';
  $string['easyavailability:openingtime'] = 'Can be booked from';
 $string['easyavailability:closingtime'] = 'Can be booked until';
 $string['easyavailability:heading'] = '<div class="alert alert-info">You are editing the availability of "<b>{$a}</b>"</div>';
@@ -247,8 +247,8 @@ $string['summary'] = 'General';
 $string['summary_desc'] = 'Contains the settings and stats for the whole Moodle site';
 
 // Rolls.
-$string['berta:create'] = "Create";
-$string['berta:view'] = "View";
+$string['urise:create'] = "Create";
+$string['urise:view'] = "View";
 
 // Settings.
 $string['multibookinginstances'] = "List of default activeted booking instances";

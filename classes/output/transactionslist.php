@@ -17,19 +17,19 @@
 /**
  * This file contains the definition for the renderable classes for transactions list
  *
- * @package   local_berta
+ * @package   local_urise
  * @copyright 2024 Christian Badusch {@link http://www.wunderbyte.at}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_berta\output;
+namespace local_urise\output;
 
-use local_berta\table\berta_transactions_table;
+use local_urise\table\urise_transactions_table;
 use renderable;
 use renderer_base;
 use templatable;
 use stdClass;
-use local_berta\berta_payment_helper;
+use local_urise\urise_payment_helper;
 
 /**
  * This class prepares to data to render transactionstable in mustache template
@@ -41,21 +41,21 @@ class transactionslist implements renderable, templatable {
         global $DB;
 
         // Create instance of transactions wb_table and specify columns and headers.
-        $table = new berta_transactions_table('berta_transactions_table');
+        $table = new urise_transactions_table('urise_transactions_table');
 
         // Headers.
         $table->define_headers([
-            get_string('id', 'local_berta'),
+            get_string('id', 'local_urise'),
             get_string('timecreated', 'local_shopping_cart'),
             get_string('timemodified', 'local_shopping_cart'),
-            get_string('transactionid', 'local_berta'),
-            get_string('itemid', 'local_berta'),
-            get_string('username', 'local_berta'),
-            get_string('price', 'local_berta'),
-            get_string('gateway', 'local_berta'),
-            get_string('status', 'local_berta'),
-            get_string('names', 'local_berta'),
-            get_string('action', 'local_berta'),
+            get_string('transactionid', 'local_urise'),
+            get_string('itemid', 'local_urise'),
+            get_string('username', 'local_urise'),
+            get_string('price', 'local_urise'),
+            get_string('gateway', 'local_urise'),
+            get_string('status', 'local_urise'),
+            get_string('names', 'local_urise'),
+            get_string('action', 'local_urise'),
         ]);
 
         // Columns.
@@ -73,9 +73,9 @@ class transactionslist implements renderable, templatable {
         // Define Filters.
         $table->define_filtercolumns([
             'status' => [
-                'localizedname' => get_string('status', 'local_berta'),
-                '0' => get_string('openorder', 'local_berta'),
-                '3' => get_string('bookedorder', 'local_berta'),
+                'localizedname' => get_string('status', 'local_urise'),
+                '0' => get_string('openorder', 'local_urise'),
+                '3' => get_string('bookedorder', 'local_urise'),
             ]
         ]);
 
@@ -87,7 +87,7 @@ class transactionslist implements renderable, templatable {
         $table->define_sortablecolumns(['id', 'timecreated', 'timemodified', 'tid', 'itemid',
             'username', 'price', 'gateway', 'status', 'names']);
 
-        $table->define_cache('local_berta', 'cachedpaymenttable');
+        $table->define_cache('local_urise', 'cachedpaymenttable');
 
         $table->pageable(true);
 
@@ -121,7 +121,7 @@ class transactionslist implements renderable, templatable {
         $concatsql = $DB->sql_group_concat("sch.itemname", "<br>", "sch.itemname");
         $concatusername = $DB->sql_fullname("u.lastname", "u.firstname");
 
-        $gatewaynames = berta_payment_helper::get_supported_payment_gateways();
+        $gatewaynames = urise_payment_helper::get_supported_payment_gateways();
         $gatewayselectstring = "";
 
         foreach ($gatewaynames as $gwname) {

@@ -17,19 +17,19 @@
 /**
  * Plugin upgrade steps are defined here.
  *
- * @package     local_berta
+ * @package     local_urise
  * @category    upgrade
  * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
- * Execute local_berta upgrade from the given old version.
+ * Execute local_urise upgrade from the given old version.
  *
  * @param int $oldversion
  * @return bool
  */
-function xmldb_local_berta_upgrade($oldversion) {
+function xmldb_local_urise_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager();

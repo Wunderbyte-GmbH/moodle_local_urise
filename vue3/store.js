@@ -16,7 +16,7 @@
 /**
  * Validate if the string does excist.
  *
- * @package     local_berta
+ * @package     local_urise
  * @author      Jacob Viertel
  * @copyright  2023 Wunderbyte GmbH
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -63,7 +63,7 @@ export function createAppStore() {
             },
             async loadComponentStrings(context) {
                 const lang = $('html').attr('lang').replace(/-/g, '_');
-                const cacheKey = 'local_berta/strings/' + lang;
+                const cacheKey = 'local_urise/strings/' + lang;
                 const cachedStrings = moodleStorage.get(cacheKey);
                 if (cachedStrings) {
                     context.commit('setStrings', JSON.parse(cachedStrings));
@@ -87,7 +87,7 @@ export function createAppStore() {
             },
             async fetchTab(context, index) {
                 const params = { coursecategoryid: index };
-                const content = await ajax('local_berta_get_parent_categories', params);
+                const content = await ajax('local_urise_get_parent_categories', params);
                 if (index === 0) {
                     context.commit('setTabs', content);
                 }
@@ -102,7 +102,7 @@ export function createAppStore() {
                 context.commit('setConfigList', configlist);
             },
             async setParentContent(context, index) {
-              return await ajax('local_berta_set_parent_content', {
+              return await ajax('local_urise_set_parent_content', {
                 capability: index.capability,
                 id: index.id,
                 json: index.json,

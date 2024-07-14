@@ -15,22 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Moodle hooks for local_berta
- * @package    local_berta
+ * Moodle hooks for local_urise
+ * @package    local_urise
  * @copyright  2024 Wunderbyte GmbH
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 use core\event\capability_assigned;
-use local_berta\permissions;
+use local_urise\permissions;
 use mod_booking\singleton_service;
 
 // Define booking status parameters.
-define('LOCAL_berta_STATUSPARAM_BOOKED', 0);
-define('LOCAL_berta_STATUSPARAM_WAITINGLIST', 1);
-define('LOCAL_berta_STATUSPARAM_RESERVED', 2);
-define('LOCAL_berta_STATUSPARAM_NOTBOOKED', 4);
-define('LOCAL_berta_STATUSPARAM_DELETED', 5);
+define('local_urise_STATUSPARAM_BOOKED', 0);
+define('local_urise_STATUSPARAM_WAITINGLIST', 1);
+define('local_urise_STATUSPARAM_RESERVED', 2);
+define('local_urise_STATUSPARAM_NOTBOOKED', 4);
+define('local_urise_STATUSPARAM_DELETED', 5);
 
 /**
  * Adds module specific settings to the settings block
@@ -38,17 +38,17 @@ define('LOCAL_berta_STATUSPARAM_DELETED', 5);
  * @param navigation_node $modnode The node to add module settings to
  * @return void
  */
-function local_berta_extend_navigation(navigation_node $navigation) {
+function local_urise_extend_navigation(navigation_node $navigation) {
     $context = context_system::instance();
-    if (has_capability('local/berta:canedit', $context)) {
+    if (has_capability('local/urise:canedit', $context)) {
         $nodehome = $navigation->get('home');
         if (empty($nodehome)) {
             $nodehome = $navigation;
         }
-        $pluginname = get_string('pluginname', 'local_berta');
-        $link = new moodle_url('/local/berta/dashboard.php', array());
-        $icon = new pix_icon('i/dashboard', $pluginname, 'local_berta');
-        $nodecreatecourse = $nodehome->add($pluginname, $link, navigation_node::NODETYPE_LEAF, $pluginname, 'berta_editor', $icon);
+        $pluginname = get_string('pluginname', 'local_urise');
+        $link = new moodle_url('/local/urise/dashboard.php', array());
+        $icon = new pix_icon('i/dashboard', $pluginname, 'local_urise');
+        $nodecreatecourse = $nodehome->add($pluginname, $link, navigation_node::NODETYPE_LEAF, $pluginname, 'urise_editor', $icon);
         $nodecreatecourse->showinflatnavigation = true;
     }
 }
@@ -58,9 +58,9 @@ function local_berta_extend_navigation(navigation_node $navigation) {
  *
  * @return  array
  */
-function local_berta_get_fontawesome_icon_map() {
+function local_urise_get_fontawesome_icon_map() {
     return [
-        'local_berta:i/dashboard' => 'fa-tachometer'
+        'local_urise:i/dashboard' => 'fa-tachometer'
     ];
 }
 
@@ -70,7 +70,7 @@ function local_berta_get_fontawesome_icon_map() {
  * @param renderer_base $renderer
  * @return string The HTML
  */
-function local_berta_render_navbar_output(\renderer_base $renderer) {
+function local_urise_render_navbar_output(\renderer_base $renderer) {
     global $CFG, $DB;
     // Early bail out conditions.
     if (!isloggedin() || isguestuser()) {
@@ -86,18 +86,18 @@ function local_berta_render_navbar_output(\renderer_base $renderer) {
     $output = '<div class="popover-region nav-link icon-no-margin dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button"
         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        '. get_string('berta', 'local_berta') .'
+        '. get_string('urise', 'local_urise') .'
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="'
-                . $CFG->wwwroot . '/local/berta/dashboard.php">'
-                . get_string('dashboard', 'local_berta') . '</a>
+                . $CFG->wwwroot . '/local/urise/dashboard.php">'
+                . get_string('dashboard', 'local_urise') . '</a>
             <a class="dropdown-item" href="'
                 . $CFG->wwwroot . '/local/entities/entities.php">'
-                . get_string('entities', 'local_berta') . '</a>
+                . get_string('entities', 'local_urise') . '</a>
             <a class="dropdown-item" href="'
-                . $CFG->wwwroot . '/local/berta/meinekurse.php">'
-                . get_string('mycourses', 'local_berta') . '</a>
+                . $CFG->wwwroot . '/local/urise/meinekurse.php">'
+                . get_string('mycourses', 'local_urise') . '</a>
         </div>
     </div>';
     return $output;
@@ -118,7 +118,7 @@ function local_berta_render_navbar_output(\renderer_base $renderer) {
  * @throws moodle_exception
  * @throws require_login_exception
  */
-function local_berta_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+function local_urise_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
 
     // Check the contextlevel is as expected - if your plugin is a block.
     // We need context course if wee like to acces template files.
@@ -143,7 +143,7 @@ function local_berta_pluginfile($course, $cm, $context, $filearea, $args, $force
 
     // Retrieve the file from the Files API.
     $fs = get_file_storage();
-    $file = $fs->get_file($context->id, 'local_berta', $filearea, $itemid, $filepath, $filename);
+    $file = $fs->get_file($context->id, 'local_urise', $filearea, $itemid, $filepath, $filename);
     if (!$file) {
         return false; // The file does not exist.
     }

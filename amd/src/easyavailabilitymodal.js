@@ -14,16 +14,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /*
- * @package    local_berta
+ * @package    local_urise
  * @author     Bernhard Fischer
  * @copyright  2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
- * Modal form for simplified access to availability conditions for BERTA.
+ * Modal form for simplified access to availability conditions for urise.
  *
- * @module     local_berta/easyavailabilitymodal
+ * @module     local_urise/easyavailabilitymodal
  * @copyright  2024 Wunderbyte GmbH
  * @author     Bernhard Fischer
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -38,7 +38,7 @@ export const init = (optionid, linkSelector, modalTitle) => {
         element.addEventListener('click', (e) => {
             e.preventDefault();
             const form = new ModalForm({
-                formClass: "local_berta\\form\\easy_availability_modal_form",
+                formClass: "local_urise\\form\\easy_availability_modal_form",
                 // Add as many arguments as you need, they will be passed to the form:
                 args: {
                     'optionid': optionid,

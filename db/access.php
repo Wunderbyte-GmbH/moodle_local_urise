@@ -17,7 +17,7 @@
 /**
  * Plugin capabilities are defined here.
  *
- * @package     local_berta
+ * @package     local_urise
  * @category    access
  * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,42 +26,42 @@
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = [
-    'local/berta:canedit' => [
+    'local/urise:canedit' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
             'manager' => CAP_ALLOW,
         ],
     ],
-    'local/berta:editavailability' => [
+    'local/urise:editavailability' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
             'manager' => CAP_ALLOW,
         ],
     ],
-    'local/berta:cansendmessages' => [
+    'local/urise:cansendmessages' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
             'manager' => CAP_ALLOW,
         ],
     ],
-    'local/berta:view' => [
+    'local/urise:view' => [
       'captype' => 'read',
       'contextlevel' => CONTEXT_COURSECAT,
       'archetypes' => [
           'manager' => CAP_ALLOW,
       ],
     ],
-    'local/berta:create' => [
+    'local/urise:create' => [
       'captype' => 'write',
       'contextlevel' => CONTEXT_COURSECAT,
       'archetypes' => [
           'manager' => CAP_ALLOW,
       ],
     ],
-    'local/berta:viewdashboard' => [
+    'local/urise:viewdashboard' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [

@@ -24,23 +24,23 @@
 // Import needed libraries
 import { createRouter, createWebHashHistory } from 'vue-router';
 import notFound from '../components/NotFound';
-import bertaDashboard from '../components/BertaDashboard'
+import uriseDashboard from '../components/uriseDashboard'
 
 // All available routes
 const routes = [
     {
-        path: '/berta',
+        path: '/urise',
         redirect: {
-            name: 'berta-overview'
+            name: 'urise-overview'
         }
     },
     {
-        path: '/berta/overview',
-        component: bertaDashboard,
-        name: 'berta-overview',
+        path: '/urise/overview',
+        component: uriseDashboard,
+        name: 'urise-overview',
     },
     {
-        path: '/berta/:catchAll(.*)',
+        path: '/urise/:catchAll(.*)',
         name: 'not-found',
         component: notFound,
     },

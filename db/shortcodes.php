@@ -17,7 +17,7 @@
 /**
  * Shortcodes for mod booking
  *
- * @package local_berta
+ * @package local_urise
  * @subpackage db
  * @since Moodle 3.11
  * @copyright 2024 Georg Maißer
@@ -28,22 +28,22 @@ defined('MOODLE_INTERNAL') || die();
 
 $shortcodes = [
     'unifiedlist' => [
-        'callback' => 'local_berta\shortcodes::unifiedlist',
+        'callback' => 'local_urise\shortcodes::unifiedlist',
         'wraps' => false,
         'description' => 'shortcodes::unifiedlist',
     ],
     'unifiedcards' => [
-        'callback' => 'local_berta\shortcodes::unifiedcards',
+        'callback' => 'local_urise\shortcodes::unifiedcards',
         'wraps' => false,
         'description' => 'shortcodes::unifiedlist',
     ],
     'unifiedmybookingslist' => [
-        'callback' => 'local_berta\shortcodes::unifiedmybookingslist',
+        'callback' => 'local_urise\shortcodes::unifiedmybookingslist',
         'wraps' => false,
         'description' => 'shortcodes::unifiedlist',
     ],
     'unifiedtrainercourseslist' => [
-        'callback' => 'local_berta\shortcodes::mytaughtcourses',
+        'callback' => 'local_urise\shortcodes::mytaughtcourses',
         'wraps' => false,
         'description' => 'shortcodeslistofmytaughtbookingoptionsascards',
     ],

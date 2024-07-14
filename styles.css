@@ -1,15 +1,15 @@
-:root { 
-    --lightgrayberta: rgb(220, 218, 218);
+:root {
+    --lightgrayurise: rgb(220, 218, 218);
 }
-.local_berta-dashboard .card-deck .card {
+.local_urise-dashboard .card-deck .card {
     max-width: 15rem;
 }
 
-#page-local-berta-dashboard .modal-body {
+#page-local-urise-dashboard .modal-body {
     overflow-y: visible;
 }
 
-#page-local-berta-dashboard .modal-content {
+#page-local-urise-dashboard .modal-content {
     overflow: visible;
 }
 
@@ -26,7 +26,7 @@
     width: 300px;
 }
 
-.berta-user-dash-overview .card-counter {
+.urise-user-dash-overview .card-counter {
     box-shadow: 2px 2px 10px #dadada;
     margin: 5px;
     padding: 20px 10px;
@@ -36,40 +36,40 @@
     transition: .3s linear all;
 }
 
-.berta-user-dash-overview .card-counter:hover {
+.urise-user-dash-overview .card-counter:hover {
     box-shadow: 4px 4px 20px #dadada;
     transition: .3s linear all;
 }
 
-.berta-user-dash-overview .card-counter.primary {
+.urise-user-dash-overview .card-counter.primary {
     background-color: #fff;
     border-color: #007bff;
     color: #007bff;
 }
 
-.berta-user-dash-overview .card-counter.danger {
+.urise-user-dash-overview .card-counter.danger {
     background-color: #ef5350;
     color: #fff;
 }
 
-.berta-user-dash-overview .card-counter.success {
+.urise-user-dash-overview .card-counter.success {
     background-color: #fff;
     border-color: #66bb6a;
     color: #66bb6a;
 }
 
-.berta-user-dash-overview .card-counter.info {
+.urise-user-dash-overview .card-counter.info {
     background-color: #fff;
     border-color: #26c6da;
     color: #26c6da;
 }
 
-.berta-user-dash-overview .card-counter i {
+.urise-user-dash-overview .card-counter i {
     font-size: 5em;
     opacity: 0.2;
 }
 
-.berta-user-dash-overview .card-counter .count-numbers {
+.urise-user-dash-overview .card-counter .count-numbers {
     position: absolute;
     right: 35px;
     top: 20px;
@@ -77,7 +77,7 @@
     display: block;
 }
 
-.berta-user-dash-overview .card-counter .count-name {
+.urise-user-dash-overview .card-counter .count-name {
     position: absolute;
     right: 35px;
     top: 65px;
@@ -103,26 +103,26 @@
     width: 100%;
 }
 
-.berta-courses-container.wunderbyte_table_filter_on .wunderbyte_table_container {
+.urise-courses-container.wunderbyte_table_filter_on .wunderbyte_table_container {
     grid-template-columns: 1fr 3fr;
 }
 
-.berta-courses-container .wunderbyteTableFilter .form-group {
+.urise-courses-container .wunderbyteTableFilter .form-group {
     border: none;
     background-color: #fff !important;
     padding: 0;
     margin: 0 !important;
 }
 
-.berta-courses-container .wunderbyteTableFilter .collapse.show {
+.urise-courses-container .wunderbyteTableFilter .collapse.show {
     margin-top: 0 !important;
 }
 
-.berta-courses-container .wunderbyteTableFilter ul.wunderbyterFilterList {
+.urise-courses-container .wunderbyteTableFilter ul.wunderbyterFilterList {
     padding-top: 0 !important;
 }
 
-.berta-courses-container .wunderbyteTableFilter ul.wunderbyterFilterList li {
+.urise-courses-container .wunderbyteTableFilter ul.wunderbyterFilterList li {
     min-height: 2rem;
 }
 
@@ -281,7 +281,7 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     justify-content: space-between;
 }
 
-.berta-table-option-title a {
+.urise-table-option-title a {
     color: #0B131F
 }
 
@@ -370,7 +370,7 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
 
 .bg-secondary.orga, .bg-secondary.category {
     /* eslint-disable-next-line */
-    background: var(--lightgrayberta) !important;
+    background: var(--lightgrayurise) !important;
 }
 
 
@@ -382,7 +382,7 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     font-size: 1.5rem;
 }
 
-.berta-table-botag {
+.urise-table-botag {
     font-weight: bold;
 }
 
@@ -410,7 +410,7 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     color: black !important
 }
 
-.berta-avail {
+.urise-avail {
     border: 2px solid black;
     padding: 0.25rem;
     border-radius: 0.5rem;
@@ -450,17 +450,17 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     font-size: 5em;
 }
 
-.local_berta-allcourses .wunderbyte_table_filter_on .wunderbyte_table_container {
+.local_urise-allcourses .wunderbyte_table_filter_on .wunderbyte_table_container {
     margin-left: -5em;
     grid-template-columns: 1fr 4fr;
 }
 
-.local_berta-allcourses .wunderbyte_table_filter_on.inactivefilter .wunderbyte_table_container {
+.local_urise-allcourses .wunderbyte_table_filter_on.inactivefilter .wunderbyte_table_container {
     grid-template-columns: max-content;
     margin-left: 0;
 }
 
-.local_berta-allcourses .wunderbyte_table_filter_on .wunderbyte_table_container.showontop {
+.local_urise-allcourses .wunderbyte_table_filter_on .wunderbyte_table_container.showontop {
     margin-left: 0;
 }
 
@@ -469,7 +469,7 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     border: none !important;
 }
 
-.berta-table-option-title {
+.urise-table-option-title {
     font-size: 1.4rem;
 }
 
@@ -485,7 +485,7 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     object-fit: cover;
 }
 
-.imagecontainer img, .bertaimage {
+.imagecontainer img, .uriseimage {
     /* eslint-disable-next-line */
     border-radius: 7px 7px 0 0 !important;
 }
@@ -498,7 +498,7 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
 .wunderbyte-table-grid .booking-button-mainarea.alert {
     /* eslint-disable-next-line */
     margin-bottom: 0.5rem !important;
-}   
+}
 
 .booking-showdates-title .fa.fa-calendar.fa-fw {
     display: none;
@@ -522,13 +522,13 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
 
 }
 
-.wunderbyteTableSearch.berta {
+.wunderbyteTableSearch.urise {
     width: 80%;
     max-width: 100%;
     margin: auto;
 }
 
-.search.berta {
+.search.urise {
     height: 3em;
 }
 
@@ -563,13 +563,13 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     font-size: 50px;
     color: #adb5bd;
   }
-  
+
 @media screen and (max-width: 768px) {
     .row.optionrow, .card.listcard {
         max-height: fit-content;
     }
 
-    .local_berta-allcourses .wunderbyte_table_filter_on .wunderbyte_table_container {
+    .local_urise-allcourses .wunderbyte_table_filter_on .wunderbyte_table_container {
         margin-left: 0;
     }
 

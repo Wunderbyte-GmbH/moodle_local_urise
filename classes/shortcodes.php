@@ -15,16 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Shortcodes for local_berta
+ * Shortcodes for local_urise
  *
- * @package local_berta
+ * @package local_urise
  * @subpackage db
  * @since Moodle 3.11
  * @copyright 2024 Georg Maißer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_berta;
+namespace local_urise;
 
 use Closure;
 use coding_exception;
@@ -35,8 +35,8 @@ use local_wunderbyte_table\filters\types\hierarchicalfilter;
 use local_wunderbyte_table\wunderbyte_table;
 use mod_booking\customfield\booking_handler;
 use mod_booking\output\page_allteachers;
-use local_berta\output\userinformation;
-use local_berta\table\berta_table;
+use local_urise\output\userinformation;
+use local_urise\table\urise_table;
 use local_shopping_cart\shopping_cart;
 use local_shopping_cart\shopping_cart_credits;
 use local_wunderbyte_table\filters\types\datepicker;
@@ -530,7 +530,7 @@ class shortcodes {
         }
 
         $data = new userinformation($userid, $args['fields']);
-        $output = $PAGE->get_renderer('local_berta');
+        $output = $PAGE->get_renderer('local_urise');
         return $output->render_userinformation($data);
     }
 
@@ -592,7 +592,7 @@ class shortcodes {
         $bookingids = array_filter($bookingids, fn($a) => !empty($a));
 
         if (empty($bookingids)) {
-            return get_string('nobookinginstancesselected', 'local_berta');
+            return get_string('nobookinginstancesselected', 'local_urise');
         }
 
         if (!isset($args['image']) || !$showimage = ($args['image'])) {
@@ -711,12 +711,12 @@ class shortcodes {
 
         self::fix_args($args);
 
-        $bookingids = explode(',', get_config('local_berta', 'multibookinginstances'));
+        $bookingids = explode(',', get_config('local_urise', 'multibookinginstances'));
 
         $bookingids = array_filter($bookingids, fn($a) => !empty($a));
 
         if (empty($bookingids)) {
-            return get_string('nobookinginstancesselected', 'local_berta');
+            return get_string('nobookinginstancesselected', 'local_urise');
         }
 
         if (!isset($args['category']) || !$category = ($args['category'])) {
@@ -812,10 +812,10 @@ class shortcodes {
         self::set_table_options_from_arguments($table, $args);
         if (!empty($args['cards'])) {
             self::generate_table_for_cards($table, $args);
-            $table->tabletemplate = 'local_berta/table_card';
+            $table->tabletemplate = 'local_urise/table_card';
         } else {
             self::generate_table_for_list($table, $args);
-            $table->tabletemplate = 'local_berta/table_list';
+            $table->tabletemplate = 'local_urise/table_list';
         }
 
         $table->cardsort = true;
@@ -861,12 +861,12 @@ class shortcodes {
 
         self::fix_args($args);
 
-        $bookingids = explode(',', get_config('local_berta', 'multibookinginstances'));
+        $bookingids = explode(',', get_config('local_urise', 'multibookinginstances'));
 
         $bookingids = array_filter($bookingids, fn($a) => !empty($a));
 
         if (empty($bookingids)) {
-            return get_string('nobookinginstancesselected', 'local_berta');
+            return get_string('nobookinginstancesselected', 'local_urise');
         }
 
         if (!isset($args['category']) || !$category = ($args['category'])) {
@@ -932,10 +932,10 @@ class shortcodes {
         self::set_table_options_from_arguments($table, $args);
         if (!empty($args['cards'])) {
             self::generate_table_for_cards($table, $args);
-            $table->tabletemplate = 'local_berta/table_card';
+            $table->tabletemplate = 'local_urise/table_card';
         } else {
             self::generate_table_for_list($table, $args);
-            $table->tabletemplate = 'local_berta/table_list';
+            $table->tabletemplate = 'local_urise/table_list';
         }
 
         $table->cardsort = true;
@@ -974,7 +974,7 @@ class shortcodes {
         self::fix_args($args);
         // If the id argument was not passed on, we have a fallback in the connfig.
         if (!isset($args['id'])) {
-            $args['id'] = get_config('local_berta', 'shortcodessetinstance');
+            $args['id'] = get_config('local_urise', 'shortcodessetinstance');
         }
 
         // To prevent misconfiguration, id has to be there and int.
@@ -997,7 +997,7 @@ class shortcodes {
         $data['teacher'] = count($asteacher);
         $data['credits'] = $credits[0];
 
-        $output = $PAGE->get_renderer('local_berta');
+        $output = $PAGE->get_renderer('local_urise');
         return $output->render_user_dashboard_overview($data);
 
     }
@@ -1025,7 +1025,7 @@ class shortcodes {
             $buyforuserid = $USER->id;
         }
 
-        $table = new berta_table($tablename);
+        $table = new urise_table($tablename);
 
         $table->define_baseurl($baseurl->out());
         $table->cardsort = true;
@@ -1047,7 +1047,7 @@ class shortcodes {
         $standardfilter = new standardfilter('zgcommunities', get_string('zgcommunities', 'local_berta'));
         $table->add_filter($standardfilter);
 
-        $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_berta'));
+        $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_urise'));
         $hierarchicalfilter->add_options(self::KOMPETENZEN);
         $table->add_filter($hierarchicalfilter);
 
@@ -1088,7 +1088,7 @@ class shortcodes {
             $table->add_filter($datepicker);
         }
 
-        if (get_config('local_berta', 'bertashortcodesshowfilterbookingtime')) {
+        if (get_config('local_urise', 'uriseshortcodesshowfilterbookingtime')) {
 
             $datepicker = new datepicker(
                 'bookingopeningtime',
@@ -1120,7 +1120,7 @@ class shortcodes {
         self::fix_args($args);
         // If the id argument was not passed on, we have a fallback in the connfig.
         if (!isset($args['id'])) {
-            $args['id'] = get_config('local_berta', 'shortcodessetinstance');
+            $args['id'] = get_config('local_urise', 'shortcodessetinstance');
         }
 
         // To prevent misconfiguration, id has to be there and int.
@@ -1147,7 +1147,7 @@ class shortcodes {
     private static function set_table_options_from_arguments(&$table, $args) {
         self::fix_args($args);
 
-        /** @var berta_table $table */
+        /** @var urise_table $table */
         $table->set_display_options($args);
 
         if (!empty($args['filter'])) {
@@ -1162,21 +1162,21 @@ class shortcodes {
 
         if (!empty($args['sort'])) {
             $sortablecolumns = [
-                'titleprefix' => get_string('titleprefix', 'local_berta'),
-                'text' => get_string('coursename', 'local_berta'),
-                'organisation' => get_string('organisation', 'local_berta'),
-                'location' => get_string('location', 'local_berta'),
+                'titleprefix' => get_string('titleprefix', 'local_urise'),
+                'text' => get_string('coursename', 'local_urise'),
+                'organisation' => get_string('organisation', 'local_urise'),
+                'location' => get_string('location', 'local_urise'),
             ];
-            if (get_config('local_berta', 'bertashortcodesshowstart')) {
+            if (get_config('local_urise', 'uriseshortcodesshowstart')) {
                 $sortablecolumns['coursestarttime'] = get_string('coursestarttime', 'mod_booking');
             }
-            if (get_config('local_berta', 'bertashortcodesshowend')) {
+            if (get_config('local_urise', 'uriseshortcodesshowend')) {
                 $sortablecolumns['courseendtime'] = get_string('courseendtime', 'mod_booking');
             }
-            if (get_config('local_berta', 'bertashortcodesshowbookablefrom')) {
+            if (get_config('local_urise', 'uriseshortcodesshowbookablefrom')) {
                 $sortablecolumns['bookingopeningtime'] = get_string('bookingopeningtime', 'mod_booking');
             }
-            if (get_config('local_berta', 'bertashortcodesshowbookableuntil')) {
+            if (get_config('local_urise', 'uriseshortcodesshowbookableuntil')) {
                 $sortablecolumns['bookingclosingtime'] = get_string('bookingclosingtime', 'mod_booking');
             }
             $table->define_sortablecolumns($sortablecolumns);
@@ -1260,7 +1260,7 @@ class shortcodes {
         $subcolumnsinfo = ['showdates'];
 
         // Check if we should add the description.
-        if (get_config('local_berta', 'shortcodelists_showdescriptions')) {
+        if (get_config('local_urise', 'shortcodelists_showdescriptions')) {
             $subcolumnsleftside[] = 'description';
         }
 
@@ -1298,21 +1298,21 @@ class shortcodes {
 
         $table->add_classes_to_subcolumns('leftside', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-1 title'], ['text']);
-        if (get_config('local_berta', 'shortcodelists_showdescriptions')) {
+        if (get_config('local_urise', 'shortcodelists_showdescriptions')) {
             $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-3 col-md-auto'], ['description']);
         }
 
         $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-clock-o text-primary
         showdatesicon'], ['showdates']);
         $table->add_classes_to_subcolumns('info', ['columnclassinner' => 'align-items-center'], ['showdates']);
-        if (get_config('local_berta', 'bertashortcodesshowend')) {
+        if (get_config('local_urise', 'uriseshortcodesshowend')) {
             $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-stop'], ['courseendtime']);
         }
-        if (get_config('local_berta', 'bertashortcodesshowbookablefrom')) {
+        if (get_config('local_urise', 'uriseshortcodesshowbookablefrom')) {
             $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-forward'], ['bookingopeningtime']);
         }
-        $table->add_classes_to_subcolumns('info', ['columnalt' => get_string('locationalt', 'local_berta')], ['location']);
-        $table->add_classes_to_subcolumns('cardimage', ['cardimagealt' => get_string('imagealt', 'local_berta')], ['image']);
+        $table->add_classes_to_subcolumns('info', ['columnalt' => get_string('locationalt', 'local_urise')], ['location']);
+        $table->add_classes_to_subcolumns('cardimage', ['cardimagealt' => get_string('imagealt', 'local_urise')], ['image']);
 
         $table->add_classes_to_subcolumns('rightside',
             ['columnvalueclass' => 'text-right mb-auto align-self-end shortcodes_option_info_invisible '],

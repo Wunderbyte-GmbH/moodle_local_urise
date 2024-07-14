@@ -17,12 +17,12 @@
 /**
  * This file contains the definition for the renderable classes for the booking instance
  *
- * @package   local_berta
+ * @package   local_urise
  * @copyright 2024 Georg Maißer {@link http://www.wunderbyte.at}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_berta\output;
+namespace local_urise\output;
 
 use context_system;
 use local_shopping_cart\shopping_cart;
@@ -35,7 +35,7 @@ use templatable;
 /**
  * This class prepares data for displaying user information
  *
- * @package local_berta
+ * @package local_urise
  * @copyright 2024 Georg Maißer {@link http://www.wunderbyte.at}
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

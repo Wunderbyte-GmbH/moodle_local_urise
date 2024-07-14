@@ -17,14 +17,14 @@
 /**
  * This class contains a list of webservice functions related to the Shopping Cart Module by Wunderbyte.
  *
- * @package    local_berta
+ * @package    local_urise
  * @copyright  2024 Georg Maißer <info@wunderbyte.at>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 declare(strict_types=1);
 
-namespace local_berta\external;
+namespace local_urise\external;
 
 use external_api;
 use external_function_parameters;
@@ -32,7 +32,7 @@ use external_multiple_structure;
 use external_value;
 use external_single_structure;
 use context_coursecat;
-use local_berta\coursecategories;
+use local_urise\coursecategories;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -41,7 +41,7 @@ require_once($CFG->libdir . '/externallib.php');
 /**
  * External Service for shopping cart.
  *
- * @package   local_berta
+ * @package   local_urise
  * @copyright 2024 Wunderbyte GmbH {@link http://www.wunderbyte.at}
  * @author    Georg Maißer
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -84,10 +84,10 @@ class get_parent_categories extends external_api {
             $returnarray = [
                 [
                     'id' => 0,
-                    'name' => get_string('summary', 'local_berta'),
+                    'name' => get_string('summary', 'local_urise'),
                     'contextid' => 1,
                     'coursecount' => $coursecount,
-                    'description' => get_string('summarydescription', 'local_berta'),
+                    'description' => get_string('summarydescription', 'local_urise'),
                     'path' => '',
                     'json' => '',
                 ],
@@ -100,7 +100,7 @@ class get_parent_categories extends external_api {
 
             $context = context_coursecat::instance($record->id);
 
-            if (!has_capability('local/berta:view', $context)) {
+            if (!has_capability('local/urise:view', $context)) {
                 continue;
             }
             $coursecount += $record->coursecount;

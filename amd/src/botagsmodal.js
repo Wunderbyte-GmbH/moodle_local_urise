@@ -14,7 +14,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /*
- * @package    local_berta
+ * @package    local_urise
  * @author     Bernhard Fischer
  * @copyright  2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -23,7 +23,7 @@
 /**
  * Modal form to manage booking option tags (botags).
  *
- * @module     local_berta/botagsmodal
+ * @module     local_urise/botagsmodal
  * @copyright  2024 Wunderbyte GmbH
  * @author     Bernhard Fischer
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -34,7 +34,7 @@ export const init = (linkSelector, modalTitle) => {
     document.querySelector(linkSelector).addEventListener('click', (e) => {
         e.preventDefault();
         const form = new ModalForm({
-            formClass: "local_berta\\form\\botags_modal_form",
+            formClass: "local_urise\\form\\botags_modal_form",
             modalConfig: {title: modalTitle},
             returnFocus: e.currentTarget
         });

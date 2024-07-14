@@ -17,12 +17,12 @@
 /**
  * This file contains the definition for the renderable classes for the booking instance
  *
- * @package   local_berta
+ * @package   local_urise
  * @copyright 2024 Georg Maißer {@link http://www.wunderbyte.at}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_berta\output;
+namespace local_urise\output;
 
 use html_writer;
 use moodle_url;
@@ -34,7 +34,7 @@ use templatable;
 /**
  * This class prepares data for displaying a booking option instance
  *
- * @package local_berta
+ * @package local_urise
  * @copyright 2024 Georg Maißer {@link http://www.wunderbyte.at}
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -85,7 +85,7 @@ class card_content_entities implements renderable, templatable {
         foreach ($this->data as $key => $value) {
 
             $item = [
-                'key' => get_string($key, 'local_berta')
+                'key' => get_string($key, 'local_urise')
             ];
 
             // We only have value & link at the time as types, but might have more at one point.

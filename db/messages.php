@@ -17,7 +17,7 @@
 /**
  * Plugin message providers are defined here.
  *
- * @package     local_berta
+ * @package     local_urise
  * @category    message
  * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -28,6 +28,6 @@ defined('MOODLE_INTERNAL') || die();
 $messageproviders = [
 
     'sendmessages' => array(
-        'capability' => 'local/berta:cansendmessages'
+        'capability' => 'local/urise:cansendmessages'
     ),
 ];

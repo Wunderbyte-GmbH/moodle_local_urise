@@ -14,13 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_berta;
+namespace local_urise;
 
 use context;
 /**
  * Helper functions for payment stuff.
  *
- * @package local_berta
+ * @package local_urise
  * @copyright 2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author Georg Maißer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -34,7 +34,7 @@ class permissions {
      * @param int $contextlevel
      * @return bool
      */
-    public static function has_capability_anywhere($capability = 'local/berta:viewdashboard', $contextlevel = CONTEXT_COURSECAT) {
+    public static function has_capability_anywhere($capability = 'local/urise:viewdashboard', $contextlevel = CONTEXT_COURSECAT) {
 
         global $DB;
 

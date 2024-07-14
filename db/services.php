@@ -17,7 +17,7 @@
 /**
  * Webservice to reload table.
  *
- * @package     local_berta
+ * @package     local_urise
  * @category    upgrade
  * @copyright   2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,15 +26,15 @@
 defined('MOODLE_INTERNAL') || die();
 
 $functions = [
-        'local_berta_get_parent_categories' => [
-                'classname' => 'local_berta\external\get_parent_categories',
+        'local_urise_get_parent_categories' => [
+                'classname' => 'local_urise\external\get_parent_categories',
                 'classpath' => '',
                 'description' => 'Get all parent categories',
                 'type' => 'read',
                 'capabilities' => '',
                 'ajax' => 1,
         ],
-        'local_berta_set_parent_content' => [
+        'local_urise_set_parent_content' => [
                                 'classname' => 'mod_booking\external\save_option_field_config',
                 'classpath' => '',
                 'description' => 'Set content of parent category',

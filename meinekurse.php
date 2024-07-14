@@ -18,7 +18,7 @@
  * An overview of all courses the currently logged in user
  * either teacher or has booked.
  *
- * @package local_berta
+ * @package local_urise
  * @copyright 2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @author Bernhard Fischer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -42,18 +42,18 @@ $isteacher = false;
 // Check if optionid is valid.
 $PAGE->set_context($context);
 
-$title = get_string('mycourses', 'local_berta');
-$archive = get_string('archive', 'local_berta');
+$title = get_string('mycourses', 'local_urise');
+$archive = get_string('archive', 'local_urise');
 
-$PAGE->set_url('/local/berta/meinekurse.php');
+$PAGE->set_url('/local/urise/meinekurse.php');
 // $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_pagelayout('base');
-$PAGE->add_body_class('local_berta-meinekurse');
+$PAGE->add_body_class('local_urise-meinekurse');
 
 // Get archive cmids.
 $archivecmids = [];
-$archivecmidsstring = get_config('local_berta', 'shortcodesarchivecmids');
+$archivecmidsstring = get_config('local_urise', 'shortcodesarchivecmids');
 if (!empty($archivecmidsstring)) {
     $archivecmidsstring = str_replace(';', ',', $archivecmidsstring);
     $archivecmidsstring = str_replace(' ', '', $archivecmidsstring);
@@ -66,14 +66,14 @@ echo '<div class="background d-flex justify-content-center align-items-center mt
                <div class="container mw-90 d-flex justify-content-center">
                     <div class="row mb-2 w-100 d-flex justify-content-center flex-column">
                     <h1 class="font-weight-light text-center mb-2 text-light">
-                    ' . get_string('myspace', 'local_berta') . '
+                    ' . get_string('myspace', 'local_urise') . '
                     </h1>
                </div>
           </div>
      </div>
 ';
 
-// echo html_writer::div(get_string('coursesibooked', 'local_berta'), 'h2 mt-3 mb-2 text-center');
+// echo html_writer::div(get_string('coursesibooked', 'local_urise'), 'h2 mt-3 mb-2 text-center');
 echo format_text("[unifiedmybookingslist cards=1 sort=1 filter=1 filterontop=1]", FORMAT_HTML);
 
 echo $OUTPUT->footer();

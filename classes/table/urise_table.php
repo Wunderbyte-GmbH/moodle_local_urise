@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_berta\table;
-use local_berta\shortcodes;
+namespace local_urise\table;
+use local_urise\shortcodes;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -46,7 +46,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Search results for managers are shown in a table (student search results use the template searchresults_student).
  */
-class berta_table extends wunderbyte_table {
+class urise_table extends wunderbyte_table {
 
     /** @var array $displayoptions */
     private $displayoptions = [];
@@ -88,7 +88,7 @@ class berta_table extends wunderbyte_table {
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
 
         if (!empty($settings->invisible)) {
-            return get_string('invisibleoption', 'local_berta');
+            return get_string('invisibleoption', 'local_urise');
         } else {
             return '';
         }
@@ -128,7 +128,7 @@ class berta_table extends wunderbyte_table {
                 $value['last'] = false;
             }
         }
-        $output = singleton_service::get_renderer('local_berta');
+        $output = singleton_service::get_renderer('local_urise');
         return $output->render_col_teacher($data);;
     }
 
@@ -250,7 +250,7 @@ class berta_table extends wunderbyte_table {
         }
 
         if (!$this->is_downloading()) {
-            $title = "<div class='berta-table-option-title'><a href='$url' target='_blank'>$title</a></div>";
+            $title = "<div class='urise-table-option-title'><a href='$url' target='_blank'>$title</a></div>";
         }
 
         return $title;
@@ -269,9 +269,9 @@ class berta_table extends wunderbyte_table {
         $fulldescription = $values->description;
         $ret = $fulldescription;
 
-        if (!empty(get_config('local_berta', 'collapsedescriptionmaxlength'))) {
+        if (!empty(get_config('local_urise', 'collapsedescriptionmaxlength'))) {
 
-            $maxlength = (int)get_config('local_berta', 'collapsedescriptionmaxlength');
+            $maxlength = (int)get_config('local_urise', 'collapsedescriptionmaxlength');
 
             // Show collapsible for long descriptions.
             $shortdescription = strip_tags($fulldescription, '<br>');
@@ -283,7 +283,7 @@ class berta_table extends wunderbyte_table {
                         <a data-toggle="collapse" href="#collapseDescription' . $values->id . '" role="button"
                             aria-expanded="false" aria-controls="collapseDescription">
                             <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;' .
-                            get_string('showdescription', 'local_berta') . '...</a>
+                            get_string('showdescription', 'local_urise') . '...</a>
                     </div>
                     <div class="collapse" id="collapseDescription' . $values->id . '">
                         <div class="card card-body border-1 mt-1 mb-1 mr-3">' . $fulldescription . '</div>
@@ -315,7 +315,7 @@ class berta_table extends wunderbyte_table {
         if (!empty($this->displayoptions['showmaxanwers'])) {
             $data->showmaxanswers = $this->displayoptions['showmaxanwers'];
         }
-        $output = singleton_service::get_renderer('local_berta');
+        $output = singleton_service::get_renderer('local_urise');
         return $output->render_col_availableplaces($data);
     }
 
@@ -406,7 +406,7 @@ class berta_table extends wunderbyte_table {
         // The error message should only be shown to admins.
         if (has_capability('moodle/site:config', $context)) {
 
-            $message = get_string('youneedcustomfieldsport', 'local_berta');
+            $message = get_string('youneedcustomfieldsport', 'local_urise');
 
             $message = "<div class='alert alert-danger'>$message</div>";
 
@@ -458,7 +458,7 @@ class berta_table extends wunderbyte_table {
         // The error message should only be shown to admins.
         if (has_capability('moodle/site:config', $context)) {
 
-            $message = get_string('youneedcustomfieldsport', 'local_berta');
+            $message = get_string('youneedcustomfieldsport', 'local_urise');
 
             $message = "<div class='alert alert-danger'>$message</div>";
 
@@ -495,7 +495,7 @@ class berta_table extends wunderbyte_table {
                 foreach ($botagsarray as $botag) {
                     if (!empty($botag)) {
                         $botagsstring .=
-                            "<span class='berta-table-botag rounded-sm bg-info text-light pl-2 pr-2 pt-1 pb-1 mr-1 d-inline-block text-center'>
+                            "<span class='urise-table-botag rounded-sm bg-info text-light pl-2 pr-2 pt-1 pb-1 mr-1 d-inline-block text-center'>
                             $botag
                             </span>";
                     } else {
@@ -560,7 +560,7 @@ class berta_table extends wunderbyte_table {
             // ...has booked this option.
             // ...is a teacher of this option.
             // ...has the system-wide "updatebooking" capability (admins).
-            $gotomoodlecourse = get_string('tocoursecontent', 'local_berta');
+            $gotomoodlecourse = get_string('tocoursecontent', 'local_urise');
             $ret = "<a href='$courseurl' target='_self' class='btn btn-primary p-1 ml-2 w-100'>
                 <i class='fa fa-graduation-cap fa-fw' aria-hidden='true'></i>&nbsp;&nbsp;$gotomoodlecourse
             </a>";
@@ -820,7 +820,7 @@ class berta_table extends wunderbyte_table {
 
             if (!$ret = $cache->get($cachekey)) {
                 $data = new \mod_booking\output\col_coursestarttime($optionid, $booking);
-                $output = singleton_service::get_renderer('local_berta');
+                $output = singleton_service::get_renderer('local_urise');
                 $ret = $output->render_col_coursestarttime($data);
                 $cache->set($cachekey, $ret);
             }
@@ -918,7 +918,7 @@ class berta_table extends wunderbyte_table {
 
                 // The simplified availability menu.
                 $alloweditavailability = (
-                    has_capability('local/berta:editavailability', $context) &&
+                    has_capability('local/urise:editavailability', $context) &&
                     (has_capability('mod/booking:updatebooking', $context) ||
                     (has_capability('mod/booking:addeditownoption', $context) && booking_check_if_teacher($values)) ||
                     (has_capability('mod/booking:limitededitownoption', $context) && booking_check_if_teacher($values)))
@@ -989,8 +989,8 @@ class berta_table extends wunderbyte_table {
             $data->showundocancel = null;
         }
 
-        $output = singleton_service::get_renderer('local_berta');
-        return $output->render_berta_bookingoption_menu($data);
+        $output = singleton_service::get_renderer('local_urise');
+        return $output->render_urise_bookingoption_menu($data);
     }
 
     /**

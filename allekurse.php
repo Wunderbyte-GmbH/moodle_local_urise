@@ -16,7 +16,7 @@
 /**
  * Add dates to option.
  *
- * @package local_berta
+ * @package local_urise
  * @copyright 2024 Georg Maißer <info@wunderbyte.at>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -38,14 +38,14 @@ $type = optional_param('type', 'liste', PARAM_TEXT);
 // Check if optionid is valid.
 $PAGE->set_context($context);
 
-$title = get_string('allcourses', 'local_berta');
+$title = get_string('allcourses', 'local_urise');
 
-$PAGE->set_url('/local/berta/allekurse.php');
+$PAGE->set_url('/local/urise/allekurse.php');
 $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_heading($title);
 $PAGE->set_pagelayout('base');
-$PAGE->add_body_class('local_berta-allcourses');
+$PAGE->add_body_class('local_urise-allcourses');
 
 echo $OUTPUT->header();
 

@@ -17,14 +17,14 @@
 /**
  * Plugin version and other meta-data are defined here.
  *
- * @package     local_berta
+ * @package     local_urise
  * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_berta';
+$plugin->component = 'local_urise';
 $plugin->release = '0.1.6';
 $plugin->version = 2024071700;
 $plugin->requires = 2022041900; // Requires this Moodle version. Current: Moodle 4.0.0.

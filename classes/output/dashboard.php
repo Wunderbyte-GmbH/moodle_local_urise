@@ -17,12 +17,12 @@
 /**
  * This file contains the definition for the renderable classes for the booking instance
  *
- * @package   local_berta
+ * @package   local_urise
  * @copyright 2024 Georg Maißer {@link http://www.wunderbyte.at}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_berta\output;
+namespace local_urise\output;
 
 use renderer_base;
 use renderable;
@@ -32,7 +32,7 @@ use templatable;
 /**
  * This class prepares data for displaying a booking option instance
  *
- * @package local_berta
+ * @package local_urise
  * @copyright 2024 Georg Maißer {@link http://www.wunderbyte.at}
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -78,13 +78,13 @@ class dashboard implements renderable, templatable {
      */
     public function card_sports() {
         global $PAGE;
-        $output = $PAGE->get_renderer('local_berta');
+        $output = $PAGE->get_renderer('local_urise');
         $data = new card_content_sports();
 
         $card = new card(
-            get_string('listofsports', 'local_berta'),
+            get_string('listofsports', 'local_urise'),
             $output->render_card_content($data),
-            get_string('listofsports_desc', 'local_berta'),
+            get_string('listofsports_desc', 'local_urise'),
             'bg-light'
         );
         $this->add_card($card);
@@ -97,13 +97,13 @@ class dashboard implements renderable, templatable {
      */
     public function card_entities() {
         global $PAGE;
-        $output = $PAGE->get_renderer('local_berta');
+        $output = $PAGE->get_renderer('local_urise');
         $data = new card_content_entities();
 
         $card = new card(
-            get_string('entities', 'local_berta'),
+            get_string('entities', 'local_urise'),
             $output->render_card_content($data),
-            get_string('numberofentities_desc', 'local_berta'),
+            get_string('numberofentities_desc', 'local_urise'),
             'bg-light'
         );
         $this->add_card($card);
@@ -117,13 +117,13 @@ class dashboard implements renderable, templatable {
     public function card_stats1() {
         global $PAGE;
 
-        $output = $PAGE->get_renderer('local_berta');
+        $output = $PAGE->get_renderer('local_urise');
         $data = new card_content_stats1();
 
         $card = new card(
-            get_string('numberofcourses', 'local_berta'),
+            get_string('numberofcourses', 'local_urise'),
             $output->render_card_content($data),
-            get_string('numberofcourses_desc', 'local_berta'),
+            get_string('numberofcourses_desc', 'local_urise'),
             'bg-light'
         );
         $this->add_card($card);
@@ -137,13 +137,13 @@ class dashboard implements renderable, templatable {
     public function card_settings() {
         global $PAGE;
 
-        $output = $PAGE->get_renderer('local_berta');
+        $output = $PAGE->get_renderer('local_urise');
         $data = new card_content_settings();
 
         $card = new card(
-            get_string('settingsandreports', 'local_berta'),
+            get_string('settingsandreports', 'local_urise'),
             $output->render_card_content($data),
-            get_string('settingsandreports_desc', 'local_berta'),
+            get_string('settingsandreports_desc', 'local_urise'),
             'bg-light'
         );
         $this->add_card($card);

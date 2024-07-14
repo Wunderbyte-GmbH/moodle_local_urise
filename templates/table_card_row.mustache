@@ -12,7 +12,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template local_berta/table
+    @template local_urise/table
     Template which defines a mooduell view page.
     Classes required for JS:
     * none
@@ -203,11 +203,11 @@
 </div>
 {{^norecords}}
 {{#js}}
-  require(['local_berta/easyavailabilitymodal'], function(fn) {
+  require(['local_urise/easyavailabilitymodal'], function(fn) {
     fn.init(
       '{{#optionid}}{{#value}}{{{value}}}{{/value}}{{/optionid}}',
       'a.editavailability[data-optionid="{{#optionid}}{{#value}}{{{.}}}{{/value}}{{/optionid}}"]',
-      '{{#str}} editavailabilityanddescription, local_berta {{/str}}',
+      '{{#str}} editavailabilityanddescription, local_urise {{/str}}',
     );
   });
 {{/js}}

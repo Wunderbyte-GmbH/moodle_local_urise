@@ -28,9 +28,9 @@
     <h3>{{ store.state.strings.route_not_found }}</h3>
 
     <div class="learningpaths-edit-add">
-      <router-link 
-        :to="{ name: 'learningpaths-edit-overview' }" 
-        tag="button" 
+      <router-link
+        :to="{ name: 'learningpaths-edit-overview' }"
+        tag="button"
         class="btn btn-primary"
       >
         {{ store.state.strings.btnreload }}
@@ -48,7 +48,7 @@ const router = useRouter()
 
 onMounted(() => {
   if(router.value == undefined && store.state.view){
-        router.push({ name: 'berta-overview' });
+        router.push({ name: 'urise-overview' });
     }
 });
 

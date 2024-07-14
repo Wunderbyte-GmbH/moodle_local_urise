@@ -15,7 +15,7 @@
 
 /**
  *
- * @package     local_berta
+ * @package     local_urise
  * @author      Jacob Viertel
  * @copyright  2023 Wunderbyte GmbH
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -29,31 +29,31 @@ import Notifications from '@kyvg/vue3-notification'
 import router from './router/router'
 
 // Enables the Composition API
-window.__VUE_OPTIONS_API__ = true; 
+window.__VUE_OPTIONS_API__ = true;
 // Disable devtools in production
-window.__VUE_PROD_DEVTOOLS__ = false; 
+window.__VUE_PROD_DEVTOOLS__ = false;
 
 function init() {
     // We need to overwrite the variable for lazy loading.
     /* eslint-disable no-undef */
-    __webpack_public_path__ = M.cfg.wwwroot + '/local/berta/amd/build/';
+    __webpack_public_path__ = M.cfg.wwwroot + '/local/urise/amd/build/';
     /* eslint-enable no-undef */
 
-    const localBertaAppElements = document.getElementsByName('local-berta-app');
-    localBertaAppElements.forEach((localBertaAppElement) => {
-        if (!localBertaAppElement.__vue_app__) {
+    const localuriseAppElements = document.getElementsByName('local-urise-app');
+    localuriseAppElements.forEach((localuriseAppElement) => {
+        if (!localuriseAppElement.__vue_app__) {
             const app = createApp({});
             app.use(VueInputAutowidth);
             app.use(Notifications);
 
             const store = createAppStore();
             store.dispatch('loadComponentStrings');
-        
+
             app.use(store);
             app.use(router);
-        
-            app.mount(localBertaAppElement);
-            router.push({ name: 'berta-overview' });
+
+            app.mount(localuriseAppElement);
+            router.push({ name: 'urise-overview' });
         }
     });
 }

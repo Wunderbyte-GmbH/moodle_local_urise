@@ -16,12 +16,12 @@
 /**
  * Test the contract formula.
  *
- * @package local_berta
+ * @package local_urise
  * @copyright 2024 Georg Maißer <info@wunderbyte.at>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use local_berta\contractmanager;
+use local_urise\contractmanager;
 
 require_once(__DIR__ . '/../../../config.php');
 
@@ -39,14 +39,14 @@ if (!$context = context_system::instance()) {
 }
 $PAGE->set_context($context);
 
-$title = get_string('contractformulatest', 'local_berta');
+$title = get_string('contractformulatest', 'local_urise');
 
-$PAGE->set_url('/local/berta/tests/contractformula_test.php');
+$PAGE->set_url('/local/urise/tests/contractformula_test.php');
 $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_heading($title);
 $PAGE->set_pagelayout('standard');
-$PAGE->add_body_class('local_berta-contractformula-test');
+$PAGE->add_body_class('local_urise-contractformula-test');
 
 echo $OUTPUT->header();
 

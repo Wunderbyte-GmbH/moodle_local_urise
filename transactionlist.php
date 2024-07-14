@@ -15,12 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    local_berta
+ * @package    local_urise
  * @copyright  2024 Wunderbyte GmbH
  * @author     Christian Badusch
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-use local_berta\output\transactionslist;
+use local_urise\output\transactionslist;
 
 require_once('../../config.php');
 require_login();
@@ -31,15 +31,15 @@ if (!$context = context_system::instance()) {
 }
 
 $PAGE->set_context($context);
-$title = get_string('pluginname', 'local_berta');
+$title = get_string('pluginname', 'local_urise');
 $pagetitle = $title;
-$url = new moodle_url("/local/berta/transactionlist.php");
+$url = new moodle_url("/local/urise/transactionlist.php");
 
 $PAGE->set_url($url);
 $PAGE->set_title($title);
-$PAGE->set_heading(get_string('transactionslist', 'local_berta'));
+$PAGE->set_heading(get_string('transactionslist', 'local_urise'));
 
-$output = $PAGE->get_renderer('local_berta');
+$output = $PAGE->get_renderer('local_urise');
 
 echo $output->header();
 

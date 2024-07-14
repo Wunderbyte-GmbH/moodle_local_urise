@@ -17,7 +17,7 @@
 /**
  * Plugin administration pages are defined here.
  *
- * @package     local_berta
+ * @package     local_urise
  * @category    admin
  * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -32,15 +32,15 @@ if ($hassiteconfig) {
 
      // TODO: Define the plugin settings page - {@link https://docs.moodle.org/dev/Admin_settings}.
 
-     $settings = new admin_settingpage('berta', '');
-     $ADMIN->add('localplugins', new admin_category('local_berta', get_string('pluginname', 'local_berta')));
-     $ADMIN->add('local_berta', $settings);
+     $settings = new admin_settingpage('urise', '');
+     $ADMIN->add('localplugins', new admin_category('local_urise', get_string('pluginname', 'local_urise')));
+     $ADMIN->add('local_urise', $settings);
 
     if ($ADMIN->fulltree) {
         $settings->add(
             new admin_setting_heading('shortcodessetdefaultinstance',
-                get_string('shortcodessetdefaultinstance', 'local_berta'),
-                get_string('shortcodessetdefaultinstancedesc', 'local_berta')));
+                get_string('shortcodessetdefaultinstance', 'local_urise'),
+                get_string('shortcodessetdefaultinstancedesc', 'local_urise')));
 
         $allowedinstances = [];
         $multiinstances = [];
@@ -67,21 +67,21 @@ if ($hassiteconfig) {
             // If we have no instances, show an explanation text.
             $settings->add(new admin_setting_description(
                 'shortcodesnobookinginstance',
-                get_string('shortcodesnobookinginstance', 'local_berta'),
-                get_string('shortcodesnobookinginstancedesc', 'local_berta')
+                get_string('shortcodesnobookinginstance', 'local_urise'),
+                get_string('shortcodesnobookinginstancedesc', 'local_urise')
             ));
         } else {
             // Show select for cmids of booking instances.
             $settings->add(
-                new admin_setting_configselect('local_berta/shortcodessetinstance',
-                    get_string('shortcodessetinstance', 'local_berta'),
-                    get_string('shortcodessetinstancedesc', 'local_berta'),
+                new admin_setting_configselect('local_urise/shortcodessetinstance',
+                    get_string('shortcodessetinstance', 'local_urise'),
+                    get_string('shortcodessetinstancedesc', 'local_urise'),
                     $defaultcmid, $allowedinstances));
         }
 
         if (!empty($multiinstances)) {
             // Booking default instances.
-            $componentname = 'local_berta';
+            $componentname = 'local_urise';
             $settings->add(new admin_setting_configmultiselect(
                     $componentname . '/multibookinginstances',
                     get_string('multibookinginstances', $componentname),
@@ -92,52 +92,52 @@ if ($hassiteconfig) {
         }
 
         $settings->add(
-            new admin_setting_configtext('local_berta/shortcodesarchivecmids',
-                get_string('shortcodesarchivecmids', 'local_berta'),
-                get_string('shortcodesarchivecmids_desc', 'local_berta'), ''));
+            new admin_setting_configtext('local_urise/shortcodesarchivecmids',
+                get_string('shortcodesarchivecmids', 'local_urise'),
+                get_string('shortcodesarchivecmids_desc', 'local_urise'), ''));
 
         // Shortcode lists.
         $settings->add(
             new admin_setting_heading('shortcodelists',
-                get_string('shortcodelists', 'local_berta'),
-                get_string('shortcodelists_desc', 'local_berta')));
+                get_string('shortcodelists', 'local_urise'),
+                get_string('shortcodelists_desc', 'local_urise')));
 
         $settings->add(
-            new admin_setting_configcheckbox('local_berta/shortcodelists_showdescriptions',
-                get_string('shortcodelists_showdescriptions', 'local_berta'), '', 0));
+            new admin_setting_configcheckbox('local_urise/shortcodelists_showdescriptions',
+                get_string('shortcodelists_showdescriptions', 'local_urise'), '', 0));
 
         $settings->add(
-            new admin_setting_configcheckbox('local_berta/bertashortcodesshowstart',
-                get_string('bertashortcodes:showstart', 'local_berta'), '', 0));
+            new admin_setting_configcheckbox('local_urise/uriseshortcodesshowstart',
+                get_string('uriseshortcodes:showstart', 'local_urise'), '', 0));
 
         $settings->add(
-            new admin_setting_configcheckbox('local_berta/bertashortcodesshowend',
-                get_string('bertashortcodes:showend', 'local_berta'), '', 0));
+            new admin_setting_configcheckbox('local_urise/uriseshortcodesshowend',
+                get_string('uriseshortcodes:showend', 'local_urise'), '', 0));
 
         $settings->add(
-            new admin_setting_configcheckbox('local_berta/bertashortcodesshowbookablefrom',
-                get_string('bertashortcodes:showbookablefrom', 'local_berta'), '', 0));
+            new admin_setting_configcheckbox('local_urise/uriseshortcodesshowbookablefrom',
+                get_string('uriseshortcodes:showbookablefrom', 'local_urise'), '', 0));
 
         $settings->add(
-            new admin_setting_configcheckbox('local_berta/bertashortcodesshowbookableuntil',
-                get_string('bertashortcodes:showbookableuntil', 'local_berta'), '', 0));
+            new admin_setting_configcheckbox('local_urise/uriseshortcodesshowbookableuntil',
+                get_string('uriseshortcodes:showbookableuntil', 'local_urise'), '', 0));
 
-        $showfiltercoursetimesetting = new admin_setting_configcheckbox('local_berta/bertashortcodesshowfiltercoursetime',
-            get_string('bertashortcodes:showfiltercoursetime', 'local_berta'), '', 0);
+        $showfiltercoursetimesetting = new admin_setting_configcheckbox('local_urise/uriseshortcodesshowfiltercoursetime',
+            get_string('uriseshortcodes:showfiltercoursetime', 'local_urise'), '', 0);
         $showfiltercoursetimesetting->set_updatedcallback(function() {
             cache_helper::purge_by_event('setbackoptionstable');
         });
         $settings->add($showfiltercoursetimesetting);
 
-        $showfilterbookingtimesetting = new admin_setting_configcheckbox('local_berta/bertashortcodesshowfilterbookingtime',
-            get_string('bertashortcodes:showfilterbookingtime', 'local_berta'), '', 0);
+        $showfilterbookingtimesetting = new admin_setting_configcheckbox('local_urise/uriseshortcodesshowfilterbookingtime',
+            get_string('uriseshortcodes:showfilterbookingtime', 'local_urise'), '', 0);
         $showfilterbookingtimesetting->set_updatedcallback(function() {
             cache_helper::purge_by_event('setbackoptionstable');
         });
         $settings->add($showfilterbookingtimesetting);
 
         $collapsedescriptionoptions = [
-            0 => get_string('collapsedescriptionoff', 'local_berta'),
+            0 => get_string('collapsedescriptionoff', 'local_urise'),
             100 => "100",
             200 => "200",
             300 => "300",
@@ -149,21 +149,21 @@ if ($hassiteconfig) {
             900 => "900",
         ];
         $settings->add(
-            new admin_setting_configselect('local_berta/collapsedescriptionmaxlength',
-                get_string('collapsedescriptionmaxlength', 'local_berta'),
-                get_string('collapsedescriptionmaxlength_desc', 'local_berta'),
+            new admin_setting_configselect('local_urise/collapsedescriptionmaxlength',
+                get_string('collapsedescriptionmaxlength', 'local_urise'),
+                get_string('collapsedescriptionmaxlength_desc', 'local_urise'),
                 300, $collapsedescriptionoptions));
 
         // CONTRACT MANAGEMENT.
         // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
         /* $settings->add(
             new admin_setting_heading('contractmanagement_heading',
-                get_string('contractmanagementsettings', 'local_berta'),
-                get_string('contractmanagementsettings_desc', 'local_berta')));
+                get_string('contractmanagementsettings', 'local_urise'),
+                get_string('contractmanagementsettings_desc', 'local_urise')));
 
         $settings->add(
-            new admin_setting_configtextarea('local_berta/contractformula',
-                get_string('contractformula', 'local_berta'),
-                get_string('contractformula_desc', 'local_berta'), '', PARAM_TEXT, 60, 10)); */
+            new admin_setting_configtextarea('local_urise/contractformula',
+                get_string('contractformula', 'local_urise'),
+                get_string('contractformula_desc', 'local_urise'), '', PARAM_TEXT, 60, 10)); */
     }
 }
