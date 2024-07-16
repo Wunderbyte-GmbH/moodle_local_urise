@@ -33,6 +33,7 @@ use context_module;
 use dml_exception;
 use local_wunderbyte_table\filters\types\hierarchicalfilter;
 use local_wunderbyte_table\wunderbyte_table;
+use mod_booking\customfield\booking_handler;
 use mod_booking\output\page_allteachers;
 use local_berta\output\userinformation;
 use local_berta\table\berta_table;
@@ -566,10 +567,6 @@ class shortcodes {
             return get_string('nobookinginstancesselected', 'local_berta');
         }
 
-        if (!isset($args['organisation']) || !$category = ($args['organisation'])) {
-            $organisation = '';
-        }
-
         if (!isset($args['image']) || !$showimage = ($args['image'])) {
             $showimage = false;
         }
@@ -599,9 +596,7 @@ class shortcodes {
         $table->showcountlabel = $args['countlabel'];
         $wherearray = ['bookingid' => $bookingids];
 
-        if (!empty($organisation)) {
-            $wherearray['organisation'] = $category;
-        };
+        self::set_wherearray_from_arguments($args, $wherearray);
 
         // If we want to find only the teacher relevant options, we chose different sql.
         if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
@@ -1407,6 +1402,38 @@ class shortcodes {
             // Get rid of quotation marks.
             $value = str_replace('"', '', $value);
             $value = str_replace("'", "", $value);
+        }
+    }
+
+    /**
+     * Modify there wherearray via arguments.
+     *
+     * @param array $args
+     *
+     * @return void
+     *
+     */
+    private static function set_wherearray_from_arguments(array &$args, &$wherearray) {
+
+        $customfields = booking_handler::get_customfields();
+        // Set given customfields (shortnames) as arguments.
+        $fields = [];
+        if (!empty($customfields) && !empty($args)) {
+            foreach ($args as $key => $value) {
+                foreach ($customfields as $customfield) {
+                    if ($customfield->shortname == $key) {
+                        $fields[$key] = $value;
+                        break;
+                    }
+                }
+            }
+        }
+        if (!empty($fields)) {
+            foreach ($fields as $customfield => $argument) {
+                $argument = strip_tags($argument);
+                $argument = trim($argument);
+                $wherearray[$customfield] = $argument;
+            }
         }
     }
 }
