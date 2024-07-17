@@ -272,3 +272,6 @@ $string['gotoprofile'] = "Profile";
 $string['buchungsbedingungen'] = "Booking requirements";
 $string['orgacontact'] = "Contactdetails responsible organisation";
 $string['aboutoffer'] = "About the offer";
+
+$string['zgcommunities'] = "Interesting for";
+$string['organisationfilter'] = "Hosted by";

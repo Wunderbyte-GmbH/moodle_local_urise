@@ -1112,12 +1112,15 @@ class shortcodes {
      */
     private static function define_filtercolumns(&$table) {
 
-        $hierarchicalfilter = new hierarchicalfilter('organisation', get_string('organisation', 'local_berta'));
-        $hierarchicalfilter->add_options(self::ORGANISATIONEN);
-        $table->add_filter($hierarchicalfilter);
+        $standardfilter = new standardfilter('zgcommunities', get_string('zgcommunities', 'local_berta'));
+        $table->add_filter($standardfilter);
 
         $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_berta'));
         $hierarchicalfilter->add_options(self::KOMPETENZEN);
+        $table->add_filter($hierarchicalfilter);
+
+        $hierarchicalfilter = new hierarchicalfilter('organisation', get_string('organisationfilter', 'local_berta'));
+        $hierarchicalfilter->add_options(self::ORGANISATIONEN);
         $table->add_filter($hierarchicalfilter);
 
         $standardfilter = new standardfilter('dayofweek', get_string('dayofweek', 'local_berta'));
