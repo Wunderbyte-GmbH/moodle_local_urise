@@ -322,9 +322,8 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     width: fit-content !important;
 }
 
-.booking-button-area .booking-button-toparea {
+/* .booking-button-area .booking-button-toparea {
     border-radius: 0.5rem;
-    /* eslint-disable */
     height: 2.5rem !important;
     padding: 0 !important;
     margin: 0 0.25rem !important;
@@ -333,8 +332,7 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     display: flex;
     justify-content: center;
     align-items: center;
-    /* eslint-enable */
-}
+} */
 
 /* eslint-disable */
 .allprices {
