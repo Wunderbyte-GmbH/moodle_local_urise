@@ -1138,9 +1138,6 @@ class shortcodes {
         $standardfilter = new standardfilter('location', get_string('location', 'mod_booking'));
         $table->add_filter($standardfilter);
 
-        $standardfilter = new standardfilter('botags', get_string('tags', 'core'));
-        $table->add_filter($standardfilter);
-
         if (get_config('local_berta', 'bertashortcodesshowfiltercoursetime')) {
 
             $datepicker = new datepicker(
