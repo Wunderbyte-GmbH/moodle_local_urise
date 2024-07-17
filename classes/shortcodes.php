@@ -543,7 +543,7 @@ class shortcodes {
       * @param string|null $content
       * @param object $env
       * @param Closure $next
-      * @return void
+      * @return string
       */
     public static function unifiedcards($shortcode, $args, $content, $env, $next) {
 
@@ -579,8 +579,6 @@ class shortcodes {
             $args['filterontop'] = false;
         }
 
-        $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
-
         if (
             !isset($args['perpage'])
             || !is_int((int)$args['perpage'])
@@ -591,23 +589,32 @@ class shortcodes {
             $infinitescrollpage = 0;
         }
 
-        $table = self::inittableforcourses($booking);
+        $table = self::inittableforcourses();
 
         $table->showcountlabel = $args['countlabel'];
         $wherearray = ['bookingid' => $bookingids];
 
-        self::set_wherearray_from_arguments($args, $wherearray);
+        $additionalwhere = self::set_wherearray_from_arguments($args, $wherearray) ?? '';
+
+        if (!empty($additionalwhere)) {
+            $additionalwhere .= " AND ";
+        }
+        // Additonal where has to be added here. We add the param later.
+        $additionalwhere .= " (courseendtime > :timenow OR courseendtime = 0) ";
 
         // If we want to find only the teacher relevant options, we chose different sql.
         if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
             $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
             list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray);
+                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, null, [], $additionalwhere);
         } else {
 
             list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray);
+                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, null, [], $additionalwhere);
         }
+
+        // Param has to be added after we got back params array.
+        $params['timenow'] = strtotime('today 00:00');
 
         $table->set_filter_sql($fields, $from, $where, $filter, $params);
 
@@ -1410,30 +1417,44 @@ class shortcodes {
      *
      * @param array $args
      *
-     * @return void
+     * @return string
      *
      */
     private static function set_wherearray_from_arguments(array &$args, &$wherearray) {
 
+        global $DB;
+
         $customfields = booking_handler::get_customfields();
         // Set given customfields (shortnames) as arguments.
         $fields = [];
+        $additonalwhere = '';
         if (!empty($customfields) && !empty($args)) {
             foreach ($args as $key => $value) {
                 foreach ($customfields as $customfield) {
                     if ($customfield->shortname == $key) {
-                        $fields[$key] = $value;
+                        $configdata = json_decode($customfield->configdata ?? '[]');
+
+                        if (!empty($configdata->multiselect)) {
+                            if (!empty($additonalwhere)) {
+                                $additonalwhere .= " AND ";
+                            }
+
+                            $value = "'%$value%'";
+
+                            $additonalwhere .= " $key LIKE $value ";
+
+                        } else {
+                            $argument = strip_tags($argument);
+                            $argument = trim($argument);
+                            $wherearray[$key] = $value;
+                        }
+
                         break;
                     }
                 }
             }
         }
-        if (!empty($fields)) {
-            foreach ($fields as $customfield => $argument) {
-                $argument = strip_tags($argument);
-                $argument = trim($argument);
-                $wherearray[$customfield] = $argument;
-            }
-        }
+
+        return $additonalwhere;
     }
 }
