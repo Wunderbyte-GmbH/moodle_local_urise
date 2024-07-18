@@ -588,7 +588,7 @@ class shortcodes {
         self::fix_args($args);
         $booking = self::get_booking($args);
 
-        $bookingids = explode(',', get_config('local_berta', 'multibookinginstances'));
+        $bookingids = explode(',', get_config('local_urise', 'multibookinginstances'));
         $bookingids = array_filter($bookingids, fn($a) => !empty($a));
 
         if (empty($bookingids)) {
@@ -670,12 +670,12 @@ class shortcodes {
 
         if ($renderascard) {
             self::generate_table_for_cards($table, $args);
-            $table->tabletemplate = 'local_berta/table_card';
+            $table->tabletemplate = 'local_urise/table_card';
         } else {
             self::generate_table_for_list($table, $args);
             $table->cardsort = true;
             $table->infinitescroll = $infinitescrollpage;
-            $table->tabletemplate = 'local_berta/table_list';
+            $table->tabletemplate = 'local_urise/table_list';
         }
 
         $table->showfilterontop = $args['filterontop'];
@@ -1044,18 +1044,18 @@ class shortcodes {
      */
     private static function define_filtercolumns(&$table) {
 
-        $standardfilter = new standardfilter('zgcommunities', get_string('zgcommunities', 'local_berta'));
+        $standardfilter = new standardfilter('zgcommunities', get_string('zgcommunities', 'local_urise'));
         $table->add_filter($standardfilter);
 
         $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_urise'));
         $hierarchicalfilter->add_options(self::KOMPETENZEN);
         $table->add_filter($hierarchicalfilter);
 
-        $hierarchicalfilter = new hierarchicalfilter('organisation', get_string('organisationfilter', 'local_berta'));
+        $hierarchicalfilter = new hierarchicalfilter('organisation', get_string('organisationfilter', 'local_urise'));
         $hierarchicalfilter->add_options(self::ORGANISATIONEN);
         $table->add_filter($hierarchicalfilter);
 
-        $standardfilter = new standardfilter('dayofweek', get_string('dayofweek', 'local_berta'));
+        $standardfilter = new standardfilter('dayofweek', get_string('dayofweek', 'local_urise'));
         $standardfilter->add_options([
             'monday' => get_string('monday', 'mod_booking'),
             'tuesday' => get_string('tuesday', 'mod_booking'),
@@ -1070,7 +1070,7 @@ class shortcodes {
         $standardfilter = new standardfilter('location', get_string('location', 'mod_booking'));
         $table->add_filter($standardfilter);
 
-        if (get_config('local_berta', 'bertashortcodesshowfiltercoursetime')) {
+        if (get_config('local_urise', 'uriseshortcodesshowfiltercoursetime')) {
 
             $datepicker = new datepicker(
                 'coursestarttime',
