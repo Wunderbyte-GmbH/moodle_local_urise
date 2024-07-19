@@ -1020,7 +1020,7 @@ class shortcodes {
         $table->define_baseurl($baseurl->out());
         $table->cardsort = true;
         // Without defining sorting won't work!
-        $table->define_columns(['titleprefix']);
+        $table->define_columns(['titleprefix', 'coursestarttime', 'courseendtime', 'location', 'bookingopeningtime', 'bookingclosingtime']);
         return $table;
     }
 
@@ -1172,15 +1172,17 @@ class shortcodes {
             $table->define_sortablecolumns($sortablecolumns);
         }
 
+        $sortorder = $table->return_current_sortorder();
+
         $defaultorder = SORT_ASC; // Default.
         if (!empty($args['sortorder'])) {
             if (strtolower($args['sortorder']) === "desc") {
                 $defaultorder = SORT_DESC;
             }
         }
+
         if (!empty($args['sortby'])) {
             $table->sortable(true, $args['sortby'], $defaultorder);
-            $table->define_sortablecolumns([$args['sortby']]);
         } else {
             $table->sortable(true, 'text', $defaultorder);
         }
