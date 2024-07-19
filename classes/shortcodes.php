@@ -711,14 +711,6 @@ class shortcodes {
 
         self::fix_args($args);
 
-        $bookingids = explode(',', get_config('local_urise', 'multibookinginstances'));
-
-        $bookingids = array_filter($bookingids, fn($a) => !empty($a));
-
-        if (empty($bookingids)) {
-            return get_string('nobookinginstancesselected', 'local_urise');
-        }
-
         if (!isset($args['category']) || !$category = ($args['category'])) {
             $category = '';
         }
@@ -753,8 +745,6 @@ class shortcodes {
 
         $table->showcountlabel = $args['countlabel'];
         $table->showreloadbutton = $args['reload'];
-
-        $wherearray = ['bookingid' => $bookingids];
 
         if (!empty($category)) {
             $wherearray['organisation'] = $category;
@@ -1190,6 +1180,7 @@ class shortcodes {
         }
         if (!empty($args['sortby'])) {
             $table->sortable(true, $args['sortby'], $defaultorder);
+            $table->define_sortablecolumns([$args['sortby']]);
         } else {
             $table->sortable(true, 'text', $defaultorder);
         }
