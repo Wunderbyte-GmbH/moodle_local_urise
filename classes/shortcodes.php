@@ -632,11 +632,11 @@ class shortcodes {
             $organisation = '';
         }
 
+        $wherearray = ['bookingid' => $bookingids];
+
         if (!empty($organisation)) {
             $wherearray['organisation'] = $category;
         }
-
-        $wherearray = ['bookingid' => $bookingids];
 
         // Additional where condition for both card and list views
         $additionalwhere = self::set_wherearray_from_arguments($args, $wherearray) ?? '';
@@ -745,6 +745,9 @@ class shortcodes {
 
         $table->showcountlabel = $args['countlabel'];
         $table->showreloadbutton = $args['reload'];
+        
+
+        $wherearray = [];
 
         if (!empty($category)) {
             $wherearray['organisation'] = $category;
@@ -770,7 +773,6 @@ class shortcodes {
                     ]
                 );
         } else {
-
             list($fields, $from, $where, $params, $filter) =
                 booking::get_options_filter_sql(0,
                     0,
