@@ -16,7 +16,7 @@
 /**
  * Validate if the string does excist.
  *
- * @package     local_urise
+ * @package     local_berta
  * @author      Jacob Viertel
  * @copyright  2023 Wunderbyte GmbH
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -38,6 +38,8 @@ export function createAppStore() {
                 tabs: [],
                 content: [],
                 configlist: [],
+                compareConfiglist: [],
+                cmid: null,
             };
         },
         mutations: {
@@ -53,6 +55,10 @@ export function createAppStore() {
             },
             setConfigList(state, configlist) {
               state.configlist = configlist;
+              state.compareConfiglist = JSON.parse(JSON.stringify(configlist));
+            },
+            setCM(state, cmid) {
+              state.cmid = cmid;
             },
         },
         actions: {
@@ -68,14 +74,27 @@ export function createAppStore() {
                 if (cachedStrings) {
                     context.commit('setStrings', JSON.parse(cachedStrings));
                 } else {
-                    const request = {
+                    const requests = [
+                        {
                         methodname: 'core_get_component_strings',
                         args: {
-                            'component': 'local_adele',
+                            'component': 'local_urise',
                             lang,
-                        },
-                    };
-                    const loadedStrings = await moodleAjax.call([request])[0];
+                        }
+                      },
+                      {
+                          methodname: 'core_get_component_strings',
+                          args: {
+                              'component': 'mod_booking',
+                              lang,
+                          }
+                      }
+                    ];
+                    const loadedStrings1 = await moodleAjax.call([requests[0]])[0];
+                    const loadedStrings2 = await moodleAjax.call([requests[1]])[0];
+
+                    // Urise overrides mod_booking
+                    const loadedStrings = loadedStrings2.concat(loadedStrings1);
                     let strings = {};
                     loadedStrings.forEach((s) => {
                         strings[s.stringid] = s.string;
@@ -83,29 +102,51 @@ export function createAppStore() {
                     context.commit('setStrings', strings);
                     moodleStorage.set(cacheKey, JSON.stringify(strings));
                 }
-
             },
-            async fetchTab(context, index) {
-                const params = { coursecategoryid: index };
-                const content = await ajax('local_urise_get_parent_categories', params);
-                if (index === 0) {
+            async fetchTab(context, params) {
+                const content = await ajax('local_urise_get_parent_categories', {
+                  coursecategoryid: params.coursecategoryid
+                });
+                if (params.coursecategoryid === 0) {
                     context.commit('setTabs', content);
                 }
-
                 // we get back an array, so we need to get the first element for tab.
                 const tabcontent = content[0];
+
+                // We have all the Data at once.
+                // if (content.length > 1) {
+                    
+                // }
                 if (tabcontent.json.length > 3) {
                   tabcontent.json = JSON.parse(tabcontent.json)
+                } else if (content.length > 1) {
+                  // combine all arrays for general:
+                  let jsonCombined = [];
+                  content.forEach((ce, index) => {
+                    if (ce.json.length > 3) {
+                        const parsejson =  JSON.parse(ce.json);
+                        jsonCombined.push(parsejson);
+                    }
+                  });
+                  content[0].json = jsonCombined;
                 }
                 context.commit('setContent', tabcontent);
-                const configlist = await ajax('mod_booking_get_option_field_config', params);
+                const configlist = await ajax('mod_booking_get_option_field_config', {
+                  contextid: params.contextid
+                });
                 context.commit('setConfigList', configlist);
+                return configlist;
             },
             async setParentContent(context, index) {
-              return await ajax('local_urise_set_parent_content', {
+              return await ajax('mod_booking_set_parent_content', {
                 capability: index.capability,
                 id: index.id,
                 json: index.json,
+              });
+            },
+            async setCheckedBookingInstance(context, index) {
+              await ajax('mod_booking_set_checked_booking_instance', {
+                id: index.bookingid,
               });
             },
         }

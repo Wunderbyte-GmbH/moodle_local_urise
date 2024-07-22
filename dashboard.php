@@ -57,9 +57,9 @@ $PAGE->add_body_class('local_urise-dashboard');
 
 echo $OUTPUT->header();
 
-$PAGE->requires->js_call_amd('mod_booking/app-lazy', 'init');
+$PAGE->requires->js_call_amd('local_urise/app-lazy', 'init');
 echo <<<EOT
-    <div id="mod-booking-app" name="mod-booking-app">
+    <div id="local-urise-app" name="local-urise-app">
     <router-view></router-view>
     </div>
   EOT;

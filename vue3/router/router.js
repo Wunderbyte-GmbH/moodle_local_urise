@@ -24,23 +24,29 @@
 // Import needed libraries
 import { createRouter, createWebHashHistory } from 'vue-router';
 import notFound from '../components/NotFound';
-import uriseDashboard from '../components/uriseDashboard'
+import bookingDashboard from '../components/BookingDashboard'
+import configForm from '../components/dashboard/ConfigForm'
 
 // All available routes
 const routes = [
     {
-        path: '/urise',
+        path: '/booking',
         redirect: {
-            name: 'urise-overview'
+            name: 'booking-overview'
         }
     },
     {
-        path: '/urise/overview',
-        component: uriseDashboard,
-        name: 'urise-overview',
+        path: '/booking/overview',
+        component: bookingDashboard,
+        name: 'booking-overview',
     },
     {
-        path: '/urise/:catchAll(.*)',
+        path: '/booking/context',
+        component: configForm,
+        name: 'booking-context',
+    },
+    {
+        path: '/booking/:catchAll(.*)',
         name: 'not-found',
         component: notFound,
     },

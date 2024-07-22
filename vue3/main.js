@@ -15,7 +15,7 @@
 
 /**
  *
- * @package     local_urise
+ * @package     local_berta
  * @author      Jacob Viertel
  * @copyright  2023 Wunderbyte GmbH
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,9 +25,10 @@
 import { createApp } from 'vue';
 import VueInputAutowidth from 'vue-input-autowidth';
 import { createAppStore } from './store';
-import Notifications from '@kyvg/vue3-notification'
-import router from './router/router'
-
+import Notifications from '@kyvg/vue3-notification';
+import router from './router/router';
+import './scss/custom.scss';
+import vSelect from "vue-select";
 // Enables the Composition API
 window.__VUE_OPTIONS_API__ = true;
 // Disable devtools in production
@@ -38,24 +39,33 @@ function init() {
     /* eslint-disable no-undef */
     __webpack_public_path__ = M.cfg.wwwroot + '/local/urise/amd/build/';
     /* eslint-enable no-undef */
+    const localBookingAppElement = document.getElementById('local-urise-app');
+    if (!localBookingAppElement.__vue_app__) {
 
-    const localuriseAppElements = document.getElementsByName('local-urise-app');
-    localuriseAppElements.forEach((localuriseAppElement) => {
-        if (!localuriseAppElement.__vue_app__) {
-            const app = createApp({});
-            app.use(VueInputAutowidth);
-            app.use(Notifications);
+        const app = createApp({});
+        app.use(VueInputAutowidth);
+        app.use(Notifications);
+        app.component("v-select", vSelect);
 
-            const store = createAppStore();
-            store.dispatch('loadComponentStrings');
+        const store = createAppStore();
+        store.dispatch('loadComponentStrings');
 
-            app.use(store);
-            app.use(router);
+        const contextidAttributeValue = localBookingAppElement.dataset.contextid;
 
-            app.mount(localuriseAppElement);
-            router.push({ name: 'urise-overview' });
+        store.state.contextid = contextidAttributeValue;
+
+        console.log("contextidAttributeValue: ", contextidAttributeValue, localBookingAppElement);
+
+        app.use(store);
+        app.use(router);
+
+        app.mount(localBookingAppElement);
+        if(store.state.contextid){
+          router.push({ name: 'booking-context' });
+        } else {
+          router.push({ name: 'booking-overview' });
         }
-    });
+    }
 }
 
 export { init };

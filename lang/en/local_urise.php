@@ -176,6 +176,123 @@ $string['coursesiteacharchive'] = 'Courses I taught in previous semesters:';
 $string['urise:canedit'] = 'User can edit';
 $string['urise:viewdashboard'] = "User can see Dashboard";
 
+// Dashboard Vue.
+$string['dashboard_new_bookings'] = 'Bookings';
+$string['dashboard_ppl_wl'] = 'People in queue';
+$string['dashboard_neue_stornos'] = 'Cancellations';
+$string['dashboard_noshows'] = 'No shows';
+$string['dashboard_managelocation'] = 'Manage locations';
+
+$string['dashboard_overview'] = 'Overview';
+$string['dashboard_bookingfields'] = 'Bookingoptionfields';
+$string['dashboard_stats'] = 'Stats';
+$string['dashboard_mydashboard'] = 'My Dashboard';
+
+$string['dashboard_zeitraum'] = 'Timespan';
+$string['dashboard_organisation'] = 'Organisation';
+$string['dashboard_auswertung'] = 'Reporting';
+
+// Vue strings.
+$string['vue_dashboard_checked'] = 'Default Checked';
+$string['vue_dashboard_name'] = 'Name';
+$string['vue_dashboard_course_count'] = 'Course Count';
+$string['vue_dashboard_path'] = 'Path';
+$string['vue_dashboard_create_oe'] = 'Create new OE';
+$string['vue_dashboard_assign_role'] = 'Assign Roles';
+$string['vue_dashboard_new_course'] = 'Create new course';
+$string['vue_dashboard_booking_instances'] = 'Booking instances';
+$string['vue_not_found_route_not_found'] = 'Route not found';
+$string['vue_not_found_try_again'] = 'Please try later again';
+$string['vue_booking_stats_capability'] = 'Capability';
+$string['vue_booking_stats_back'] = 'Back';
+$string['vue_booking_stats_save'] = 'Save';
+$string['vue_booking_stats_restore'] = 'Restore';
+$string['vue_booking_stats_select_all'] = 'Select all';
+$string['vue_booking_stats_booking_options'] = 'Booking Options';
+$string['vue_booking_stats_booked'] = 'Booked';
+$string['vue_booking_stats_waiting'] = 'Waiting List';
+$string['vue_booking_stats_reserved'] = 'Reserved';
+$string['vue_capability_options_cap_config'] = 'Capability Configuration';
+$string['vue_capability_options_necessary'] = 'necessary';
+$string['vue_capability_unsaved_changes'] = 'There are unsaved changes';
+$string['vue_capability_unsaved_continue'] = 'You really want to reset this configuration?';
+$string['vue_booking_stats_restore_confirmation'] = 'You really want to reset this configuration?';
+$string['vue_booking_stats_yes'] = 'Yes';
+$string['vue_booking_stats_no'] = 'No';
+$string['vue_confirm_modal'] = 'Are you sure you want to go back?';
+$string['vue_heading_modal'] = 'Confirmation';
+$string['vue_notification_title_unsave'] = 'No unsaved changes detected';
+$string['vue_notification_text_unsave'] = 'There were no unsaved changes detected.';
+$string['vue_notification_title_action_success'] = 'Configuration was {$a}';
+$string['vue_notification_text_action_success'] = 'Configuration was {$a} successfully.';
+$string['vue_notification_title_action_fail'] = 'Configuration was not  {$a}';
+$string['vue_notification_text_action_fail'] = 'Something went wrong while saving. The changes have not been made.';
+$string['vue_dashboard_goto_category'] = 'Go to category';
+
+// Access.
+$string['mod/booking:expertoptionform'] = 'Bookingoption for experts';
+$string['mod/booking:reducedoptionform1'] = 'Reduced booking option 1';
+$string['mod/booking:reducedoptionform2'] = 'Reduced booking option 2';
+$string['mod/booking:reducedoptionform3'] = 'Reduced booking option 3';
+$string['mod/booking:reducedoptionform4'] = 'Reduced booking option 4';
+$string['mod/booking:reducedoptionform5'] = 'Reduced booking option 5';
+$string['mod/booking:bookanyone'] = 'Book anyone';
+$string['mod/booking:seepersonalteacherinformation'] = 'See personal teacher information';
+
+// Optionformconfig.php / optionformconfig_form.php.
+$string['optionformconfig'] = 'Configure booking option forms (PRO)';
+$string['optionformconfig_infotext'] = 'With this PRO feature, you can create your individual booking option forms by using drag & drop
+and the checkboxes. The forms are stored on a specific context level (e.g. booking instance, system-wide...). Users can only access the forms
+if they have the appropriate capabilities.';
+$string['optionformconfig_getpro'] = ' With Booking ' . $badgepro . ' you have the possibility to create individual forms with drag and drop
+for specific user roles and contexts (e.g. for a specific booking instance or system wide).';
+$string['optionformconfigsaved'] = 'Configuration for the booking option form saved.';
+$string['optionformconfigsubtitle'] = '<p>Turn off features you do not need, in order to make the booking option form more compact for your administrators.</p>
+<p><strong>BE CAREFUL:</strong> Only deactivate fields if you are completely sure that you won\'t need them!</p>';
+$string['optionformconfig:nobooking'] = 'You need to create at least one booking instance before you can use this form!';
+
+$string['optionformconfigsavedsystem'] = 'Your form definition was saved on context level system';
+$string['optionformconfigsavedcoursecat'] = 'Your form definition was saved on context level course category';
+$string['optionformconfigsavedmodule'] = 'Your form definition was saved on context level module';
+$string['optionformconfigsavedcourse'] = 'Your form definition was saved on context level course';
+$string['optionformconfigsavedother'] = 'Your form definition was saved on context level {$a}';
+
+$string['optionformconfignotsaved'] = 'No special configuration was saved for your form';
+
+$string['prepare_import'] = "Prepare Import";
+$string['id'] = "Id";
+$string['json'] = "Stores supplementary information";
+$string['returnurl'] = "Url to return to";
+$string['youareusingconfig'] = 'Your are using the following form configuration: {$a}';
+$string['formconfig'] = 'Show which form is used.';
+$string['template'] = 'Templates';
+$string['moveoption'] = 'Move booking option';
+$string['dontmove'] = 'Nicht verschieben';
+$string['moveoption_help'] = 'Move booking option to different booking instance';
+$string['text'] = 'Titel';
+$string['maxanswers'] = 'Limit for answers';
+$string['identifier'] = 'Identification';
+$string['easy_text'] = 'Easy, not changeable text';
+$string['easy_bookingopeningtime'] = 'Easy booking opening time';
+$string['easy_bookingclosingtime'] = 'Easy booking closing time';
+$string['easy_availability_selectusers'] = 'Easy selected users condition';
+$string['easy_availability_previouslybooked'] = 'Easy already booked condition';
+$string['invisible'] = 'Invisible';
+$string['annotation'] = 'Internal annotation';
+$string['courseid'] = 'Course to subscribe to';
+$string['entities'] = 'Choose places with entities plugin';
+$string['entitiesfieldname'] = 'Place(s)';
+$string['shoppingcart'] = 'Set payment options with shopping cart plugin';
+$string['optiondates'] = 'Dates';
+$string['actions'] = 'Booking actions';
+$string['attachment'] = 'Attachments';
+$string['howmanyusers'] = 'Book other users limit';
+$string['recurringoptions'] = 'Recurring booking options';
+$string['bookusers'] = 'For Import, to book users directly';
+$string['timemodified'] = 'Time modified';
+$string['waitforconfirmation'] = 'Book only after confirmation';
+
+
 // Filter.
 $string['organisation'] = 'Organisation';
 $string['location'] = 'Location';

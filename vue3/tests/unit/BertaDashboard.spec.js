@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/vue';
-import uriseDashboard from '../../components/uriseDashboard.vue';
+import BertaDashboard from '../../components/BertaDashboard.vue';
 import { createStore } from 'vuex';
 import '@testing-library/jest-dom';
 
@@ -32,7 +32,7 @@ const store = createStore({
 
 describe('ComponentUnderTest', () => {
   it('renders correctly and shows tabs', async () => {
-    const { container } = await render(uriseDashboard, {
+    const { container } = await render(BertaDashboard, {
       global: {
         plugins: [store],
       },
@@ -44,7 +44,7 @@ describe('ComponentUnderTest', () => {
   });
 
   it('changes tab when clicked', async () => {
-    const { container } = await render(uriseDashboard, {
+    const { container } = await render(BertaDashboard, {
       global: {
         plugins: [store],
       },
@@ -58,7 +58,7 @@ describe('ComponentUnderTest', () => {
   });
 
   it('updates filtered tabs when search bar emits event', async () => {
-    const { container } = await render(uriseDashboard, {
+    const { container } = await render(BertaDashboard, {
       global: {
         plugins: [store],
       },
@@ -73,7 +73,7 @@ describe('ComponentUnderTest', () => {
   });
 
   it('displays content based on selected tab', async () => {
-    const { container } = await render(uriseDashboard, {
+    const { container } = await render(BertaDashboard, {
       global: {
         plugins: [store],
       },
@@ -89,7 +89,7 @@ describe('ComponentUnderTest', () => {
   });
 
   it('handles capability clicked event', async () => {
-    const { container } = await render(uriseDashboard, {
+    const { container } = await render(BertaDashboard, {
       global: {
         plugins: [store],
       },

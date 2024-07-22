@@ -24,34 +24,12 @@
 
 <template>
   <div class="NotFound">
-    <h2>{{ store.state.strings.route_not_found_site_name }}</h2>
-    <h3>{{ store.state.strings.route_not_found }}</h3>
-
-    <div class="learningpaths-edit-add">
-      <router-link
-        :to="{ name: 'learningpaths-edit-overview' }"
-        tag="button"
-        class="btn btn-primary"
-      >
-        {{ store.state.strings.btnreload }}
-      </router-link>
-    </div>
+    <h2>{{ store.state.strings.vue_not_found_route_not_found }}</h2>
+    <h3>{{ store.state.strings.vue_not_found_try_again }}</h3>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useStore } from 'vuex'
-const store = useStore()
-const router = useRouter()
-
-onMounted(() => {
-  if(router.value == undefined && store.state.view){
-        router.push({ name: 'urise-overview' });
-    }
-});
-
-
-
+  import { useStore } from 'vuex'
+  const store = useStore();
 </script>
