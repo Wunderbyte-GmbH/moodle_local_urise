@@ -256,7 +256,7 @@ $string['optionformconfig'] = 'Formulare für Buchungsoptionen anpassen (PRO)';
 $string['optionformconfig_infotext'] = 'Mit diesem PRO-Feature können Sie sich mit Drag & Drop und den Checkboxen beliebige Buchungsoptionsformulare zusammenstellen.
 Die einzelnen Formulare werden auf bestimmten Kontext-Ebenen (z.B. pro Buchungsinstanz, Systemweit...) definiert. Den jeweiligen Nutzer:innen sind die Formulare nur zugänglich,
 wenn Sie die jeweils entsprechende Berechtigung haben.';
-$string['optionformconfig_getpro'] = 'Mit Booking ' . $badgepro . ' haben Sie die Möglichkeit, mit Drag & Drop individuelle Formulare für bestimmte Nutzer:innen-Gruppen und Kontexte
+$string['optionformconfig_getpro'] = 'Mit Booking <span class="badge bg-success text-light"><i class="fa fa-cogs" aria-hidden="true"></i> PRO</span> haben Sie die Möglichkeit, mit Drag & Drop individuelle Formulare für bestimmte Nutzer:innen-Gruppen und Kontexte
 (z.B. nur für eine bestimmte Buchungsinstanz) anzulegen.';
 $string['optionformconfigsaved'] = 'Konfiguration für das Buchungsoptionsformular gespeichert.';
 $string['optionformconfigsubtitle'] = '<p>Hier können Sie nicht benötigte Funktionalitäten entfernen, um das Formular für die Erstellung von Buchungsoptionen übersichtlicher zu gestalten.</p>

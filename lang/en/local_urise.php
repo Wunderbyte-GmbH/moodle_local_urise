@@ -244,7 +244,7 @@ $string['optionformconfig'] = 'Configure booking option forms (PRO)';
 $string['optionformconfig_infotext'] = 'With this PRO feature, you can create your individual booking option forms by using drag & drop
 and the checkboxes. The forms are stored on a specific context level (e.g. booking instance, system-wide...). Users can only access the forms
 if they have the appropriate capabilities.';
-$string['optionformconfig_getpro'] = ' With Booking ' . $badgepro . ' you have the possibility to create individual forms with drag and drop
+$string['optionformconfig_getpro'] = ' With Booking <span class="badge bg-success text-light"><i class="fa fa-cogs" aria-hidden="true"></i> PRO</span> you have the possibility to create individual forms with drag and drop
 for specific user roles and contexts (e.g. for a specific booking instance or system wide).';
 $string['optionformconfigsaved'] = 'Configuration for the booking option form saved.';
 $string['optionformconfigsubtitle'] = '<p>Turn off features you do not need, in order to make the booking option form more compact for your administrators.</p>
