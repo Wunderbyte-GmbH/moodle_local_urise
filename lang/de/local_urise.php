@@ -402,3 +402,4 @@ $string['aboutoffer'] = "Über das Angebot";
 
 $string['zgcommunities'] = "Interessant für";
 $string['organisationfilter'] = "Angeboten von";
+$string['fromdate'] = "Ab ";

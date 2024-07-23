@@ -821,7 +821,7 @@ class urise_table extends wunderbyte_table {
 
             if (!$ret = $cache->get($cachekey)) {
                 $data = new \mod_booking\output\col_coursestarttime($optionid, $booking);
-                $output = singleton_service::get_renderer('local_urise');
+                $output = singleton_service::get_renderer('mod_booking');
                 $ret = $output->render_col_coursestarttime($data);
                 $cache->set($cachekey, $ret);
             }

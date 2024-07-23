@@ -392,3 +392,4 @@ $string['aboutoffer'] = "About the offer";
 
 $string['zgcommunities'] = "Interesting for";
 $string['organisationfilter'] = "Hosted by";
+$string['fromdate'] = "From ";

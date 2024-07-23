@@ -648,7 +648,7 @@ class shortcodes {
         if (empty($args['all'])) {
             $additionalwhere .= " (courseendtime > :timenow OR courseendtime = 0) ";
         }
-        
+
         if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
             $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
             list($fields, $from, $where, $params, $filter) =
