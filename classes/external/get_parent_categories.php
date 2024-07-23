@@ -85,6 +85,7 @@ class get_parent_categories extends external_api {
         $bookedcount = 0;
         $waitinglistcount = 0;
         $reservedcount = 0;
+        $realparticipants = 0;
 
         if (empty($params['coursecategoryid'])) {
             $returnarray = [
@@ -114,14 +115,17 @@ class get_parent_categories extends external_api {
             $record->bookedcount = 0;
             $record->waitinglistcount = 0;
             $record->reservedcount = 0;
+            $record->realparticipants = 0;
 
             $sql = "SELECT c.id, c.fullname
                     FROM {course} c
                     WHERE c.category=:categoryid";
             $record->courses = $DB->get_records_sql($sql, ['categoryid' => $record->id], IGNORE_MISSING) ?: [];
 
-            if ($bookingoptions
-                    = coursecategories::return_booking_information_for_coursecategory((int)$record->contextid)) {
+            if (
+                $bookingoptions
+                    = coursecategories::return_booking_information_for_coursecategory((int)$record->contextid, 'tatsaechlichetnbib')
+            ) {
                 $multibookingconfig = explode(',', get_config('local_urise', 'multibookinginstances') ?: '');
                 foreach ($bookingoptions as &$value) {
                     $defaultchecked = false;
@@ -134,6 +138,7 @@ class get_parent_categories extends external_api {
                     $record->bookedcount += $value->booked;
                     $record->waitinglistcount += $value->waitinglist ?? 0;
                     $record->reservedcount += $value->reserved ?? 0;
+                    $record->realparticipants += $value->realparticipants ?? 0;
 
                 }
                 $record->json = json_encode([
@@ -146,6 +151,7 @@ class get_parent_categories extends external_api {
             $bookedcount += $record->bookedcount;
             $waitinglistcount += $record->waitinglistcount;
             $reservedcount += $record->reservedcount;
+            $realparticipants += $record->realparticipants;
         }
 
         // We set the combined coursecount, if there is a general tab.
@@ -155,6 +161,7 @@ class get_parent_categories extends external_api {
             $returnarray[0]['bookedcount'] = $bookedcount;
             $returnarray[0]['waitinglistcount'] = $waitinglistcount;
             $returnarray[0]['reservedcount'] = $reservedcount;
+            $returnarray[0]['realparticipants'] = $realparticipants;
         }
 
         return $returnarray;
@@ -177,6 +184,7 @@ class get_parent_categories extends external_api {
                     'bookedcount' => new external_value(PARAM_TEXT, 'Booked count', VALUE_DEFAULT, 0),
                     'waitinglistcount' => new external_value(PARAM_TEXT, 'Waitinglist count', VALUE_DEFAULT, 0),
                     'reservedcount' => new external_value(PARAM_TEXT, 'Reserved count', VALUE_DEFAULT, 0),
+                    'realparticipants' => new external_value(PARAM_TEXT, 'Real participants count', VALUE_DEFAULT, 0),
                     'description' => new external_value(PARAM_RAW, 'description', VALUE_DEFAULT, ''),
                     'path' => new external_value(PARAM_TEXT, 'path', VALUE_DEFAULT, ''),
                     'courses' => new external_multiple_structure(
