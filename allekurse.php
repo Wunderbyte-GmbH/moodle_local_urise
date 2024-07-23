@@ -58,7 +58,7 @@ switch ($type) {
         break;
     case 'liste':
     default:
-        echo format_text("[unifiedlist filter=1 search=1 sort=1 sortby=text sortorder=asc perpage=6 requirelogin=false]", FORMAT_HTML);
+        echo format_text("[unifiedlist filter=1 search=1 sort=1 sortby=text sortorder=asc perpage=6 requirelogin=false all=true]", FORMAT_HTML);
         break;
 }
 

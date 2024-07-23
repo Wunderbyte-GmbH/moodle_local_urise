@@ -673,6 +673,10 @@ class shortcodes {
         if ($renderascard) {
             self::generate_table_for_cards($table, $args);
             $table->tabletemplate = 'local_urise/table_card';
+        } else if (isset($args['calender'])) {
+            self::generate_table_for_calendar($table, $args);
+            $perpage = 4;
+            $table->tabletemplate = 'local_urise/urise_calendar';
         } else {
             self::generate_table_for_list($table, $args);
             $table->cardsort = true;
@@ -747,7 +751,6 @@ class shortcodes {
 
         $table->showcountlabel = $args['countlabel'];
         $table->showreloadbutton = $args['reload'];
-        
 
         $wherearray = [];
 
@@ -1194,6 +1197,12 @@ class shortcodes {
         if (isset($args['requirelogin']) && $args['requirelogin'] == "false") {
             $table->requirelogin = false;
         }
+    }
+
+
+    private static function generate_table_for_calendar(&$table, $args) {
+        self::fix_args($args);
+        $table->add_subcolumns('main', ['text']);
     }
 
     /**
