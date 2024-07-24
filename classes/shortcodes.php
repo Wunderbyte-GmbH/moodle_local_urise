@@ -37,6 +37,7 @@ use mod_booking\customfield\booking_handler;
 use mod_booking\output\page_allteachers;
 use local_urise\output\userinformation;
 use local_urise\table\urise_table;
+use local_urise\table\calendar_table;
 use local_shopping_cart\shopping_cart;
 use local_shopping_cart\shopping_cart_credits;
 use local_wunderbyte_table\filters\types\datepicker;
@@ -548,6 +549,7 @@ class shortcodes {
     public static function unifiedlist($shortcode, $args, $content, $env, $next) {
         return self::unifiedview($shortcode, $args, $content, $env, $next, false);
     }
+    
 
     /**
      * Prints out list of bookingoptions.
@@ -562,6 +564,39 @@ class shortcodes {
      */
     public static function unifiedcards($shortcode, $args, $content, $env, $next) {
         return self::unifiedview($shortcode, $args, $content, $env, $next, true);
+    }
+
+    public static function calendarblock($shortcode, $args, $content, $env, $next) {
+
+        self::fix_args($args);
+
+        // Get bookingids.
+        $booking = self::get_booking($args);
+
+        $bookingids = explode(',', get_config('local_urise', 'multibookinginstances'));
+        $bookingids = array_filter($bookingids, fn($a) => !empty($a));
+
+        $table = self::inittableforcalendar();
+
+        $wherearray = ['bookingid' => $bookingids];
+
+        if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
+            $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
+            list($fields, $from, $where, $params, $filter) =
+                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, null, [], '');
+        } else {
+            list($fields, $from, $where, $params, $filter) =
+                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, null, [], '');
+        }
+
+        $table->set_filter_sql($fields, $from, $where, $filter, $params);
+        $table->tabletemplate = 'local_urise/urise_calendar';
+        $table->infinitescroll = false;
+
+        $out = $table->outhtml(4, true);
+
+        return $out;
+
     }
 
 
@@ -673,11 +708,7 @@ class shortcodes {
         if ($renderascard) {
             self::generate_table_for_cards($table, $args);
             $table->tabletemplate = 'local_urise/table_card';
-        } else if (isset($args['calender'])) {
-            self::generate_table_for_calendar($table, $args);
-            $perpage = 4;
-            $table->tabletemplate = 'local_urise/urise_calendar';
-        } else {
+        }  else {
             self::generate_table_for_list($table, $args);
             $table->cardsort = true;
             $table->infinitescroll = $infinitescrollpage;
@@ -1005,6 +1036,26 @@ class shortcodes {
      * @return wunderbyte_table
      *
      */
+    private static function inittableforcalendar() {
+
+        global $PAGE, $USER;
+
+        $tablename = bin2hex(random_bytes(12));
+
+        // It's important to have the baseurl defined, we use it as a return url at one point.
+        $baseurl = $PAGE->url ?? new moodle_url('');
+
+        $table = new calendar_table($tablename);
+
+        $table->define_baseurl($baseurl->out());
+        // Without defining sorting won't work!
+        $table->define_columns(['text']);
+        $table->add_subcolumns('main', ['text', 'category', 'more']);
+        $table->add_subcolumns('header', ['coursestarttime']);
+        $table->add_classes_to_subcolumns('main', ['columnclass' => 'text-primary mt-3'], ['text']);
+        return $table;
+    }
+
     private static function inittableforcourses() {
 
         global $PAGE, $USER;
@@ -1203,6 +1254,7 @@ class shortcodes {
     private static function generate_table_for_calendar(&$table, $args) {
         self::fix_args($args);
         $table->add_subcolumns('main', ['text']);
+        $table->add_subcolumns('header', ['coursestarttime']);
     }
 
     /**

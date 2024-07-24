@@ -47,9 +47,9 @@ $shortcodes = [
         'wraps' => false,
         'description' => 'shortcodeslistofmytaughtbookingoptionsascards',
     ],
-    'calenderblock' => [
-        'callback' => 'local_urise\shortcodes::unifiedlist',
+    'calendarblock' => [
+        'callback' => 'local_urise\shortcodes::calendarblock',
         'wraps' => false,
-        'description' => 'shortcodes::unifiedlist',
+        'description' => 'shortcodes::calendarblock',
     ],
 ];

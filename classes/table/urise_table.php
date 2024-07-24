@@ -253,7 +253,6 @@ class urise_table extends wunderbyte_table {
             $title = "<div class='urise-table-option-title'><a href='$url' target='_blank'>$title</a></div>";
         }
 
-
         return $title;
     }
 
