@@ -359,6 +359,7 @@ $string['add_sports_division'] = 'Add course type';
 $string['nosportsdivision'] = 'No course types set on this site';
 
 $string['shortcodes::unifiedlist'] = "Shortcode unified list";
+$string['shortcodes::calendarblock'] = "Shortcode calendarblock";
 
 $string['summary'] = 'General';
 $string['summary_desc'] = 'Contains the settings and stats for the whole Moodle site';

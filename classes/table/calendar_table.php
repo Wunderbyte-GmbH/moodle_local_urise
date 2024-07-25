@@ -49,28 +49,12 @@ defined('MOODLE_INTERNAL') || die();
 class calendar_table extends wunderbyte_table {
 
     public function col_text($values) {
-        
-        // $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid);
-        // $buyforuser = price::return_user_to_buy_for();
-
-        // if ($booking) {
-        //     $url = new moodle_url('/mod/booking/optionview.php', ['optionid' => $values->id,
-        //                                                           'cmid' => $booking->cmid,
-        //                                                           'userid' => $buyforuser->id]);
-        // } else {
-        //     $url = '#';
-        // }
 
         $title = format_text($values->text);
         $title = strip_tags($title);
         if (!empty($values->titleprefix)) {
             $title = $values->titleprefix . ' - ' . $title;
         }
-
-        // if (!$this->is_downloading()) {
-        //     $title = "<div class='urise-table-option-title'><p>$title</p><a href='$url' target='_blank' class=''>mehr</a></div>";
-        // }
-
         return $title;
     }
 

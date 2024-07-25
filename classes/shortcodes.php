@@ -591,7 +591,10 @@ class shortcodes {
 
         $table->set_filter_sql($fields, $from, $where, $filter, $params);
         $table->tabletemplate = 'local_urise/urise_calendar';
-        $table->infinitescroll = false;
+        $table->define_sortablecolumns(['coursestarttime']);
+        $table->sortable(true, 'coursestarttime', SORT_ASC);
+        $table->infinitescroll = 0;
+        $table->use_pages = true;
 
         $out = $table->outhtml(4, true);
 

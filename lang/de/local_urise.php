@@ -373,6 +373,8 @@ $string['add_sports_division'] = 'Die Sparten zu den Sportarten automatisch hinz
 $string['nosportsdivision'] = 'Keine Sparten auf dieser Website verfügbar';
 
 $string['shortcodes::unifiedlist'] = "Shortcode unified list";
+$string['shortcodes::calendarblock'] = "Shortcode calendarblock";
+
 
 $string['summary'] = 'Allgemein';
 $string['summary_desc'] = 'Enthält die Einstellungsmöglichkeiten und Statistiken der gesamten Plattform';
@@ -403,3 +405,5 @@ $string['aboutoffer'] = "Über das Angebot";
 $string['zgcommunities'] = "Interessant für";
 $string['organisationfilter'] = "Angeboten von";
 $string['fromdate'] = "Ab ";
+
+
