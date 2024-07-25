@@ -549,7 +549,6 @@ class shortcodes {
     public static function unifiedlist($shortcode, $args, $content, $env, $next) {
         return self::unifiedview($shortcode, $args, $content, $env, $next, false);
     }
-    
 
     /**
      * Prints out list of bookingoptions.
@@ -566,6 +565,16 @@ class shortcodes {
         return self::unifiedview($shortcode, $args, $content, $env, $next, true);
     }
 
+    /**
+     * Prints calenderblock.
+     *
+     * @param string $shortcode
+     * @param array $args
+     * @param string|null $content
+     * @param object $env
+     * @param Closure $next
+     * @return mixed
+     */
     public static function calendarblock($shortcode, $args, $content, $env, $next) {
 
         self::fix_args($args);
@@ -580,16 +589,28 @@ class shortcodes {
 
         $wherearray = ['bookingid' => $bookingids];
 
+        $additionalwhere = self::set_wherearray_from_arguments($args, $wherearray) ?? '';
+
+        if (!empty($additionalwhere)) {
+            $additionalwhere .= " AND ";
+        }
+        // Additional where has to be added here. We add the param later.
+        if (empty($args['all'])) {
+            $additionalwhere .= " (courseendtime > :timenow OR courseendtime = 0) ";
+        }
+
         if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
             $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
             list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, null, [], '');
+                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, null, [], $additionalwhere);
         } else {
             list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, null, [], '');
+                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, null, [], $additionalwhere);
         }
 
+        $params['timenow'] = strtotime('today 00:00');
         $table->set_filter_sql($fields, $from, $where, $filter, $params);
+
         $table->tabletemplate = 'local_urise/urise_calendar';
         $table->define_sortablecolumns(['coursestarttime']);
         $table->sortable(true, 'coursestarttime', SORT_ASC);
@@ -723,7 +744,7 @@ class shortcodes {
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
             list($idstring, $encodedtable, $out) = $table->lazyouthtml($perpage, true);
-            return $out;
+            return $out; 
         }
 
         $out = $table->outhtml($perpage, true);
@@ -1034,7 +1055,7 @@ class shortcodes {
     }
 
     /**
-     * Init the table.
+     * Init the table for calendar.
      *
      * @return wunderbyte_table
      *
@@ -1059,6 +1080,12 @@ class shortcodes {
         return $table;
     }
 
+    /**
+     * Init the table.
+     *
+     * @return wunderbyte_table
+     *
+     */
     private static function inittableforcourses() {
 
         global $PAGE, $USER;
@@ -1253,7 +1280,12 @@ class shortcodes {
         }
     }
 
-
+    /**
+     * Sets columns for calendar.
+     *
+     * @return wunderbyte_table
+     *
+     */
     private static function generate_table_for_calendar(&$table, $args) {
         self::fix_args($args);
         $table->add_subcolumns('main', ['text']);
