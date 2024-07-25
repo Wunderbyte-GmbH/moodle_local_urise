@@ -195,6 +195,7 @@ $string['dashboard_zeitraum'] = 'Zeitraum';
 $string['dashboard_organisation'] = 'Organisation';
 $string['dashboard_auswertung'] = 'Auswertung';
 
+
 // Vue strings.
 $string['vue_dashboard_checked'] = 'Default Ausgewählt';
 $string['vue_dashboard_name'] = 'Name';
@@ -214,6 +215,7 @@ $string['vue_booking_stats_booking_options'] = 'Buchungsoptionen';
 $string['vue_booking_stats_booked'] = 'Gebucht';
 $string['vue_booking_stats_waiting'] = 'Warteliste';
 $string['vue_booking_stats_reserved'] = 'Reserviert';
+$string['vue_booking_stats_realparticipants'] = 'Tatsächliche Teilnehmer';
 $string['vue_capability_options_cap_config'] = 'Berechtigungskonfiguration';
 $string['vue_capability_options_necessary'] = 'notwendig';
 $string['vue_capability_unsaved_changes'] = 'Es gibt ungespeicherte Änderungen';

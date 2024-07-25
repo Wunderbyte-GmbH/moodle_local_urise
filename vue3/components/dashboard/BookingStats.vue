@@ -10,6 +10,7 @@
           <th>{{ store.state.strings.vue_booking_stats_booked }}</th>
           <th>{{ store.state.strings.vue_booking_stats_waiting }}</th>
           <th>{{ store.state.strings.vue_booking_stats_reserved }}</th>
+          <th v-if="showRealParticipants">{{ store.state.strings.vue_booking_stats_realparticipants }}</th>
         </tr>
       </thead>
       <tbody>
@@ -41,6 +42,7 @@
           <td>{{ bookingStat.booked }}</td>
           <td>{{ bookingStat.waitinglist }}</td>
           <td>{{ bookingStat.reserved }}</td>
+          <td v-if="showRealParticipants">{{ bookingStat.realparticipants }}</td>
         </tr>
       </tbody>
     </table>
@@ -50,9 +52,10 @@
 <script setup>
 
   import { useStore } from 'vuex'
+  import { computed } from 'vue';
   const store = useStore();
 
-  defineProps({
+  const props = defineProps({
     bookingstats: {
       type: Object,
       default: null,
@@ -62,6 +65,11 @@
   const handleCheckboxChange = async (bookingStat) => {
     await store.dispatch('setCheckedBookingInstance', bookingStat)
   }
+
+  const showRealParticipants = computed(() => {
+    console.log('participans', props.bookingstats.json.booking.some(stat => stat.realparticipants > 0));
+    return props.bookingstats.json.booking.some(stat => stat.realparticipants > 0);
+  });
 
 </script>
 

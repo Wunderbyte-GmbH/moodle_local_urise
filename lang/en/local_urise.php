@@ -212,6 +212,7 @@ $string['vue_booking_stats_booking_options'] = 'Booking Options';
 $string['vue_booking_stats_booked'] = 'Booked';
 $string['vue_booking_stats_waiting'] = 'Waiting List';
 $string['vue_booking_stats_reserved'] = 'Reserved';
+$string['vue_booking_stats_realparticipants'] = 'Real participants';
 $string['vue_capability_options_cap_config'] = 'Capability Configuration';
 $string['vue_capability_options_necessary'] = 'necessary';
 $string['vue_capability_unsaved_changes'] = 'There are unsaved changes';
