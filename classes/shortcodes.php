@@ -53,172 +53,6 @@ use stdClass;
 class shortcodes {
 
     /**
-     * KOMPETENZEN
-     *
-     * @var array]
-     */
-    public const KOMPETENZEN = [
-        'explode' => ',',
-        '1' => [
-            'parent' => 'Lehrkompetenzen',
-            'localizedname' => 'Lehrkonzeption & -planung',
-        ],
-        '2' => [
-            'parent' => 'Lehrkompetenzen',
-            'localizedname' => 'Lehr- & Lernmethoden',
-        ],
-        '3' => [
-            'parent' => 'Lehrkompetenzen',
-            'localizedname' => 'Erstellung Lehr-/Lernmaterialien',
-        ],
-        '4' => [
-            'parent' => 'Lehrkompetenzen',
-            'localizedname' => 'Lehren mit digitalen Technologien',
-        ],
-        '5' => [
-            'parent' => 'Lehrkompetenzen',
-            'localizedname' => 'Prüfen & Beurteilen',
-        ],
-        '6' => [
-            'parent' => 'Lehrkompetenzen',
-            'localizedname' => 'Betreuung schriftlicher Arbeiten',
-        ],
-        '7' => [
-            'parent' => 'Lehrkompetenzen',
-            'localizedname' => 'Weiterentwicklung der Lehre',
-        ],
-        '8' => [
-            'parent' => 'Forschungskompetenzen',
-            'localizedname' => 'Wissenschaftliches Arbeiten',
-        ],
-        '9' => [
-            'parent' => 'Forschungskompetenzen',
-            'localizedname' => 'Wissenschaftliches Publizieren',
-        ],
-        '10' => [
-            'parent' => 'Forschungskompetenzen',
-            'localizedname' => 'Open Science',
-        ],
-        '11' => [
-            'parent' => 'Forschungskompetenzen',
-            'localizedname' => 'Wissensaustausch & Innovation',
-        ],
-        '12' => [
-            'parent' => 'Forschungskompetenzen',
-            'localizedname' => 'Wissenschaftliche Integrität',
-        ],
-        '13' => [
-            'parent' => 'Forschungskompetenzen',
-            'localizedname' => 'Networking in der Wissenschaft',
-        ],
-        '14' => [
-            'parent' => 'Forschungskompetenzen',
-            'localizedname' => 'Interdisziplinäre Forschung',
-        ],
-        '15' => [
-            'parent' => 'Forschungskompetenzen',
-            'localizedname' => 'Forschungsförderung',
-        ],
-        '16' => [
-            'parent' => 'Forschungskompetenzen',
-            'localizedname' => 'Karriereentwicklung & -planung',
-        ],
-        '17' => [
-            'parent' => 'Kommunikation & Kooperation',
-            'localizedname' => 'Präsentation',
-        ],
-        '18' => [
-            'parent' => 'Kommunikation & Kooperation',
-            'localizedname' => 'Gesprächs- & Verhandlungsführung',
-        ],
-        '19' => [
-            'parent' => 'Kommunikation & Kooperation',
-            'localizedname' => 'Feedback',
-        ],
-        '20' => [
-            'parent' => 'Kommunikation & Kooperation',
-            'localizedname' => 'Moderation',
-        ],
-        '21' => [
-            'parent' => 'Kommunikation & Kooperation',
-            'localizedname' => 'Sprachkenntnisse',
-        ],
-        '22' => [
-            'parent' => 'Kommunikation & Kooperation',
-            'localizedname' => 'Konfliktmanagement',
-        ],
-        '23' => [
-            'parent' => 'Kommunikation & Kooperation',
-            'localizedname' => 'Informations- & Kommunikation',
-        ],
-        '24' => [
-            'parent' => 'Kommunikation & Kooperation',
-            'localizedname' => 'Gender- & Diversitätskompetenz',
-        ],
-        '25' => [
-            'parent' => 'Kommunikation & Kooperation',
-            'localizedname' => 'Kooperationskompetenz',
-        ],
-        '26' => [
-            'parent' => 'Selbst- & Arbeitsorganisation',
-            'localizedname' => 'Veranstaltungsorganisation',
-        ],
-        '27' => [
-            'parent' => 'Selbst- & Arbeitsorganisation',
-            'localizedname' => 'Arbeitsorganisation',
-        ],
-        '28' => [
-            'parent' => 'Selbst- & Arbeitsorganisation',
-            'localizedname' => 'Selbstorganisation',
-        ],
-        '29' => [
-            'parent' => 'Selbst- & Arbeitsorganisation',
-            'localizedname' => 'Service- & Kund*innenorientierung',
-        ],
-        '30' => [
-            'parent' => 'Selbst- & Arbeitsorganisation',
-            'localizedname' => 'Lösungs- & Zukunftsorientierung',
-        ],
-        '31' => [
-            'parent' => 'Selbst- & Arbeitsorganisation',
-            'localizedname' => 'Ressourceneffizienz',
-        ],
-        '32' => [
-            'parent' => 'Selbst- & Arbeitsorganisation',
-            'localizedname' => 'Change-Kompetenz',
-        ],
-        '33' => [
-            'parent' => 'Selbst- & Arbeitsorganisation',
-            'localizedname' => 'Gesundheitsorientierung',
-        ],
-        '34' => [
-            'parent' => 'Selbst- & Arbeitsorganisation',
-            'localizedname' => 'Lernkompetenz',
-        ],
-        '35' => [
-            'parent' => 'Digitalkompetenzen',
-            'localizedname' => 'IT Security',
-        ],
-        '36' => [
-            'parent' => 'Digitalkompetenzen',
-            'localizedname' => 'Digitale Interaktion',
-        ],
-        '37' => [
-            'parent' => 'Digitalkompetenzen',
-            'localizedname' => 'Umgang mit Informationen & Daten',
-        ],
-        '38' => [
-            'parent' => 'Digitalkompetenzen',
-            'localizedname' => 'Technologienutzung',
-        ],
-        '39' => [
-            'parent' => 'Führungskompetenzen',
-            'localizedname' => 'Educational Leadership & Management',
-        ],
-    ];
-
-
-    /**
      * Retrungs the array of organisations.
      *
      * @return [type]
@@ -480,7 +314,7 @@ class shortcodes {
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
             list($idstring, $encodedtable, $out) = $table->lazyouthtml($perpage, true);
-            return $out; 
+            return $out;
         }
 
         $out = $table->outhtml($perpage, true);
@@ -863,7 +697,7 @@ class shortcodes {
         $table->add_filter($standardfilter);
 
         $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_urise'));
-        $hierarchicalfilter->add_options(self::KOMPETENZEN);
+        $hierarchicalfilter->add_options(self::get_kompetenzen());
         $table->add_filter($hierarchicalfilter);
 
         $hierarchicalfilter = new hierarchicalfilter('organisation', get_string('organisationfilter', 'local_urise'));
@@ -1218,5 +1052,175 @@ class shortcodes {
         }
 
         return $additonalwhere;
+    }
+
+    /**
+     * Get kompetenzen filter
+     *
+     * @return array
+     *
+     */
+    public static function get_kompetenzen() {
+
+        return [
+            'explode' => ',',
+            '1' => [
+                'parent' => 'Lehrkompetenzen',
+                'localizedname' => 'Lehrkonzeption & -planung',
+            ],
+            '2' => [
+                'parent' => 'Lehrkompetenzen',
+                'localizedname' => 'Lehr- & Lernmethoden',
+            ],
+            '3' => [
+                'parent' => 'Lehrkompetenzen',
+                'localizedname' => 'Erstellung Lehr-/Lernmaterialien',
+            ],
+            '4' => [
+                'parent' => 'Lehrkompetenzen',
+                'localizedname' => 'Lehren mit digitalen Technologien',
+            ],
+            '5' => [
+                'parent' => 'Lehrkompetenzen',
+                'localizedname' => 'Prüfen & Beurteilen',
+            ],
+            '6' => [
+                'parent' => 'Lehrkompetenzen',
+                'localizedname' => 'Betreuung schriftlicher Arbeiten',
+            ],
+            '7' => [
+                'parent' => 'Lehrkompetenzen',
+                'localizedname' => 'Weiterentwicklung der Lehre',
+            ],
+            '8' => [
+                'parent' => 'Forschungskompetenzen',
+                'localizedname' => 'Wissenschaftliches Arbeiten',
+            ],
+            '9' => [
+                'parent' => 'Forschungskompetenzen',
+                'localizedname' => 'Wissenschaftliches Publizieren',
+            ],
+            '10' => [
+                'parent' => 'Forschungskompetenzen',
+                'localizedname' => 'Open Science',
+            ],
+            '11' => [
+                'parent' => 'Forschungskompetenzen',
+                'localizedname' => 'Wissensaustausch & Innovation',
+            ],
+            '12' => [
+                'parent' => 'Forschungskompetenzen',
+                'localizedname' => 'Wissenschaftliche Integrität',
+            ],
+            '13' => [
+                'parent' => 'Forschungskompetenzen',
+                'localizedname' => 'Networking in der Wissenschaft',
+            ],
+            '14' => [
+                'parent' => 'Forschungskompetenzen',
+                'localizedname' => 'Interdisziplinäre Forschung',
+            ],
+            '15' => [
+                'parent' => 'Forschungskompetenzen',
+                'localizedname' => 'Forschungsförderung',
+            ],
+            '16' => [
+                'parent' => 'Forschungskompetenzen',
+                'localizedname' => 'Karriereentwicklung & -planung',
+            ],
+            '17' => [
+                'parent' => 'Kommunikation & Kooperation',
+                'localizedname' => 'Präsentation',
+            ],
+            '18' => [
+                'parent' => 'Kommunikation & Kooperation',
+                'localizedname' => 'Gesprächs- & Verhandlungsführung',
+            ],
+            '19' => [
+                'parent' => 'Kommunikation & Kooperation',
+                'localizedname' => 'Feedback',
+            ],
+            '20' => [
+                'parent' => 'Kommunikation & Kooperation',
+                'localizedname' => 'Moderation',
+            ],
+            '21' => [
+                'parent' => 'Kommunikation & Kooperation',
+                'localizedname' => 'Sprachkenntnisse',
+            ],
+            '22' => [
+                'parent' => 'Kommunikation & Kooperation',
+                'localizedname' => 'Konfliktmanagement',
+            ],
+            '23' => [
+                'parent' => 'Kommunikation & Kooperation',
+                'localizedname' => 'Informations- & Kommunikation',
+            ],
+            '24' => [
+                'parent' => 'Kommunikation & Kooperation',
+                'localizedname' => 'Gender- & Diversitätskompetenz',
+            ],
+            '25' => [
+                'parent' => 'Kommunikation & Kooperation',
+                'localizedname' => 'Kooperationskompetenz',
+            ],
+            '26' => [
+                'parent' => 'Selbst- & Arbeitsorganisation',
+                'localizedname' => 'Veranstaltungsorganisation',
+            ],
+            '27' => [
+                'parent' => 'Selbst- & Arbeitsorganisation',
+                'localizedname' => 'Arbeitsorganisation',
+            ],
+            '28' => [
+                'parent' => 'Selbst- & Arbeitsorganisation',
+                'localizedname' => 'Selbstorganisation',
+            ],
+            '29' => [
+                'parent' => 'Selbst- & Arbeitsorganisation',
+                'localizedname' => 'Service- & Kund*innenorientierung',
+            ],
+            '30' => [
+                'parent' => 'Selbst- & Arbeitsorganisation',
+                'localizedname' => 'Lösungs- & Zukunftsorientierung',
+            ],
+            '31' => [
+                'parent' => 'Selbst- & Arbeitsorganisation',
+                'localizedname' => 'Ressourceneffizienz',
+            ],
+            '32' => [
+                'parent' => 'Selbst- & Arbeitsorganisation',
+                'localizedname' => 'Change-Kompetenz',
+            ],
+            '33' => [
+                'parent' => 'Selbst- & Arbeitsorganisation',
+                'localizedname' => 'Gesundheitsorientierung',
+            ],
+            '34' => [
+                'parent' => 'Selbst- & Arbeitsorganisation',
+                'localizedname' => 'Lernkompetenz',
+            ],
+            '35' => [
+                'parent' => 'Digitalkompetenzen',
+                'localizedname' => 'IT Security',
+            ],
+            '36' => [
+                'parent' => 'Digitalkompetenzen',
+                'localizedname' => 'Digitale Interaktion',
+            ],
+            '37' => [
+                'parent' => 'Digitalkompetenzen',
+                'localizedname' => 'Umgang mit Informationen & Daten',
+            ],
+            '38' => [
+                'parent' => 'Digitalkompetenzen',
+                'localizedname' => 'Technologienutzung',
+            ],
+            '39' => [
+                'parent' => 'Führungskompetenzen',
+                'localizedname' => 'Educational Leadership & Management',
+            ],
+        ];
+
     }
 }
