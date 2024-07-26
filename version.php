@@ -25,8 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_urise';
-$plugin->release = '0.1.7';
-$plugin->version = 2024071901;
+$plugin->release = '0.1.8';
+$plugin->version = 2024072600;
 $plugin->requires = 2022041900; // Requires this Moodle version. Current: Moodle 4.0.0.
 $plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = [
