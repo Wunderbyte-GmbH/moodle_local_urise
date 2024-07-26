@@ -217,287 +217,22 @@ class shortcodes {
         ],
     ];
 
-    /**
-     * KOMPETENZEN
-     *
-     * @var array]
-     */
-    public const ORGANISATIONEN = [
-        'explode' => ',',
-        '52' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Afrikawissenschaften und Orientalistik',
-        ],
-        '53' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Alte Geschichte',
-        ],
-        '54' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Anglistik und Amerikanistik',
-        ],
-        '55' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Archälogie und Numismatik',
-        ],
-        '56' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Astronomie',
-        ],
-        '57' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Bildungswissenschaft, Sprachwissenschaft und Vergleichende Literaturwissenschaft',
-        ],
-        '58' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Biologie und Botanik, Standort Biologie',
-        ],
-        '59' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Biologie und Botanik, Standort Botanik',
-        ],
-        '60' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Byzantistik und Neogräzistik',
-        ],
-        '64' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Geographie und Regionalforschung',
-        ],
-        '125' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Erdwissenschaften und Meteorologie',
-        ],
-        '126' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Europäische Ethnologie',
-        ],
-        '124' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Finno-Ugristik',
-        ],
-        '65' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Germanistik, Nederlandistik und Skandinavistik',
-        ],
-        '66' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Geschichtswissenschaften',
-        ],
-        '127' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Judaistik',
-        ],
-        '68' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Klassische Philologie, Mittel - und Neulatein',
-        ],
-        '69' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Kultur - und Sozialanthropologie',
-        ],
-        '70' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Kunstgeschichte',
-        ],
-        '71' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Musikwissenschaft',
-        ],
-        '72' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Ostasienwissenschaften',
-        ],
-        '74' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Osteuropäische Geschichte und Slawistik',
-        ],
-        '75' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Pharmazie und Ernährungswissenschaften',
-        ],
-        '76' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Philosophie und Psychologie',
-        ],
-        '77' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'ZB Physik und Chemie',
-        ],
-        '78' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Publizistik- und Kommunikationswissenschaft und Informatik',
-        ],
-        '79' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Rechtswissenschaften',
-        ],
-        '128' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Romanistik',
-        ],
-        '81' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Soziologie und Politikwissenschaft',
-        ],
-        '82' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Sportwissenschaft',
-        ],
-        '83' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Südasien-, Tibet- und Buddhismuskunde',
-        ],
-        '84' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Theater-, Film- und Medienwissenschaft',
-        ],
-        '85' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Theologie',
-        ],
-        '86' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Translationswissenschaft',
-        ],
-        '87' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Wirtschaftswissenschaften und Mathematik',
-        ],
-        '88' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'FB Zeitgeschichte',
-        ],
-        '121' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'Forschungs- und Publikationsservices',
-        ],
-        '51' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'Hauptbibliothek',
-        ],
-        '43' => [
-            'parent' => 'Bibliotheks - und Archivwesen',
-            'localizedname' => 'Universitätsarchiv',
-        ],
-        '91' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Advanced Research School in Law and Jurisprudence',
-        ],
-        '101' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Doctoral School Microbiology and Environmental Science',
-        ],
-        '110' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Doctoral School of Philological and Cultural Studies',
-        ],
-        '109' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Oskar Morgenstern Doctoral School',
-        ],
-        '95' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'UniVie Doctoral School Computer Science',
-        ],
-        '92' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna Doctoral School of Historical and Cultural Studies',
-        ],
-        '93' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna Doctoral School of Philosophy',
-        ],
-        '94' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna Doctoral School of Social Sciences',
-        ],
-        '97' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna Doctoral School in Chemistry',
-        ],
-        '102' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna Doctoral School of Ecology and Evolution',
-        ],
-        '98' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna International School in Earth and Space Sciences',
-        ],
-        '99' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna School of Mathematics | Joint Doctoral School with TU Wien',
-        ],
-        '96' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna Doctoral School in Physics',
-        ],
-        '103' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna Doctoral School of Pharmaceutical, Nutritional and Sport Sciences',
-        ],
-        '105' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna BioCenter PhD Program, joint doctoral school of the University of Vienna and the Medical University of Vienna',
-        ],
-        '106' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna Doctoral School in Cognition, Behavior, and Neuroscience - from Biology to Psychology and the Humanities',
-        ],
-        '107' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna Doctoral School of Theology and Research on Religion',
-        ],
-        '108' => [
-            'parent' => 'Doctoral Schools',
-            'localizedname' => 'Vienna Doctoral School in Education',
-        ],
-        '49' => [
-            'parent' => 'Personalwesen und Frauenförderung',
-            'localizedname' => 'Organisationskultur und Gleichstellung',
-        ],
-        '24' => [
-            'parent' => 'Personalwesen und Frauenförderung',
-            'localizedname' => 'Personalentwicklung und Recruiting',
-        ],
-        '119' => [
-            'parent' => 'Studienservice und Lehrwesen',
-            'localizedname' => 'Center for Teaching and Learning',
-        ],
-        '112' => [
-            'parent' => 'Studienservice und Lehrwesen',
-            'localizedname' => 'Koordination Studienservices',
-        ],
-        '42' => [
-            'parent' => 'Zentraler Informatikdienst',
-            'localizedname' => 'Zentraler Informatikdienst',
-        ],
-        '131' => [
-            'parent' => 'Zusätzliche Clients für Landing Pages:',
-            'localizedname' => 'LP PostDoc',
-        ],
-        '132' => [
-            'parent' => 'Zusätzliche Clients für Landing Pages:',
-            'localizedname' => 'LP Führungskräfte',
-        ],
-        '133' => [
-            'parent' => 'Zusätzliche Clients für Landing Pages:',
-            'localizedname' => 'LP Allgemeines Universitätspersonal',
-        ],
-        '134' => [
-            'parent' => 'Zusätzliche Clients für Landing Pages:',
-            'localizedname' => 'LP Studierende',
-        ],
-        '135' => [
-            'parent' => 'Zusätzliche Clients für Landing Pages:',
-            'localizedname' => 'LP Externe',
-        ],
-        '136' => [
-            'parent' => 'Zusätzliche Clients für Landing Pages:',
-            'localizedname' => 'LP Bibliothek',
-        ],
-    ];
 
+    /**
+     * Retrungs the array of organisations.
+     *
+     * @return [type]
+     *
+     */
+    public static function organisations() {
+        $filterstring = get_config('local_urise', 'organisationfilter');
+        $pattern = '/get_string\("([^"]*)", "([^"]*)"\)/';
+        $outputstring = preg_replace_callback($pattern, fn($a) => '"' . get_string($a[1], $a[2]) . '"', $filterstring);
+
+        $filter = json_decode($outputstring, true) ?? [];
+
+        return $filter;
+    }
 
     /**
      * Prints out list of bookingoptions.
@@ -549,6 +284,7 @@ class shortcodes {
     public static function unifiedlist($shortcode, $args, $content, $env, $next) {
         return self::unifiedview($shortcode, $args, $content, $env, $next, false);
     }
+
 
     /**
      * Prints out list of bookingoptions.
@@ -806,6 +542,7 @@ class shortcodes {
 
         $table->showcountlabel = $args['countlabel'];
         $table->showreloadbutton = $args['reload'];
+
 
         $wherearray = [];
 
@@ -1130,7 +867,7 @@ class shortcodes {
         $table->add_filter($hierarchicalfilter);
 
         $hierarchicalfilter = new hierarchicalfilter('organisation', get_string('organisationfilter', 'local_urise'));
-        $hierarchicalfilter->add_options(self::ORGANISATIONEN);
+        $hierarchicalfilter->add_options(self::organisations());
         $table->add_filter($hierarchicalfilter);
 
         $standardfilter = new standardfilter('dayofweek', get_string('dayofweek', 'local_urise'));

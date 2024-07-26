@@ -146,7 +146,7 @@ class urise_table extends wunderbyte_table {
 
         if (isset($settings->customfieldsfortemplates) && isset($settings->customfieldsfortemplates['kurssprache'])) {
             $value = $settings->customfieldsfortemplates['kurssprache']['value'];
-            return $value;
+            return format_string($value);
         }
     }
 
@@ -433,7 +433,7 @@ class urise_table extends wunderbyte_table {
 
                 $returnorgas = [];
                 foreach ($settings->customfields['organisation'] as $orgaid) {
-                    $organisations = shortcodes::ORGANISATIONEN;
+                    $organisations = shortcodes::organisations();
 
                     if (isset($organisations[$orgaid])) {
                         $returnorgas[] = html_writer::tag(

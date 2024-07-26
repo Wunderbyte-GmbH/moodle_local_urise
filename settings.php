@@ -149,11 +149,21 @@ if ($hassiteconfig) {
             900 => "900",
         ];
         $settings->add(
-            new admin_setting_configselect('local_urise/collapsedescriptionmaxlength',
+            new admin_setting_configselect(
+                'local_urise/collapsedescriptionmaxlength',
                 get_string('collapsedescriptionmaxlength', 'local_urise'),
                 get_string('collapsedescriptionmaxlength_desc', 'local_urise'),
                 300, $collapsedescriptionoptions));
 
+        $settings->add(new admin_setting_configtextarea(
+            'local_urise/organisationfilter',
+            get_string('organisationfilterdefinition', 'local_urise'),
+            get_string('organisationfilterdefinition_desc', 'local_urise'),
+            '',
+            PARAM_TEXT,
+            60,
+            10
+        ));
         // CONTRACT MANAGEMENT.
         // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
         /* $settings->add(
