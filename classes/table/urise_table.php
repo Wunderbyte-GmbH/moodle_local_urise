@@ -381,7 +381,7 @@ class urise_table extends wunderbyte_table {
 
                 $returnorgas = [];
                 foreach ($settings->customfields['kompetenzen'] as $orgaid) {
-                    $organisations = shortcodes::KOMPETENZEN;
+                    $organisations = shortcodes::get_kompetenzen();
 
                     if (isset($organisations[$orgaid])) {
                         $returnorgas[] = html_writer::tag(
