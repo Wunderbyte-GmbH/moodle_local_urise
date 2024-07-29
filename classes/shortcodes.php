@@ -687,37 +687,54 @@ class shortcodes {
      * Define filtercolumns.
      *
      * @param mixed $table
+     * @param mixed $args
      *
      * @return void
      *
      */
-    private static function define_filtercolumns(&$table) {
+    private static function define_filtercolumns(&$table, $args) {
 
-        $standardfilter = new standardfilter('zgcommunities', get_string('zgcommunities', 'local_urise'));
-        $table->add_filter($standardfilter);
+        if (!empty($args['onlyfilterforcolumns'])) {
+            $filtercolumns = explode(',', $args['onlyfilterforcolumns']);
+        } else {
+            $filtercolumns = [];
+        }
 
-        $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_urise'));
-        $hierarchicalfilter->add_options(self::get_kompetenzen());
-        $table->add_filter($hierarchicalfilter);
+        if (empty($filtercolumns) || in_array('zgcommunities', $filtercolumns)) {
+            $standardfilter = new standardfilter('zgcommunities', get_string('zgcommunities', 'local_urise'));
+            $table->add_filter($standardfilter);
+        }
 
-        $hierarchicalfilter = new hierarchicalfilter('organisation', get_string('organisationfilter', 'local_urise'));
-        $hierarchicalfilter->add_options(self::organisations());
-        $table->add_filter($hierarchicalfilter);
+        if (empty($filtercolumns) || in_array('kompetenzen', $filtercolumns)) {
+            $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_urise'));
+            $hierarchicalfilter->add_options(self::get_kompetenzen());
+            $table->add_filter($hierarchicalfilter);
+        }
 
-        $standardfilter = new standardfilter('dayofweek', get_string('dayofweek', 'local_urise'));
-        $standardfilter->add_options([
-            'monday' => get_string('monday', 'mod_booking'),
-            'tuesday' => get_string('tuesday', 'mod_booking'),
-            'wednesday' => get_string('wednesday', 'mod_booking'),
-            'thursday' => get_string('thursday', 'mod_booking'),
-            'friday' => get_string('friday', 'mod_booking'),
-            'saturday' => get_string('saturday', 'mod_booking'),
-            'sunday' => get_string('sunday', 'mod_booking'),
-        ]);
-        $table->add_filter($standardfilter);
+        if (empty($filtercolumns) || in_array('organisation', $filtercolumns)) {
+            $hierarchicalfilter = new hierarchicalfilter('organisation', get_string('organisationfilter', 'local_urise'));
+            $hierarchicalfilter->add_options(self::organisations());
+            $table->add_filter($hierarchicalfilter);
+        }
 
-        $standardfilter = new standardfilter('location', get_string('location', 'mod_booking'));
-        $table->add_filter($standardfilter);
+        if (empty($filtercolumns) || in_array('dayofweek', $filtercolumns)) {
+            $standardfilter = new standardfilter('dayofweek', get_string('dayofweek', 'local_urise'));
+            $standardfilter->add_options([
+                'monday' => get_string('monday', 'mod_booking'),
+                'tuesday' => get_string('tuesday', 'mod_booking'),
+                'wednesday' => get_string('wednesday', 'mod_booking'),
+                'thursday' => get_string('thursday', 'mod_booking'),
+                'friday' => get_string('friday', 'mod_booking'),
+                'saturday' => get_string('saturday', 'mod_booking'),
+                'sunday' => get_string('sunday', 'mod_booking'),
+            ]);
+            $table->add_filter($standardfilter);
+        }
+
+        if (empty($filtercolumns) || in_array('location', $filtercolumns)) {
+            $standardfilter = new standardfilter('location', get_string('location', 'mod_booking'));
+            $table->add_filter($standardfilter);
+        }
 
         if (get_config('local_urise', 'uriseshortcodesshowfiltercoursetime')) {
 
@@ -800,7 +817,7 @@ class shortcodes {
         $table->set_display_options($args);
 
         if (!empty($args['filter'])) {
-            self::define_filtercolumns($table);
+            self::define_filtercolumns($table, $args);
         }
 
         if (!empty($args['search'])) {
