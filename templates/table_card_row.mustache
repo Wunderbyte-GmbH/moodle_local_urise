@@ -66,6 +66,11 @@
 {{/datafields}}
 >
   <div class="{{cardimageclass}}">
+     {{#url}}
+      {{#value}}
+        <a href="{{{value}}}" class="stretched-link"></a>
+          {{/value}}
+      {{/url}}
     {{#cardimage}}
       {{#value}}
         <img class="w-100" src="{{{value}}}" {{#cardimagealt}}alt="{{.}}" title="{{.}}"{{/cardimagealt}}>
@@ -82,7 +87,7 @@
         {{/value}}
     {{/cardimage}}
   </div>
-  <div class="d-flex flex-column flex-grow-1">
+  <div class="d-flex flex-column flex-grow-1" style="z-index: 99">
   <div class="mt-4 row w-100 mx-auto d-flex align-items-center mt-1 px-2">
      {{#cardheader}}
       {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}

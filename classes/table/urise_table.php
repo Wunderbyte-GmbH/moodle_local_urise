@@ -258,6 +258,30 @@ class urise_table extends wunderbyte_table {
 
     /**
      * This function is called for each data row to allow processing of the
+     * text value.
+     *
+     * @param object $values Contains object with all the values of record.
+     * @return string $string Return name of the booking option.
+     * @throws dml_exception
+     */
+    public function col_url($values) {
+
+        $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid);
+        $buyforuser = price::return_user_to_buy_for();
+
+        if ($booking) {
+            $url = new moodle_url('/mod/booking/optionview.php', ['optionid' => $values->id,
+                                                                  'cmid' => $booking->cmid,
+                                                                  'userid' => $buyforuser->id]);
+        } else {
+            $url = '#';
+        }
+
+        return $url;
+    }
+
+    /**
+     * This function is called for each data row to allow processing of the
      * description value.
      *
      * @param object $values Contains object with all the values of record.

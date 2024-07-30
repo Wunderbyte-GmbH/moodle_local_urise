@@ -893,6 +893,7 @@ class shortcodes {
         // We define it here so we can pass it with the mustache template.
         $table->add_subcolumns('optionid', ['id']);
 
+        $table->add_subcolumns('url', ['url']);
         $table->add_subcolumns('cardimage', ['image']);
         $table->set_tableclass('cardimageclass', 'imagecontainer');
         $table->add_subcolumns('cardheader', ['botags', 'action', 'bookings']);
