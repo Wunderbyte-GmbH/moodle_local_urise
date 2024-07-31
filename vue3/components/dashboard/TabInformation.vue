@@ -53,7 +53,7 @@
           <div class="card h-100">
             <div class="d-flex align-items-center mb-auto">
               <h1 class="font-weight-normal mr-auto">
-                <span v-if="content.bookedcount">{{ content.waitinglistcount }}</span>
+                <span v-if="content.bookedcount">{{ content.bookedcount }}</span>
                 <span v-else>/</span>
               </h1>
               <i class="fa-regular fa-bookmark text-success" />
@@ -94,7 +94,8 @@
           <div class="card h-100">
             <div class="d-flex align-items-center  mb-auto">
               <h1 class="font-weight-normal mr-auto">
-                0
+                <span v-if="content.noshows">{{ content.noshows }}</span>
+                <span v-else>/</span>
               </h1>
               <i class="fa-solid fa-thumbs-down text-warning" />
             </div>

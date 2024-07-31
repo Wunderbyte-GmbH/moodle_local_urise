@@ -1,9 +1,8 @@
 <template>
   <div class="d-flex justify-content-end align-items-center">
     <div 
-      class="input-group" 
-      style="max-width: 200px; 
-      margin-bottom: 2rem;"
+      class="input-group mr-2" 
+      style="min-width: 200px;"
     >
       <input 
         type="text" 

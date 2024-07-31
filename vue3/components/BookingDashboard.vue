@@ -1,7 +1,6 @@
 <template>
   <div>
     <notifications width="100%" />
-    <Searchbar :tabs="tabsstored" @filteredTabs="updateFilteredTabs" />
     <div class="bgfull">
       <span class="dbhead">{{ store.state.strings.dashboard_mydashboard }}</span>
       <div class="d-flex align-items-end">
@@ -9,6 +8,12 @@
     margin-right: 1rem; padding-bottom: 10px"><i class="fa-solid fa-arrow-left"></i></a>
         <div class="overflow-tabs-container d-flex justify-content-start" ref="scrollMe">
           <div v-if="tabs.length > 0" class="nav nav-tabs justify-content-center navouter">
+            <span class="d-flex justify-content-center align-items-center m-1 text-white" @click="toggleSearchbar" ><i class="fa-solid fa-magnifying-glass"></i></span>
+            <div class="nav-item searchbar">
+              <transition name="fade">
+            <Searchbar v-if="showSearchbar" :tabs="tabsstored" @filteredTabs="updateFilteredTabs" class="m0 p0 no-margin"/>
+          </transition>
+          </div>
             <div v-for="tab in tabs" :key="tab.id" class="nav-item">
               <a :class="['nav-link', { 'active': activeTab === tab.id }]" @click="changeTab(tab.id)">
                 <span class="tabunselected">{{ tab.name }}</span>
@@ -101,6 +106,7 @@ const changesMade = ref({})
 const showConfirmationModal = ref(false)
 const indexTab = ref(0)
 const scrollMe = ref(null);
+const showSearchbar = ref(false);
 
 // Trigger web services on mount
 onMounted(async () => {
@@ -155,6 +161,10 @@ const scrollRight = () => {
       behavior: 'smooth'
     });
   }
+};
+
+const toggleSearchbar = () => {
+  showSearchbar.value = !showSearchbar.value;
 };
 
 async function handleRestoreConfig(index) {
@@ -325,6 +335,18 @@ function findElementById(jsonData, idToFind) {
   }
 
 }
+
+.searchbar {
+  .input-group {
+    min-width: 200px !important;
+    margin: 0;
+  }
+}
+
+.input-group {
+    min-width: 200px !important;
+    margin: 0;
+  }
 
 // .overflow-tabs-container::after {
 //   content: '';
