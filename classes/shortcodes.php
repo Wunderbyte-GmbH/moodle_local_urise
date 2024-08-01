@@ -679,7 +679,14 @@ class shortcodes {
         $table->define_baseurl($baseurl->out());
         $table->cardsort = true;
         // Without defining sorting won't work!
-        $table->define_columns(['titleprefix', 'coursestarttime', 'courseendtime', 'location', 'bookingopeningtime', 'bookingclosingtime']);
+        $table->define_columns([
+            'titleprefix',
+            'coursestarttime',
+            'courseendtime',
+            'location',
+            'bookingopeningtime',
+            'bookingclosingtime'
+        ]);
         return $table;
     }
 
@@ -695,6 +702,7 @@ class shortcodes {
     private static function define_filtercolumns(&$table, $args) {
 
         if (!empty($args['onlyfilterforcolumns'])) {
+            // If you want to turn off filter for booking- and coursetime, do it via pluginsettings.
             $filtercolumns = explode(',', $args['onlyfilterforcolumns']);
         } else {
             $filtercolumns = [];
