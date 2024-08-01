@@ -1238,6 +1238,10 @@ class shortcodes {
                 'parent' => 'Führungskompetenzen',
                 'localizedname' => 'Educational Leadership & Management',
             ],
+            '40' => [
+                'parent' => 'Sonstige',
+                'localizedname' => 'Sonstige Kompetenzen',
+            ],
         ];
 
     }
