@@ -82,7 +82,6 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
         return true;
     }
 
-
     $output = '<div class="popover-region nav-link icon-no-margin dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button"
         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
