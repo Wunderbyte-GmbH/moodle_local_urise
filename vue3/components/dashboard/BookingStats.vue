@@ -1,16 +1,16 @@
 <template>
   <div v-if="bookingstats.json && bookingstats.json.booking">
-    <h5>{{store.state.strings.vue_dashboard_booking_instances}}</h5>
+    <h5>{{store.state.strings.vuedashboardbookinginstances}}</h5>
     <table class="table mt-2">
       <thead class="thead-light">
         <tr>
-          <th>{{ store.state.strings.vue_dashboard_checked }}</th>
-          <th>{{ store.state.strings.vue_dashboard_name }}</th>
-          <th>{{ store.state.strings.vue_booking_stats_booking_options }}</th>
-          <th>{{ store.state.strings.vue_booking_stats_booked }}</th>
-          <th>{{ store.state.strings.vue_booking_stats_waiting }}</th>
-          <th>{{ store.state.strings.vue_booking_stats_reserved }}</th>
-          <th v-if="showRealParticipants">{{ store.state.strings.vue_booking_stats_realparticipants }}</th>
+          <th>{{ store.state.strings.vuedashboardchecked }}</th>
+          <th>{{ store.state.strings.vuedashboardname }}</th>
+          <th>{{ store.state.strings.vuebookingstatsbookingoptions }}</th>
+          <th>{{ store.state.strings.vuebookingstatsbooked }}</th>
+          <th>{{ store.state.strings.vuebookingstatswaiting }}</th>
+          <th>{{ store.state.strings.vuebookingstatsreserved }}</th>
+          <th v-if="showRealParticipants">{{ store.state.strings.vuebookingstatsrealparticipants }}</th>
         </tr>
       </thead>
       <tbody>
@@ -20,7 +20,7 @@
         >
           <td>
             <div class="custom-control custom-switch">
-              <input type="checkbox" class="custom-control-input" :id="'checkbox_' + bookingStat.id"  
+              <input type="checkbox" class="custom-control-input" :id="'checkbox_' + bookingStat.id"
               :checked="bookingStat.checked"
               @change="handleCheckboxChange(bookingStat)">
               <label class="custom-control-label" :for="'checkbox_' + bookingStat.id"></label>
