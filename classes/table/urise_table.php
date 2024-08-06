@@ -164,7 +164,7 @@ class urise_table extends wunderbyte_table {
 
         if (isset($settings->customfieldsfortemplates) && isset($settings->customfieldsfortemplates['format'])) {
                 $value = $settings->customfieldsfortemplates['format']['value'];
-                return $value;
+                return format_string($value);
         }
 
     }
