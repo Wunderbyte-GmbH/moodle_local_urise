@@ -273,7 +273,7 @@ $string['optionformconfigsavedother'] = 'Ihre Formular-Definition wurde auf Kont
 
 $string['optionformconfignotsaved'] = 'Es wurde keine besondere Formular-Definition gespeichert';
 
-$string['prepare_import'] = "Bereite den Import vor";
+$string['prepareimport'] = "Bereite den Import vor";
 $string['id'] = "Id";
 $string['json'] = "Sammelfeld für zum Speichern von Informationen";
 $string['returnurl'] = "Adresse für Rückkehr";
