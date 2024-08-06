@@ -260,7 +260,7 @@ $string['optionformconfigsavedother'] = 'Your form definition was saved on conte
 
 $string['optionformconfignotsaved'] = 'No special configuration was saved for your form';
 
-$string['prepare_import'] = "Prepare Import";
+$string['prepareimport'] = "Prepare Import";
 $string['id'] = "Id";
 $string['json'] = "Stores supplementary information";
 $string['returnurl'] = "Url to return to";
