@@ -297,12 +297,20 @@ class shortcodes {
             $table->add_subcolumns('cardimage', ['image']);
         }
 
+        if (empty($args['showpagination'])) {
+            $args['showpagination'] = true;
+        }
+
         self::set_table_options_from_arguments($table, $args);
 
         if ($renderascard) {
             self::generate_table_for_cards($table, $args);
-            $table->tabletemplate = 'local_urise/table_card';
-        }  else {
+            if ($args['showpagination'] == "true") {
+                // $table->tabletemplate = 'local_urise/table_card';
+            } else {
+                $table->tabletemplate = 'local_urise/table_card_no_pagination';
+            }
+        } else {
             self::generate_table_for_list($table, $args);
             $table->cardsort = true;
             $table->infinitescroll = $infinitescrollpage;
