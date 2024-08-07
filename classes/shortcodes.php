@@ -306,7 +306,7 @@ class shortcodes {
         if ($renderascard) {
             self::generate_table_for_cards($table, $args);
             if ($args['showpagination'] == "true") {
-                // $table->tabletemplate = 'local_urise/table_card';
+                $table->tabletemplate = 'local_urise/table_card';
             } else {
                 $table->tabletemplate = 'local_urise/table_card_no_pagination';
             }
