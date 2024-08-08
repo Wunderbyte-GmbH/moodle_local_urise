@@ -246,7 +246,14 @@ class shortcodes {
             $infinitescrollpage = 0;
         }
 
-        $table = self::inittableforcourses();
+        if (empty($args['initcourses'])) {
+            $args['initcourses'] = true;
+        }
+        if ($args['initcourses'] === true) {
+            $table = self::inittableforcourses();
+        } else {
+            $table = self::inittableforcourses(false);
+        }
 
         $table->showcountlabel = $args['countlabel'];
 
@@ -665,7 +672,7 @@ class shortcodes {
      * @return wunderbyte_table
      *
      */
-    private static function inittableforcourses() {
+    private static function inittableforcourses($addcols = true) {
 
         global $PAGE, $USER;
 
@@ -687,14 +694,16 @@ class shortcodes {
         $table->define_baseurl($baseurl->out());
         $table->cardsort = true;
         // Without defining sorting won't work!
-        $table->define_columns([
-            'titleprefix',
-            'coursestarttime',
-            'courseendtime',
-            'location',
-            'bookingopeningtime',
-            'bookingclosingtime'
-        ]);
+        if ($addcols == true) {
+            $table->define_columns([
+                'titleprefix',
+                'coursestarttime',
+                'courseendtime',
+                'location',
+                'bookingopeningtime',
+                'bookingclosingtime',
+            ]);
+        }
         return $table;
     }
 
