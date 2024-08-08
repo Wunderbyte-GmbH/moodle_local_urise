@@ -389,7 +389,7 @@ $string['searchheadertext'] = "Was möchten Sie lernen?";
 $string['myspace'] = "Mein Bereich";
 
 // Descriptionview.
-$string['requirements'] = "Vorraussetzungen";
+$string['requirements'] = "Voraussetzungen";
 $string['goals'] = "Ziele";
 $string['coursecontent'] = "Inhalte";
 $string['coursemethods'] = "Methoden";
