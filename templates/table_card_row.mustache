@@ -88,34 +88,34 @@
     {{/cardimage}}
   </div>
   <div class="d-flex flex-column flex-grow-1" style="z-index: 99">
-  <div class="mt-4 row w-100 mx-auto d-flex align-items-center mt-1 px-2">
-     {{#cardheader}}
-      {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
-            <span {{^value}} style="display:none" {{/value}}>
-            {{#columniclassbefore}}
-              <i class="{{.}}" aria-hidden="true"></i>
-            {{/columniclassbefore}}
-            </span>
-            {{#columnkeyclass}}<span class="key {{.}}">{{/columnkeyclass}}
-              {{^keystring}}
-            {{{key}}}
-            {{/keystring}}
-            {{#keystring}}
-              {{.}}:
-            {{/keystring}}
-            {{#columnkeyclass}}</span>{{/columnkeyclass}}
-            <div {{^value}} style="display:none" {{/value}} class="{{columnvalueclass}}{{#key}} {{key}}{{/key}}">
-              {{{value}}}
-            </div>
-            <span {{^value}} style="display:none" {{/value}}>
-            {{#columniclassafter}}
-              <i class="value {{.}}" aria-hidden="true"></i>
-            {{/columniclassafter}}
-            </span>
-      {{#columnclass}}</div>{{/columnclass}}
-    {{/cardheader}}
-  </div>
-    <div class="{{cardbodyclass}} px-2 mt-2">
+    <div class="mod-booking-card-header mt-4 row w-100 mx-auto d-flex align-items-center mt-1 px-2">
+      {{#cardheader}}
+        {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
+              <span {{^value}} style="display:none" {{/value}}>
+              {{#columniclassbefore}}
+                <i class="{{.}}" aria-hidden="true"></i>
+              {{/columniclassbefore}}
+              </span>
+              {{#columnkeyclass}}<span class="key {{.}}">{{/columnkeyclass}}
+                {{^keystring}}
+              {{{key}}}
+              {{/keystring}}
+              {{#keystring}}
+                {{.}}:
+              {{/keystring}}
+              {{#columnkeyclass}}</span>{{/columnkeyclass}}
+              <div {{^value}} style="display:none" {{/value}} class="{{columnvalueclass}}{{#key}} {{key}}{{/key}}">
+                {{{value}}}
+              </div>
+              <span {{^value}} style="display:none" {{/value}}>
+              {{#columniclassafter}}
+                <i class="value {{.}}" aria-hidden="true"></i>
+              {{/columniclassafter}}
+              </span>
+        {{#columnclass}}</div>{{/columnclass}}
+      {{/cardheader}}
+    </div>
+    <div class="mod-booking-card-body {{cardbodyclass}} px-2 mt-2">
     {{#cardbody}}
       {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
             <span {{^value}} style="display:none" {{/value}}>
@@ -144,7 +144,7 @@
       {{#columnclass}}</div>{{/columnclass}}
     {{/cardbody}}
   </div>
-  <div class="mt-2 px-2">
+  <div class="mod-booking-card-infos mt-2 px-2">
     <div class="{{cardlistclass}}">
       <ul class="infolist">
       {{#cardlist}}
@@ -177,7 +177,7 @@
       </ul>
     </div>
   </div>
-  <div class="px-3 text-center mt-auto mb-2 pt-2">
+  <div class="mod-booking-card-footer px-3 text-center mt-auto mb-2 pt-2">
     {{#cardfooter}}
       {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
             <span {{^value}} style="display:none" {{/value}}>
