@@ -590,7 +590,8 @@ booking-button-area.btn-secondary:disabled {
     margin-top: auto;
 }
 
-.mod-booking-card-header {
+.mod-booking-card-header,
+.mod-booking-body {
     margin-bottom: auto;
 }
 
