@@ -1,6 +1,7 @@
 :root {
     --lightgrayurise: rgb(220, 218, 218);
 }
+
 .local_urise-dashboard .card-deck .card {
     max-width: 15rem;
 }
@@ -198,6 +199,7 @@
 .wunderbyte-table-list .rows-container .row {
     border-radius: 5px;
 }
+
 /* Tablegrid. */
 .wunderbyte-table-grid .grid-entry {
     display: grid;
@@ -215,13 +217,14 @@
 }
 
 
-.wunderbyte-table-grid .list-group-item + .list-group-item {
+.wunderbyte-table-grid .list-group-item+.list-group-item {
     border-top: 1px solid rgba(0, 0, 0, .125);
     border-top-width: 1px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
 .text-gray {
     color: #77838f;
 }
@@ -229,6 +232,7 @@
 .font-size-sm {
     font-size: 0.8rem;
 }
+
 .wunderbyte-table-list .action {
     position: absolute;
     top: 0;
@@ -239,7 +243,7 @@ div.columnclass.titleprefix {
     display: none;
 }
 
-.wunderbyteTableFilter > div {
+.wunderbyteTableFilter>div {
     background-color: #fff;
 }
 
@@ -260,7 +264,7 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     color: black
 }
 
-.row.optionrow  {
+.row.optionrow {
     min-height: 350px;
     max-height: fit-content;
 }
@@ -297,8 +301,9 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
 
 /* Some of this needs important because the buttons are styled inline in booking template */
 
-booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.btn-secondary:disabled {
-     /* eslint-disable-next-line */
+booking-button-area.footerdivider.btn-secondary.disabled,
+booking-button-area.btn-secondary:disabled {
+    /* eslint-disable-next-line */
     border: none !important;
     background-color: #dadada !important;
 }
@@ -339,6 +344,7 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     display: flex !important;
     margin-bottom: 1.5rem !important;
 }
+
 /* eslint-enable */
 
 .booking-button-area {
@@ -351,6 +357,7 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     justify-content: end;
     align-items: center;
 }
+
 .pricecurrency {
     margin: 0 10px;
     margin-top: 0.5rem;
@@ -368,7 +375,8 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     padding: 0 0.5em;
 }
 
-.bg-secondary.orga, .bg-secondary.category {
+.bg-secondary.orga,
+.bg-secondary.category {
     /* eslint-disable-next-line */
     background: var(--lightgrayurise) !important;
 }
@@ -477,7 +485,7 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     border-radius: 7px;
 }
 
-.wunderbyte-table-grid .list-group-item  img {
+.wunderbyte-table-grid .list-group-item img {
     /* eslint-disable-next-line */
     border-radius: 7px 7px 0 0 !important;
     height: 100%;
@@ -485,7 +493,8 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     object-fit: cover;
 }
 
-.imagecontainer img, .uriseimage {
+.imagecontainer img,
+.uriseimage {
     /* eslint-disable-next-line */
     border-radius: 7px 7px 0 0 !important;
 }
@@ -508,7 +517,7 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     justify-content: space-between;
 }
 
-.showdatesicon{
+.showdatesicon {
     /* eslint-disable-next-line */
     /* line-height: 32px !important;
     font-size: 16px; */
@@ -536,14 +545,12 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     box-shadow: 0 .5rem 1rem rgb(202 202 202 / 15%);
 }
 
-
-
 .wunderbyte-table-container .pagination {
-     /* eslint-disable-next-line */
+    /* eslint-disable-next-line */
     list-style-type: none !important;
 }
 
-.course-content .activity-altcontent ul  {
+.course-content .activity-altcontent ul {
     /* eslint-disable-next-line */
     list-style-type: none !important;
 }
@@ -557,15 +564,47 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     align-items: center;
     justify-content: center;
     margin: auto;
-  }
+}
 
 .detailteacher .profile-icon-wrapper i {
     font-size: 50px;
     color: #adb5bd;
-  }
+}
+
+.mod-booking-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.d-flex.flex-column.flex-grow-1 {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mod-booking-infos,
+.mod-booking-card-footer {
+    margin-top: auto;
+}
+
+.mod-booking-card-header {
+    margin-bottom: auto;
+}
+
+.mod-booking-card.list-group-item {
+    padding-bottom: 20px;
+    box-shadow: -5px 0 10px 0 rgba(0, 0, 0, 0.02),
+        /* First shadow */
+        5px 0 10px 0 rgba(0, 0, 0, 0.02);
+}
 
 @media screen and (max-width: 768px) {
-    .row.optionrow, .card.listcard {
+
+    .row.optionrow,
+    .card.listcard {
         max-height: fit-content;
     }
 
@@ -574,10 +613,9 @@ booking-button-area.footerdivider.btn-secondary.disabled, booking-button-area.bt
     }
 
 
-.background {
-    margin-left: 0;
-    margin-right: 0;
+    .background {
+        margin-left: 0;
+        margin-right: 0;
 
-}
-
+    }
 }
