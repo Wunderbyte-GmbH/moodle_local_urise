@@ -392,7 +392,6 @@ class shortcodes {
         $table->showcountlabel = $args['countlabel'];
         $table->showreloadbutton = $args['reload'];
 
-
         $wherearray = [];
 
         if (!empty($category)) {
@@ -848,7 +847,7 @@ class shortcodes {
         if (!empty($args['search'])) {
             $table->define_fulltextsearchcolumns([
                 'titleprefix', 'text', 'organisation', 'description', 'location',
-                'teacherobjects', 'botags']);
+                'teacherobjects', 'botags', 'inhalte', 'zielgruppe']);
         }
 
         if (!empty($args['sort'])) {
