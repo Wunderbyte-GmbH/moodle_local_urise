@@ -394,9 +394,12 @@ class shortcodes {
 
         $wherearray = [];
 
-        if (!empty($category)) {
-            $wherearray['organisation'] = $category;
-        };
+        // Additional where condition for both card and list views
+        $additionalwhere = self::set_wherearray_from_arguments($args, $wherearray) ?? '';
+
+        // We want to show booking options also when the user was deleted from them. but only, if the booking option is canceled now.
+
+        $additionalwhere .= ' ((waitinglist <> ' . MOD_BOOKING_STATUSPARAM_DELETED . ' AND status = 0) OR (waitinglist = ' . MOD_BOOKING_STATUSPARAM_DELETED . ' AND status = 1))';
 
         // If we want to find only the teacher relevant options, we chose different sql.
         if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
@@ -415,7 +418,9 @@ class shortcodes {
                         MOD_BOOKING_STATUSPARAM_RESERVED,
                         MOD_BOOKING_STATUSPARAM_WAITINGLIST,
                         MOD_BOOKING_STATUSPARAM_NOTIFYMELIST,
-                    ]
+                        MOD_BOOKING_STATUSPARAM_DELETED,
+                    ],
+                    $additionalwhere
                 );
         } else {
             list($fields, $from, $where, $params, $filter) =
@@ -432,7 +437,9 @@ class shortcodes {
                         MOD_BOOKING_STATUSPARAM_RESERVED,
                         MOD_BOOKING_STATUSPARAM_WAITINGLIST,
                         MOD_BOOKING_STATUSPARAM_NOTIFYMELIST,
-                    ]
+                        MOD_BOOKING_STATUSPARAM_DELETED,
+                    ],
+                    $additionalwhere
                 );
         }
 
