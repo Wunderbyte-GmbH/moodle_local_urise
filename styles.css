@@ -458,6 +458,10 @@ booking-button-area.btn-secondary:disabled {
     font-size: 5em;
 }
 
+a.booking-card-image-link:hover {
+    text-decoration: none;
+}
+
 .local_urise-allcourses .wunderbyte_table_filter_on .wunderbyte_table_container {
     margin-left: -5em;
     grid-template-columns: 1fr 4fr;

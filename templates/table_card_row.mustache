@@ -68,7 +68,7 @@
   <div class="{{cardimageclass}}">
      {{#url}}
       {{#value}}
-        <a href="{{{value}}}">
+        <a href="{{{value}}}" class="booking-card-image-link">
           {{/value}}
       {{/url}}
     {{#cardimage}}
@@ -78,7 +78,7 @@
         {{^value}}
             <div class="placeholderimage">
             <div class="m-3 d-flex justify-conten-center align-items-center flex-column">
-              <i class="fa-regular fa-image placeholdericon"></i>
+              <i class="fa-regular fa-image placeholdericon text-dark"></i>
               <h4 class="pt-2" >
                 {{#str}} optionnoimage, mod_booking {{/str}}
               </h4>
