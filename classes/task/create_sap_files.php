@@ -14,25 +14,34 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace local_urise\task;
+
+use core\task\scheduled_task;
+use local_urise\sap_daily_sums;
+
 /**
- * Shortcodes for mod booking
- *
+ * Scheduled task creates SAP files in Moodle data directory.
  * @package local_urise
- * @subpackage db
- * @since Moodle 4.3
- * @copyright 2024 Georg Maißer
+ * @copyright 2024 Wunderbyte GmbH <info@wunderbyte.at>
+ * @author Bernhard Fischer
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class create_sap_files extends scheduled_task {
+    /**
+     * Get name of the task.
+     * @return string
+     */
+    public function get_name() {
+        return get_string('create_sap_files', 'local_urise');
+    }
 
-defined('MOODLE_INTERNAL') || die();
-
-$tasks = [
-        ['classname' => '\local_urise\task\create_sap_files',
-            'blocking' => 0,
-            'minute' => '30',
-            'hour' => '4',
-            'day' => '*',
-            'dayofweek' => '*',
-            'month' => '*',
-        ],
-];
+    /**
+     * Scheduled task that creates the SAP files needed for reporting.
+     *
+     */
+    public function execute() {
+        $now = time();
+        $tendaysago = strtotime('-10 days', $now);
+        sap_daily_sums::create_sap_files_from_date($tendaysago);
+    }
+}
