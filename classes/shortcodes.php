@@ -1084,9 +1084,22 @@ class shortcodes {
                                 $additonalwhere .= " AND ";
                             }
 
-                            $value = "'%$value%'";
+                            $values = explode(',', $value);
 
-                            $additonalwhere .= " $key LIKE $value ";
+                            if (!empty($values)) {
+                                $additonalwhere .= " ( ";
+                            }
+
+                            foreach ($values as $vkey => $vvalue) {
+
+                                $additonalwhere .= $vkey > 0 ? ' OR ' : '';
+                                $vvalue = "'%$vvalue%'";
+                                $additonalwhere .= " $key LIKE $vvalue ";
+                            }
+
+                            if (!empty($values)) {
+                                $additonalwhere .= " ) ";
+                            }
 
                         } else {
                             $argument = strip_tags($argument);
