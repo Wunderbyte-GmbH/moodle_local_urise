@@ -126,7 +126,11 @@ class get_parent_categories extends external_api {
 
             if (
                 $bookingoptions
-                    = coursecategories::return_booking_information_for_coursecategory((int)$record->contextid, 'tatsaechlichetnbib')
+                    = coursecategories::return_booking_information_for_coursecategory(
+                        (int)$record->contextid,
+                        'tatsaechlichetnbib',
+                        'kostenausoesicht',
+                        )
             ) {
                 $multibookingconfig = explode(',', get_config('local_urise', 'multibookinginstances') ?: '');
                 foreach ($bookingoptions as &$value) {
