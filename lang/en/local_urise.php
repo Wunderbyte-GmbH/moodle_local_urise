@@ -466,3 +466,11 @@ $string['studienserviceundlehrwesen'] = "Teaching Affairs and Student Services";
 
 $string['organisationfilterdefinition'] = "Organisation filter";
 $string['organisationfilterdefinition_desc'] = "You need to add the filter of hierarchical organisation structure here.";
+
+$string['bibliothekszielgruppe'] = 'Bibliothekszielgruppe';
+$string['students'] = 'Students';
+$string['doctoralcandidates'] = 'Doctoral candidates';
+$string['lecturers'] = 'University lecturers';
+$string['researchers'] = 'Researchers';
+$string['pupilsandteachers'] = 'High school students and teachers';
+$string['generalpublic'] = 'General public';

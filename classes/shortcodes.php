@@ -736,6 +736,12 @@ class shortcodes {
             $table->add_filter($standardfilter);
         }
 
+        if (empty($filtercolumns) || in_array('bibliothekszielgruppe', $filtercolumns)) {
+            $standardfilter = new standardfilter('bibliothekszielgruppe', get_string('bibliothekszielgruppe', 'local_urise'));
+            $standardfilter->add_options(self::get_bibliothekszielgruppe());
+            $table->add_filter($standardfilter);
+        }
+
         if (empty($filtercolumns) || in_array('kompetenzen', $filtercolumns)) {
             $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_urise'));
             $hierarchicalfilter->add_options(self::get_kompetenzen());
@@ -1286,6 +1292,26 @@ class shortcodes {
                 'parent' => 'Sonstige',
                 'localizedname' => 'Sonstige Kompetenzen',
             ],
+        ];
+
+    }
+
+    /**
+     * Get Bibliothekszielgruppen filter
+     *
+     * @return array
+     *
+     */
+    public static function get_bibliothekszielgruppe() {
+
+        return [
+            'explode' => ',',
+            '1' => get_string('students', 'local_urise'),
+            '2' => get_string('doctoralcandidates', 'local_urise'),
+            '3' => get_string('lecturers', 'local_urise'),
+            '4' => get_string('researchers', 'local_urise'),
+            '5' => get_string('pupilsandteachers', 'local_urise'),
+            '6' => get_string('generalpublic', 'local_urise'),
         ];
 
     }
