@@ -216,6 +216,7 @@ $string['vuebookingstatsbooked'] = 'Gebucht';
 $string['vuebookingstatswaiting'] = 'Warteliste';
 $string['vuebookingstatsreserved'] = 'Reserviert';
 $string['vuebookingstatsrealparticipants'] = 'Tatsächliche TN';
+$string['vuebookingstatsrealcosts'] = 'Tatsächliche Kosten';
 $string['vuecapabilityoptionscapconfig'] = 'Berechtigungskonfiguration';
 $string['vuecapabilityoptionsnecessary'] = 'notwendig';
 $string['vuecapabilityunsavedchanges'] = 'Es gibt ungespeicherte Änderungen';
