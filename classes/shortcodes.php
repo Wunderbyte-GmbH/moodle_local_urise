@@ -903,6 +903,12 @@ class shortcodes {
         if (isset($args['requirelogin']) && $args['requirelogin'] == "false") {
             $table->requirelogin = false;
         }
+
+        if (!empty($args['showfilterbutton'])) {
+            $table->showfilterbutton = true;
+        } else {
+            $table->showfilterbutton = false;
+        }
     }
 
     /**
