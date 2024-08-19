@@ -44,7 +44,7 @@
               {{ store.state.strings.dashboardoverview }}
             </button>
           </li>
-          <li class="nav-item" role="presentation">
+          <li v-if="content.showbookingoptionfields" class="nav-item" role="presentation">
             <button id="profile-tab" class="nav-link" data-toggle="tab" data-target="#profile" type="button" role="tab"
               aria-controls="profile" aria-selected="false">
               {{ store.state.strings.dashboardbookingfields }}
