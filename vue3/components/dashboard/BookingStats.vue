@@ -11,6 +11,7 @@
           <th>{{ store.state.strings.vuebookingstatswaiting }}</th>
           <th>{{ store.state.strings.vuebookingstatsreserved }}</th>
           <th v-if="showRealParticipants">{{ store.state.strings.vuebookingstatsrealparticipants }}</th>
+          <th v-if="showRealCosts">{{ store.state.strings.vuebookingstatsrealcosts }}</th>
         </tr>
       </thead>
       <tbody>
@@ -43,6 +44,7 @@
           <td>{{ bookingStat.waitinglist }}</td>
           <td>{{ bookingStat.reserved }}</td>
           <td v-if="showRealParticipants">{{ bookingStat.realparticipants }}</td>
+          <td v-if="showRealCosts">{{ bookingStat.realcosts }}</td>
         </tr>
       </tbody>
     </table>
@@ -71,6 +73,9 @@
     return props.bookingstats.json.booking.some(stat => stat.realparticipants > 0);
   });
 
+  const showRealCosts = computed(() => {
+    return props.bookingstats.json.booking.some(stat => stat.realcosts > 0);
+  });
 </script>
 
 
