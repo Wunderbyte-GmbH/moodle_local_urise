@@ -26,6 +26,7 @@ declare(strict_types=1);
 
 namespace local_urise\external;
 
+use context_system;
 use external_api;
 use external_function_parameters;
 use external_multiple_structure;
@@ -88,6 +89,8 @@ class get_parent_categories extends external_api {
         $realparticipants = 0;
         $noshows = 0;
 
+        $context = context_system::instance();
+
         if (empty($params['coursecategoryid'])) {
             $returnarray = [
                 [
@@ -98,6 +101,7 @@ class get_parent_categories extends external_api {
                     'description' => get_string('dashboardsummary_desc', 'mod_booking'),
                     'path' => '',
                     'json' => '',
+                    'showbookingoptionfields' => has_capability('mod/booking:expertoptionform', $context),
                 ],
             ];
         } else {
@@ -151,6 +155,8 @@ class get_parent_categories extends external_api {
                 $record->json = json_encode([
                     'booking' => array_values($bookingoptions),
                 ]);
+
+                $record->showbookingoptionfields = has_capability('mod/booking:expertoptionform', $context);
             }
             $returnarray[] = (array)$record;
 
@@ -206,6 +212,7 @@ class get_parent_categories extends external_api {
                         ), 'List of courses', VALUE_OPTIONAL
                     ),
                     'json' => new external_value(PARAM_RAW, 'json', VALUE_DEFAULT, '{}'),
+                    'showbookingoptionfields' => new external_value(PARAM_BOOL, 'Show bookingoptionfields Tab', VALUE_DEFAULT, false),
                 ]
             )
         );
