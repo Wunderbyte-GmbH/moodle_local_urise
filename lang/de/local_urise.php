@@ -234,7 +234,7 @@ $string['vuenotificationtitleactionfail'] = 'Die Konfiguration wurde nicht erfol
 $string['vuenotificationtextactionfail'] = 'Beim Speichern ist ein Fehler aufgetreten. Die Änderungen wurden nicht vorgenommen.';
 $string['vuedashboardgotocategory'] = 'Zur Kategorie';
 $string['vuedashboardbookinginstances'] = 'Booking instances';
-$string['vuenotabsfounds'] = 'No tabs were found';
+$string['vuenotabsfounds'] = 'Keine Tabs gefunden';
 
 $string['booking:expertoptionform'] = "Expert option form";
 $string['booking:reducedoptionform1'] = "1. Reduced option form for course category";
