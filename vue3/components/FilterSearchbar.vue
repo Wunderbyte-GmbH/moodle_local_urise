@@ -1,15 +1,15 @@
 <template>
   <div class="d-flex justify-content-end align-items-center">
-    <div 
-      class="input-group mr-2" 
-      style="min-width: 200px;"
+    <div
+      class="input-group mr-2"
+      style="min-width: 200px; margin-bottom: 10px;"
     >
-      <input 
-        type="text" 
-        class="form-control rounded-pill" 
-        placeholder="Filter tabs..." 
-        aria-label="Search" 
-        aria-describedby="button-addon2" 
+      <input
+        type="text"
+        class="form-control rounded-pill"
+        placeholder="Filter tabs..."
+        aria-label="Search"
+        aria-describedby="button-addon2"
         @input="handleInputChange"
       >
     </div>

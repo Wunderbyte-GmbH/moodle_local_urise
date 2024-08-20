@@ -230,6 +230,7 @@ $string['vuenotificationtextactionsuccess'] = 'Configuration was {$a} successful
 $string['vuenotificationtitleactionfail'] = 'Configuration was not  {$a}';
 $string['vuenotificationtextactionfail'] = 'Something went wrong while saving. The changes have not been made.';
 $string['vuedashboardgotocategory'] = 'Go to category';
+$string['vuenotabsfounds'] = 'Keine Tabs gefunden';
 
 // Access.
 $string['mod/booking:expertoptionform'] = 'Bookingoption for experts';
