@@ -7,14 +7,19 @@
         <a @click="scrollLeft()" class="text-white ml5em" style="font-size: 1.3em;
     margin-right: 1rem; padding-bottom: 10px"><i class="fa-solid fa-arrow-left"></i></a>
         <div class="overflow-tabs-container d-flex justify-content-start" ref="scrollMe">
-          <div v-if="tabs.length > 0" class="nav nav-tabs justify-content-center navouter">
+          <div v-if="tabsstored.length > 0" class="nav nav-tabs justify-content-center navouter">
             <span class="d-flex justify-content-center align-items-center m-1 text-white" @click="toggleSearchbar" ><i class="fa-solid fa-magnifying-glass"></i></span>
             <div class="nav-item searchbar">
               <transition name="fade">
             <Searchbar v-if="showSearchbar" :tabs="tabsstored" @filteredTabs="updateFilteredTabs" class="m0 p0 no-margin"/>
           </transition>
           </div>
-            <div v-for="tab in tabs" :key="tab.id" class="nav-item">
+            <div v-if="!tabs || tabs.length == 0" class="nav-item">
+              <a class="nav-link" style="color: gray; background-color: #f0f0f0;">
+                <span class="tabunselected">{{ store.state.strings.vuenotabsfounds }}</span>
+              </a>
+            </div>
+            <div v-else v-for="tab in tabs" :key="tab.id" class="nav-item">
               <a :class="['nav-link', { 'active': activeTab === tab.id }]" @click="changeTab(tab.id)">
                 <span class="tabunselected">{{ tab.name }}</span>
               </a>
