@@ -65,34 +65,34 @@
     data-{{key}}="{{value}}"
 {{/datafields}}
 >
-  <div class="{{cardimageclass}}">
-     {{#url}}
-      {{#value}}
-        <a href="{{{value}}}" class="booking-card-image-link">
-          {{/value}}
-      {{/url}}
-    {{#cardimage}}
-      {{#value}}
-        <img class="w-100" src="{{{value}}}" {{#cardimagealt}}alt="{{.}}" title="{{.}}"{{/cardimagealt}}>
-      {{/value}}
-        {{^value}}
-            <div class="placeholderimage">
-            <div class="m-3 d-flex justify-conten-center align-items-center flex-column">
-              <i class="fa-regular fa-image placeholdericon text-dark"></i>
-              <h4 class="pt-2" >
-                {{#str}} optionnoimage, mod_booking {{/str}}
-              </h4>
-              </div>
-            </div>
+  <div class="d-flex flex-column flex-grow-1 mod-booking-card-content">
+    <div class="{{cardimageclass}}">
+      {{#url}}
+        {{#value}}
+          <a href="{{{value}}}" class="booking-card-image-link">
+            {{/value}}
+        {{/url}}
+      {{#cardimage}}
+        {{#value}}
+          <img class="w-100" src="{{{value}}}" {{#cardimagealt}}alt="{{.}}" title="{{.}}"{{/cardimagealt}}>
         {{/value}}
-    {{/cardimage}}
-    {{#url}}
-      {{#value}}
-        </a>
+          {{^value}}
+              <div class="placeholderimage">
+              <div class="m-3 d-flex justify-conten-center align-items-center flex-column">
+                <i class="fa-regular fa-image placeholdericon text-dark"></i>
+                <h4 class="pt-2" >
+                  {{#str}} optionnoimage, mod_booking {{/str}}
+                </h4>
+                </div>
+              </div>
           {{/value}}
-      {{/url}}
-  </div>
-  <div class="d-flex flex-column flex-grow-1">
+      {{/cardimage}}
+      {{#url}}
+        {{#value}}
+          </a>
+            {{/value}}
+        {{/url}}
+    </div>
     <div class="mod-booking-card-header mt-4 row w-100 mx-auto d-flex align-items-center mt-1 px-2">
       {{#cardheader}}
         {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}

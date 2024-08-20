@@ -624,3 +624,18 @@ a.booking-card-image-link:hover {
 
     }
 }
+
+@media (max-width: 768px) {
+    .mod-booking-card-content {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   grid-column-gap: 0px;
+   grid-row-gap: 0px;
+   }
+
+   .imagecontainer { grid-area: 1 / 1 / 1 / 4; }
+   .mod-booking-card-header { grid-area: 1 / 4 / 2 / 5; }
+   .mod-booking-card-body   { grid-area: 3 / 1 / 4 / 6; }
+   .mod-booking-card-infos { grid-area: 4 / 1 / 5 / 6; }
+   .mod-booking-card-footer { grid-area: 4 / 1 / 5 / 5; }
+}
