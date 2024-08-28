@@ -82,6 +82,17 @@ $string['sportsdivisions'] = 'Sparten';
 $string['titleprefix'] = 'Kursnummer';
 $string['unknown'] = 'Unbekannt';
 
+$string['format'] = "Kursformat";
+$string['german'] = 'Deutsch';
+$string['english'] = 'Englisch';
+$string['onsite'] = 'Vor Ort';
+$string['hybrid'] = 'Hybrid';
+$string['blendedlearningonsite'] = 'Blended Learning mit Vor-Ort-Terminen';
+$string['blendedlearningonline'] = 'Blended Learning mit Online-Terminen';
+$string['blendedlearningonline'] = 'Blended Learning mit Hybrid-Terminen';
+$string['onsite'] = 'Online-Termin';
+$string['selfpaced'] = 'Selbstlernkurs';
+
 // Errors.
 $string['error:starttime'] = 'Start muss vor dem Ende sein.';
 $string['error:endtime'] = 'Ende muss nach dem Start sein.';
@@ -410,7 +421,7 @@ $string['zgcommunities'] = "Interessant für";
 $string['organisationfilter'] = "Angeboten von";
 $string['fromdate'] = "Ab ";
 
-
+$string['kurssprache'] = 'Kurssprache';
 
 $string['fbafrikawissenschaftenundorientalistik'] = "FB Afrikawissenschaften und Orientalistik";
 $string['fbaltegeschichte'] = "FB Alte Geschichte";

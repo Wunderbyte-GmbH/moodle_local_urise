@@ -754,6 +754,29 @@ class shortcodes {
             $table->add_filter($hierarchicalfilter);
         }
 
+        if (empty($filtercolumns) || in_array('kurssprache', $filtercolumns)) {
+            $standardfilter = new standardfilter('kurssprache', get_string('kurssprache', 'local_urise'));
+            $standardfilter->add_options([
+                1 => get_string('german', 'local_urise'),
+                2 => get_string('english', 'local_urise'),
+            ]);
+            $table->add_filter($standardfilter);
+        }
+
+        if (empty($filtercolumns) || in_array('format', $filtercolumns)) {
+            $standardfilter = new standardfilter('format', get_string('format', 'local_urise'));
+            $standardfilter->add_options([
+                1 => get_string('onsite', 'local_urise'),
+                2 => get_string('hybrid', 'local_urise'),
+                3 => get_string('blendedlearningonsite', 'local_urise'),
+                4 => get_string('blendedlearningonline', 'local_urise'),
+                5 => get_string('blendedlearningonline', 'local_urise'),
+                6 => get_string('onsite', 'local_urise'),
+                7 => get_string('selfpaced', 'local_urise'),
+            ]);
+            $table->add_filter($standardfilter);
+        }
+
         if (empty($filtercolumns) || in_array('dayofweek', $filtercolumns)) {
             $standardfilter = new standardfilter('dayofweek', get_string('dayofweek', 'local_urise'));
             $standardfilter->add_options([
