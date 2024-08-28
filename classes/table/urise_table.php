@@ -16,6 +16,7 @@
 
 namespace local_urise\table;
 use local_urise\shortcodes;
+use mod_booking\booking_answers;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -662,12 +663,15 @@ class urise_table extends wunderbyte_table {
         $settings = singleton_service::get_instance_of_booking_option_settings($values->optionid, $values);
         $bookinganswers = singleton_service::get_instance_of_booking_answers($settings, 0);
 
-        if (count($bookinganswers->usersonlist) > 0) {
+        if (booking_answers::count_places($bookinganswers->usersonlist) > 0) {
             // Add a link to redirect to the booking option.
-            $link = new moodle_url($CFG->wwwroot . '/mod/booking/report.php', array(
-                'id' => $values->cmid,
-                'optionid' => $values->optionid
-            ));
+            $link = new moodle_url(
+                $CFG->wwwroot . '/mod/booking/report.php',
+                [
+                    'id' => $values->cmid,
+                    'optionid' => $values->optionid,
+                ]
+            );
             // Use html_entity_decode to convert "&amp;" to a simple "&" character.
             if ($CFG->version >= 2023042400) {
                 // Moodle 4.2 needs second param.
