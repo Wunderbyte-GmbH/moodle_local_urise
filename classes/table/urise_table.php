@@ -478,18 +478,6 @@ class urise_table extends wunderbyte_table {
             }
         }
 
-        $context = context_module::instance($settings->cmid);
-
-        // The error message should only be shown to admins.
-        if (has_capability('moodle/site:config', $context)) {
-
-            $message = get_string('youneedcustomfieldsport', 'local_urise');
-
-            $message = "<div class='alert alert-danger'>$message</div>";
-
-            return $message;
-        }
-
         // Normal users won't notice the problem.
         return '';
     }
