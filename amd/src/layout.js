@@ -66,6 +66,10 @@ function adjustHeights() {
         // Calculate the number of cards per row
         const numberOfCardsInRow = Math.floor(containerWidth / cardWidth);
 
+        if (numberOfCardsInRow < 1) {
+            return;
+        }
+
         // Reset heights
         cards.forEach(function(card) {
             const cardBody = card.querySelector('.mod-booking-card-body');
