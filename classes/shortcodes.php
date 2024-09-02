@@ -287,10 +287,10 @@ class shortcodes {
 
         if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
             $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
-            list($fields, $from, $where, $params, $filter) =
+            [$fields, $from, $where, $params, $filter] =
                 booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, null, [], $additionalwhere);
         } else {
-            list($fields, $from, $where, $params, $filter) =
+            [$fields, $from, $where, $params, $filter] =
                 booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, null, [], $additionalwhere);
         }
 
@@ -325,10 +325,11 @@ class shortcodes {
         }
 
         $table->showfilterontop = $args['filterontop'];
+        $table->showcountlabel = true;
 
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
-            list($idstring, $encodedtable, $out) = $table->lazyouthtml($perpage, true);
+            [$idstring, $encodedtable, $out] = $table->lazyouthtml($perpage, true);
             return $out;
         }
 
