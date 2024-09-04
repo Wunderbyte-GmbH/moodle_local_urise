@@ -209,11 +209,6 @@ class shortcodes {
     public static function unifiedview($shortcode, $args, $content, $env, $next, $renderascard = false) {
         global $DB;
 
-        // TODO: Define capability.
-        // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-        /* if (!has_capability('moodle/site:config', $env->context)) {
-            return '';
-        } */
         self::fix_args($args);
         $booking = self::get_booking($args);
 
@@ -264,24 +259,16 @@ class shortcodes {
 
         $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
 
-        if (!isset($args['organisation']) || !$category = ($args['organisation'])) {
-            $organisation = '';
-        }
-
         $wherearray = ['bookingid' => $bookingids];
-
-        if (!empty($organisation)) {
-            $wherearray['organisation'] = $category;
-        }
 
         // Additional where condition for both card and list views
         $additionalwhere = self::set_wherearray_from_arguments($args, $wherearray) ?? '';
 
-        if (!empty($additionalwhere)) {
-            $additionalwhere .= " AND ";
-        }
         // Additional where has to be added here. We add the param later.
         if (empty($args['all'])) {
+            if (!empty($additionalwhere)) {
+                $additionalwhere .= " AND ";
+            }
             $additionalwhere .= " (courseendtime > :timenow OR courseendtime = 0) ";
         }
 
@@ -338,7 +325,6 @@ class shortcodes {
         return $out;
     }
 
-
     /**
      * Prints out list of bookingoptions.
      * Arguments can be 'category' or 'perpage'.
@@ -348,18 +334,20 @@ class shortcodes {
      * @param string|null $content
      * @param object $env
      * @param Closure $next
-     * @return void
+     * @return string
      */
     public static function unifiedmybookingslist($shortcode, $args, $content, $env, $next) {
 
-        global $DB, $USER, $CFG;
-
-        require_once($CFG->dirroot . '/mod/booking/lib.php');
+        global $USER;
 
         self::fix_args($args);
+        $booking = self::get_booking($args);
 
-        if (!isset($args['category']) || !$category = ($args['category'])) {
-            $category = '';
+        $bookingids = explode(',', get_config('local_urise', 'multibookinginstances'));
+        $bookingids = array_filter($bookingids, fn($a) => !empty($a));
+
+        if (empty($bookingids)) {
+            return get_string('nobookinginstancesselected', 'local_urise');
         }
 
         if (!isset($args['image']) || !$showimage = ($args['image'])) {
@@ -370,15 +358,9 @@ class shortcodes {
             $args['countlabel'] = false;
         }
 
-        if (empty($args['reload'])) {
-            $args['reload'] = false;
-        }
-
         if (empty($args['filterontop'])) {
             $args['filterontop'] = false;
         }
-
-        $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
 
         if (
             !isset($args['perpage'])
@@ -386,27 +368,51 @@ class shortcodes {
             || !$perpage = ($args['perpage'])
         ) {
             $perpage = 100;
+        } else {
+            $infinitescrollpage = 0;
         }
 
-        $table = self::inittableforcourses();
+        if (empty($args['initcourses'])) {
+            $args['initcourses'] = false;
+        } else {
+            $args['initcourses'] = true;
+        }
+        if ($args['initcourses'] === false) {
+            $table = self::inittableforcourses();
+        } else {
+            $table = self::inittableforcourses(false);
+        }
 
         $table->showcountlabel = $args['countlabel'];
+
+        if (empty($args['reload'])) {
+            $args['reload'] = false;
+        }
         $table->showreloadbutton = $args['reload'];
 
-        $wherearray = [];
+        $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
+
+        $wherearray = ['bookingid' => $bookingids];
 
         // Additional where condition for both card and list views
         $additionalwhere = self::set_wherearray_from_arguments($args, $wherearray) ?? '';
 
-        // We want to show booking options also when the user was deleted from them. but only, if the booking option is canceled now.
-
         $additionalwhere .= ' ((waitinglist <> ' . MOD_BOOKING_STATUSPARAM_DELETED . ' AND status = 0) OR (waitinglist = ' . MOD_BOOKING_STATUSPARAM_DELETED . ' AND status = 1))';
+
+        // Additional where has to be added here. We add the param later.
+        if (empty($args['all'])) {
+            if (!empty($additionalwhere)) {
+                $additionalwhere .= " AND ";
+            }
+            $additionalwhere .= " (courseendtime > :timenow OR courseendtime = 0) ";
+        }
 
         // If we want to find only the teacher relevant options, we chose different sql.
         if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
             $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
-            list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0,
+            [$fields, $from, $where, $params, $filter] =
+                booking::get_options_filter_sql(
+                    0,
                     0,
                     '',
                     null,
@@ -424,8 +430,9 @@ class shortcodes {
                     $additionalwhere
                 );
         } else {
-            list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0,
+            [$fields, $from, $where, $params, $filter] =
+                booking::get_options_filter_sql(
+                    0,
                     0,
                     '',
                     null,
@@ -444,14 +451,18 @@ class shortcodes {
                 );
         }
 
+        $params['timenow'] = strtotime('today 00:00');
         $table->set_filter_sql($fields, $from, $where, $filter, $params);
 
-        $table->use_pages = true;
+        $table->use_pages = empty($args['showpagination']) ? false : true;
 
         if ($showimage !== false) {
             $table->set_tableclass('cardimageclass', 'pr-0 pl-1');
-
             $table->add_subcolumns('cardimage', ['image']);
+        }
+
+        if (empty($args['showpagination'])) {
+            $args['showpagination'] = true;
         }
 
         self::set_table_options_from_arguments($table, $args);
@@ -460,25 +471,16 @@ class shortcodes {
             $table->tabletemplate = 'local_urise/table_card';
         } else {
             self::generate_table_for_list($table, $args);
+            $table->infinitescroll = $infinitescrollpage;
             $table->tabletemplate = 'local_urise/table_list';
         }
 
-        $table->cardsort = true;
-
-        // This allows us to use infinite scrolling, No pages will be used.
-        $table->infinitescroll = $infinitescrollpage;
-
         $table->showfilterontop = $args['filterontop'];
-        $table->showfilterbutton = false;
-
-        // We override the cache, because the my cache has to be invalidated with every booking.
-        $table->define_cache('mod_booking', 'mybookingoptionstable');
+        $table->showcountlabel = true;
 
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
-
-            list($idstring, $encodedtable, $out) = $table->lazyouthtml($perpage, true);
-
+            [$idstring, $encodedtable, $out] = $table->lazyouthtml($perpage, true);
             return $out;
         }
 
@@ -908,8 +910,6 @@ class shortcodes {
             }
             $table->define_sortablecolumns($sortablecolumns);
         }
-
-        $sortorder = $table->return_current_sortorder();
 
         $defaultorder = SORT_ASC; // Default.
         if (!empty($args['sortorder'])) {
