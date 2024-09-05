@@ -60,7 +60,6 @@
     }
 }}
 {{> local_wunderbyte_table/component_countlabel }}
-{{> local_wunderbyte_table/component_pagination }}
 
 {{#table}}
 
@@ -72,7 +71,7 @@
 
 {{/table}}
 
-{{> local_wunderbyte_table/component_pagination }}
+<div class="mt-4">{{> local_wunderbyte_table/component_pagination }}</div>
 
 {{^norecords}}
 {{#js}}
