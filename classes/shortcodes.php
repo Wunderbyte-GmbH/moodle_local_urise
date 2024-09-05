@@ -241,13 +241,10 @@ class shortcodes {
             $infinitescrollpage = 0;
         }
 
-        if (empty($args['initcourses'])) {
-            $args['initcourses'] = true;
-        }
-        if ($args['initcourses'] === true) {
-            $table = self::inittableforcourses();
-        } else {
+        if (empty($args['initcourses']) || $args['initcourses'] = false) {
             $table = self::inittableforcourses(false);
+        } else {
+            $table = self::inittableforcourses();
         }
 
         $table->showcountlabel = $args['countlabel'];
@@ -372,15 +369,10 @@ class shortcodes {
             $infinitescrollpage = 0;
         }
 
-        if (empty($args['initcourses'])) {
-            $args['initcourses'] = false;
-        } else {
-            $args['initcourses'] = true;
-        }
-        if ($args['initcourses'] === false) {
-            $table = self::inittableforcourses();
-        } else {
+        if (empty($args['initcourses']) || $args['initcourses'] = false) {
             $table = self::inittableforcourses(false);
+        } else {
+            $table = self::inittableforcourses();
         }
 
         $table->showcountlabel = $args['countlabel'];
