@@ -87,6 +87,8 @@ class get_parent_categories extends external_api {
         $waitinglistcount = 0;
         $reservedcount = 0;
         $realparticipants = 0;
+        $participated = 0;
+        $excused = 0;
         $noshows = 0;
 
         $context = context_system::instance();
@@ -121,6 +123,8 @@ class get_parent_categories extends external_api {
             $record->waitinglistcount = 0;
             $record->reservedcount = 0;
             $record->realparticipants = 0;
+            $record->participated = 0;
+            $record->excused = 0;
             $record->noshows = 0;
 
             $sql = "SELECT c.id, c.fullname
@@ -150,6 +154,8 @@ class get_parent_categories extends external_api {
                     $record->reservedcount += $value->reserved ?? 0;
                     $record->realparticipants += $value->realparticipants ?? 0;
                     $record->noshows += $value->noshows ?? 0;
+                    $record->excused += $value->excused ?? 0;
+                    $record->participated += $value->participated ?? 0;
 
                 }
                 $record->json = json_encode([
@@ -165,6 +171,8 @@ class get_parent_categories extends external_api {
             $waitinglistcount += $record->waitinglistcount;
             $reservedcount += $record->reservedcount;
             $realparticipants += $record->realparticipants;
+            $participated += $record->participated;
+            $excused += $record->excused;
             $noshows += $record->noshows;
         }
 
@@ -176,6 +184,8 @@ class get_parent_categories extends external_api {
             $returnarray[0]['waitinglistcount'] = $waitinglistcount;
             $returnarray[0]['reservedcount'] = $reservedcount;
             $returnarray[0]['realparticipants'] = $realparticipants;
+            $returnarray[0]['participated'] = $participated;
+            $returnarray[0]['excused'] = $excused;
             $returnarray[0]['noshows'] = $noshows;
         }
 
@@ -200,6 +210,8 @@ class get_parent_categories extends external_api {
                     'waitinglistcount' => new external_value(PARAM_TEXT, 'Waitinglist count', VALUE_DEFAULT, 0),
                     'reservedcount' => new external_value(PARAM_TEXT, 'Reserved count', VALUE_DEFAULT, 0),
                     'realparticipants' => new external_value(PARAM_TEXT, 'Real participants count', VALUE_DEFAULT, 0),
+                    'participated' => new external_value(PARAM_TEXT, 'With status participated', VALUE_DEFAULT, 0),
+                    'excused' => new external_value(PARAM_TEXT, 'With status excused', VALUE_DEFAULT, 0),
                     'noshows' => new external_value(PARAM_TEXT, 'Number of noshows at event', VALUE_DEFAULT, 0),
                     'description' => new external_value(PARAM_RAW, 'description', VALUE_DEFAULT, ''),
                     'path' => new external_value(PARAM_TEXT, 'path', VALUE_DEFAULT, ''),
@@ -209,7 +221,9 @@ class get_parent_categories extends external_api {
                                 'id' => new external_value(PARAM_INT, 'Course ID'),
                                 'fullname' => new external_value(PARAM_TEXT, 'Full course name'),
                             ]
-                        ), 'List of courses', VALUE_OPTIONAL
+                        ),
+                        'List of courses',
+                        VALUE_OPTIONAL
                     ),
                     'json' => new external_value(PARAM_RAW, 'json', VALUE_DEFAULT, '{}'),
                     'showbookingoptionfields' => new external_value(PARAM_BOOL, 'Show bookingoptionfields Tab', VALUE_DEFAULT, false),
