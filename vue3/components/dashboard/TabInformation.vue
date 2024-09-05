@@ -115,19 +115,6 @@
           </a>
         </div>
       </div>
-      <div v-if="content.courses && content.courses.length > 0" class="courses mt-3">
-        <h5 class="mb-4">{{ strings.courses }} <a role="button" data-toggle="collapse" href="#collapseCourses"
-            aria-expanded="false" aria-controls="collapseCourses"><i class="fa-solid fa-square-caret-down"></i></a></h5>
-        <div class="collapse" id="collapseCourses">
-          <div class="list-group d-flex flex-row flex-wrap">
-            <div v-for="course in content.courses" :key="course.id" class="m-1">
-              <a class="btn button-secondary px-4" role="button" :href="`/course/view.php?id=${course.id}`">{{
-                course.fullname
-                }}</a>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
