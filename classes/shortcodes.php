@@ -241,7 +241,7 @@ class shortcodes {
             $infinitescrollpage = 0;
         }
 
-        if (empty($args['initcourses']) || $args['initcourses'] = false) {
+        if (empty($args['initcourses']) || $args['initcourses'] == "false") {
             $table = self::inittableforcourses(false);
         } else {
             $table = self::inittableforcourses();
@@ -369,7 +369,7 @@ class shortcodes {
             $infinitescrollpage = 0;
         }
 
-        if (empty($args['initcourses']) || $args['initcourses'] = false) {
+        if (empty($args['initcourses']) || $args['initcourses'] == "false") {
             $table = self::inittableforcourses(false);
         } else {
             $table = self::inittableforcourses();
