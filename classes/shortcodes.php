@@ -796,7 +796,7 @@ class shortcodes {
             $datepicker = new datepicker(
                 'coursestarttime',
                 get_string('timefilter:coursetime', 'mod_booking'),
-                'columntimeend'
+                'courseendtime'
             );
             $datepicker->add_options(
                 'in between',
