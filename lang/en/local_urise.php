@@ -547,3 +547,5 @@ $string['extrashortcodeone'] = "HTML for extra shortcode 1";
 $string['extrashortcodeone_desc'] = "Can be used to output html code via a shortcode";
 $string['extrashortcodetwo'] = "HTML for extra shortcode 2";
 $string['extrashortcodetwo_desc'] = "Can be used to output html code via a shortcode";
+
+$string['jointevent'] = "Joint event";

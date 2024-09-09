@@ -432,7 +432,7 @@ class urise_table extends wunderbyte_table {
                     }
                 }
 
-                return implode(", ", $returnorgas);
+                return implode("", $returnorgas);
             } else {
                 $value = $settings->customfields['kompetenzen'];
                 $message = "<span class='bg-secondary orga'>$value</span>";
@@ -469,8 +469,8 @@ class urise_table extends wunderbyte_table {
 
         if (isset($settings->customfields) && isset($settings->customfields['organisation'])) {
             if (is_array($settings->customfields['organisation'])) {
-
                 $returnorgas = [];
+                $strlen = 0;
                 foreach ($settings->customfields['organisation'] as $orgaid) {
                     $organisations = shortcodes::organisations();
 
@@ -480,11 +480,20 @@ class urise_table extends wunderbyte_table {
                             $organisations[$orgaid]['localizedname'],
                             ['class' => 'bg-secondary pl-1 pr-1 mr-1 rounded category']
                         );
-
+                        $strlen += strlen($organisations[$orgaid]['localizedname']);
                     }
                 }
 
-                return implode(", ", $returnorgas);
+                if (count($returnorgas) > 1 && $strlen > 70) {
+                    $output = html_writer::tag(
+                        'span',
+                        get_string('jointevent', 'local_urise'),
+                        ['class' => 'bg-secondary pl-1 pr-1 mr-1 rounded category']
+                    );
+                } else {
+                    $output = implode(" ", $returnorgas);
+                }
+                return $output;
             } else {
                 $value = $settings->customfields['organisation'];
                 $message = "<span class='bg-secondary orga'>$value</span>";

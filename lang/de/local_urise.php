@@ -564,3 +564,5 @@ $string['extrashortcodeone'] = "HTML für extra shortcode 1";
 $string['extrashortcodeone_desc'] = "Kann verwendet werden um html über den shortcode auszugeben";
 $string['extrashortcodetwo'] = "HTML für extra shortcode 2";
 $string['extrashortcodetwo_desc'] = "Kann verwendet werden um html über den shortcode auszugeben";
+
+$string['jointevent'] = "Gemeinsame Veranstaltung";
