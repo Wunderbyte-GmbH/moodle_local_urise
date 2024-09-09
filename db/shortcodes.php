@@ -52,4 +52,9 @@ $shortcodes = [
         'wraps' => false,
         'description' => 'shortcodes::calendarblock',
     ],
+    'navbarhtml' => [
+        'callback' => 'local_urise\shortcodes::navbarhtml',
+        'wraps' => false,
+        'description' => 'shortcodes::navbarhtml',
+    ],
 ];
