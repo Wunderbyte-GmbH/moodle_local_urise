@@ -55,6 +55,13 @@
         <h5 class="mb-4">{{ store.state.strings.courses }} <a role="button" data-toggle="collapse" href="#collapseCourses"
             aria-expanded="false" aria-controls="collapseCourses"><i class="fa-solid fa-square-caret-down"></i></a></h5>
         <div class="collapse" id="collapseCourses">
+          <template v-if="bookingstats.id">
+            <a role="button" :href="'/course/edit.php?category=' + bookingstats.id"
+              class="mb-3 block-link btn button-secondary">
+              <i class="fa-solid fa-plus mr-1" />
+              {{ store.state.strings.vuedashboardnewcourse }}
+            </a>
+          </template>
           <input type="text" v-model="searchTerm" placeholder="Search courses..." class="form-control mb-3 searchCourse" />
           <ul class="list-group list-group-flush">
             <li v-for="course in filteredCourses" :key="course.id" class="list-group-item">
