@@ -716,7 +716,7 @@ class shortcodes {
      * @param string|null $content
      * @param object $env
      * @param Closure $next
-     * @return void
+     * @return string
      */
     public static function navbarhtml($shortcode, $args, $content, $env, $next) {
 
@@ -726,6 +726,8 @@ class shortcodes {
         if (!empty($args['category']) && $args['category'] === 'support') {
             $html = get_config('local_urise', 'extrashortcodetwo');
         }
+
+        $html = format_text($html);
 
         return $html ?? 'no html or category not set correctly';
     }
