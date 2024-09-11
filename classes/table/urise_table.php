@@ -264,8 +264,28 @@ class urise_table extends wunderbyte_table {
             $title = $values->titleprefix . ' - ' . $title;
         }
 
+        $context = context_module::instance($booking->cmid);
+
+        if (!isloggedin() || !has_capability('mod/booking::view', $context)) {
+            return html_writer::tag('div', $title, ['class' => 'urise-table-option-title']);
+        }
+
         if (!$this->is_downloading()) {
-            $title = "<div class='urise-table-option-title'><a href='$url' target='_blank'>$title</a></div>";
+            $title = html_writer::tag(
+                'a',
+                $title,
+                [
+                    'href' => $url,
+                    'target' => '_blank',
+                ]
+            );
+            $title = html_writer::tag(
+                'div',
+                $title,
+                [
+                    'class' => 'urise-table-option-title',
+                ]
+            );
         }
 
         return $title;
