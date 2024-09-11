@@ -81,8 +81,17 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
     if (!permissions::has_capability_anywhere()) {
         return true;
     }
+    $context = context_system::instance();
+    if (has_capability('moodle/user:editprofile', $context)) {
+        $editteacherlink = '<a class="dropdown-item" href="'
+                . $CFG->wwwroot . '/mod/booking/teachers.php">'
+                . get_string('editteachers', 'local_urise') . '</a>';
+    } else {
+        $editteacherlink = '';
+    }
 
-    $output = '<div class="popover-region nav-link icon-no-margin dropdown">
+
+    $output = '<div class="popover-region nav-link icon-no-margin dropdown" data-id="urise-popover-region">
         <button class="btn btn-secondary dropdown-toggle" type="button"
         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         '. get_string('urise', 'local_urise') .'
@@ -96,14 +105,15 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
                 . get_string('entities', 'local_urise') . '</a>
             <a class="dropdown-item" href="'
                 . $CFG->wwwroot . '/local/urise/meinekurse.php">'
-                . get_string('mycourses', 'local_urise') . '</a>
+                . get_string('mycourses', 'local_urise') . '</a>'
+            . $editteacherlink . '
         </div>
     </div>';
     return $output;
 }
 
 /**
- *  Callback checking permissions and preparing the file for serving plugin files, see File API.
+ * Callback checking permissions and preparing the file for serving plugin files, see File API.
  *
  * @param $course
  * @param $cm
@@ -112,25 +122,23 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
  * @param $args
  * @param $forcedownload
  * @param array $options
- * @return bool
+ * @return mixed
  * @throws coding_exception
  * @throws moodle_exception
  * @throws require_login_exception
  */
-function local_urise_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
-
+function local_urise_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
     // Check the contextlevel is as expected - if your plugin is a block.
-    // We need context course if wee like to acces template files.
-    if (!in_array($context->contextlevel, array(CONTEXT_SYSTEM))) {
+    // We need context course if we like to access template files.
+    if (!in_array($context->contextlevel, [CONTEXT_SYSTEM])) {
         return false;
     }
-
     // Leave this line out if you set the itemid to null in make_pluginfile_url (set $itemid to 0 instead).
     $itemid = array_shift($args); // The first item in the $args array.
-                                  // Use the itemid to retrieve any relevant data records and
-                                  // perform any security checks to see if the
-                                  // user really does have access to the file in question.
-                                  // Extract the filename / filepath from the $args array.
+    // Use the itemid to retrieve any relevant data records and
+    // perform any security checks to see if the
+    // user really does have access to the file in question.
+    // Extract the filename / filepath from the $args array.
     $filename = array_pop($args); // The last item in the $args array.
     if (!$args) {
         // Var $args is empty => the path is '/'.
@@ -139,14 +147,12 @@ function local_urise_pluginfile($course, $cm, $context, $filearea, $args, $force
         // Var $args contains elements of the filepath.
         $filepath = '/' . implode('/', $args) . '/';
     }
-
     // Retrieve the file from the Files API.
     $fs = get_file_storage();
     $file = $fs->get_file($context->id, 'local_urise', $filearea, $itemid, $filepath, $filename);
     if (!$file) {
         return false; // The file does not exist.
     }
-
     // Send the file back to the browser - in this case with a cache lifetime of 1 day and no filtering.
     send_stored_file($file, 0, 0, true, $options);
 }

@@ -549,3 +549,4 @@ $string['extrashortcodetwo'] = "HTML for extra shortcode 2";
 $string['extrashortcodetwo_desc'] = "Can be used to output html code via a shortcode";
 
 $string['jointevent'] = "Joint event";
+$string['editteachers'] = "Edit teachers";
