@@ -709,6 +709,28 @@ class shortcodes {
     }
 
     /**
+     * Navbarhtml shortcode.
+     *
+     * @param string $shortcode
+     * @param array $args
+     * @param string|null $content
+     * @param object $env
+     * @param Closure $next
+     * @return void
+     */
+    public static function navbarhtml($shortcode, $args, $content, $env, $next) {
+
+        if (!empty($args['category']) && $args['category'] === 'communities') {
+            $html = get_config('local_urise', 'extrashortcodeone');
+        }
+        if (!empty($args['category']) && $args['category'] === 'support') {
+            $html = get_config('local_urise', 'extrashortcodetwo');
+        }
+
+        return $html ?? 'no html or category not set correctly';
+    }
+
+    /**
      * Define filtercolumns.
      *
      * @param mixed $table

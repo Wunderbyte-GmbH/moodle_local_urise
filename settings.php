@@ -164,6 +164,26 @@ if ($hassiteconfig) {
             60,
             10
         ));
+
+        $settings->add(new admin_setting_configtextarea(
+            'local_urise/extrashortcodeone',
+            get_string('extrashortcodeone', 'local_urise'),
+            get_string('extrashortcodeone_desc', 'local_urise'),
+            '',
+            PARAM_RAW,
+            60,
+            10
+        ));
+
+        $settings->add(new admin_setting_configtextarea(
+            'local_urise/extrashortcodetwo',
+            get_string('extrashortcodetwo', 'local_urise'),
+            get_string('extrashortcodetwo_desc', 'local_urise'),
+            '',
+            PARAM_RAW,
+            60,
+            10
+        ));
         // CONTRACT MANAGEMENT.
         // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
         /* $settings->add(

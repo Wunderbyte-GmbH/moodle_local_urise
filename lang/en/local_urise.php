@@ -377,6 +377,7 @@ $string['nosportsdivision'] = 'No course types set on this site';
 
 $string['shortcodes::unifiedlist'] = "Shortcode unified list";
 $string['shortcodes::calendarblock'] = "Shortcode calendarblock";
+$string['shortcodes::navbarhtml'] = "Shortcode that returns html defined in the settings of this plugin";
 
 $string['summary'] = 'General';
 $string['summary_desc'] = 'Contains the settings and stats for the whole Moodle site';
@@ -541,3 +542,11 @@ $string['fuehrungskompetenzen'] = "Leadership competencies";
 $string['educationalleadershipandmanagement'] = 'Educational Leadership & Management';
 $string['sonstige'] = "Others";
 $string['sonstigekompetenzen'] = 'other competencies';
+
+$string['extrashortcodeone'] = "HTML for extra shortcode 1";
+$string['extrashortcodeone_desc'] = "Can be used to output html code via a shortcode";
+$string['extrashortcodetwo'] = "HTML for extra shortcode 2";
+$string['extrashortcodetwo_desc'] = "Can be used to output html code via a shortcode";
+
+$string['jointevent'] = "Joint event";
+$string['editteachers'] = "Edit teachers";

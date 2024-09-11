@@ -34,13 +34,13 @@
               {{ strings.vuedashboardassignrole }}
             </a>
           </template>
-          <template v-if="content.id">
+          <!-- <template v-if="content.id">
             <a role="button" :href="'/course/edit.php?category=' + content.id"
               class="mb-0 block-link btn button-secondary">
               <i class="fa-solid fa-plus mr-1" />
               {{ strings.vuedashboardnewcourse }}
             </a>
-          </template>
+          </template> -->
           <a role="button" :href="'/course/index.php?categoryid=' + content.id"
             class="mb-0 block-link btn button-secondary">
             <i class="fa-solid fa-list mr-1" />

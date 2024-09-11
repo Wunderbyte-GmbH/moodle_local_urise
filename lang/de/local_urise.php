@@ -392,7 +392,7 @@ $string['nosportsdivision'] = 'Keine Sparten auf dieser Website verfügbar';
 
 $string['shortcodes::unifiedlist'] = "Shortcode unified list";
 $string['shortcodes::calendarblock'] = "Shortcode calendarblock";
-
+$string['shortcodes::navbarhtml'] = "Shortcode der html zurückgibt das in den Einstellungen dieses Plugins definiert werden kann";
 
 $string['summary'] = 'Allgemein';
 $string['summary_desc'] = 'Enthält die Einstellungsmöglichkeiten und Statistiken der gesamten Plattform';
@@ -559,3 +559,11 @@ $string['fuehrungskompetenzen'] = "Führungskompetenzen";
 $string['educationalleadershipandmanagement'] = 'Educational Leadership & Management';
 $string['sonstige'] = "Sonstige";
 $string['sonstigekompetenzen'] = 'Sonstige Kompetenzen';
+
+$string['extrashortcodeone'] = "HTML für extra shortcode 1";
+$string['extrashortcodeone_desc'] = "Kann verwendet werden um html über den shortcode auszugeben";
+$string['extrashortcodetwo'] = "HTML für extra shortcode 2";
+$string['extrashortcodetwo_desc'] = "Kann verwendet werden um html über den shortcode auszugeben";
+
+$string['jointevent'] = "Gemeinsame Veranstaltung";
+$string['editteachers'] = "Lehrende bearbeiten";
