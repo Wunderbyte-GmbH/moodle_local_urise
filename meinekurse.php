@@ -62,7 +62,7 @@ if (!empty($archivecmidsstring)) {
 
 echo $OUTPUT->header();
 
-echo '<div class="background d-flex justify-content-center align-items-center mt-2">
+echo '<div class="background d-flex justify-content-center align-items-center">
                <div class="container mw-90 d-flex justify-content-center">
                     <div class="row mb-2 w-100 d-flex justify-content-center flex-column">
                     <h1 class="font-weight-light text-center mb-2 text-light">
