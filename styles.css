@@ -542,7 +542,14 @@ a.booking-card-image-link:hover {
 }
 
 .search.urise {
+    color: var(--interface-dark_secondary, #242A3A);
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
     height: 3em;
+    border: none;
 }
 
 .shadowcustom {

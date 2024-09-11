@@ -550,3 +550,5 @@ $string['extrashortcodetwo_desc'] = "Can be used to output html code via a short
 
 $string['jointevent'] = "Joint event";
 $string['editteachers'] = "Edit teachers";
+
+$string['search'] = "Suchbegriff eingeben";

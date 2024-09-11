@@ -567,3 +567,5 @@ $string['extrashortcodetwo_desc'] = "Kann verwendet werden um html über den sho
 
 $string['jointevent'] = "Gemeinsame Veranstaltung";
 $string['editteachers'] = "Lehrende bearbeiten";
+
+$string['search'] = "Suchbegriff eingeben";
