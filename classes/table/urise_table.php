@@ -266,7 +266,7 @@ class urise_table extends wunderbyte_table {
 
         $context = context_module::instance($booking->cmid);
 
-        if (!isloggedin() || !has_capability('mod/booking::view', $context)) {
+        if (!isloggedin() || !has_capability('mod/booking:view', $context)) {
             return html_writer::tag('div', $title, ['class' => 'urise-table-option-title']);
         }
 
