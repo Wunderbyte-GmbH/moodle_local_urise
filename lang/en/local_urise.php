@@ -488,7 +488,7 @@ $string['phdstudents'] = "PhD Students";
 $string['postdoc'] = "Postdocs";
 $string['fuehrungskraefte'] = "Executive staff";
 $string['allgemeinespersonal'] = "General staff";
-$string['wissenschaftlichespersonal'] = "Academic university staff";
+$string['wissenschaftlichespersonal'] = "Academic staff";
 $string['studierende'] = "Students";
 $string['interessierteoeffentlichkeit'] = "General public";
 
