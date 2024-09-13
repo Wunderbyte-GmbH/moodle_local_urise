@@ -752,6 +752,15 @@ class shortcodes {
 
         if (empty($filtercolumns) || in_array('zgcommunities', $filtercolumns)) {
             $standardfilter = new standardfilter('zgcommunities', get_string('zgcommunities', 'local_urise'));
+            $standardfilter->add_options([
+                "Wissenschaftliches Personal" => get_string('wissenschaftlichespersonal', 'local_urise'),
+                "PhD Students" => get_string('phdstudents', 'local_urise'),
+                "PostDoc" => get_string('postdoc', 'local_urise'),
+                "Allgemeines Personal" => get_string('allgemeinespersonal', 'local_urise'),
+                "Führungskräfte" => get_string('fuehrungskraefte', 'local_urise'),
+                "Studierende" => get_string('studierende', 'local_urise'),
+                "Interessierte Öffentlichkeit" => get_string('interessierteoeffentlichkeit', 'local_urise'),
+            ]);
             $table->add_filter($standardfilter);
         }
 

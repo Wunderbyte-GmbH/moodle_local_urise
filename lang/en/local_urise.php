@@ -477,6 +477,20 @@ $string['personalentwicklungundrecruiting'] = "Personnel Development";
 $string['centerforteachingandlearning'] = "Center for Teaching and Learning";
 $string['koordinationstudienservices'] = "Coordination of Student Services";
 $string['zentralerinformatikdienst'] = "Vienna University Computer Center";
+$string['lppostdoc'] = "LP Postdoc";
+$string['lpfuehrungskräfte'] = "LP Executive staff";
+$string['lpallgemeinesuniversitätspersonal'] = "LP General university staff";
+$string['lpstudierende'] = "LP Students";
+$string['lpexterne'] = "LP Externe";
+$string['lpbibliothek'] = "LP Bibliothek";
+
+$string['phdstudents'] = "PhD Students";
+$string['postdoc'] = "Postdocs";
+$string['fuehrungskraefte'] = "Executive staff";
+$string['allgemeinespersonal'] = "General staff";
+$string['wissenschaftlichespersonal'] = "Academic university staff";
+$string['studierende'] = "Students";
+$string['interessierteoeffentlichkeit'] = "General public";
 
 $string['doctoralschools'] = "Doctoral Schools";
 $string['personalwesenundfrauenfoerderung'] = "Human Resources and Gender Equality";
@@ -486,7 +500,7 @@ $string['studienserviceundlehrwesen'] = "Teaching Affairs and Student Services";
 $string['organisationfilterdefinition'] = "Organisation filter";
 $string['organisationfilterdefinition_desc'] = "You need to add the filter of hierarchical organisation structure here.";
 
-$string['bibliothekszielgruppe'] = 'Bibliothekszielgruppe';
+$string['bibliothekszielgruppe'] = 'Library';
 $string['students'] = 'Students';
 $string['doctoralcandidates'] = 'Doctoral candidates';
 $string['lecturers'] = 'University lecturers';

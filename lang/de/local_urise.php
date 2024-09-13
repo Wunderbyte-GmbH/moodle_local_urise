@@ -495,6 +495,15 @@ $string['lpstudierende'] = "LP Studierende";
 $string['lpexterne'] = "LP Externe";
 $string['lpbibliothek'] = "LP Bibliothek";
 
+$string['phdstudents'] = "PhD Students";
+$string['postdoc'] = "Postdocs";
+$string['fuehrungskraefte'] = "Führungskräfte";
+$string['allgemeinespersonal'] = "Allgemeines Personal";
+$string['wissenschaftlichespersonal'] = "Wissenschaftliches Personal";
+$string['studierende'] = "Führungskräfte";
+$string['studierende'] = "Studierende";
+$string['interessierteoeffentlichkeit'] = "Interessierte Öffentlichkeit";
+
 $string['doctoralschools'] = "Doctoral Schools";
 $string['personalwesenundfrauenfoerderung'] = "Personalwesen und Frauenförderung";
 $string['bibliotheksundarchivwesen'] = "Bibliotheks - und Archivwesen";
