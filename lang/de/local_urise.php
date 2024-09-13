@@ -578,3 +578,12 @@ $string['jointevent'] = "Gemeinsame Veranstaltung";
 $string['editteachers'] = "Lehrende bearbeiten";
 
 $string['search'] = "Suchbegriff eingeben";
+
+$string['basicqualification'] = "";
+$string['teachingcompetence'] = "Teaching Competence";
+$string['teachingconversations'] = "";
+$string['tailoredsupport'] = "";
+$string['qualificationforstudent'] = "";
+$string['coachingforstaff'] = "";
+$string['studyworkshops'] = "Studierwerkstätten";
+$string['mentoring'] = "Mentoring";

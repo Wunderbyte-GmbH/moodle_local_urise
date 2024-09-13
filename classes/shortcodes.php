@@ -819,11 +819,17 @@ class shortcodes {
             $table->add_filter($standardfilter);
         }
 
-        if (empty($filtercolumns) || in_array(needle: 'reihenprogramm', $filtercolumns)) {
-            $standardfilter = new standardfilter('dayofweek', get_string('dayofweek', 'local_urise'));
+        if (empty($filtercolumns) || in_array('reihenprogramm', $filtercolumns)) {
+            $standardfilter = new standardfilter('reihenprogramm', get_string('reihenprogramm', 'local_urise'));
             $standardfilter->add_options([
-                1 => get_string('basisqualifizierung', 'local_urise'),
-                1 => get_string('monday', 'local_urise'),
+                1 => get_string('basicqualification', 'local_urise'),
+                2 => get_string('teachingcompetence', 'local_urise'),
+                3 => get_string('teachingconversations', 'local_urise'),
+                4 => get_string('tailoredsupport', 'local_urise'),
+                5 => get_string('qualificationforstudent', 'local_urise'),
+                6 => get_string('coachingforstaff', 'local_urise'),
+                7 => get_string('studyworkshops', 'local_urise'),
+                8 => get_string('mentoring', 'local_urise'),
             ]);
             $table->add_filter($standardfilter);
         }
