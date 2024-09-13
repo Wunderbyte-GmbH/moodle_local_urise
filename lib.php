@@ -102,10 +102,7 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
                 . get_string('dashboard', 'local_urise') . '</a>
             <a class="dropdown-item" href="'
                 . $CFG->wwwroot . '/local/entities/entities.php">'
-                . get_string('entities', 'local_urise') . '</a>
-            <a class="dropdown-item" href="'
-                . $CFG->wwwroot . '/local/urise/meinekurse.php">'
-                . get_string('mycourses', 'local_urise') . '</a>'
+                . get_string('entities', 'local_urise') . '</a>'
             . $editteacherlink . '
         </div>
     </div>';
