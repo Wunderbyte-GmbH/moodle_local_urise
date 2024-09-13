@@ -819,6 +819,15 @@ class shortcodes {
             $table->add_filter($standardfilter);
         }
 
+        if (empty($filtercolumns) || in_array(needle: 'reihenprogramm', $filtercolumns)) {
+            $standardfilter = new standardfilter('dayofweek', get_string('dayofweek', 'local_urise'));
+            $standardfilter->add_options([
+                1 => get_string('basisqualifizierung', 'local_urise'),
+                1 => get_string('monday', 'local_urise'),
+            ]);
+            $table->add_filter($standardfilter);
+        }
+
         if (empty($filtercolumns) || in_array('location', $filtercolumns)) {
             $standardfilter = new standardfilter('location', get_string('location', 'mod_booking'));
             $table->add_filter($standardfilter);
