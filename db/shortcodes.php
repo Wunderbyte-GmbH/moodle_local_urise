@@ -57,4 +57,9 @@ $shortcodes = [
         'wraps' => false,
         'description' => 'shortcodes::navbarhtml',
     ],
+    'filterview' => [
+        'callback' => 'local_urise\shortcodes::filterview',
+        'wraps' => false,
+        'description' => 'shortcodes::filterview',
+    ],
 ];

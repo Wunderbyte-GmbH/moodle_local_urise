@@ -51,7 +51,6 @@ use stdClass;
  * Deals with local_shortcodes regarding booking.
  */
 class shortcodes {
-
     /**
      * Retrungs the array of organisations.
      *
@@ -116,7 +115,17 @@ class shortcodes {
       * @return string
       */
     public static function unifiedlist($shortcode, $args, $content, $env, $next) {
-        return self::unifiedview($shortcode, $args, $content, $env, $next, false);
+        [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, true);
+
+        // If we find "nolazy='1'", we return the table directly, without lazy loading.
+        if (!empty($args['lazy'])) {
+            [$idstring, $encodedtable, $out] = $table->lazyouthtml($perpage, true);
+            return $out;
+        }
+
+        $out = $table->outhtml($perpage, true);
+
+        return $out;
     }
 
 
@@ -132,7 +141,17 @@ class shortcodes {
      * @return string
      */
     public static function unifiedcards($shortcode, $args, $content, $env, $next) {
-        return self::unifiedview($shortcode, $args, $content, $env, $next, true);
+        [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, true);
+
+        // If we find "nolazy='1'", we return the table directly, without lazy loading.
+        if (!empty($args['lazy'])) {
+            [$idstring, $encodedtable, $out] = $table->lazyouthtml($perpage, true);
+            return $out;
+        }
+
+        $out = $table->outhtml($perpage, true);
+
+        return $out;
     }
 
     /**
@@ -204,7 +223,7 @@ class shortcodes {
      * @param object $env
      * @param Closure $next
      * @param string $rendertype
-     * @return mixed
+     * @return array
      */
     public static function unifiedview($shortcode, $args, $content, $env, $next, $renderascard = false) {
         global $DB;
@@ -311,15 +330,7 @@ class shortcodes {
         $table->showfilterontop = $args['filterontop'];
         $table->showcountlabel = true;
 
-        // If we find "nolazy='1'", we return the table directly, without lazy loading.
-        if (!empty($args['lazy'])) {
-            [$idstring, $encodedtable, $out] = $table->lazyouthtml($perpage, true);
-            return $out;
-        }
-
-        $out = $table->outhtml($perpage, true);
-
-        return $out;
+        return [$table, $perpage];
     }
 
     /**
@@ -599,6 +610,29 @@ class shortcodes {
     }
 
     /**
+     * Create an filter view from a table.
+     *
+     * @param mixed $shortcode
+     * @param mixed $args
+     * @param mixed $content
+     * @param mixed $env
+     * @param mixed $next
+     *
+     * @return [type]
+     *
+     */
+    public static function filterview($shortcode, $args, $content, $env, $next) {
+
+        [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, true);
+
+        $table->tabletemplate = 'local_wunderbyte_table/filterview';
+
+        $onlyfilterforcolumns = !empty($args['onlyfilterforcolumns']) ? explode(',', $args['onlyfilterforcolumns']) : [];
+
+        return $table->filterouthtml($perpage, true, true, $onlyfilterforcolumns);
+    }
+
+    /**
      * Prints out user dashboard overview as cards.
      *
      * @param string $shortcode
@@ -753,13 +787,14 @@ class shortcodes {
         if (empty($filtercolumns) || in_array('zgcommunities', $filtercolumns)) {
             $standardfilter = new standardfilter('zgcommunities', get_string('zgcommunities', 'local_urise'));
             $standardfilter->add_options([
-                "Wissenschaftliches Personal" => get_string('wissenschaftlichespersonal', 'local_urise'),
-                "PhD Students" => get_string('phdstudents', 'local_urise'),
-                "PostDoc" => get_string('postdoc', 'local_urise'),
-                "Allgemeines Personal" => get_string('allgemeinespersonal', 'local_urise'),
-                "Führungskräfte" => get_string('fuehrungskraefte', 'local_urise'),
-                "Studierende" => get_string('studierende', 'local_urise'),
-                "Interessierte Öffentlichkeit" => get_string('interessierteoeffentlichkeit', 'local_urise'),
+                'explode' => ',',
+                1 => get_string('wissenschaftlichespersonal', 'local_urise'),
+                2 => get_string('phdstudents', 'local_urise'),
+                3 => get_string('postdoc', 'local_urise'),
+                4 => get_string('allgemeinespersonal', 'local_urise'),
+                5 => get_string('fuehrungskraefte', 'local_urise'),
+                6 => get_string('studierende', 'local_urise'),
+                7 => get_string('interessierteoeffentlichkeit', 'local_urise'),
             ]);
             $table->add_filter($standardfilter);
         }
