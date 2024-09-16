@@ -419,7 +419,7 @@ $string['showdates'] = "Termine anzeigen";
 $string['teachers'] = "Trainer*in";
 $string['gotoprofile'] = "Zum Profil";
 $string['buchungsbedingungen'] = "Buchungsbedingungen";
-$string['orgacontact'] = "Kontakt der verantwortlichen Organisationseinheit";
+$string['orgacontact'] = "Kontakt der Anbieter*innen";
 $string['aboutoffer'] = "Über das Angebot";
 
 $string['zgcommunities'] = "Interessant für";
