@@ -238,26 +238,8 @@ class urise_table extends wunderbyte_table {
         global $PAGE;
 
         $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid);
-        $buyforuser = price::return_user_to_buy_for();
 
-        if ($booking) {
-            if (!modechecker::is_ajax_or_webservice_request()) {
-                $returnurl = $PAGE->url->out();
-            } else {
-                $returnurl = '/';
-            }
-
-            // The current page is not /mod/booking/optionview.php.
-            $url = new moodle_url("/mod/booking/optionview.php", [
-                "optionid" => (int)$values->id,
-                "cmid" => (int)$booking->cmid,
-                "userid" => (int)$buyforuser->id,
-                'returnto' => 'url',
-                'returnurl' => $returnurl,
-            ]);
-        } else {
-            $url = '#';
-        }
+        $url = $this->col_url($values);
 
         $title = format_text($values->text);
         if (!empty($values->titleprefix)) {
@@ -300,19 +282,31 @@ class urise_table extends wunderbyte_table {
      * @throws dml_exception
      */
     public function col_url($values) {
+        global $PAGE;
 
         $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid);
         $buyforuser = price::return_user_to_buy_for();
 
         if ($booking) {
-            $url = new moodle_url('/mod/booking/optionview.php', ['optionid' => $values->id,
-                                                                  'cmid' => $booking->cmid,
-                                                                  'userid' => $buyforuser->id]);
+            if (!modechecker::is_ajax_or_webservice_request()) {
+                $returnurl = $PAGE->url->out(false);
+            } else {
+                $returnurl = '/';
+            }
+
+            // The current page is not /mod/booking/optionview.php.
+            $url = new moodle_url("/mod/booking/optionview.php", [
+                "optionid" => (int)$values->id,
+                "cmid" => (int)$booking->cmid,
+                "userid" => (int)$buyforuser->id,
+                'returnto' => 'url',
+                'returnurl' => $returnurl,
+            ]);
         } else {
             $url = '#';
         }
 
-        return $url;
+        return $url->out(false);
     }
 
     /**
