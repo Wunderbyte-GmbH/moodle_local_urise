@@ -51,7 +51,8 @@
           </tr>
         </tbody>
       </table>
-      <div v-if="bookingstats.courses && bookingstats.courses.length > 0" class="courses mt-3">
+    </div>
+    <div class="courses mt-3">
         <h5 class="mb-4">{{ store.state.strings.courses }} <a role="button" data-toggle="collapse" href="#collapseCourses"
             aria-expanded="false" aria-controls="collapseCourses"><i class="fa-solid fa-square-caret-down"></i></a></h5>
         <div class="collapse" id="collapseCourses">
@@ -72,7 +73,6 @@
           </ul>
         </div>
       </div>
-    </div>
   </div>
 </template>
 

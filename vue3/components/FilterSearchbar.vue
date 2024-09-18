@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-end align-items-center">
     <div
       class="input-group mr-2"
-      style="min-width: 200px; margin-bottom: 10px;"
+      style="min-width: 200px; margin-bottom: 8px;"
     >
       <input
         type="text"

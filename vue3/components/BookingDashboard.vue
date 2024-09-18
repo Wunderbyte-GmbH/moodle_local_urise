@@ -4,7 +4,9 @@
     <div class="bgfull">
       <span class="dbhead">{{ store.state.strings.dashboardmydashboard }}</span>
       <div class="d-flex align-items-end">
-        <a @click="scrollLeft()" class="text-white ml5em" style="font-size: 1.3em;
+        <a @click="scrolltostart()" class="text-white ml5em" style="font-size: 1.3em;
+    margin-right: 1rem; padding-bottom: 10px"><i class="fa-solid fa-backward-step"></i></a>
+        <a @click="scrollLeft()" class="text-white" style="font-size: 1.3em;
     margin-right: 1rem; padding-bottom: 10px"><i class="fa-solid fa-arrow-left"></i></a>
         <div class="overflow-tabs-container d-flex justify-content-start" ref="scrollMe">
           <div v-if="tabsstored.length > 0" class="nav nav-tabs justify-content-center navouter">
@@ -32,7 +34,7 @@
           </div>
         </div>
         <a @click="scrollRight()" class="text-white mr5em ml-auto" style="font-size: 1.3em;
-    margin-left: 1rem; padding-bottom: 10px;"><i class="fa-solid fa-arrow-right"></i></a>
+    margin-left: 1rem; padding-bottom: 10px;"><i class="fa-solid fa-arrow-right dashboardicon"></i></a>
         <!-- Confirmation dialog -->
         <div v-if="showConfirmationModal">
           <ConfirmationModal :show-confirmation-modal="showConfirmationModal" :strings="store.state.strings"
@@ -157,6 +159,16 @@ const scrollLeft = () => {
     });
   }
 };
+
+const scrolltostart = () => {
+  if (scrollMe.value) {
+    scrollMe.value.scrollTo({
+      top: 0,
+      left: 0, // Adjust the value as needed for scroll distance
+      behavior: 'smooth'
+    });
+  }
+}
 
 const scrollRight = () => {
   if (scrollMe.value) {
