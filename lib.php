@@ -74,12 +74,12 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
     global $CFG, $DB;
     // Early bail out conditions.
     if (!isloggedin() || isguestuser()) {
-        return;
+        return '';
     }
 
     // Here, we need to check the capability, but user will not have it on system, but only on coursecategory level.
     if (!permissions::has_capability_anywhere()) {
-        return true;
+        return '';
     }
     $context = context_system::instance();
     if (has_capability('moodle/user:editprofile', $context)) {
