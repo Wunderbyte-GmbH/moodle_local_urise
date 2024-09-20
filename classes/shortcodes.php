@@ -886,7 +886,8 @@ class shortcodes {
                 '<',
                 get_string('apply_filter', 'local_wunderbyte_table'),
                 'now',
-                'now + 1 year'
+                'now + 1 year',
+                ['flexoverlap']
             );
 
             $table->add_filter($datepicker);
@@ -905,7 +906,8 @@ class shortcodes {
                 '<',
                 get_string('apply_filter', 'local_wunderbyte_table'),
                 'now',
-                'now + 1 year'
+                'now + 1 year',
+                ['flexoverlap']
             );
 
             $table->add_filter($datepicker);
