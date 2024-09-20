@@ -211,7 +211,7 @@ $string['dashboard_auswertung'] = 'Auswertung';
 // Vue strings.
 $string['vuedashboardchecked'] = 'Default Ausgewählt';
 $string['vuedashboardname'] = 'Name';
-$string['vuedashboardcoursecount'] = 'Anzahl der Kurse';
+$string['vuedashboardcoursecount'] = 'Anzahl der Moodle Kurse';
 $string['vuedashboardpath'] = 'Pfad';
 $string['vuedashboardcreateoe'] = 'Neue OE erstellen';
 $string['vuedashboardassignrole'] = 'Rollen zuweisen';
@@ -347,7 +347,7 @@ $string['editcontractformula'] = 'Vertragsformel bearbeiten';
 $string['userinformation'] = 'Benutzer-Information';
 
 // My Courses List.
-$string['tocoursecontent'] = 'Zu den Kursmaterialien';
+$string['tocoursecontent'] = 'Zum Moodle Kurs';
 
 // Shortlist section information.
 $string['dayofweekalt'] = 'Wochentag und Termin, an dem eine Kurseinheit stattfindet';
@@ -426,7 +426,7 @@ $string['zgcommunities'] = "Interessant für";
 $string['organisationfilter'] = "Angeboten von";
 $string['fromdate'] = "Ab ";
 
-$string['kurssprache'] = 'Kurssprache';
+$string['kurssprache'] = 'Sprache';
 
 $string['fbafrikawissenschaftenundorientalistik'] = "FB Afrikawissenschaften und Orientalistik";
 $string['fbaltegeschichte'] = "FB Alte Geschichte";

@@ -207,7 +207,7 @@ $string['dashboard_auswertung'] = 'Reporting';
 // Vue strings.
 $string['vuedashboardchecked'] = 'Default Checked';
 $string['vuedashboardname'] = 'Name';
-$string['vuedashboardcoursecount'] = 'Course Count';
+$string['vuedashboardcoursecount'] = 'Moodle Course Count';
 $string['vuedashboardpath'] = 'Path';
 $string['vuedashboardcreateoe'] = 'Create new OE';
 $string['vuedashboardassignrole'] = 'Assign Roles';
