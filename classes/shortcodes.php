@@ -155,65 +155,6 @@ class shortcodes {
     }
 
     /**
-     * Prints calenderblock.
-     *
-     * @param string $shortcode
-     * @param array $args
-     * @param string|null $content
-     * @param object $env
-     * @param Closure $next
-     * @return mixed
-     */
-    public static function calendarblock($shortcode, $args, $content, $env, $next) {
-
-        self::fix_args($args);
-
-        // Get bookingids.
-        $booking = self::get_booking($args);
-
-        $bookingids = explode(',', get_config('local_urise', 'multibookinginstances'));
-        $bookingids = array_filter($bookingids, fn($a) => !empty($a));
-
-        $table = self::inittableforcalendar();
-
-        $wherearray = ['bookingid' => $bookingids];
-
-        $additionalwhere = self::set_wherearray_from_arguments($args, $wherearray) ?? '';
-
-        if (!empty($additionalwhere)) {
-            $additionalwhere .= " AND ";
-        }
-        // Additional where has to be added here. We add the param later.
-        if (empty($args['all'])) {
-            $additionalwhere .= " (courseendtime > :timenow OR courseendtime = 0) ";
-        }
-
-        if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
-            $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
-            list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, null, [], $additionalwhere);
-        } else {
-            list($fields, $from, $where, $params, $filter) =
-                booking::get_options_filter_sql(0, 0, '', null, $booking->context, [], $wherearray, null, [], $additionalwhere);
-        }
-
-        $params['timenow'] = strtotime('today 00:00');
-        $table->set_filter_sql($fields, $from, $where, $filter, $params);
-
-        $table->tabletemplate = 'local_urise/urise_calendar';
-        $table->define_sortablecolumns(['coursestarttime']);
-        $table->sortable(true, 'coursestarttime', SORT_ASC);
-        $table->infinitescroll = 0;
-        $table->use_pages = true;
-
-        $out = $table->outhtml(4, true);
-
-        return $out;
-
-    }
-
-
-    /**
      * Prints out list of bookingoptions.
      * Arguments can be 'category' or 'perpage'.
      *
@@ -630,6 +571,31 @@ class shortcodes {
         $onlyfilterforcolumns = !empty($args['onlyfilterforcolumns']) ? explode(',', $args['onlyfilterforcolumns']) : [];
 
         return $table->filterouthtml($perpage, true, true, $onlyfilterforcolumns);
+    }
+
+    /**
+     * Create an calendarview from a table.
+     *
+     * @param mixed $shortcode
+     * @param mixed $args
+     * @param mixed $content
+     * @param mixed $env
+     * @param mixed $next
+     *
+     * @return [type]
+     *
+     */
+    public static function calendarview($shortcode, $args, $content, $env, $next) {
+
+        [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, true);
+
+        $table->tabletemplate = 'local_wunderbyte_table/calendarview';
+        $table->define_columns(['text']);
+        $table->add_subcolumns('main', ['text', 'category', 'more']);
+        $table->add_subcolumns('header', ['coursestarttime']);
+        $table->add_classes_to_subcolumns('main', ['columnclass' => 'text-primary mt-3'], ['text']);
+
+        return $table->calendarouthtml($perpage, true, true);
     }
 
     /**

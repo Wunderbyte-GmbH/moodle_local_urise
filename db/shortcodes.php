@@ -47,11 +47,6 @@ $shortcodes = [
         'wraps' => false,
         'description' => 'shortcodeslistofmytaughtbookingoptionsascards',
     ],
-    'calendarblock' => [
-        'callback' => 'local_urise\shortcodes::calendarblock',
-        'wraps' => false,
-        'description' => 'shortcodes::calendarblock',
-    ],
     'navbarhtml' => [
         'callback' => 'local_urise\shortcodes::navbarhtml',
         'wraps' => false,
@@ -61,5 +56,10 @@ $shortcodes = [
         'callback' => 'local_urise\shortcodes::filterview',
         'wraps' => false,
         'description' => 'shortcodes::filterview',
+    ],
+    'calendarview' => [
+        'callback' => 'local_urise\shortcodes::calendarview',
+        'wraps' => false,
+        'description' => 'shortcodes::calendarblock',
     ],
 ];

@@ -309,6 +309,21 @@ class urise_table extends wunderbyte_table {
         return $url->out(false);
     }
 
+    public function col_more($values)  {
+
+        $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid);
+        $buyforuser = price::return_user_to_buy_for();
+
+        if ($booking) {
+            $url = new moodle_url('/mod/booking/optionview.php', ['optionid' => $values->id,
+                                                                  'cmid' => $booking->cmid,
+                                                                  'userid' => $buyforuser->id]);
+        } else {
+            $url = '#';
+        }
+        return "<a href='$url' target='_blank' class=''>mehr</a>";
+    }
+
     /**
      * This function is called for each data row to allow processing of the
      * description value.
