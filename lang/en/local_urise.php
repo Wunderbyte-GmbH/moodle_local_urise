@@ -408,7 +408,7 @@ $string['showdates'] = "Show dates";
 $string['teachers'] = "Teacher";
 $string['gotoprofile'] = "Profile";
 $string['buchungsbedingungen'] = "Booking requirements";
-$string['orgacontact'] = "Contactdetails responsible organisation";
+$string['orgacontact'] = "Contact for content-related inquiries";
 $string['aboutoffer'] = "About the offer";
 
 $string['zgcommunities'] = "Interesting for";
