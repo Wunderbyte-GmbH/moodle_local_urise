@@ -83,7 +83,7 @@ $string['sportsdivisions'] = 'Sparten';
 $string['titleprefix'] = 'Kursnummer';
 $string['unknown'] = 'Unbekannt';
 
-$string['format'] = "Kursformat";
+$string['format'] = "Format";
 $string['german'] = 'Deutsch';
 $string['english'] = 'Englisch';
 $string['onsite'] = 'Vor Ort';
