@@ -568,6 +568,12 @@ class shortcodes {
 
         $table->tabletemplate = 'local_wunderbyte_table/filterview';
 
+        if (!empty($args['customurl'])) {
+            preg_match('/<a\s+href=["\']?([^"\'>]+)["\']?\s+.*?>/i', $args['customurl'], $matches);
+            $baseurl = $matches[1];
+            $table->define_baseurl($baseurl);
+        }
+
         $onlyfilterforcolumns = !empty($args['onlyfilterforcolumns']) ? explode(',', $args['onlyfilterforcolumns']) : [];
 
         return $table->filterouthtml($perpage, true, true, $onlyfilterforcolumns);
