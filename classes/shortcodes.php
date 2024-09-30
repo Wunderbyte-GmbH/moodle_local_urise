@@ -837,6 +837,12 @@ class shortcodes {
                 6 => get_string('coachingforstaff', 'local_urise'),
                 7 => get_string('studyworkshops', 'local_urise'),
                 8 => get_string('mentoring', 'local_urise'),
+                9 => get_string('imoox', 'local_urise'),
+                10 => get_string('basiswissenbiblio', 'local_urise'),
+                11 => get_string('literatursuche', 'local_urise'),
+                12 => get_string('orgauethikwissenschaft', 'local_urise'),
+                13 => get_string('spezialwissenbiblio', 'local_urise'),
+
             ]);
             $table->add_filter($standardfilter);
         }
