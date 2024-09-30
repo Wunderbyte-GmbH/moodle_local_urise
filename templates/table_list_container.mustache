@@ -89,21 +89,21 @@
                          </div>
                     </div>
                </div>
-               <div class="wunderbyte_table_container {{uniqueid}} {{#showfitlerontop}}showontop{{/showfitlerontop}}">
-               {{#showfitlerontop}}
+               <div class="wunderbyte_table_container {{uniqueid}} {{#showfilterontop}}showontop{{/showfilterontop}}">
+               {{#showfilterontop}}
                <div class="filterheader">
                     <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
                          {{> local_wunderbyte_table/component_filter }}
                          {{> local_wunderbyte_table/component_infinitescroll }}
                     </aside>
                </div>
-               {{/showfitlerontop}}
-               {{^showfitlerontop}}
+               {{/showfilterontop}}
+               {{^showfilterontop}}
                <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
                     {{> local_wunderbyte_table/component_filter }}
                     {{> local_wunderbyte_table/component_infinitescroll }}
                </aside>
-               {{/showfitlerontop}}
+               {{/showfilterontop}}
                             <div class="row w-100 d-flex justify-content-end mt-3">
                          {{> local_wunderbyte_table/component_sort }}
                </div>

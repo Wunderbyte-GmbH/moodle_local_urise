@@ -71,32 +71,33 @@
            <div class="background d-flex justify-content-center align-items-center">
                <div class="container mw-90 d-flex justify-content-center">
                     <div class="row mb-2 w-100 d-flex justify-content-center flex-column">
-                    <h1 class="font-weight-light text-center mb-4 text-light">
-                    {{#str}} searchheadertext, local_urise {{/str}}
-                    </h1>
-                    {{> local_urise/component_search }}
+                         <h1 class="font-weight-light text-center mb-4 text-light">
+                         {{#str}} searchheadertext, local_urise {{/str}}
+                         </h1>
+                         {{> local_urise/component_search }}
+                    </div>
                </div>
           </div>
           {{/search}}
      </div>
-     <div class="wunderbyte_table_container {{#showfitlerontop}}showontop{{/showfitlerontop}}">
-             {{#showfitlerontop}}
-               <div class="filterheader">
-                <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
-                    {{> local_wunderbyte_table/component_filter }}
-                    {{> local_wunderbyte_table/component_infinitescroll }}
-               </aside>
-               </div>
-               {{/showfitlerontop}}
-               {{^showfitlerontop}}
+     <div class="wunderbyte_table_container {{#showfilterontop}}showontop{{/showfilterontop}}">
+          {{#showfilterontop}}
+          <div class="filterheader">
                <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
                     {{> local_wunderbyte_table/component_filter }}
                     {{> local_wunderbyte_table/component_infinitescroll }}
                </aside>
-               {{/showfitlerontop}}
-               <div class="row w-100 d-flex justify-content-end mt-3">
+          </div>
+          {{/showfilterontop}}
+          {{^showfilterontop}}
+          <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
+               {{> local_wunderbyte_table/component_filter }}
+               {{> local_wunderbyte_table/component_infinitescroll }}
+          </aside>
+          {{/showfilterontop}}
+          <div class="row w-100 d-flex justify-content-end mt-3">
                {{> local_wunderbyte_table/component_sort }}
-     </div>
+          </div>
           <div class= "wunderbyteTableClass" id='a{{idstring}}'>
                {{> local_urise/table_card }}
           </div>
