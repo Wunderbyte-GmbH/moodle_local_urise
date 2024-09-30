@@ -264,13 +264,18 @@ class urise_table extends wunderbyte_table {
         }
 
         if (!$this->is_downloading()) {
+
+            $attributes = [
+                'href' => $url,
+                'class' => 'urise-table-option-title',
+            ];
+            if (!get_config('booking', 'openbookingdetailinsametab')) {
+                $attributes['target'] = '_blank';
+            }
             $title = html_writer::tag(
                 'a',
                 $title,
-                [
-                    'href' => $url,
-                    'target' => '_blank',
-                ]
+                $attributes,
             );
             $title = html_writer::tag(
                 'div',
