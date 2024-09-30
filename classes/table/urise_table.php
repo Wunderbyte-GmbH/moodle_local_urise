@@ -96,12 +96,23 @@ class urise_table extends wunderbyte_table {
         }
     }
 
+    /**
+     * Returns the image url
+     *
+     * @param mixed $values
+     *
+     * @return string
+     *
+     */
     public function col_image($values) {
 
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
-
-        if (empty($settings->imageurl)) {
-            return null;
+        if (
+            !isloggedin()
+            || isguestuser()
+            || empty($settings->imageurl)
+        ) {
+            return '';
         }
 
         return $settings->imageurl;
@@ -248,7 +259,7 @@ class urise_table extends wunderbyte_table {
 
         $context = context_module::instance($booking->cmid);
 
-        if (!isloggedin() || !has_capability('mod/booking:choose', $context)) {
+        if (!isloggedin() || isguestuser() || !$url) {
             return html_writer::tag('div', $title, ['class' => 'urise-table-option-title']);
         }
 
@@ -278,7 +289,7 @@ class urise_table extends wunderbyte_table {
      * text value.
      *
      * @param object $values Contains object with all the values of record.
-     * @return string $string Return name of the booking option.
+     * @return string|bool $string Return name of the booking option or false.
      * @throws dml_exception
      */
     public function col_url($values) {
@@ -287,7 +298,13 @@ class urise_table extends wunderbyte_table {
         $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid);
         $buyforuser = price::return_user_to_buy_for();
 
-        if ($booking) {
+        $context = context_module::instance($booking->cmid);
+
+        if (
+            $booking
+            && isloggedin()
+            && !isguestuser()
+        ) {
             if (!modechecker::is_ajax_or_webservice_request()) {
                 $returnurl = $PAGE->url->out(false);
             } else {
@@ -303,7 +320,7 @@ class urise_table extends wunderbyte_table {
                 'returnurl' => $returnurl,
             ]);
         } else {
-            $url = '#';
+            return false;
         }
 
         return $url->out(false);
