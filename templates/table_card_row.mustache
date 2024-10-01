@@ -149,11 +149,11 @@
       {{#columnclass}}</div>{{/columnclass}}
     {{/cardbody}}
   </div>
-  <div class="mod-booking-card-infos mt-2 px-2">
+  <div class="mod-booking-card-infos lexa-copy mt-2 px-2">
     <div class="{{cardlistclass}}">
       <ul class="infolist">
       {{#cardlist}}
-        <li class="d-flex mt-2" {{#columnalt}}title="{{.}}"{{/columnalt}}>
+        <li class="d-flex mb-3" {{#columnalt}}title="{{.}}"{{/columnalt}}>
         {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
               <span {{^value}} style="display:none" {{/value}}>
               {{#columniclassbefore}}
@@ -182,7 +182,7 @@
       </ul>
     </div>
   </div>
-  <div class="mod-booking-card-footer px-3 text-center mt-auto mb-2 pt-2">
+  <div class="mod-booking-card-footer lexa-copy px-3 text-center mt-auto mb-2 pt-2">
     {{#cardfooter}}
       {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
             <span {{^value}} style="display:none" {{/value}}>
