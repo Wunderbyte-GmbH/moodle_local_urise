@@ -72,7 +72,9 @@
 
 {{/table}}
 
-<div class="mt-4">{{> local_wunderbyte_table/component_pagination }}</div>
+{{^nopages}}
+    <div class="mt-4">{{> local_wunderbyte_table/component_pagination }}</div>
+{{/nopages}}
 
 {{^norecords}}
 {{#js}}
