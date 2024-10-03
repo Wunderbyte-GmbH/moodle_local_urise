@@ -793,6 +793,7 @@ class shortcodes {
         if (empty($filtercolumns) || in_array('kurssprache', $filtercolumns)) {
             $standardfilter = new standardfilter('kurssprache', get_string('kurssprache', 'local_urise'));
             $standardfilter->add_options([
+                0 => 'wbt_suppress',
                 1 => get_string('german', 'local_urise'),
                 2 => get_string('english', 'local_urise'),
             ]);
@@ -802,6 +803,7 @@ class shortcodes {
         if (empty($filtercolumns) || in_array('format', $filtercolumns)) {
             $standardfilter = new standardfilter('format', get_string('format', 'local_urise'));
             $standardfilter->add_options([
+                0 => 'wbt_suppress',
                 1 => get_string('onsite', 'local_urise'),
                 2 => get_string('hybrid', 'local_urise'),
                 3 => get_string('blendedlearningonsite', 'local_urise'),
@@ -829,7 +831,9 @@ class shortcodes {
 
         if (empty($filtercolumns) || in_array('reihenprogramm', $filtercolumns)) {
             $standardfilter = new standardfilter('reihenprogramm', get_string('reihenprogramm', 'local_urise'));
-            $standardfilter->add_options([
+
+            $options = [
+                0 => 'wbt_suppress',
                 1 => get_string('basicqualification', 'local_urise'),
                 2 => get_string('teachingcompetence', 'local_urise'),
                 3 => get_string('teachingconversations', 'local_urise'),
@@ -843,8 +847,9 @@ class shortcodes {
                 11 => get_string('literatursuche', 'local_urise'),
                 12 => get_string('orgauethikwissenschaft', 'local_urise'),
                 13 => get_string('spezialwissenbiblio', 'local_urise'),
+            ];
 
-            ]);
+            $standardfilter->add_options($options);
             $table->add_filter($standardfilter);
         }
 

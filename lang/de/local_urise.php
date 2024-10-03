@@ -581,12 +581,12 @@ $string['editteachers'] = "Lehrende bearbeiten";
 
 $string['search'] = "Suchbegriff eingeben";
 
-$string['basicqualification'] = "";
+$string['basicqualification'] = "Basisqualifizierung Erstlehrende";
 $string['teachingcompetence'] = "Teaching Competence";
-$string['teachingconversations'] = "";
-$string['tailoredsupport'] = "";
-$string['qualificationforstudent'] = "";
-$string['coachingforstaff'] = "";
+$string['teachingconversations'] = "Didaktikfrühstück";
+$string['tailoredsupport'] = "Maßgeschneiderte Lehrentwicklung";
+$string['qualificationforstudent'] = "Qualifizierung für studentische Multiplikator*innen (QuaM)";
+$string['coachingforstaff'] = "Praxiscoaching für Erstlehrende";
 $string['studyworkshops'] = "Studierwerkstätten";
 $string['mentoring'] = "Mentoring";
 $string['imoox'] = "iMooX";
