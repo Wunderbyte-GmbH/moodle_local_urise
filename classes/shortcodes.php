@@ -571,7 +571,7 @@ class shortcodes {
 
         if (!empty($args['customurl'])) {
             preg_match('/<a\s+href=["\']?([^"\'>]+)["\']?\s+.*?>/i', $args['customurl'], $matches);
-            $baseurl = $matches[1];
+            $baseurl = $matches[1] ?? '';
             $table->define_baseurl($baseurl);
         }
 
