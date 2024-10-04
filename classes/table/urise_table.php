@@ -108,9 +108,7 @@ class urise_table extends wunderbyte_table {
 
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
         if (
-            !isloggedin()
-            || isguestuser()
-            || empty($settings->imageurl)
+            empty($settings->imageurl)
         ) {
             return '';
         }
