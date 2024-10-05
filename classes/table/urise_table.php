@@ -308,11 +308,7 @@ class urise_table extends wunderbyte_table {
             && isloggedin()
             && !isguestuser()
         ) {
-            if (!modechecker::is_ajax_or_webservice_request()) {
-                $returnurl = $PAGE->url->out(false);
-            } else {
-                $returnurl = '/';
-            }
+            $returnurl = $this->baseurl->out(false);
 
             // The current page is not /mod/booking/optionview.php.
             $url = new moodle_url("/mod/booking/optionview.php", [
@@ -1092,7 +1088,15 @@ class urise_table extends wunderbyte_table {
         echo $output->render_bookingoptions_wbtable($table);
     }
 
-    private function add_return_url(string $urlstring):string {
+    /**
+     * Add returnurl.
+     *
+     * @param string $urlstring
+     *
+     * @return string
+     *
+     */
+    private function add_return_url(string $urlstring): string {
 
         $returnurl = $this->baseurl->out();
 
@@ -1103,9 +1107,10 @@ class urise_table extends wunderbyte_table {
         $url = new moodle_url(
             $urlcomponents['path'],
             array_merge(
-                $params, [
-                'returnto' => 'url',
-                'returnurl' => $returnurl
+                $params,
+                [
+                    'returnto' => 'url',
+                    'returnurl' => $returnurl,
                 ]
             )
         );
