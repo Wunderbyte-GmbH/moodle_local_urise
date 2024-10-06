@@ -820,26 +820,9 @@ class urise_table extends wunderbyte_table {
      * @throws coding_exception
      */
     public function col_coursestarttime($values) {
-        $coursestarttime = $values->coursestarttime;
-        if (empty($coursestarttime)) {
-            return '';
-        }
 
-        switch (current_language()) {
-            case 'de':
-                $renderedcoursestarttime = date('d.m.Y, H:i', $coursestarttime);
-                break;
-            default:
-                $renderedcoursestarttime = date('M d, Y, H:i', $coursestarttime);
-                break;
-        }
-
-        if ($this->is_downloading()) {
-            $ret = $renderedcoursestarttime;
-        } else {
-            $ret = get_string('coursestarttime', 'mod_booking') . ": " . $renderedcoursestarttime;
-        }
-        return $ret;
+        // We don't use this column here, so just return an empty string.
+        return '';
     }
 
     /**
@@ -851,26 +834,9 @@ class urise_table extends wunderbyte_table {
      * @throws coding_exception
      */
     public function col_courseendtime($values) {
-        $courseendtime = $values->courseendtime;
-        if (empty($courseendtime)) {
-            return '';
-        }
 
-        switch (current_language()) {
-            case 'de':
-                $renderedcourseendtime = date('d.m.Y, H:i', $courseendtime);
-                break;
-            default:
-                $renderedcourseendtime = date('M d, Y, H:i', $courseendtime);
-                break;
-        }
-
-        if ($this->is_downloading()) {
-            $ret = $renderedcourseendtime;
-        } else {
-            $ret = get_string('courseendtime', 'mod_booking') . ": " . $renderedcourseendtime;
-        }
-        return $ret;
+        // We don't use this column here, so just return an empty string.
+        return '';
     }
 
 
