@@ -865,12 +865,12 @@ class urise_table extends wunderbyte_table {
             // Use the renderer to output this column.
             $lang = current_language();
 
-            $cachekey = "sessiondates$optionid$lang";
+            $cachekey = "ursessiondates$optionid$lang";
             $cache = cache::make($this->cachecomponent, $this->rawcachename);
 
             if (!$ret = $cache->get($cachekey)) {
                 $data = new \mod_booking\output\col_coursestarttime($optionid, $booking);
-                $output = singleton_service::get_renderer('mod_booking');
+                $output = singleton_service::get_renderer('local_urise');
                 $ret = $output->render_col_coursestarttime($data);
                 $cache->set($cachekey, $ret);
             }

@@ -39,43 +39,15 @@
     }
 }}
 
-{{#showcollapsebtn}}
+{{#datestrings.0}}
     <div class='booking-showdates-collapse mt-1'>
-        <span>
-            <i class="fa fa-calendar fa-fw" aria-hidden="true"></i>
-        </span>
-        <span>
-            <a
-                data-toggle="collapse"
-                data-bs-toggle="collapse"
-                href="#optiondates{{{optionid}}}"
-                role="button"
-                aria-expanded="false"
-                aria-controls="optiondates{{{optionid}}}">
-                {{#str}}showdates, mod_booking{{/str}}
-            </a>
-        </span>
-    </div>
-    <div class="collapse" id="optiondates{{{optionid}}}">
+        {{#firstDate}}
+            {{#str}}fromdate, local_urise{{/str}}{{firstDate}}
+        {{/firstDate}}
+        {{^firstDate}}
         {{#datestrings}}
-            <div>{{{datestring}}}</div>
+                <div>{{{datestring}}}</div>
         {{/datestrings}}
+        {{/firstDate}}
     </div>
-{{/showcollapsebtn}}
-{{^showcollapsebtn}}
-    <div id="optiondates{{{optionid}}}">
-        <div class='booking-showdates-title mt-1'>
-            <span>
-                <i class="fa fa-calendar fa-fw" aria-hidden="true"></i>
-            </span>
-        </div>
-        {{#datestrings}}
-            <div>{{{datestring}}}</div>
-        {{/datestrings}}
-    </div>
-{{/showcollapsebtn}}
-{{^datestrings}}
-    <p class="m-0">
-    {{#str}}datenotset, mod_booking{{/str}}
-    </p>
-{{/datestrings}}
+{{/datestrings.0}}

@@ -104,9 +104,14 @@ class renderer extends plugin_renderer_base {
      */
     public function render_col_coursestarttime($data) {
         $o = '';
+        // Check if multiple dates.
         $data = $data->export_for_template($this);
+        if (!empty($data['datestrings']) && count($data['datestrings']) > 1) {
+            $data['firstDate'] = $data['datestrings'][0]['datestring'];
+        }
         $o .= $this->render_from_template('local_urise/col_coursestarttime', $data);
         return $o;
+
     }
 
     /** Function to render the teacher column.
