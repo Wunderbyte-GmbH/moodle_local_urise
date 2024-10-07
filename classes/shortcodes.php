@@ -423,6 +423,9 @@ class shortcodes {
         $table->showfilterontop = $args['filterontop'];
         $table->showcountlabel = true;
 
+
+        $table->define_cache('mod_booking', 'mybookingoptionstable');
+
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
             [$idstring, $encodedtable, $out] = $table->lazyouthtml($perpage, true);
