@@ -131,6 +131,7 @@ $string['editbookings'] = 'Kurs-Übersicht';
 $string['viewteachers'] = 'Trainer:innen-Übersicht';
 $string['teachersinstancereport'] = 'Trainer:innen-Gesamtbericht (Kurse, Fehlstunden, Vertretungen)';
 $string['sapdailysums'] = 'SAP-Buchungsdateien';
+$string['searchcourses'] = "Kurs suchen ...";
 
 $string['addbookinginstance'] = '<span class="bg-danger font-weight-bold">Keine Buchungs-Instanz! Hier klicken, um eine einzustellen.</span>';
 $string['editpricecategories'] = 'Preiskategorien bearbeiten';

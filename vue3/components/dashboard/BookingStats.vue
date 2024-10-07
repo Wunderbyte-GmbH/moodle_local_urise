@@ -53,8 +53,9 @@
       </table>
     </div>
     <div class="courses mt-3">
-        <h5 class="mb-4">{{ store.state.strings.courses }} <a role="button" data-toggle="collapse" href="#collapseCourses"
+        <h5 v-if="tabIndex != 0" class="mb-4">{{ store.state.strings.courses }}: {{ bookingstats.coursecount }} <a role="button" data-toggle="collapse" href="#collapseCourses"
             aria-expanded="false" aria-controls="collapseCourses"><i class="fa-solid fa-square-caret-down"></i></a></h5>
+        <h5 v-else class="mb-4">{{ store.state.strings.courses }}: {{ bookingstats.coursecount }}</h5>
         <div class="collapse" id="collapseCourses">
           <template v-if="bookingstats.id">
             <a role="button" :href="'/course/edit.php?category=' + bookingstats.id"
@@ -63,7 +64,7 @@
               {{ store.state.strings.vuedashboardnewcourse }}
             </a>
           </template>
-          <input type="text" v-model="searchTerm" placeholder="Search courses..." class="form-control mb-3 searchCourse" />
+          <input  v-if="bookingstats.courses && (bookingstats.courses.length > 0)" type="text" v-model="searchTerm" :placeholder="store.state.strings.searchcourses" class="form-control mb-3 searchCourse" />
           <ul class="list-group list-group-flush">
             <li v-for="course in filteredCourses" :key="course.id" class="list-group-item">
               <a class="" role="button" :href="`/course/view.php?id=${course.id}`">{{
@@ -85,11 +86,14 @@ const store = useStore();
 const searchTerm = ref('');
 
 const props = defineProps({
+  tabIndex: Number,
   bookingstats: {
     type: Object,
     default: null,
   },
 });
+
+const emit = defineEmits(['change-tab']);
 
 const filteredCourses = computed(() => {
   if (!props.bookingstats.courses) return [];
@@ -98,8 +102,10 @@ const filteredCourses = computed(() => {
 });
 
 const handleCheckboxChange = async (bookingStat) => {
-  await store.dispatch('setCheckedBookingInstance', bookingStat)
-}
+  await store.dispatch('setCheckedBookingInstance', bookingStat);
+  emit('reload-tab', props.tabIndex );
+
+  }
 
 const showRealParticipants = computed(() => {
   return props.bookingstats.json.booking.some(stat => stat.realparticipants > 0);

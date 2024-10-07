@@ -130,6 +130,7 @@ $string['editbookings'] = 'Overview of courses';
 $string['viewteachers'] = 'Teacher overview';
 $string['teachersinstancereport'] = 'Teachers instance report (courses, missing hours, substitutions)';
 $string['sapdailysums'] = 'SAP booking files';
+$string['searchcourses'] = "Search course ...";
 
 $string['addbookinginstance'] = '<span class="bg-danger font-weight-bold">No semester instance! Click here to choose one.</span>';
 $string['editpricecategories'] = 'Edit price categories';

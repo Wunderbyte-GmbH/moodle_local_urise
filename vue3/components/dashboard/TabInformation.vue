@@ -11,14 +11,6 @@
               <br>
             </template>
           </div>
-          <div class="row d-flex justify-content-start">
-            <template v-if="content.coursecount">
-              <p>
-                <i class="fa-regular fa-calendar mr-2 text-primary" />
-                <strong>{{ strings.vuedashboardcoursecount }}: </strong> {{ content.coursecount }}
-              </p>
-            </template>
-          </div>
         </div>
         <div class="col-md-6 d-dlex justify-content-end align-items-center row m-0">
           <template v-if="indextab == 0">

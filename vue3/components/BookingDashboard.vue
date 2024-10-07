@@ -7,7 +7,7 @@
         <a @click="scrolltostart()" class="text-white ml5em" style="font-size: 1.3em;
     margin-right: 1rem; padding-bottom: 10px"><i class="fa-solid fa-backward-step"></i></a>
         <a @click="scrollLeft()" class="text-white" style="font-size: 1.3em;
-    margin-right: 1rem; padding-bottom: 10px"><i class="fa-solid fa-arrow-left"></i></a>
+    margin-right: 1rem; padding-bottom: 10px"><i class="fa-solid fa-arrow-left dashboardicon"></i></a>
         <div class="overflow-tabs-container d-flex justify-content-start" ref="scrollMe">
           <div v-if="tabsstored.length > 0" class="nav nav-tabs justify-content-center navouter">
             <span class="d-flex justify-content-center align-items-center m-1 text-white" @click="toggleSearchbar" ><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -67,7 +67,7 @@
         <div id="myTabContent" class="tab-content">
           <div id="home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
             <TabInformation class="mt-4 mb-3" :content="content" :strings="store.state.strings" :indextab="indexTab" />
-            <BookingStats :bookingstats="content" />
+            <BookingStats :bookingstats="content" :tabIndex="activeTab" @reload-tab="changeTabEmit"/>
           </div>
           <div id="profile" class="tab-pane fade" role="tabpanel" aria-labelledby="profile-tab">
             <CapabilityButtons :configlist="configlist" :active-tab="activeTab" :changes-made="changesMade"
@@ -134,6 +134,10 @@ watch(() => store.state.tabs, async () => {
 watch(() => store.state.content, async () => {
   content.value = store.state.content
 }, { deep: true });
+
+const changeTabEmit = (data) => {
+  changeTab(data);
+}
 
 async function changeTab(index) {
   indexTab.value = index
