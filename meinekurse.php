@@ -27,11 +27,12 @@
 use mod_booking\singleton_service;
 
 require_once(__DIR__ . '/../../config.php');
-
 // No guest autologin.
 require_login(0, false);
 
 global $DB, $PAGE, $OUTPUT, $USER;
+
+require_once($CFG->dirroot . '/mod/booking/lib.php');
 
 if (!$context = context_system::instance()) {
     throw new moodle_exception('badcontext');
@@ -60,18 +61,29 @@ if (!empty($archivecmidsstring)) {
     $archivecmids = explode(',', $archivecmidsstring);
 }
 
+if (booking_check_if_teacher()) {
+     $teacherid = $USER->id;
+     $teacherelement = '<div class="col-12 text-right">
+                              <a class="btn btn-primary button-link-to-teacher-page" href="/mod/booking/teacher.php?teacherid=' . $teacherid . '">
+                                   ' . get_string('teacher', 'mod_booking') . '
+                              </a>
+                         </div>';
+}
+
 echo $OUTPUT->header();
 
 echo '<div class="background d-flex justify-content-center align-items-center">
-               <div class="container mw-90 d-flex justify-content-center">
+               <div class="container mw-90">
+                    <div class="row w-100">
+                         ' . $teacherelement . '
+                    </div>
                     <div class="row mb-2 w-100 d-flex justify-content-center flex-column">
-                    <h1 class="font-weight-light text-center mb-4 text-light">
-                    ' . get_string('myspace', 'local_urise') . '
-                    </h1>
+                         <h1 class="font-weight-light text-center mb-4 text-light">
+                         ' . get_string('myspace', 'local_urise') . '
+                         </h1>
+                    </div>
                </div>
-          </div>
-     </div>
-';
+               </div>';
 
 // echo html_writer::div(get_string('coursesibooked', 'local_urise'), 'h2 mt-3 mb-2 text-center');
 echo format_text("[unifiedmybookingslist cards=1 sort=1 filter=1 filterontop=1]", FORMAT_HTML);
