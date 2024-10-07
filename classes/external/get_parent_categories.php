@@ -145,17 +145,17 @@ class get_parent_categories extends external_api {
                     $defaultchecked = false;
                     if (in_array($value->bookingid, $multibookingconfig)) {
                         $defaultchecked = true;
+
+                        $record->bookingoptionscount += $value->bookingoptions;
+                        $record->bookedcount += $value->booked;
+                        $record->waitinglistcount += $value->waitinglist ?? 0;
+                        $record->reservedcount += $value->reserved ?? 0;
+                        $record->realparticipants += $value->realparticipants ?? 0;
+                        $record->noshows += $value->noshows ?? 0;
+                        $record->excused += $value->excused ?? 0;
+                        $record->participated += $value->participated ?? 0;
                     }
                     $value->checked = $defaultchecked;
-
-                    $record->bookingoptionscount += $value->bookingoptions;
-                    $record->bookedcount += $value->booked;
-                    $record->waitinglistcount += $value->waitinglist ?? 0;
-                    $record->reservedcount += $value->reserved ?? 0;
-                    $record->realparticipants += $value->realparticipants ?? 0;
-                    $record->noshows += $value->noshows ?? 0;
-                    $record->excused += $value->excused ?? 0;
-                    $record->participated += $value->participated ?? 0;
 
                 }
                 $record->json = json_encode([
