@@ -414,6 +414,7 @@ $string['aboutoffer'] = "About the offer";
 
 $string['zgcommunities'] = "Interesting for";
 $string['organisationfilter'] = "Hosted by";
+$string['filter'] = "Filter";
 $string['fromdate'] = "From ";
 
 $string['kurssprache'] = 'Language';
