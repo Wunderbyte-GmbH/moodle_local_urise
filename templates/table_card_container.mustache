@@ -82,44 +82,24 @@
      </div>
      <div class="wunderbyte_table_container {{#showfilterontop}}showontop{{/showfilterontop}}">
           {{#showfilterontop}}
-          <div class="filtermobile">
-                <button class="filtermobilebutton gradienthover lexa-b1" data-toggle="collapse" data-target="#collapseMobileFilter" type="button" aria-expanded="false" aria-controls="collapseMobileFilter">
+            <div class="filterheader blockmobile">
+          
+           <div class="filtermobile">
+           <button class="filtermobilebutton gradienthover lexa-b1" data-toggle="collapse" data-target="#collapseMobileFilter" type="button" aria-expanded="false" aria-controls="collapseMobileFilter">
                   <i class="fas fa-sliders-h mr-2"></i>
                     {{#str}} filter, local_urise {{/str}}
                </button>
-               <div class="collapse" id="collapseMobileFilter">
-                                   <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
+          </div><div class="collapse showfilterdesktop" id="collapseMobileFilter">          <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
                     {{> local_wunderbyte_table/component_filter }}
                     {{> local_wunderbyte_table/component_infinitescroll }}
-               </aside>
-               </div>
-          </div>
-          <div class="filterheader filterdesktop">
-               <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
-                    {{> local_wunderbyte_table/component_filter }}
-                    {{> local_wunderbyte_table/component_infinitescroll }}
-               </aside>
+               </aside></div>
           </div>
           {{/showfilterontop}}
           {{^showfilterontop}}
-             <div class="filtermobile">
-                 <button class="filtermobilebutton gradienthover lexa-b1" data-toggle="collapse" data-target="#collapseMobileFilter" type="button" aria-expanded="false" aria-controls="collapseMobileFilter">
-                  <i class="fas fa-sliders-h mr-2"></i>
-                    {{#str}} filter, local_urise {{/str}}
-               </button>
-               <div class="collapse" id="collapseMobileFilter">
-                                   <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
-                    {{> local_wunderbyte_table/component_filter }}
-                    {{> local_wunderbyte_table/component_infinitescroll }}
-               </aside>
-               </div>
-          </div>
-          <div class="filterheader filterdesktop">
           <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
                {{> local_wunderbyte_table/component_filter }}
                {{> local_wunderbyte_table/component_infinitescroll }}
           </aside>
-          </div>
           {{/showfilterontop}}
           <div class="row w-100 d-flex justify-content-end mt-3">
                {{> local_wunderbyte_table/component_sort }}
