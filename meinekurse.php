@@ -86,6 +86,6 @@ echo '<div class="background d-flex justify-content-center align-items-center">
                </div>';
 
 // echo html_writer::div(get_string('coursesibooked', 'local_urise'), 'h2 mt-3 mb-2 text-center');
-echo format_text("[unifiedmybookingslist cards=1 sort=1 filter=1 filterontop=1]", FORMAT_HTML);
+echo format_text("[unifiedmybookingslist cards=1 sort=1 filter=1 filterontop=1 all=true]", FORMAT_HTML);
 
 echo $OUTPUT->footer();
