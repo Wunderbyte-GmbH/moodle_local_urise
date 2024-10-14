@@ -398,7 +398,7 @@ $string['myspace'] = "My bookings";
 
 // Descriptionview.
 $string['requirements'] = "Requirements";
-$string['goals'] = "Objectives";
+$string['goals'] = "Goals";
 $string['coursecontent'] = "Content";
 $string['coursemethods'] = "Methods";
 $string['additionalinfo'] = "Additional information";

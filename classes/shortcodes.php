@@ -322,13 +322,17 @@ class shortcodes {
             $infinitescrollpage = 0;
         }
 
-        if (empty($args['initcourses']) || $args['initcourses'] == "false") {
+        if (!empty($args['initcourses']) && $args['initcourses'] == "false") {
             $table = self::inittableforcourses(false);
         } else {
             $table = self::inittableforcourses();
         }
 
-        $table->showcountlabel = $args['countlabel'];
+        if (!empty($args['countlabel']) && $args['countlabel'] == "false") {
+            $table->showcountlabel = false;
+        } else {
+            $table->showcountlabel = true;
+        }
 
         if (empty($args['reload'])) {
             $args['reload'] = false;
@@ -421,8 +425,6 @@ class shortcodes {
         }
 
         $table->showfilterontop = $args['filterontop'];
-        $table->showcountlabel = true;
-
 
         $table->define_cache('mod_booking', 'mybookingoptionstable');
 
