@@ -874,8 +874,8 @@ class shortcodes {
                 'in between',
                 '<',
                 get_string('apply_filter', 'local_wunderbyte_table'),
-                'now',
-                'now + 1 year',
+                'today 00:00',
+                'today 00:00 + 1 year',
                 ['within']
             );
 
