@@ -183,10 +183,6 @@ class shortcodes {
             $showimage = false;
         }
 
-        if (empty($args['countlabel'])) {
-            $args['countlabel'] = false;
-        }
-
         if (empty($args['filterontop'])) {
             $args['filterontop'] = false;
         }
@@ -206,8 +202,6 @@ class shortcodes {
         } else {
             $table = self::inittableforcourses();
         }
-
-        $table->showcountlabel = $args['countlabel'];
 
         if (empty($args['reload'])) {
             $args['reload'] = false;
@@ -243,6 +237,12 @@ class shortcodes {
 
         $table->use_pages = true;
 
+        if (!empty($args['countlabel']) && $args['countlabel'] == "false") {
+            $table->showcountlabel = false;
+        } else {
+            $table->showcountlabel = true;
+        }
+
         if ($showimage !== false) {
             $table->set_tableclass('cardimageclass', 'pr-0 pl-1');
             $table->add_subcolumns('cardimage', ['image']);
@@ -270,7 +270,6 @@ class shortcodes {
         }
 
         $table->showfilterontop = $args['filterontop'];
-        $table->showcountlabel = true;
 
         return [$table, $perpage];
     }
@@ -474,10 +473,6 @@ class shortcodes {
             $showimage = false;
         }
 
-        if (empty($args['countlabel'])) {
-            $args['countlabel'] = false;
-        }
-
         if (empty($args['reload'])) {
             $args['reload'] = false;
         }
@@ -498,7 +493,11 @@ class shortcodes {
 
         $table = self::inittableforcourses();
 
-        $table->showcountlabel = $args['countlabel'];
+        if (!empty($args['countlabel']) && $args['countlabel'] == "false") {
+            $table->showcountlabel = false;
+        } else {
+            $table->showcountlabel = true;
+        }
         $table->showreloadbutton = $args['reload'];
 
         $wherearray = ['bookingid' => $bookingids];
@@ -875,7 +874,7 @@ class shortcodes {
                 '<',
                 get_string('apply_filter', 'local_wunderbyte_table'),
                 'today 00:00',
-                'today 00:00 + 1 year',
+                'today 00:00 1 year',
                 ['within']
             );
 
