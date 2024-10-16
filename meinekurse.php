@@ -88,4 +88,8 @@ echo '<div class="background d-flex justify-content-center align-items-center">
 // echo html_writer::div(get_string('coursesibooked', 'local_urise'), 'h2 mt-3 mb-2 text-center');
 echo format_text("[unifiedmybookingslist cards=1 sort=1 filter=1 filterontop=1 all=true]", FORMAT_HTML);
 
+if ($DB->record_exists('local_shopping_cart_history', ['userid' => $USER->id, 'paymentstatus' => 2])) {
+     echo format_text("[shoppingcarthistory]", FORMAT_HTML);
+}
+
 echo $OUTPUT->footer();
