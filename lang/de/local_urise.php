@@ -573,6 +573,8 @@ $string['educationalleadershipandmanagement'] = 'Educational Leadership & Manage
 $string['sonstige'] = "Sonstige";
 $string['sonstigekompetenzen'] = 'Sonstige Kompetenzen';
 
+$string['excludecourselistindashboard'] = "Kursliste im urise Dashboard ausschließen";
+$string['excludecourselistindashboard_desc'] = "Hier können Namen der Kursbreiche eingetragen werden (Komma separiert, ohne Leerzeichen dazwischen). In den hier eingetragenen Bereichen werden keine Kurslisten angezeigt.";
 $string['extrashortcodeone'] = "HTML für extra shortcode 1";
 $string['extrashortcodeone_desc'] = "Kann verwendet werden um html über den shortcode auszugeben";
 $string['extrashortcodetwo'] = "HTML für extra shortcode 2";

@@ -127,10 +127,20 @@ class get_parent_categories extends external_api {
             $record->excused = 0;
             $record->noshows = 0;
 
-            $sql = "SELECT c.id, c.fullname
+
+            $excludedcoursenames = explode(',', get_config('local_urise', 'excludecourselistindashboard') ?? '');
+            if (
+                in_array($record->name, $excludedcoursenames)
+                && !has_capability('local/urise:viewcourselistindashboard', context_system::instance())
+            ) {
+                $record->courses = [];
+            } else {
+                $sql = "SELECT c.id, c.fullname
                     FROM {course} c
                     WHERE c.category=:categoryid";
-            $record->courses = $DB->get_records_sql($sql, ['categoryid' => $record->id], IGNORE_MISSING) ?: [];
+
+                $record->courses = $DB->get_records_sql($sql, ['categoryid' => $record->id], IGNORE_MISSING) ?: [];
+            }
 
             if (
                 $bookingoptions
@@ -138,7 +148,7 @@ class get_parent_categories extends external_api {
                         (int)$record->contextid,
                         'tatsaechlichetnbib',
                         'kostenausoesicht',
-                        )
+                    )
             ) {
                 $multibookingconfig = explode(',', get_config('local_urise', 'multibookinginstances') ?: '');
                 foreach ($bookingoptions as &$value) {

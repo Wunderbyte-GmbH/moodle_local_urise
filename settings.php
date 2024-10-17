@@ -96,6 +96,12 @@ if ($hassiteconfig) {
                 get_string('shortcodesarchivecmids', 'local_urise'),
                 get_string('shortcodesarchivecmids_desc', 'local_urise'), ''));
 
+        $settings->add(
+            new admin_setting_configtext('local_urise/excludecourselistindashboard',
+                get_string('excludecourselistindashboard', 'local_urise'),
+                get_string('excludecourselistindashboard_desc', 'local_urise'), ''));
+
+
         // Shortcode lists.
         $settings->add(
             new admin_setting_heading('shortcodelists',
