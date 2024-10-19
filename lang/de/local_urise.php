@@ -271,6 +271,8 @@ $string['booking:bookanyone'] = 'Darf alle Nutzer:innen buchen';
 $string['mod/booking:bookanyone'] = 'JedeN buchen';
 $string['mod/booking:seepersonalteacherinformation'] = 'Detailinfos über Lehrende anzeigen';
 
+$string['more'] = 'mehr';
+
 // Optionformconfig.php / optionformconfig_form.php.
 $string['optionformconfig'] = 'Formulare für Buchungsoptionen anpassen (PRO)';
 $string['optionformconfig_infotext'] = 'Mit diesem PRO-Feature können Sie sich mit Drag & Drop und den Checkboxen beliebige Buchungsoptionsformulare zusammenstellen.

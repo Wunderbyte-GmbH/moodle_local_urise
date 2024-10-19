@@ -337,7 +337,7 @@ class urise_table extends wunderbyte_table {
         } else {
             $url = '#';
         }
-        return "<a href='$url' target='_blank' class=''>mehr</a>";
+        return "<a href='$url' target='_blank' class=''>".get_string('more', 'local_urise')."</a>";
     }
 
     /**

@@ -258,6 +258,8 @@ $string['mod/booking:reducedoptionform5'] = 'Reduced booking option 5';
 $string['mod/booking:bookanyone'] = 'Book anyone';
 $string['mod/booking:seepersonalteacherinformation'] = 'See personal teacher information';
 
+$string['more'] = 'more';
+
 // Optionformconfig.php / optionformconfig_form.php.
 $string['optionformconfig'] = 'Configure booking option forms (PRO)';
 $string['optionformconfig_infotext'] = 'With this PRO feature, you can create your individual booking option forms by using drag & drop
