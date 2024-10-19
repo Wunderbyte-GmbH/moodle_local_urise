@@ -137,6 +137,7 @@ $string['addbookinginstance'] = '<span class="bg-danger font-weight-bold">Keine 
 $string['editpricecategories'] = 'Preiskategorien bearbeiten';
 $string['editsemesters'] = 'Semester bearbeiten';
 $string['changebookinginstance'] = 'Standard-Semester-Instanz setzen';
+$string['changeuser'] = 'Wechsle Nutzer:in';
 $string['editbotags'] = 'Tags verwalten';
 $string['createbotag'] = 'Neuen Tag anlegen...';
 $string['createbotag:helptext'] = '<p>

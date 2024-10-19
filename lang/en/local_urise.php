@@ -551,6 +551,7 @@ $string['servicekundinnenorientierung'] = 'Service & customer-facing skills ';
 $string['loesungszukunftsorientierung'] = 'Solutions & future focus';
 $string['ressourceneffizienz'] = 'Resource efficiency';
 $string['changekompetenz'] = 'Flexibility';
+$string['changeuser'] = 'Change user';
 $string['gesundheitsorientierung'] = 'Health awareness';
 $string['lernkompetenz'] = 'Aptitude for learning';
 $string['digitalkompetenzen'] = "Digital competencies";

@@ -24,6 +24,8 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_shopping_cart\form\dynamic_select_users;
+use local_shopping_cart\shopping_cart;
 use mod_booking\singleton_service;
 
 require_once(__DIR__ . '/../../config.php');
@@ -39,6 +41,7 @@ if (!$context = context_system::instance()) {
 }
 
 $isteacher = false;
+$userid = optional_param('userid', $USER->id, PARAM_INT);
 
 // Check if optionid is valid.
 $PAGE->set_context($context);
@@ -61,25 +64,54 @@ if (!empty($archivecmidsstring)) {
     $archivecmids = explode(',', $archivecmidsstring);
 }
 
-if (booking_check_if_teacher()) {
-     $teacherid = $USER->id;
-     $teacherelement = '<div class="col-12 text-right">
-                              <a class="btn btn-primary button-link-to-teacher-page" href="/mod/booking/teacher.php?teacherid=' . $teacherid . '">
-                                   ' . get_string('teacher', 'mod_booking') . '
-                              </a>
-                         </div>';
+if (has_capability('mod/booking:editteacherdescription', context_system::instance())) {
+     $changeuserbutton = html_writer::tag('a', get_string('changeuser', 'local_urise'), ['class' => 'btn btn-primary', 'data-toggle' => 'collapse', 'href' => '#changeUser', 'role' => 'button', 'aria-expanded' => 'false', 'aria-controls' => 'changeUser']);
+     $changeuserelement = html_writer::start_tag('div', ['class' => 'collapse', 'id' => 'changeUser']);
+     $changeuserelement .= html_writer::start_tag('div', ['class' => 'card card-body']);
+     $changeuserelement .= html_writer::tag('div', '', ['data-id' => 'urise-selectuserformcontainer']);
+     $changeuserelement .= html_writer::end_div();
+     $changeuserelement .= html_writer::end_div();
+} else {
+     $changeuserbutton = '';
+     $changeuserelement = '';
 }
+if (booking_check_if_teacher()) {
+    $teacherelement = html_writer::tag(
+        'a',
+        get_string('teacher', 'mod_booking'),
+        ['class' => 'btn btn-primary', 'href' => '/mod/booking/teacher.php?teacherid=' . $USER->id]
+    );
+} else {
+    $teacherelement = '';
+}
+
+$adminelement = html_writer::start_div('col-12 text-right');
+$adminelement .= html_writer::tag('div', $teacherelement);
+$adminelement .= html_writer::tag('div', $changeuserbutton);
+$adminelement .= html_writer::end_div();
 
 echo $OUTPUT->header();
 
+$selectuserform = new dynamic_select_users();
+// echo html_writer::div($selectuserform->render(), '', ['data-id' => 'urise-selectuserformcontainer']);
+$PAGE->requires->js_call_amd('local_urise/userselectorform', 'init');
+
+if ($userid != $USER->id) {
+    $user = $DB->get_record('user', ['id' => $userid]);
+    $whosspace = "$user->firstname $user->lastname (id: $user->id) <br> $user->email";
+} else {
+    $whosspace = get_string('myspace', 'local_urise');
+}
+
 echo '<div class="background d-flex justify-content-center align-items-center">
                <div class="container mw-90">
+               ' . $changeuserelement . '
                     <div class="row w-100">
-                         ' . $teacherelement . '
+                         ' . $adminelement . '
                     </div>
                     <div class="row mb-2 w-100 d-flex justify-content-center flex-column">
                          <h1 class="font-weight-light text-center mb-4 text-light">
-                         ' . get_string('myspace', 'local_urise') . '
+                         ' . $whosspace . '
                          </h1>
                     </div>
                </div>
