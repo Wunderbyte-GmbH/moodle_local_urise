@@ -287,9 +287,16 @@ class shortcodes {
      */
     public static function unifiedmybookingslist($shortcode, $args, $content, $env, $next) {
 
-        global $USER;
+        global $USER, $PAGE;
+
+        $userid = optional_param('userid', $USER->id, PARAM_INT);
+
+        if ($userid != $USER->id) {
+            shopping_cart::buy_for_user($userid);
+        }
 
         self::fix_args($args);
+
         $booking = self::get_booking($args);
 
         $bookingids = explode(',', get_config('local_urise', 'multibookinginstances'));
@@ -367,7 +374,7 @@ class shortcodes {
                     null,
                     [],
                     $wherearray,
-                    $USER->id,
+                    $userid,
                     [
                         MOD_BOOKING_STATUSPARAM_BOOKED,
                         MOD_BOOKING_STATUSPARAM_RESERVED,
@@ -387,7 +394,7 @@ class shortcodes {
                     null,
                     [],
                     $wherearray,
-                    $USER->id,
+                    $userid,
                     [
                         MOD_BOOKING_STATUSPARAM_BOOKED,
                         MOD_BOOKING_STATUSPARAM_RESERVED,
