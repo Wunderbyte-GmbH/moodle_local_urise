@@ -197,11 +197,7 @@ class shortcodes {
             $infinitescrollpage = 0;
         }
 
-        if (empty($args['initcourses']) || $args['initcourses'] == "false") {
-            $table = self::inittableforcourses(false);
-        } else {
-            $table = self::inittableforcourses();
-        }
+        $table = self::inittableforcourses();
 
         if (empty($args['reload'])) {
             $args['reload'] = false;
@@ -605,6 +601,11 @@ class shortcodes {
      */
     public static function calendarview($shortcode, $args, $content, $env, $next) {
 
+        // Calendar should normally be sorted by coursestarttime.
+        if (empty($args['sortby'])) {
+            $args['sortby'] = 'coursestarttime';
+        }
+
         [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, true);
 
         $table->tabletemplate = 'local_wunderbyte_table/calendarview';
@@ -716,12 +717,12 @@ class shortcodes {
         if ($addcols == true) {
             $table->define_columns([
                 'titleprefix',
-                'coursestarttime',
-                'courseendtime',
                 'location',
                 'bookingopeningtime',
                 'bookingclosingtime',
             ]);
+
+            $table->add_subcolumns('invisible', ['coursestarttime', 'courseendtime']);
         }
         return $table;
     }

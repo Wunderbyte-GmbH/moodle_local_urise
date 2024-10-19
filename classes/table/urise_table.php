@@ -821,8 +821,20 @@ class urise_table extends wunderbyte_table {
      */
     public function col_coursestarttime($values) {
 
-        // We don't use this column here, so just return an empty string.
-        return '';
+        $coursestarttime = $values->coursestarttime;
+        if (empty($coursestarttime)) {
+            return '';
+        }
+
+        switch (current_language()) {
+            case 'de':
+                $renderedcoursestarttime = date('d.m.Y', $coursestarttime);
+                break;
+            default:
+                $renderedcoursestarttime = date('M d, Y', $coursestarttime);
+                break;
+        }
+        return $renderedcoursestarttime;
     }
 
     /**
