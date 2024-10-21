@@ -547,6 +547,7 @@ $string['selbstundarbeitsorganisation'] = "Personal and professional organisatio
 $string['veranstaltungsorganisation'] = 'Event organisation';
 $string['arbeitsorganisation'] = 'Professional organisation';
 $string['selbstorganisation'] = 'Personal organisation';
+$string['servicedesk'] = 'Servicedesk';
 $string['servicekundinnenorientierung'] = 'Service & customer-facing skills ';
 $string['loesungszukunftsorientierung'] = 'Solutions & future focus';
 $string['ressourceneffizienz'] = 'Resource efficiency';

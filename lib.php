@@ -106,6 +106,8 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
                 . $CFG->wwwroot . '/local/entities/entities.php">'
                 . get_string('entities', 'local_urise') . '</a>'
             . $editteacherlink . '
+            <a class="dropdown-item" href="https://servicedesk.univie.ac.at/plugins/servlet/desk/portal/163/create/1918">'
+                . get_string('servicedesk', 'local_urise') . '</a>
         </div>
     </div>';
     return $output;

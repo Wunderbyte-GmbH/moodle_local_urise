@@ -560,6 +560,7 @@ $string['selbstundarbeitsorganisation'] = "Selbst- & Arbeitsorganisation";
 $string['veranstaltungsorganisation'] = 'Veranstaltungsorganisation';
 $string['arbeitsorganisation'] = 'Arbeitsorganisation';
 $string['selbstorganisation'] = 'Selbstorganisation';
+$string['servicedesk'] = 'Servicedesk';
 $string['servicekundinnenorientierung'] = 'Service- & Kund*innenorientierung';
 $string['loesungszukunftsorientierung'] = 'Lösungs- & Zukunftsorientierung';
 $string['ressourceneffizienz'] = 'Ressourceneffizienz';
