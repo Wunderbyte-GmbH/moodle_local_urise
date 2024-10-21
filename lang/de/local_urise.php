@@ -572,6 +572,7 @@ $string['itsecurity'] = 'IT Security';
 $string['digitaleinteraktion'] = 'Digitale Interaktion';
 $string['umgangmitinformationenunddaten'] = 'Umgang mit Informationen & Daten';
 $string['technologienutzung'] = 'Technologienutzung';
+$string['termsandconditions'] = 'Bei Anmeldung akzeptiere ich <a href="{$a}">die Teilnahmebedingungen</a>.';
 $string['fuehrungskompetenzen'] = "Führungskompetenzen";
 $string['educationalleadershipandmanagement'] = 'Educational Leadership & Management';
 $string['sonstige'] = "Sonstige";
