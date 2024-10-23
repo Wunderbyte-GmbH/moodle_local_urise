@@ -495,7 +495,7 @@ $string['personalentwicklungundrecruiting'] = "Personalentwicklung und Recruitin
 $string['centerforteachingandlearning'] = "Center for Teaching and Learning";
 $string['koordinationstudienservices'] = "Koordination Studienservices";
 $string['zentralerinformatikdienst'] = "Zentraler Informatikdienst";
-$string['lppostdoc'] = "LP Postdoc";
+$string['lppostdoc'] = "LP PostDocs";
 $string['lpfuehrungskraefte'] = "LP Führungskraefte";
 $string['lpallgemeinesuniversitaetspersonal'] = "LP Allgemeines Universitätspersonal";
 $string['lpstudierende'] = "LP Studierende";
@@ -503,7 +503,7 @@ $string['lpexterne'] = "LP Externe";
 $string['lpbibliothek'] = "LP Bibliothek";
 
 $string['phdstudents'] = "PhD Students";
-$string['postdoc'] = "Postdocs";
+$string['postdoc'] = "PostDocs";
 $string['fuehrungskraefte'] = "Führungskräfte";
 $string['allgemeinespersonal'] = "Allgemeines Personal";
 $string['wissenschaftlichespersonal'] = "Wissenschaftliches Personal";
@@ -572,7 +572,7 @@ $string['itsecurity'] = 'IT Security';
 $string['digitaleinteraktion'] = 'Digitale Interaktion';
 $string['umgangmitinformationenunddaten'] = 'Umgang mit Informationen & Daten';
 $string['technologienutzung'] = 'Technologienutzung';
-$string['termsandconditions'] = 'Bei Anmeldung akzeptiere ich <a href="{$a}">die Teilnahmebedingungen</a>.';
+$string['termsandconditions'] = 'Bei Anmeldung akzeptiere ich&nbsp;<a href="{$a}">die Teilnahmebedingungen</a>.';
 $string['fuehrungskompetenzen'] = "Führungskompetenzen";
 $string['educationalleadershipandmanagement'] = 'Educational Leadership & Management';
 $string['sonstige'] = "Sonstige";
