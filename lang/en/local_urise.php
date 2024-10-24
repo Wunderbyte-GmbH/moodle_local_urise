@@ -560,7 +560,7 @@ $string['itsecurity'] = 'IT Security';
 $string['digitaleinteraktion'] = 'Digital interaction';
 $string['umgangmitinformationenunddaten'] = 'Handling information & data	';
 $string['technologienutzung'] = 'IT skills';
-$string['termsandconditions'] = 'With booking I accept the&nbsp;<a href="{$a}">terms and conditions</a>.';
+$string['termsandconditions'] = 'With booking I accept the&nbsp;<a href="{$a}" target="_blank">terms and conditions</a>.';
 $string['fuehrungskompetenzen'] = "Leadership competencies";
 $string['educationalleadershipandmanagement'] = 'Educational Leadership & Management';
 $string['sonstige'] = "Others";

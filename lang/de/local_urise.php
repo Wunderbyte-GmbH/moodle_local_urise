@@ -72,7 +72,7 @@ $string['substitutionspool'] = 'Vertretungspool für {$a}';
 $string['editsubstitutionspool'] = 'Vertretungspool bearbeiten';
 $string['viewsubstitutionspool'] = 'Vertretungspool ansehen';
 $string['mailtosubstitutionspool'] = 'E-Mail an Vertretungspool senden';
-$string['substitutionspool:infotext'] = 'Trainer:innen, die <b>{$a}</b> vertreten dürfen:';
+$string['substitutionspool:infotext'] = 'Trainer*innen, die <b>{$a}</b> vertreten dürfen:';
 $string['substitutionspool:mailproblems'] = 'Hier klicken, wenn Sie Probleme beim Versenden der E-Mails haben...';
 $string['substitutionspool:copypastemails'] = 'Kopieren Sie die folgenden E-Mail-Adressen in das BCC-Feld Ihres E-Mail-Programms:';
 $string['gateway'] = 'Gateway';
@@ -128,8 +128,8 @@ $string['editentitiescategories'] = 'Kategorien der Organisations-Einheiten bear
 $string['importentities'] = 'Organisations-Einheiten importieren';
 $string['editbookinginstance'] = 'Buchungs-Instanz bearbeiten';
 $string['editbookings'] = 'Kurs-Übersicht';
-$string['viewteachers'] = 'Trainer:innen-Übersicht';
-$string['teachersinstancereport'] = 'Trainer:innen-Gesamtbericht (Kurse, Fehlstunden, Vertretungen)';
+$string['viewteachers'] = 'Trainer*innen-Übersicht';
+$string['teachersinstancereport'] = 'Trainer*innen-Gesamtbericht (Kurse, Fehlstunden, Vertretungen)';
 $string['sapdailysums'] = 'SAP-Buchungsdateien';
 $string['searchcourses'] = "Kurs suchen ...";
 
@@ -572,7 +572,7 @@ $string['itsecurity'] = 'IT Security';
 $string['digitaleinteraktion'] = 'Digitale Interaktion';
 $string['umgangmitinformationenunddaten'] = 'Umgang mit Informationen & Daten';
 $string['technologienutzung'] = 'Technologienutzung';
-$string['termsandconditions'] = 'Bei Anmeldung akzeptiere ich&nbsp;<a href="{$a}">die Teilnahmebedingungen</a>.';
+$string['termsandconditions'] = 'Bei Anmeldung akzeptiere ich&nbsp;<a href="{$a}" target="_blank">die Teilnahmebedingungen</a>.';
 $string['fuehrungskompetenzen'] = "Führungskompetenzen";
 $string['educationalleadershipandmanagement'] = 'Educational Leadership & Management';
 $string['sonstige'] = "Sonstige";

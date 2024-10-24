@@ -145,6 +145,9 @@ if ($hassiteconfig) {
         $collapsedescriptionoptions = [
             0 => get_string('collapsedescriptionoff', 'local_urise'),
             100 => "100",
+            125 => "125",
+            150 => "150",
+            175 => "175",
             200 => "200",
             300 => "300",
             400 => "400",
