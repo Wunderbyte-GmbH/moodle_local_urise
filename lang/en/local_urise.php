@@ -395,7 +395,7 @@ $string['urise:view'] = "View";
 $string['multibookinginstances'] = "List of default activeted booking instances";
 $string['multibookinginstances_desc'] = "Choose which booking instances are activated by default.";
 
-$string['searchheadertext'] = "What would you like to learn?";
+$string['searchheadertext'] = "What are you interested in?";
 $string['myspace'] = "My bookings";
 
 // Descriptionview.
@@ -577,7 +577,7 @@ $string['extrashortcodetwo_desc'] = "Can be used to output html code via a short
 $string['jointevent'] = "Joint event";
 $string['editteachers'] = "Edit teachers";
 
-$string['search'] = "Suchbegriff eingeben";
+$string['search'] = "Enter search term";
 
 $string['basicqualification'] = "Basic Qualification for Staff New to Teaching";
 $string['teachingcompetence'] = "Teaching Competence";
