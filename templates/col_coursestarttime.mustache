@@ -53,5 +53,10 @@
     {{/datestrings.0}}
 {{/selflearningcourse}}
 {{#selflearningcourse}}
-    {{#str}}selflearningcourse:durationinfo, mod_booking, {{duration}}{{/str}}
+    {{^timeremaining}}
+        {{#str}}selflearningcourse:durationinfo, mod_booking, {{duration}}{{/str}}
+    {{/timeremaining}}
+    {{#timeremaining}}
+        {{#str}}selflearningcourse:timeremaininginfo, mod_booking, {{timeremaining}}{{/str}}
+    {{/timeremaining}}
 {{/selflearningcourse}}
