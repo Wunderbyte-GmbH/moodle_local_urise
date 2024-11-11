@@ -7,7 +7,7 @@
       <input
         type="text"
         class="form-control rounded-pill"
-        placeholder="Filter tabs..."
+        :placeholder="store.state.strings.vuefiltertabs"
         aria-label="Search"
         aria-describedby="button-addon2"
         @input="handleInputChange"
@@ -18,6 +18,9 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useStore } from 'vuex'
+
+const store = useStore()
 
 const filteredTabs = ref([]);
 const emits = defineEmits(['filteredTabs']);

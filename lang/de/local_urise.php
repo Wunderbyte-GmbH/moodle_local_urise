@@ -211,7 +211,7 @@ $string['dashboard_auswertung'] = 'Auswertung';
 
 
 // Vue strings.
-$string['vuedashboardchecked'] = 'Default Ausgewählt';
+$string['vuedashboardchecked'] = 'In "Angebot" sichtbar';
 $string['vuedashboardname'] = 'Name';
 $string['vuedashboardcoursecount'] = 'Anzahl der Moodle Kurse';
 $string['vuedashboardpath'] = 'Pfad';
@@ -242,6 +242,7 @@ $string['vuebookingstatsrestoreconfirmation'] = 'Möchten Sie diese Konfiguratio
 $string['vuebookingstatsyes'] = 'Ja';
 $string['vuebookingstatsno'] = 'Nein';
 $string['vueconfirmmodal'] = 'Sind Sie sicher, dass Sie zurückgehen möchten?';
+$string['vuefiltertabs'] = 'Filter tabs...';
 $string['vueheadingmodal'] = 'Bestätigung';
 $string['vuenotificationtitleunsave'] = 'Keine ungespeicherten Änderungen erkannt';
 $string['vuenotificationtextunsave'] = 'Es wurden keine ungespeicherten Änderungen erkannt.';
@@ -250,7 +251,7 @@ $string['vuenotificationtextactionsuccess'] = 'Die Konfiguration wurde erfolgrei
 $string['vuenotificationtitleactionfail'] = 'Die Konfiguration wurde nicht erfolgreich {$a}';
 $string['vuenotificationtextactionfail'] = 'Beim Speichern ist ein Fehler aufgetreten. Die Änderungen wurden nicht vorgenommen.';
 $string['vuedashboardgotocategory'] = 'Zur Kategorie';
-$string['vuedashboardbookinginstances'] = 'Booking instances';
+$string['vuedashboardbookinginstances'] = 'Buchungsinstanzen';
 $string['vuenotabsfounds'] = 'Keine Tabs gefunden';
 
 $string['booking:expertoptionform'] = "Expert option form";

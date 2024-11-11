@@ -57,12 +57,12 @@
               {{ store.state.strings.dashboardbookingfields }}
             </button>
           </li>
-          <li class="nav-item" role="presentation">
+          <!-- <li class="nav-item" role="presentation">
             <button id="contact-tab" class="nav-link" data-toggle="tab" data-target="#contact" type="button" role="tab"
               aria-controls="contact" aria-selected="false">
               {{ store.state.strings.dashboardstats }}
             </button>
-          </li>
+          </li> -->
         </ul>
         <div id="myTabContent" class="tab-content">
           <div id="home" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">

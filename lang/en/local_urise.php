@@ -206,7 +206,7 @@ $string['dashboard_organisation'] = 'Organisation';
 $string['dashboard_auswertung'] = 'Reporting';
 
 // Vue strings.
-$string['vuedashboardchecked'] = 'Default Checked';
+$string['vuedashboardchecked'] = 'Visible in "Our Offer"';
 $string['vuedashboardname'] = 'Name';
 $string['vuedashboardcoursecount'] = 'Moodle Course Count';
 $string['vuedashboardpath'] = 'Path';
@@ -225,8 +225,8 @@ $string['vuebookingstatsbookingoptions'] = 'Booking Options';
 $string['vuebookingstatsbooked'] = 'Booked';
 $string['vuebookingstatswaiting'] = 'Waiting List';
 $string['vuebookingstatsreserved'] = 'Reserved';
-$string['vuebookingstatsrealparticipants'] = 'Real participants';
-$string['vuebookingstatsrealcosts'] = 'Real costs';
+$string['vuebookingstatsrealparticipants'] = 'Actual participants';
+$string['vuebookingstatsrealcosts'] = 'Costs for org. unit';
 $string['vuebookingstatsparticipated'] = 'Participated';
 $string['vuebookingstatsexcused'] = 'Excused';
 $string['vuebookingstatsnoshow'] = 'No Show';
@@ -238,6 +238,7 @@ $string['vuebookingstatsrestoreconfirmation'] = 'You really want to reset this c
 $string['vuebookingstatsyes'] = 'Yes';
 $string['vuebookingstatsno'] = 'No';
 $string['vueconfirmmodal'] = 'Are you sure you want to go back?';
+$string['vuefiltertabs'] = 'Filter tabs...';
 $string['vueheadingmodal'] = 'Confirmation';
 $string['vuenotificationtitleunsave'] = 'No unsaved changes detected';
 $string['vuenotificationtextunsave'] = 'There were no unsaved changes detected.';

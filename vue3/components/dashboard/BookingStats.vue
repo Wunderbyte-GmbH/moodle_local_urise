@@ -10,7 +10,7 @@
             <th>{{ store.state.strings.vuebookingstatsbookingoptions }}</th>
             <th>{{ store.state.strings.vuebookingstatsbooked }}</th>
             <th>{{ store.state.strings.vuebookingstatswaiting }}</th>
-            <th>{{ store.state.strings.vuebookingstatsreserved }}</th>
+            <th v-if="showReserved">{{ store.state.strings.vuebookingstatsreserved }}</th>
             <th v-if="showRealParticipants">{{ store.state.strings.vuebookingstatsrealparticipants }}</th>
             <th v-if="showRealCosts">{{ store.state.strings.vuebookingstatsrealcosts }}</th>
             <th v-if="showParticipated">{{ store.state.strings.vuebookingstatsparticipated }}</th>
@@ -42,7 +42,7 @@
             <td>{{ bookingStat.bookingoptions }}</td>
             <td>{{ bookingStat.booked }}</td>
             <td>{{ bookingStat.waitinglist }}</td>
-            <td>{{ bookingStat.reserved }}</td>
+            <td v-if="showReserved">{{ bookingStat.reserved }}</td>
             <td v-if="showRealParticipants">{{ bookingStat.realparticipants }}</td>
             <td v-if="showRealCosts">{{ bookingStat.realcosts }}</td>
             <td v-if="showParticipated">{{ bookingStat.participated }}</td>
@@ -106,6 +106,10 @@ const handleCheckboxChange = async (bookingStat) => {
   emit('reload-tab', props.tabIndex );
 
   }
+
+const showReserved = computed(() => {
+return props.bookingstats.json.booking.some(stat => stat.reserved > 0);
+});
 
 const showRealParticipants = computed(() => {
   return props.bookingstats.json.booking.some(stat => stat.realparticipants > 0);
