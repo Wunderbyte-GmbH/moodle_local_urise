@@ -391,6 +391,7 @@ $string['summary_desc'] = 'Contains the settings and stats for the whole Moodle 
 // Rolls.
 $string['urise:create'] = "Create";
 $string['urise:view'] = "View";
+$string['urise:viewcourselistindashboard'] = 'Can see courselist in dashobard';
 
 // Settings.
 $string['multibookinginstances'] = "List of default activeted booking instances";
