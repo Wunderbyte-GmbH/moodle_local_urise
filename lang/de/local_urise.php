@@ -470,6 +470,7 @@ $string['fbtheologie'] = "FB Theologie";
 $string['fbtranslationswissenschaft'] = "FB Translationswissenschaft";
 $string['fbwirtschaftswissenschaftenundmathematik'] = "FB Wirtschaftswissenschaften und Mathematik";
 $string['fbzeitgeschichte'] = "FB Zeitgeschichte";
+$string['forschungsserviceundnachwuchsfoerderung'] = "Forschungsservice und Nachwuchsförderung";
 $string['forschungsundpublikationsservices'] = "Forschungs- und Publikationsservices";
 $string['hauptbibliothek'] = "Hauptbibliothek";
 $string['universitaetsarchiv'] = "Universitätsarchiv";
