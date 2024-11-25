@@ -117,6 +117,10 @@ class shortcodes {
     public static function unifiedlist($shortcode, $args, $content, $env, $next) {
         [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, true);
 
+        if (empty($table)) {
+            return get_string('nobookinginstancesselected', 'local_urise');
+        }
+
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
             [$idstring, $encodedtable, $out] = $table->lazyouthtml($perpage, true);
@@ -142,6 +146,10 @@ class shortcodes {
      */
     public static function unifiedcards($shortcode, $args, $content, $env, $next) {
         [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, true);
+
+        if (empty($table)) {
+            return get_string('nobookinginstancesselected', 'local_urise');
+        }
 
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
