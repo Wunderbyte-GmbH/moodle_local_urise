@@ -92,6 +92,14 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
         $editteacherlink = '';
     }
 
+    if (has_capability('local/wb_news:editinstances', context_system::instance())) {
+        $editnewslink = '<a class="dropdown-item" href="'
+                . $CFG->wwwroot . '/local/wb_news/index.php">'
+                . get_string('editnews', 'local_urise') . '</a>';
+    } else {
+        $editnewslink = '';
+    }
+
 
     $output = '<div class="popover-region nav-link icon-no-margin dropdown" data-id="urise-popover-region">
         <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -105,7 +113,8 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
             <a class="dropdown-item" href="'
                 . $CFG->wwwroot . '/local/entities/entities.php">'
                 . get_string('entities', 'local_urise') . '</a>'
-            . $editteacherlink . '
+            . $editteacherlink .
+            $editnewslink . '
             <a class="dropdown-item" href="https://servicedesk.univie.ac.at/plugins/servlet/desk/portal/163/create/1918" target="_blank">'
                 . get_string('servicedesk', 'local_urise') . '</a>
         </div>

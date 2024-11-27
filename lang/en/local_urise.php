@@ -67,6 +67,7 @@ $string['reihenprogramm'] = "Series/Programs";
 $string['editavailabilityanddescription'] = 'Edit availability & description';
 $string['editavailability'] = 'Edit availability';
 $string['editdescription'] = 'Edit description';
+$string['editnews'] = 'Edit newselements';
 $string['substitutionspool'] = 'Substitutions pool for {$a}';
 $string['editsubstitutionspool'] = 'Edit substitutions pool';
 $string['viewsubstitutionspool'] = 'View substitutions pool';
