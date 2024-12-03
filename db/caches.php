@@ -15,22 +15,22 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Mobile cache definitions.
+ * Cache definitions.
  *
  * @package    local_urise
- * @copyright  2024 Georg Maißer <info@wudnerbyte.at>
+ * @copyright  2024 Wunderbyte GmbH <info@wunderbyte.at>
+ * @author     Georg Maißer
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$definitions = array(
-    'cachedpaymenttable' => array(
+$definitions = [
+    'cachedpaymenttable' => [
         'mode' => cache_store::MODE_APPLICATION,
         'simplekeys' => true,
         'staticacceleration' => true,
         'staticaccelerationsize' => 1,
-        'invalidationevents' => ['setbackcachedpaymenttable']
-    ),
-);
-
+        'invalidationevents' => ['setbackcachedpaymenttable'],
+    ],
+];
