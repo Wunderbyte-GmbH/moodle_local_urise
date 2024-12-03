@@ -494,7 +494,7 @@ $string['viennadoctoralschoolincognitionbehaviorandneurosciencefrombiologytopsyc
 $string['viennadoctoralschooloftheologyandresearchonreligion'] = "Vienna Doctoral School of Theology and Research on Religion";
 $string['viennadoctoralschoolineducation'] = "Vienna Doctoral School in Education";
 $string['organisationskulturundgleichstellung'] = "Organisationskultur und Gleichstellung";
-$string['personalentwicklungundrecruiting'] = "Personalentwicklung und Recruiting";
+$string['personalentwicklungundrecruiting'] = "Personalentwicklung";
 $string['centerforteachingandlearning'] = "Center for Teaching and Learning";
 $string['koordinationstudienservices'] = "Koordination Studienservices";
 $string['zentralerinformatikdienst'] = "Zentraler Informatikdienst";
