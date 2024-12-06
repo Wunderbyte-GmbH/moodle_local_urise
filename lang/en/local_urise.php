@@ -319,7 +319,7 @@ $string['waitforconfirmation'] = 'Book only after confirmation';
 // Filter.
 $string['organisation'] = 'Organisation';
 $string['location'] = 'Location';
-$string['competency'] = 'Competency';
+$string['competency'] = 'Competencies';
 
 // Nav.
 $string['urise'] = 'u:rise';
@@ -567,6 +567,11 @@ $string['technologienutzung'] = 'IT skills';
 $string['termsandconditions'] = 'With booking I accept the&nbsp;<a href="{$a}" target="_blank">terms and conditions</a>.';
 $string['fuehrungskompetenzen'] = "Leadership competencies";
 $string['educationalleadershipandmanagement'] = 'Educational Leadership & Management';
+$string['teamfuehrungentwicklung'] = 'Team leadership & development';
+$string['selbstfuehrung'] = 'Self-leadership';
+$string['mitarbeitendefoerdern'] = 'Staff development';
+$string['entscheidungskompetenzen'] = 'Decision-making competence';
+$string['strategischeplanungentwicklung'] = 'Strategic planning & implementation';
 $string['sonstige'] = "Others";
 $string['sonstigekompetenzen'] = 'other competencies';
 

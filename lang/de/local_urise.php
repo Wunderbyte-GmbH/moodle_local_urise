@@ -578,6 +578,11 @@ $string['technologienutzung'] = 'Technologienutzung';
 $string['termsandconditions'] = 'Bei Anmeldung akzeptiere ich&nbsp;<a href="{$a}" target="_blank">die Teilnahmebedingungen</a>.';
 $string['fuehrungskompetenzen'] = "Führungskompetenzen";
 $string['educationalleadershipandmanagement'] = 'Educational Leadership & Management';
+$string['teamfuehrungentwicklung'] = 'Teamführung & -entwicklung';
+$string['selbstfuehrung'] = 'Selbstführung';
+$string['mitarbeitendefoerdern'] = 'Mitarbeitende fördern';
+$string['entscheidungskompetenzen'] = 'Entscheidungskompetenz';
+$string['strategischeplanungentwicklung'] = 'Strategische Planung & Umsetzung';
 $string['sonstige'] = "Sonstige";
 $string['sonstigekompetenzen'] = 'Sonstige Kompetenzen';
 

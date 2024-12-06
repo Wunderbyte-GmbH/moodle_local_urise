@@ -1405,6 +1405,26 @@ class shortcodes {
                 'parent' => get_string('fuehrungskompetenzen', 'local_urise'),
                 'localizedname' => get_string('educationalleadershipandmanagement', 'local_urise'),
             ],
+            '41' => [
+                'parent' => get_string('fuehrungskompetenzen', 'local_urise'),
+                'localizedname' => get_string('teamfuehrungentwicklung', 'local_urise'),
+            ],
+            '42' => [
+                'parent' => get_string('fuehrungskompetenzen', 'local_urise'),
+                'localizedname' => get_string('selbstfuehrung', 'local_urise'),
+            ],
+            '43' => [
+                'parent' => get_string('fuehrungskompetenzen', 'local_urise'),
+                'localizedname' => get_string('mitarbeitendefoerdern', 'local_urise'),
+            ],
+            '44' => [
+                'parent' => get_string('fuehrungskompetenzen', 'local_urise'),
+                'localizedname' => get_string('entscheidungskompetenzen', 'local_urise'),
+            ],
+            '45' => [
+                'parent' => get_string('fuehrungskompetenzen', 'local_urise'),
+                'localizedname' => get_string('strategischeplanungentwicklung', 'local_urise'),
+            ],
             '40' => [
                 'parent' => get_string('sonstige', 'local_urise'),
                 'localizedname' => get_string('sonstigekompetenzen', 'local_urise'),
