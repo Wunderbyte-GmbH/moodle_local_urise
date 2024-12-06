@@ -981,10 +981,7 @@ class shortcodes {
 
         if (!empty($args['sort'])) {
             $sortablecolumns = [
-                'titleprefix' => get_string('titleprefix', 'local_urise'),
                 'text' => get_string('coursename', 'local_urise'),
-                'organisation' => get_string('organisation', 'local_urise'),
-                'location' => get_string('location', 'local_urise'),
             ];
             if (get_config('local_urise', 'uriseshortcodesshowstart')) {
                 $sortablecolumns['coursestarttime'] = get_string('coursestarttime', 'mod_booking');
