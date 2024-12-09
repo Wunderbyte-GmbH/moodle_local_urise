@@ -52,11 +52,11 @@
         </div>
     {{/datestrings.0}}
 {{/selflearningcourse}}
-{{#selflearningcourse}}
+{{#selflearningcourseshowdurationinfo}}
     {{^timeremaining}}
         {{#str}}selflearningcoursedurationinfo, mod_booking, {{duration}}{{/str}}
     {{/timeremaining}}
     {{#timeremaining}}
         {{#str}}selflearningcoursetimeremaininginfo, mod_booking, {{timeremaining}}{{/str}}
     {{/timeremaining}}
-{{/selflearningcourse}}
+{{/selflearningcourseshowdurationinfo}}
