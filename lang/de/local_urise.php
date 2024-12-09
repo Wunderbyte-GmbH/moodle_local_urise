@@ -83,6 +83,8 @@ $string['sportsdivision'] = 'Sparte';
 $string['sportsdivisions'] = 'Sparten';
 $string['titleprefix'] = 'Kursnummer';
 $string['unknown'] = 'Unbekannt';
+$string['merchantref'] = 'MerchantRef';
+$string['customorderid'] = 'CustomOrderID';
 
 $string['format'] = "Format";
 $string['german'] = 'Deutsch';
@@ -382,7 +384,7 @@ $string['action'] = 'Aktion';
 
 // Easy availability feature.
 $string['easyavailability:overbook'] = 'Sogar dann, wenn der Kurs <b>ausgebucht</b> ist';
-$string['easyavailability:previouslybooked'] = 'Nutzer:innen, die bereits einen bestimmten USI-Kurs gebucht haben, dürfen immer buchen';
+$string['easyavailability:previouslybooked'] = 'Nutzer:innen, die bereits einen bestimmten Kurs gebucht haben, dürfen immer buchen';
 $string['easyavailability:selectusers'] = 'Ausgewählte Nutzer:innen dürfen außerhalb der Buchungszeiten buchen';
 $string['easyavailability:formincompatible'] = '<div class="alert alert-warning">Diese Buchungsoption verwendet Einschränkungen,
  die mit diesem Formular nicht kompatibel sind. Bitte wenden Sie sich an einen urise-Admin.</div>';

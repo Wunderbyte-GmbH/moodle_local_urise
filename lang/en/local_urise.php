@@ -82,6 +82,8 @@ $string['sportsdivision'] = 'Type of courses';
 $string['sportsdivisions'] = 'Types of courses';
 $string['titleprefix'] = 'Course number';
 $string['unknown'] = 'Unknown';
+$string['merchantref'] = 'MerchantRef';
+$string['customorderid'] = 'CustomOrderID';
 
 $string['format'] = "Format";
 $string['german'] = 'German';
