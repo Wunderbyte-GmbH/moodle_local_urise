@@ -259,6 +259,7 @@ class shortcodes {
         if ($showimage !== false) {
             $table->set_tableclass('cardimageclass', 'pr-0 pl-1');
             $table->add_subcolumns('cardimage', ['image']);
+            $table->add_subcolumns('ariasection', ['puretext']);
         }
 
         if (empty($args['showpagination'])) {
@@ -270,6 +271,7 @@ class shortcodes {
         if ($renderascard) {
             self::generate_table_for_cards($table, $args);
             $table->tabletemplate = 'local_urise/table_card';
+            $table->add_subcolumns('ariasection', ['puretext']);
             if ($args['showpagination'] == "true") {
                 $table->showpagination = true;
             } else {

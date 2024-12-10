@@ -242,6 +242,18 @@ class urise_table extends wunderbyte_table {
      * @return string $string Return name of the booking option.
      * @throws dml_exception
      */
+    public function col_puretext($values) {
+        return format_string($values->text);
+    }
+
+    /**
+     * This function is called for each data row to allow processing of the
+     * text value.
+     *
+     * @param object $values Contains object with all the values of record.
+     * @return string $string Return name of the booking option.
+     * @throws dml_exception
+     */
     public function col_text($values) {
 
         global $PAGE;
@@ -250,7 +262,7 @@ class urise_table extends wunderbyte_table {
 
         $url = $this->col_url($values);
 
-        $title = format_text($values->text);
+        $title = format_string($values->text);
         if (!empty($values->titleprefix)) {
             $title = $values->titleprefix . ' - ' . $title;
         }
