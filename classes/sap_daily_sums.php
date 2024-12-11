@@ -371,8 +371,8 @@ class sap_daily_sums {
         $currentline .= date('d.m.Y', $record->timemodified) . '#';
         // Belegdatum - 10 Stellen.
         $currentline .= date('d.m.Y', $record->timecreated) . '#';
-        // Belegkopftext - 25 Stellen alphanumerisch - in unserem Fall immer "US".
-        $currentline .= str_pad('US', 25, " ", STR_PAD_LEFT) . '#';
+        // Belegkopftext - 25 Stellen alphanumerisch - bei urise immer "KU".
+        $currentline .= str_pad('KU', 25, " ", STR_PAD_LEFT) . '#';
         // Betrag - 14 Stellen alphanumerisch - Netto-Betrag.
         $renderedprice = (string) $record->price;
         $renderedprice = str_replace('.', ',', $renderedprice);
@@ -388,8 +388,8 @@ class sap_daily_sums {
         // Buchungsschlüssel - 2 Stellen alphanumerisch - 50 - bei Rechnungen, 40 - bei Gutschriften
         // Derzeit können nur Rechnungen geloggt werden, daher immer 50.
         $currentline .= '50#';
-        // Geschäftsfall-Code - 3 Stellen alphanumerisch - immer "US0".
-        $currentline .= 'US0#';
+        // Geschäftsfall-Code - 3 Stellen alphanumerisch - bei urise immer "KU0".
+        $currentline .= 'KU0#';
         // Zahlungscode - 3 Stellen alphanumerisch.
         if (!empty($record->paymentbrand)) {
             $currentline .= str_pad($record->paymentbrand, 3, " ", STR_PAD_LEFT) . '#';
@@ -401,7 +401,7 @@ class sap_daily_sums {
         if (!empty($record->lastname)) {
             $lastname = self::clean_string_for_sap($record->lastname);
         }
-        $buchungstext = " US $record->userid " . $lastname;
+        $buchungstext = " KU $record->userid " . $lastname;
         if (strlen($buchungstext) > 50) {
             $buchungstext = substr($buchungstext, 0, 50);
         }
