@@ -46,7 +46,7 @@ class sap_daily_sums {
         global $DB;
 
         $day = date('Y-m-d', $daytimestamp);
-        $filename = 'SAP_URISE_' . date('Ymd', $daytimestamp);
+        $filename = 'SAPKU_' . date('Ymd_His', $daytimestamp) . '.txt';
 
         $startofday = strtotime($day . ' 00:00');
         $endofday = strtotime($day . ' 24:00');
@@ -610,7 +610,7 @@ class sap_daily_sums {
         $itemid = 0;
         $filepath = '/';
         while ($starttimestamp <= $yesterday) {
-            $filename = 'SAP_URISE_' . date('Ymd', $starttimestamp);
+            $filename = 'SAPKU_' . date('Ymd_His', $starttimestamp) . '.txt';
             // Retrieve the file from the Files API.
             $file = $fs->get_file($contextid, $component, $filearea, $itemid, $filepath, $filename);
             if (!$file) {
@@ -637,7 +637,7 @@ class sap_daily_sums {
 
                 // If we have error content, we create an error file.
                 if (!empty($errorcontent)) {
-                    $errorfilename = 'SAP_URISE_' . date('Ymd', $starttimestamp) . '_errors';
+                    $errorfilename = 'SAPKU_' . date('Ymd_His', $starttimestamp) . '_errors.txt';
                     $errorfile = $fs->get_file($contextid, $component, $filearea, $itemid, $filepath, $errorfilename);
                     if (!$errorfile) {
                         $errorfileinfo = [
