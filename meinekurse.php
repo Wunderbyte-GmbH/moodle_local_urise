@@ -117,10 +117,12 @@ echo '<div class="background d-flex justify-content-center align-items-center">
                </div>
                </div>';
 
-// echo html_writer::div(get_string('coursesibooked', 'local_urise'), 'h2 mt-3 mb-2 text-center');
 echo format_text("[unifiedmybookingslist cards=1 sort=1 filter=1 filterontop=1 all=true]", FORMAT_HTML);
 
-if ($DB->record_exists('local_shopping_cart_history', ['userid' => $userid, 'paymentstatus' => 2])) {
+$sql = "SELECT id
+        FROM {local_shopping_cart_history}
+        WHERE userid=:userid AND paymentstatus > 0";
+if ($DB->record_exists_sql($sql, ['userid' => $userid])) {
      echo format_text("[shoppingcarthistory userid=$userid]", FORMAT_HTML);
 }
 
