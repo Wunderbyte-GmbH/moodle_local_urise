@@ -454,7 +454,13 @@ class sap_daily_sums {
      */
     private static function get_costcenter_by_identifier(int $identifier): string {
         global $DB;
-        // Kostenstelle.
+
+        // Get costcenter shortname from plugin config.
+        $costcentershortname = get_config('booking', 'cfcostcenter');
+        if (empty($costcentershortname) || $costcentershortname == "-1") {
+            return ''; // No costcenter field defined.
+        }
+
         $sqlkostenstelle = "SELECT s1.kst
         FROM {payments} p
         JOIN {local_shopping_cart_history} h
@@ -463,15 +469,21 @@ class sap_daily_sums {
             SELECT d.instanceid AS optionid, d.value AS kst
             FROM {customfield_field} f
             JOIN {customfield_category} c
-            ON c.id = f.categoryid AND c.component = 'mod_booking' AND f.shortname = 'kst'
+            ON c.id = f.categoryid AND c.component = 'mod_booking' AND f.shortname = :costcentershortname
             JOIN {customfield_data} d
             ON d.fieldid = f.id
         ) s1
         ON s1.optionid = h.itemid
         WHERE p.itemid = :identifier AND s1.kst <> '' AND s1.kst IS NOT NULL
         LIMIT 1";
-        $paramskostenstelle = ['identifier' => $identifier];
+
+        $paramskostenstelle = [
+            'identifier' => $identifier,
+            'costcentershortname' => $costcentershortname,
+        ];
+
         $kostenstelle = $DB->get_field_sql($sqlkostenstelle, $paramskostenstelle);
+
         return $kostenstelle;
     }
 
