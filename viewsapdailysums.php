@@ -74,7 +74,10 @@ foreach ($files as $file) {
         continue;
     }
     $filenamearr = explode('_', $filename);
-    $datepart = $filenamearr[2];
+    $datepart = $filenamearr[1]; // For SAPKU_20241218_140500 => this would be 20241218.
+    if (!is_number($datepart)) {
+        continue; // We do not show artifacts with legacy naming.
+    }
     $year = substr($datepart, 0, 4);
     $month = substr($datepart, 4, 2);
 
