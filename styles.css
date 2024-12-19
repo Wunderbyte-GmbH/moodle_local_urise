@@ -496,7 +496,7 @@ a.booking-card-image-link:hover {
 .wunderbyte-table-grid .list-group-item img {
     /* eslint-disable-next-line */
     border-radius: 7px 7px 0 0 !important;
-    height: 100%;
+    height: 220px;
     width: 100%;
     object-fit: cover;
 }
