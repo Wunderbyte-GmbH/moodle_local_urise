@@ -828,6 +828,7 @@ class shortcodes {
                 0 => 'wbt_suppress',
                 1 => get_string('german', 'local_urise'),
                 2 => get_string('english', 'local_urise'),
+                3 => get_string('germanenglish', 'local_urise'),
             ]);
             $table->add_filter($standardfilter);
         }

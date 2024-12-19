@@ -88,6 +88,7 @@ $string['customorderid'] = 'CustomOrderID';
 
 $string['format'] = "Format";
 $string['german'] = 'Deutsch';
+$string['germanenglish'] = 'Deutsch & Englisch';
 $string['english'] = 'Englisch';
 $string['onsite'] = 'Vor Ort';
 $string['hybrid'] = 'Hybrid';
