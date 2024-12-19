@@ -249,7 +249,7 @@ $string['vuenotificationtitleactionsuccess'] = 'Configuration was {$a}';
 $string['vuenotificationtextactionsuccess'] = 'Configuration was {$a} successfully.';
 $string['vuenotificationtitleactionfail'] = 'Configuration was not  {$a}';
 $string['vuenotificationtextactionfail'] = 'Something went wrong while saving. The changes have not been made.';
-$string['vuedashboardgotocategory'] = 'Go to category';
+$string['vuedashboardgotocategory'] = 'Go to landing page';
 $string['vuenotabsfounds'] = 'No tabs were found';
 
 // Access.

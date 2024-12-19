@@ -254,7 +254,7 @@ $string['vuenotificationtitleactionsuccess'] = 'Die Konfiguration wurde erfolgre
 $string['vuenotificationtextactionsuccess'] = 'Die Konfiguration wurde erfolgreich {$a}.';
 $string['vuenotificationtitleactionfail'] = 'Die Konfiguration wurde nicht erfolgreich {$a}';
 $string['vuenotificationtextactionfail'] = 'Beim Speichern ist ein Fehler aufgetreten. Die Änderungen wurden nicht vorgenommen.';
-$string['vuedashboardgotocategory'] = 'Zur Kategorie';
+$string['vuedashboardgotocategory'] = 'Zur Landingpage';
 $string['vuedashboardbookinginstances'] = 'Buchungsinstanzen';
 $string['vuenotabsfounds'] = 'Keine Tabs gefunden';
 
