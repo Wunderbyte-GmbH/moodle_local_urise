@@ -216,7 +216,7 @@ class shortcodes {
 
         $wherearray = ['bookingid' => $bookingids];
 
-        // Additional where condition for both card and list views
+        // Additional where condition for both card and list views.
         $additionalwhere = self::set_wherearray_from_arguments($args, $wherearray) ?? '';
 
         // Additional where has to be added here. We add the param later.
@@ -1227,9 +1227,9 @@ class shortcodes {
                             }
 
                         } else {
-                            $argument = strip_tags($argument);
+                            $argument = strip_tags($value);
                             $argument = trim($argument);
-                            $wherearray[$key] = $value;
+                            $wherearray[$key] = $argument;
                         }
 
                         break;
