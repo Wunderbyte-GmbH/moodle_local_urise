@@ -526,6 +526,7 @@ $string['organisationfilterdefinition'] = "Organisationsfilter";
 $string['organisationfilterdefinition_desc'] = "Der hierarchische Filter für die Organisationsstruktur muss hier eingefügt werden.";
 
 $string['bibliothekszielgruppe'] = 'Bibliothekszielgruppe';
+$string['studentmultipliers'] = 'Studentische Multiplikator*innen';
 $string['students'] = 'Studierende';
 $string['doctoralcandidates'] = 'Doktorand*innen';
 $string['lecturers'] = 'Uni-Lehrende';

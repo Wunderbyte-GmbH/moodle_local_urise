@@ -513,6 +513,7 @@ $string['organisationfilterdefinition'] = "Organisation filter";
 $string['organisationfilterdefinition_desc'] = "You need to add the filter of hierarchical organisation structure here.";
 
 $string['bibliothekszielgruppe'] = 'Library';
+$string['studentmultipliers'] = 'Student multipliers';
 $string['students'] = 'Students';
 $string['doctoralcandidates'] = 'Doctoral candidates';
 $string['lecturers'] = 'University lecturers';

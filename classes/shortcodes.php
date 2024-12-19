@@ -799,6 +799,7 @@ class shortcodes {
                 5 => get_string('fuehrungskraefte', 'local_urise'),
                 6 => get_string('studierende', 'local_urise'),
                 7 => get_string('interessierteoeffentlichkeit', 'local_urise'),
+                8 => get_string('studentmultipliers', 'local_urise'),
             ]);
             $table->add_filter($standardfilter);
         }
