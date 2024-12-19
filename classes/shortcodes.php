@@ -1227,9 +1227,7 @@ class shortcodes {
                             }
 
                         } else {
-                            $argument = strip_tags($value);
-                            $argument = trim($argument);
-                            $wherearray[$key] = $argument;
+                            $wherearray[$key] = strip_tags(trim($value));
                         }
 
                         break;
