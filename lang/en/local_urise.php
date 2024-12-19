@@ -107,7 +107,7 @@ $string['allcourses'] = 'All courses';
 $string['listofsports'] = 'Types of courses';
 $string['listofsports_desc'] = 'View and edit the list of courses on this system';
 
-$string['numberofcourses'] = 'Courses';
+$string['numberofcourses'] = 'Moodle Courses';
 $string['numberofcourses_desc'] = 'Information about courses and bookings on this platform.';
 
 $string['numberofentities'] = 'Number of entities';

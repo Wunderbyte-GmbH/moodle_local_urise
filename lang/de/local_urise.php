@@ -108,7 +108,7 @@ $string['allcourses'] = 'Alle Kurse';
 $string['listofsports'] = 'Kursarten';
 $string['listofsports_desc'] = 'Zeige und editiere die Liste der Kursarten auf diesem System.';
 
-$string['numberofcourses'] = 'Kurse';
+$string['numberofcourses'] = 'Moodle Kurse';
 $string['numberofcourses_desc'] = 'Informationen über die Kurse und Buchungen auf der Plattform.';
 
 $string['numberofentities'] = 'Anzahl der Organisations-Einheiten';
@@ -214,6 +214,7 @@ $string['dashboard_auswertung'] = 'Auswertung';
 
 
 // Vue strings.
+$string['vuedashboardbookinginstances'] = 'Buchungsinstanzen';
 $string['vuedashboardchecked'] = 'In "Angebot" sichtbar';
 $string['vuedashboardname'] = 'Name';
 $string['vuedashboardcoursecount'] = 'Anzahl der Moodle Kurse';
