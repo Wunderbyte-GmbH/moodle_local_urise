@@ -1055,16 +1055,18 @@ class shortcodes {
         $table->add_subcolumns('cardimage', ['image']);
         $table->set_tableclass('cardimageclass', 'imagecontainer');
         $table->add_subcolumns('cardheader', ['botags', 'action', 'bookings']);
-        $table->add_subcolumns('cardlist', ['showdates', 'kurssprache', 'format', 'kompetenzen', 'organisation', 'course']);
+        $table->add_subcolumns('cardlist', ['showdates', 'umfang', 'kurssprache', 'format', 'kompetenzen', 'organisation', 'course']);
         $table->add_subcolumns('cardfooter', ['price']);
 
         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-regular fa-message fa-fw text-primary mr-2'],
          ['kurssprache']);
+         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-clock-o text-primary fa-fw  showdatesicon mr-2'],
+         ['umfang']);
          $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-solid fa-computer fa-fw  text-primary mr-2'],
          ['format']);
          $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-solid fa-hashtag fa-fw  text-primary mr-2'],
          ['kompetenzen']);
-        $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-clock-o text-primary fa-fw  showdatesicon mr-2'], ['showdates']);
+        $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-calendar text-primary fa-fw  showdatesicon mr-2'], ['showdates']);
         $table->add_classes_to_subcolumns('cardlist', ['columnclass' => 'd-flex align-item-center'], ['showdates']);
         // $table->add_classes_to_subcolumns('cardfooter', ['columnclass' => 'mt-auto'], ['price']);
         $table->add_classes_to_subcolumns('cardheader', ['columnkeyclass' => 'd-none']);

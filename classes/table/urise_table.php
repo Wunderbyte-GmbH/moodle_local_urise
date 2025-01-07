@@ -337,6 +337,15 @@ class urise_table extends wunderbyte_table {
         return $url->out(false);
     }
 
+    public function col_umfang($values) {
+        $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
+
+        if (isset($settings->customfieldsfortemplates) && isset($settings->customfieldsfortemplates['umfang'])) {
+            $value = $settings->customfieldsfortemplates['umfang']['value'];
+            return format_string($value);
+        }
+    }
+
     public function col_more($values)  {
 
         $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid);
