@@ -71,6 +71,7 @@ $string['editdescription'] = 'Beschreibung bearbeiten';
 $string['editnews'] = 'Newselemente bearbeiten';
 $string['substitutionspool'] = 'Vertretungspool für {$a}';
 $string['editsubstitutionspool'] = 'Vertretungspool bearbeiten';
+$string['viewsapfiles'] = 'SAP-Buchungsdateien ansehen';
 $string['viewsubstitutionspool'] = 'Vertretungspool ansehen';
 $string['mailtosubstitutionspool'] = 'E-Mail an Vertretungspool senden';
 $string['substitutionspool:infotext'] = 'Trainer*innen, die <b>{$a}</b> vertreten dürfen:';

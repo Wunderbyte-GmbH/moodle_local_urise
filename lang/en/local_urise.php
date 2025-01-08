@@ -70,6 +70,7 @@ $string['editdescription'] = 'Edit description';
 $string['editnews'] = 'Edit newselements';
 $string['substitutionspool'] = 'Substitutions pool for {$a}';
 $string['editsubstitutionspool'] = 'Edit substitutions pool';
+$string['viewsapfiles'] = 'View SAP files';
 $string['viewsubstitutionspool'] = 'View substitutions pool';
 $string['mailtosubstitutionspool'] = 'Send email to substitutions pool';
 $string['substitutionspool:infotext'] = 'Teachers allowed to substitute <b>{$a}</b>:';

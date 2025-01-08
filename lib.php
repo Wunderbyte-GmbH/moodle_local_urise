@@ -100,6 +100,14 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
         $editnewslink = '';
     }
 
+    if (has_capability('local/shopping_cart:cashier', context_system::instance())) {
+        $viewsapfiles = '<a class="dropdown-item" href="'
+                . $CFG->wwwroot . '/local/urise/viewsapdailysums.php">'
+                . get_string('viewsapfiles', 'local_urise') . '</a>';
+    } else {
+        $viewsapfiles = '';
+    }
+
 
     $output = '<div class="popover-region nav-link icon-no-margin dropdown" data-id="urise-popover-region">
         <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -114,7 +122,8 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
                 . $CFG->wwwroot . '/local/entities/entities.php">'
                 . get_string('entities', 'local_urise') . '</a>'
             . $editteacherlink .
-            $editnewslink . '
+            $editnewslink
+            . $viewsapfiles . '
             <a class="dropdown-item" href="https://servicedesk.univie.ac.at/plugins/servlet/desk/portal/163/create/1918" target="_blank">'
                 . get_string('servicedesk', 'local_urise') . '</a>
         </div>
