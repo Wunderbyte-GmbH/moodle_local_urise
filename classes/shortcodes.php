@@ -841,8 +841,8 @@ class shortcodes {
                 2 => get_string('hybrid', 'local_urise'),
                 3 => get_string('blendedlearningonsite', 'local_urise'),
                 4 => get_string('blendedlearningonline', 'local_urise'),
-                5 => get_string('blendedlearningonline', 'local_urise'),
-                6 => get_string('onsite', 'local_urise'),
+                5 => get_string('blendedlearninghybrid', 'local_urise'),
+                6 => get_string('online', 'local_urise'),
                 7 => get_string('selfpaced', 'local_urise'),
             ]);
             $table->add_filter($standardfilter);

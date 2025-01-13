@@ -95,8 +95,8 @@ $string['onsite'] = 'Vor Ort';
 $string['hybrid'] = 'Hybrid';
 $string['blendedlearningonsite'] = 'Blended Learning mit Vor-Ort-Terminen';
 $string['blendedlearningonline'] = 'Blended Learning mit Online-Terminen';
-$string['blendedlearningonline'] = 'Blended Learning mit Hybrid-Terminen';
-$string['onsite'] = 'Online-Termin';
+$string['blendedlearninghybrid'] = 'Blended Learning mit Hybrid-Terminen';
+$string['online'] = 'Online-Termin';
 $string['selfpaced'] = 'Selbstlernkurs';
 
 // Errors.
