@@ -193,6 +193,24 @@ if ($hassiteconfig) {
             60,
             10
         ));
+
+        // Fetch all global roles.
+        $roles = role_fix_names(get_all_roles(context_system::instance()), context_system::instance(), ROLENAME_ORIGINAL);
+        $roleselect = [
+            0 => get_string('no'),
+        ];
+        foreach ($roles as $role) {
+            $roleselect[$role->id] = $role->localname;
+        }
+
+        // Add a dropdown setting to select a global role.
+        $settings->add(new admin_setting_configselect(
+            'local_urise/roleforselfregisteredusers',
+            get_string('roleforselfregisteredusers', 'local_urise'),
+            '',
+            0, // Default value (no role selected).
+            $roleselect
+        ));
         // CONTRACT MANAGEMENT.
         // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
         /* $settings->add(

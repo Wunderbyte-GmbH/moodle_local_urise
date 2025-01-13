@@ -52,4 +52,31 @@ class observer {
     public static function payment_successful() {
         cache_helper::purge_by_event('setbackcachedpaymenttable');
     }
+
+    /**
+     * Event handler for user creation.
+     *
+     * @param \core\event\user_created $event
+     * @return void
+     */
+    public static function user_created(\core\event\user_created $event) {
+        global $DB, $CFG;
+
+        require_once($CFG->libdir . '/accesslib.php');
+
+        $roleid = get_config('local_urise', 'roleforselfregisteredusers');
+        if (empty($roleid)) {
+            return;
+        }
+
+        // Get the user data from the event.
+        $userdata = $event->get_record_snapshot('user', $event->objectid);
+
+        // Check if the user was created via email self-registration.
+        if ($userdata->auth === 'email') {
+            // Assign the role to the user in the system context.
+            $context = \context_system::instance();
+            role_assign($roleid, $userdata->id, $context->id);
+        }
+    }
 }

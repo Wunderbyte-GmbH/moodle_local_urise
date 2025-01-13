@@ -48,3 +48,8 @@ foreach ($paymentplugins as $paymentplugin) {
         ];
     }
 }
+
+$observers[] = [
+    'eventname' => '\core\event\user_created',
+    'callback' => "\local_urise\observer::user_created",
+];

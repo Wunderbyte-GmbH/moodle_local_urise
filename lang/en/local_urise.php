@@ -606,3 +606,5 @@ $string['basiswissenbiblio'] = "Basiswissen Bibliothek";
 $string['literatursuche'] = "Literatursuche";
 $string['orgauethikwissenschaft'] = "Organisation und Ethik des wissenschaftlichen Arbeitens";
 $string['spezialwissenbiblio'] = "Spezialwissen Bibliothek";
+
+$string['roleforselfregisteredusers'] = "Role for self-registered users";
