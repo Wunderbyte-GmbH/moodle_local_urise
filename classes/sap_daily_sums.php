@@ -120,7 +120,6 @@ class sap_daily_sums {
         $datafordb = [];
         if ($records = $DB->get_records_sql($sql, $params)) {
             foreach ($records as $record) {
-
                 // If the SAP line has errors, we need to add it to a separate file.
                 $linehaserrors = false;
                 $errorinfo = null;
@@ -189,13 +188,42 @@ class sap_daily_sums {
         }
 
         // Daten aus manuellen Nachbuchungen hinzufügen.
-        self::add_sap_data_for_manual_rebookings($content, $errorcontent, $datafordb, $startofday, $endofday, $filename);
+        self::add_sap_data_for_ledger_records(
+            '7', // Manuelle Nachbuchungen.
+            $content,
+            $errorcontent,
+            $datafordb,
+            $startofday,
+            $endofday,
+            $filename
+        );
+
+        // Buchungsgutschriften hinzufügen.
+        self::add_sap_data_for_ledger_records(
+            '6', // Gutschrift bar.
+            $content,
+            $errorcontent,
+            $datafordb,
+            $startofday,
+            $endofday,
+            $filename
+        );
+        self::add_sap_data_for_ledger_records(
+            '8', // Gutschrift überwiesen.
+            $content,
+            $errorcontent,
+            $datafordb,
+            $startofday,
+            $endofday,
+            $filename
+        );
 
         return [$content, $errorcontent, $datafordb];
     }
 
     /**
      * Helper function to generate SAP line for record.
+     * @param string $paymenttype e.g. '6' for credit paid back by cash or '8' for credit paid back by transfer
      * @param string &$content reference to $content
      * @param string &$errorcontent reference to $errorcontent
      * @param array &$datafordb reference to $datafordb array
@@ -204,11 +232,21 @@ class sap_daily_sums {
      * @param string $filename the filename (without _errors suffix)
      * @return void
      */
-    private static function add_sap_data_for_manual_rebookings(&$content, &$errorcontent, &$datafordb,
-        int $startofday, int $endofday, string $filename): void {
+    private static function add_sap_data_for_ledger_records(
+        string $paymenttype,
+        &$content,
+        &$errorcontent,
+        &$datafordb,
+        int $startofday,
+        int $endofday,
+        string $filename
+    ): void {
         global $DB;
 
-        // 1. Get one record for each manual rebooking.
+        // Initialize.
+        $openorderid = 0;
+
+        // 1. Get one record for each row with the provided payment type.
         $sql = 'SELECT s1.*
                 FROM (
                     SELECT *, ROW_NUMBER() OVER (PARTITION BY identifier ORDER BY itemid DESC) AS n
@@ -217,42 +255,23 @@ class sap_daily_sums {
                 WHERE n = 1 -- Only one row per identifier.
                 AND paymentstatus = 2
                 AND timecreated BETWEEN :startofday AND :endofday AND ' .
-                $DB->sql_like('s1.payment', ':manualrebooking');
+                $DB->sql_like('s1.payment', ':paymenttype');
         $params = [
             'startofday' => $startofday,
             'endofday' => $endofday,
-            'manualrebooking' => '7',
+            'paymenttype' => $paymenttype,
         ];
         $records = $DB->get_records_sql($sql, $params);
 
-        // If we have no manual rebookings, we return.
+        // If there are no records for this payment type and date, we simply return.
         if (empty($records)) {
             return;
         }
 
         foreach ($records as $record) {
-
             // If the SAP line has errors, we need to add it to a separate file.
             $linehaserrors = false;
             $errorinfo = null;
-            $info = 'manuelle_nachbuchung';
-
-            unset($record->id); // We'll need the paymentid instead.
-            unset($record->price); // Get it from openorders table instead!
-
-            // Wenn die annotation einen identifier enthält, dann diesen verwenden!
-            $annotationarr = explode(' ', $record->annotation);
-            if (is_number($annotationarr[0])) {
-                $record->identifier = (int) $annotationarr[0];
-            }
-            $allowedpaymentbrands = ['VC', 'MC', 'EP', 'DC', 'AX'];
-            if (in_array(end($annotationarr), $allowedpaymentbrands)) {
-                $record->paymentbrand = end($annotationarr);
-            } else {
-                $record->paymentbrand = 'UK';
-                $linehaserrors = true;
-                $errorinfo = 'zahlungsart_ungueltig';
-            }
 
             // Nachname.
             $record->lastname = $DB->get_field('user', 'lastname', ['id' => $record->userid]);
@@ -262,40 +281,76 @@ class sap_daily_sums {
                 $linehaserrors = true;
                 $errorinfo = 'keine_kostenstelle';
             }
+
             // Wenn der Nachname fehlt, wird die Zeile zum Error-File hinzugefügt.
             if (empty($record->lastname)) {
                 $linehaserrors = true;
                 $errorinfo = 'kein_nachname';
             }
 
-            // Eintrag in 'paygw_payunity_openorders'-Tabelle vorhanden?
-            // Dann Preis von dort nehmen...
-            $dbman = $DB->get_manager();
-            $openorderid = 0;
-            // Currently only payunity is supported for openorderid here...
-            // ...as this is needed by USI Wien only by now.
-            if ($dbman->table_exists('paygw_payunity_openorders')) {
-                $openordersrecord = $DB->get_record('paygw_payunity_openorders', [
-                    'itemid' => $record->identifier,
-                ]);
-                if (!empty($openordersrecord)) {
-                    $openorderid = $openordersrecord->id;
-                    $record->price = $openordersrecord->price;
-                }
+            switch ($paymenttype) {
+                case '6':
+                    $info = 'gutschrift_bar';
+                    $record->price = $record->price * -1;
+                    $record->buchungsschluessel = '40';
+                    $record->paymentbrand = 'EP';
+                    break;
+                case '8':
+                    $info = 'gutschrift_ueberwiesen';
+                    $record->price = $record->price * -1;
+                    $record->buchungsschluessel = '40';
+                    $record->paymentbrand = 'EP';
+                    break;
+                case '7':
+                    $info = 'manuelle_nachbuchung';
+                    unset($record->id); // We'll need the paymentid instead.
+                    unset($record->price); // Get it from openorders table instead!
+                    // Wenn die annotation einen identifier enthält, dann diesen verwenden!
+                    $annotationarr = explode(' ', $record->annotation);
+                    if (is_number($annotationarr[0])) {
+                        $record->identifier = (int) $annotationarr[0];
+                    }
+                    $allowedpaymentbrands = ['VC', 'MC', 'EP', 'DC', 'AX'];
+                    if (in_array(end($annotationarr), $allowedpaymentbrands)) {
+                        $record->paymentbrand = end($annotationarr);
+                    } else {
+                        $record->paymentbrand = 'UK';
+                        $linehaserrors = true;
+                        $errorinfo = 'zahlungsart_ungueltig';
+                    }
+                    // Eintrag in 'paygw_payunity_openorders'-Tabelle vorhanden?
+                    // Dann Preis von dort nehmen...
+                    $dbman = $DB->get_manager();
+                    // Currently only payunity is supported for openorderid here...
+                    // ...as this is needed by USI Wien only by now.
+                    if ($dbman->table_exists('paygw_payunity_openorders')) {
+                        $openordersrecord = $DB->get_record('paygw_payunity_openorders', [
+                            'itemid' => $record->identifier,
+                        ]);
+                        if (!empty($openordersrecord)) {
+                            $openorderid = $openordersrecord->id;
+                            $record->price = $openordersrecord->price;
+                        }
+                    }
+                    if ($openorderid == 0) {
+                        // In this case we have to calculate the price from ledger.
+                        $record->price = $DB->get_field_sql(
+                            'SELECT SUM(price) AS price
+                            FROM {local_shopping_cart_ledger}
+                            WHERE identifier = :identifier
+                            AND ' . $DB->sql_like('payment', ':paymenttype'),
+                            [
+                                'identifier' => $record->identifier,
+                                'paymenttype' => '7',
+                            ]
+                        );
+                    }
+                    break;
+                default:
+                    // Unsupported payment type.
+                    return;
             }
-            if ($openorderid == 0) {
-                // In this case we have to calculate the price from ledger.
-                $record->price = $DB->get_field_sql(
-                    'SELECT SUM(price) AS price
-                    FROM {local_shopping_cart_ledger}
-                    WHERE identifier = :identifier
-                    AND ' . $DB->sql_like('payment', ':manualrebooking'),
-                    [
-                        'identifier' => $record->identifier,
-                        'manualrebooking' => '7',
-                    ]
-                );
-            }
+
             // Round price to full number.
             $record->price = (int) round($record->price);
 
@@ -351,15 +406,6 @@ class sap_daily_sums {
 
         $currentline = '';
 
-        /* Spezialfall für Payone / USI Wien: Bei Payone muss die Payone-spezifische
-        merchantref anstelle des Identifiers angezeigt werden! */
-        // Payone merchantref darf im SAP doch nicht verwendet werden, weil zu lange!
-        // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-        /*$dbman = $DB->get_manager();
-        if ($dbman->table_exists('paygw_payone_openorders')) {
-            $merchantref = $DB->get_field('paygw_payone_openorders', 'merchantref', ['itemid' => $record->identifier]);
-        }*/
-
         /*
         * Mandant - 3 Stellen alphanumerisch - immer "101"
         * Buchungskreis - 4 Stellen alphanumerisch - immer "VIE1"
@@ -388,9 +434,13 @@ class sap_daily_sums {
         /* Werbeabgabe - 14 Stellen alphanumerisch - kein bekannter Geschäftsfall im Moment,
         daher bleibt das Feld immer leer. */
         $currentline .= str_pad('', 14, " ") . '#';
-        // Buchungsschlüssel - 2 Stellen alphanumerisch - 50 - bei Rechnungen, 40 - bei Gutschriften
-        // Derzeit können nur Rechnungen geloggt werden, daher immer 50.
-        $currentline .= '50#';
+        // Buchungsschlüssel - 2 Stellen alphanumerisch - 50 - bei Rechnungen, 40 - bei Gutschriften.
+        if (!empty($record->buchungsschluessel)) {
+            $currentline .= $record->buchungsschluessel . '#';
+        } else {
+            // Normalfall.
+            $currentline .= '50#';
+        }
         // Geschäftsfall-Code - 3 Stellen alphanumerisch - bei urise immer "KU0".
         $currentline .= 'KU0#';
         // Zahlungscode - 3 Stellen alphanumerisch.
@@ -498,7 +548,7 @@ class sap_daily_sums {
 
         // At first replace special chars.
         $umlaute = [
-            "/ß/" ,
+            "/ß/",
             "/ä/", "/à/", "/á/", "/â/", "/æ/", "/ã/", "/å/", "/ā/",
             "/Ä/", "/À/", "/Á/", "/Â/", "/Æ/", "/Ã/", "/Å/", "/Ā/",
             "/é/", "/è/", "/ê/", "/ë/", "/ė/",
@@ -514,7 +564,7 @@ class sap_daily_sums {
         ];
 
         $replace = [
-            "ss" ,
+            "ss",
             "ae", "a", "a", "a", "ae", "a", "a", "a",
             "Ae", "A", "A", "A", "Ae", "A", "A", "A",
             "e", "e", "e", "e", "e",
@@ -625,7 +675,7 @@ class sap_daily_sums {
                         'filename' => $filename,
                 ];
 
-                list($content, $errorcontent, $datafordb) =
+                [$content, $errorcontent, $datafordb] =
                     self::generate_sap_text_file_for_date($starttimestamp);
 
                 foreach ($datafordb as $recordfordb) {
