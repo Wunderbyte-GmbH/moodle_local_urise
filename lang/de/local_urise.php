@@ -38,6 +38,7 @@ $string['urise:viewcourselistindashboard'] = 'Kann Kursliste im Dashboard sehen'
 $string['cachedef_cachedpaymenttable'] = 'Zahlungstransaktionen (Cache)';
 
 // Shortcodes.
+$string['sciencecommunicationprogramme'] = "Science Communication Programme";
 $string['shortcodelists'] = 'Shortcode-Listen';
 $string['shortcodelists_desc'] = 'Hier können Sie Listen konfigurieren, die durch Shortcodes (z.B. [allekurseliste]) generiert werden.';
 $string['shortcodelists_showdescriptions'] = 'Beschreibungen von Buchungsoptionen anzeigen';

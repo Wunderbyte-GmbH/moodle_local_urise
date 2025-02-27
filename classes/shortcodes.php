@@ -867,6 +867,7 @@ class shortcodes {
 
             $options = [
                 0 => 'wbt_suppress',
+                14 => get_string('sciencecommunicationprogramme', 'local_urise'),
                 1 => get_string('basicqualification', 'local_urise'),
                 2 => get_string('teachingcompetence', 'local_urise'),
                 3 => get_string('teachingconversations', 'local_urise'),
