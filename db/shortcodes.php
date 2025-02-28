@@ -62,9 +62,4 @@ $shortcodes = [
         'wraps' => false,
         'description' => 'shortcodes::calendarblock',
     ],
-    'userinfo' => [
-        'callback' => 'local_urise\shortcodes::userinformation',
-        'wraps' => false,
-        'description' => 'shortcodes::userinformation',
-    ],
 ];

@@ -65,19 +65,8 @@ class renderer extends plugin_renderer_base {
         return $o;
     }
 
-    /** Function to render the cards table
-     * @param any $data
-     * @param string $data
-     * @return string
-     */
-    public function render_userinformation($data) {
-        $o = '';
-        $data = $data->export_for_template($this);
-        $o .= $this->render_from_template('local_urise/userinformation', $data);
-        return $o;
-    }
-
-    /** Function to render the cards table
+    /**
+     * Function to render the cards table
      * @param any $data
      * @param string $data
      * @return string

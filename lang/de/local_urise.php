@@ -182,7 +182,6 @@ $string['shortcodessetinstancedesc'] = 'Wenn Du hier einen Wert setzt, kann der 
 Es ist also nicht mehr nötig, eine ID zu übergeben.';
 $string['shortcodesnobookinginstance'] = '<div class="text-danger font-weight-bold">Noch keine Buchungsinstanz erstellt!</div>';
 $string['shortcodesnobookinginstancedesc'] = 'Sie müssen mindestens eine Buchungsinstanz in einem Moodle-Kurs erstellen, bevor Sie hier eine auswählen können.';
-$string['shortcodes::userinformation'] = 'Zeige Informationen von NutzerInnen';
 $string['shortcodesarchivecmids'] = 'Liste von IDs für das "Meine Kurse"-Archiv';
 $string['shortcodesarchivecmids_desc'] = 'Geben Sie eine Komma-getrennte Liste von Kursmodul-IDs (cmids) der Semester-Instanzen (Buchungsinstanzen) an,
 die im "Meine Kurse"-Archiv aufscheinen sollen.';
@@ -354,9 +353,6 @@ $string['contractformula_desc'] = 'Hier können Sie eine JSON-Formel angeben, di
  auswirken und welche Sonderfälle es gibt.';
 $string['contractformulatest'] = 'Vertragsformel testen';
 $string['editcontractformula'] = 'Vertragsformel bearbeiten';
-
-// Userinformation.mustache.
-$string['userinfo'] = 'Benutzer-Information';
 
 // My Courses List.
 $string['tocoursecontent'] = 'Zum Moodle Kurs';

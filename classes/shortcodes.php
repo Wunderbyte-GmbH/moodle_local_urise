@@ -28,14 +28,10 @@ namespace local_urise;
 
 use Closure;
 use coding_exception;
-use context_system;
-use context_module;
 use dml_exception;
 use local_wunderbyte_table\filters\types\hierarchicalfilter;
 use local_wunderbyte_table\wunderbyte_table;
 use mod_booking\customfield\booking_handler;
-use mod_booking\output\page_allteachers;
-use local_urise\output\userinformation;
 use local_urise\table\urise_table;
 use local_urise\table\calendar_table;
 use local_shopping_cart\shopping_cart;
@@ -45,7 +41,6 @@ use local_wunderbyte_table\filters\types\standardfilter;
 use mod_booking\booking;
 use mod_booking\singleton_service;
 use moodle_url;
-use stdClass;
 
 /**
  * Deals with local_shortcodes regarding booking.
@@ -65,42 +60,6 @@ class shortcodes {
         $filter = json_decode($outputstring, true) ?? [];
 
         return $filter;
-    }
-
-    /**
-     * Prints out list of bookingoptions.
-     * Arguments can be 'category' or 'perpage'.
-     *
-     * @param string $shortcode
-     * @param array $args
-     * @param string|null $content
-     * @param object $env
-     * @param Closure $next
-     * @return string
-     */
-    public static function userinformation($shortcode, $args, $content, $env, $next) {
-
-        global $USER, $PAGE;
-
-        self::fix_args($args);
-
-        $userid = $args['userid'] ?? 0;
-        // If the id argument was not passed on, we have a fallback in the connfig.
-        $context = context_system::instance();
-        if (empty($userid) && has_capability('local/shopping_cart:cashier', $context)) {
-            $userid = shopping_cart::return_buy_for_userid();
-        } else if (!has_capability('local/shopping_cart:cashier', $context)) {
-            $userid = $USER->id;
-        }
-
-        if (!isset($args['fields'])) {
-
-            $args['fields'] = '';
-        }
-
-        $data = new userinformation($userid, $args['fields']);
-        $output = $PAGE->get_renderer('local_urise');
-        return $output->render_userinformation($data);
     }
 
      /**
@@ -534,7 +493,7 @@ class shortcodes {
 
         // This is the important part: We only filter for booking options where the current user is a teacher!
         // Also we only want to show courses for the currently set booking instance (semester instance).
-        list($fields, $from, $where, $params, $filter) =
+        [$fields, $from, $where, $params, $filter] =
             booking::get_all_options_of_teacher_sql($teacherid, (int)$booking->id);
 
         $table->set_filter_sql($fields, $from, $where, $filter, $params);
@@ -566,8 +525,7 @@ class shortcodes {
 
         // If we find "nolazy='1'", we return the table directly, without lazy loading.
         if (!empty($args['lazy'])) {
-
-            list($idstring, $encodedtable, $out) = $table->lazyouthtml($perpage, true);
+            [$idstring, $encodedtable, $out] = $table->lazyouthtml($perpage, true);
 
             return $out;
         }
@@ -666,8 +624,11 @@ class shortcodes {
         $user = $USER;
 
         $booked = $booking->get_user_booking_count($USER);
-        $asteacher = $DB->get_fieldset_select('booking_teachers', 'optionid',
-            "userid = {$USER->id} AND bookingid = $booking->id ");
+        $asteacher = $DB->get_fieldset_select(
+            'booking_teachers',
+            'optionid',
+            "userid = {$USER->id} AND bookingid = $booking->id "
+        );
         $credits = shopping_cart_credits::get_balance($USER->id);
 
         $data['booked'] = $booked;
@@ -676,7 +637,6 @@ class shortcodes {
 
         $output = $PAGE->get_renderer('local_urise');
         return $output->render_user_dashboard_overview($data);
-
     }
 
     /**
@@ -893,7 +853,6 @@ class shortcodes {
         }
 
         if (get_config('local_urise', 'uriseshortcodesshowfiltercoursetime')) {
-
             $datepicker = new datepicker(
                 'coursestarttime',
                 get_string('timefilter:coursetime', 'mod_booking'),
@@ -912,7 +871,6 @@ class shortcodes {
         }
 
         if (get_config('local_urise', 'uriseshortcodesshowfilterbookingtime')) {
-
             $datepicker = new datepicker(
                 'bookingopeningtime',
                 get_string('bookingopeningtime', 'mod_booking'),
@@ -1059,14 +1017,26 @@ class shortcodes {
         $table->add_subcolumns('cardlist', ['showdates', 'umfang', 'kurssprache', 'format', 'kompetenzen', 'organisation', 'course']);
         $table->add_subcolumns('cardfooter', ['price']);
 
-        $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-regular fa-message fa-fw text-primary mr-2'],
-         ['kurssprache']);
-         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-clock-o text-primary fa-fw  showdatesicon mr-2'],
-         ['umfang']);
-         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-solid fa-computer fa-fw  text-primary mr-2'],
-         ['format']);
-         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa-solid fa-hashtag fa-fw  text-primary mr-2'],
-         ['kompetenzen']);
+        $table->add_classes_to_subcolumns(
+            'cardlist',
+            ['columniclassbefore' => 'fa-regular fa-message fa-fw text-primary mr-2'],
+            ['kurssprache']
+        );
+         $table->add_classes_to_subcolumns(
+             'cardlist',
+             ['columniclassbefore' => 'fa fa-clock-o text-primary fa-fw  showdatesicon mr-2'],
+             ['umfang']
+         );
+         $table->add_classes_to_subcolumns(
+             'cardlist',
+             ['columniclassbefore' => 'fa-solid fa-computer fa-fw  text-primary mr-2'],
+             ['format']
+         );
+         $table->add_classes_to_subcolumns(
+             'cardlist',
+             ['columniclassbefore' => 'fa-solid fa-hashtag fa-fw  text-primary mr-2'],
+             ['kompetenzen']
+         );
         $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-calendar text-primary fa-fw  showdatesicon mr-2'], ['showdates']);
         $table->add_classes_to_subcolumns('cardlist', ['columnclass' => 'd-flex align-item-center'], ['showdates']);
         // $table->add_classes_to_subcolumns('cardfooter', ['columnclass' => 'mt-auto'], ['price']);
@@ -1125,7 +1095,7 @@ class shortcodes {
         // $table->add_subcolumns('top', ['botags', 'bookings' ]);
         $table->add_subcolumns('leftside', $subcolumnsleftside);
         $table->add_subcolumns('info', $subcolumnsinfo);
-        $table->add_subcolumns('footer', $subcolumnsfooter );
+        $table->add_subcolumns('footer', $subcolumnsfooter);
 
         $table->add_subcolumns('rightside', ['organisation', 'invisibleoption', 'course', 'price']);
         // $table->add_subcolumns('rightside', ['organisation', 'invisibleoption', 'price']);
@@ -1136,7 +1106,7 @@ class shortcodes {
         $table->add_classes_to_subcolumns('top', ['columnclass' => 'mr-auto text-uppercase'], ['botags']);
         // $table->add_classes_to_subcolumns('top', ['columnclass' => 'text-left col-md-8'], ['organisation']);
         // $table->add_classes_to_subcolumns('top', ['columnvalueclass' =>
-        //     'organisation-badge rounded-sm text-gray-800 mt-2'], ['organisation']);
+        // 'organisation-badge rounded-sm text-gray-800 mt-2'], ['organisation']);
         // $table->add_classes_to_subcolumns('top', ['columnclass' => 'text-right col-md-2 position-relative pr-0'], ['action']);
 
         $table->add_classes_to_subcolumns('leftside', ['columnkeyclass' => 'd-none']);
@@ -1157,20 +1127,31 @@ class shortcodes {
         $table->add_classes_to_subcolumns('info', ['columnalt' => get_string('locationalt', 'local_urise')], ['location']);
         $table->add_classes_to_subcolumns('cardimage', ['cardimagealt' => get_string('imagealt', 'local_urise')], ['image']);
 
-        $table->add_classes_to_subcolumns('rightside',
+        $table->add_classes_to_subcolumns(
+            'rightside',
             ['columnvalueclass' => 'text-right mb-auto align-self-end shortcodes_option_info_invisible '],
-            ['invisibleoption']);
+            ['invisibleoption']
+        );
         $table->add_classes_to_subcolumns('rightside', ['columnclass' =>
              'theme-text-color bold ml-auto'], ['price']);
-            //  $table->add_classes_to_subcolumns('rightside', ['columnvalueclass' =>
-            //  'bg-secondary orga mb-2'], ['organisation']);
+            // $table->add_classes_to_subcolumns('rightside', ['columnvalueclass' =>
+            // 'bg-secondary orga mb-2'], ['organisation']);
 
-        $table->add_classes_to_subcolumns('footer', ['columniclassbefore' => 'fa-regular fa-message text-primary'],
-         ['kurssprache']);
-         $table->add_classes_to_subcolumns('footer', ['columniclassbefore' => 'fa-solid fa-computer text-primary'],
-         ['format']);
-         $table->add_classes_to_subcolumns('footer', ['columniclassbefore' => 'fa-solid fa-hashtag text-primary'],
-         ['kompetenzen']);
+        $table->add_classes_to_subcolumns(
+            'footer',
+            ['columniclassbefore' => 'fa-regular fa-message text-primary'],
+            ['kurssprache']
+        );
+         $table->add_classes_to_subcolumns(
+             'footer',
+             ['columniclassbefore' => 'fa-solid fa-computer text-primary'],
+             ['format']
+         );
+         $table->add_classes_to_subcolumns(
+             'footer',
+             ['columniclassbefore' => 'fa-solid fa-hashtag text-primary'],
+             ['kompetenzen']
+         );
 
         $table->is_downloading('', 'List of booking options');
     }
@@ -1221,7 +1202,6 @@ class shortcodes {
                             }
 
                             foreach ($values as $vkey => $vvalue) {
-
                                 $additonalwhere .= $vkey > 0 ? ' OR ' : '';
                                 $vvalue = "'%$vvalue%'";
                                 $additonalwhere .= " $key LIKE $vvalue ";
@@ -1230,7 +1210,6 @@ class shortcodes {
                             if (!empty($values)) {
                                 $additonalwhere .= " ) ";
                             }
-
                         } else {
                             $wherearray[$key] = strip_tags(trim($value));
                         }
@@ -1454,6 +1433,5 @@ class shortcodes {
             '5' => get_string('pupilsandteachers', 'local_urise'),
             '6' => get_string('generalpublic', 'local_urise'),
         ];
-
     }
 }
