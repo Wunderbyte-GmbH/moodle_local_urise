@@ -522,7 +522,7 @@ $string['interessierteoeffentlichkeit'] = "Interessierte Öffentlichkeit";
 
 $string['doctoralschools'] = "Doctoral Schools";
 $string['personalwesenundfrauenfoerderung'] = "Personalwesen und Frauenförderung";
-$string['bibliotheksundarchivwesen'] = "Bibliotheks - und Archivwesen";
+$string['bibliotheksundarchivwesen'] = "Bibliotheks- und Archivwesen";
 $string['studienserviceundlehrwesen'] = "Studienservice und Lehrwesen";
 
 $string['organisationfilterdefinition'] = "Organisationsfilter";
