@@ -419,7 +419,7 @@ $string['orgacontact'] = "Contact for content-related inquiries";
 $string['aboutoffer'] = "About the offer";
 
 $string['zgcommunities'] = "Interesting for";
-$string['organisationfilter'] = "Hosted by";
+$string['organisationfilter'] = "Offered by";
 $string['filter'] = "Filter";
 $string['fromdate'] = "From ";
 
@@ -539,6 +539,7 @@ $string['networkinginderwissenschaft'] = 'Academic Networking';
 $string['interdisziplinaereforschung'] = 'Interdisciplinary research';
 $string['forschungsfoerderung'] = 'Research funding';
 $string['karriereentwicklungplanung'] = 'Career development & planning';
+$string['kommunikation'] = "Corporate Communications";
 $string['kommunikationkooperation'] = "Communication & Collaboration";
 $string['praesentation'] = 'Presentation skills';
 $string['gespraechsverhandlungsfuehrung'] = 'Conversation & negotiation skills';

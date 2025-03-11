@@ -552,6 +552,7 @@ $string['networkinginderwissenschaft'] = 'Networking in der Wissenschaft';
 $string['interdisziplinaereforschung'] = 'Interdisziplinäre Forschung';
 $string['forschungsfoerderung'] = 'Forschungsförderung';
 $string['karriereentwicklungplanung'] = 'Karriereentwicklung & -planung';
+$string['kommunikation'] = "Kommunikation";
 $string['kommunikationkooperation'] = "Kommunikation & Kooperation";
 $string['praesentation'] = 'Präsentation';
 $string['gespraechsverhandlungsfuehrung'] = 'Gesprächs- & Verhandlungsführung';
