@@ -154,15 +154,7 @@ class shortcodes {
             $args['filterontop'] = false;
         }
 
-        if (
-            !isset($args['perpage'])
-            || !is_int((int)$args['perpage'])
-            || !$perpage = ($args['perpage'])
-        ) {
-            $perpage = 100;
-        } else {
-            $infinitescrollpage = 0;
-        }
+        $perpage = \mod_booking\shortcodes::check_perpage($args);
 
         $table = self::inittableforcourses('unifiedview');
 
@@ -981,7 +973,20 @@ class shortcodes {
 
         /** @var urise_table $table */
         $table->set_display_options($args);
+        \mod_booking\shortcodes::set_common_table_options_from_arguments($table, $args);
+        self::set_common_table_options_from_arguments($table, $args);
+    }
 
+    /**
+     * Setting options from shortcodes arguments common for urise_table.
+     *
+     * @param urise_table $table reference to table
+     * @param array $args
+     *
+     * @return void
+     *
+     */
+    private static function set_common_table_options_from_arguments(&$table, $args) {
         if (!empty($args['filter'])) {
             self::define_filtercolumns($table, $args);
         }
@@ -1010,24 +1015,6 @@ class shortcodes {
             }
             $table->define_sortablecolumns($sortablecolumns);
         }
-
-        $defaultorder = SORT_ASC; // Default.
-        if (!empty($args['sortorder'])) {
-            if (strtolower($args['sortorder']) === "desc") {
-                $defaultorder = SORT_DESC;
-            }
-        }
-
-        if (!empty($args['sortby'])) {
-            $table->sortable(true, $args['sortby'], $defaultorder);
-        } else {
-            $table->sortable(true, 'text', $defaultorder);
-        }
-
-        if (isset($args['requirelogin']) && $args['requirelogin'] == "false") {
-            $table->requirelogin = false;
-        }
-
         if (!empty($args['showfilterbutton'])) {
             $table->showfilterbutton = true;
         } else {
