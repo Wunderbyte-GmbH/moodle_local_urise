@@ -254,7 +254,7 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
 
 
 .card.listcard {
-    min-height: 350px;
+    min-height: 100px;
     max-height: fit-content;
     border-radius: 2px;
     padding: 0;
@@ -265,7 +265,7 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
 }
 
 .row.optionrow {
-    min-height: 350px;
+    min-height: 100px;
     max-height: fit-content;
 }
 
@@ -289,12 +289,12 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     color: #0B131F
 }
 
-.customimg .img-fluid.list-img {
+.imageforlist .img-fluid.list-img {
     max-height: fit-content;
     width: 100%;
 }
 
-.customimg .img-fluid.list-img {
+.imageforlist .img-fluid.list-img {
     /* eslint-disable-next-line */
     border-radius: 0 !important;
 }
@@ -501,13 +501,13 @@ a.booking-card-image-link:hover {
     object-fit: cover;
 }
 
-.imagecontainer img,
+.imageforcard img,
 .uriseimage {
     /* eslint-disable-next-line */
     border-radius: 7px 7px 0 0 !important;
 }
 
-.wunderbyte-table-grid .imagecontainer {
+.wunderbyte-table-grid .imageforcard {
     height: 220px;
     width: 100%;
 }
@@ -644,7 +644,7 @@ a.booking-card-image-link:hover {
    grid-row-gap: 0px;
    }
 
-   .imagecontainer { grid-area: 1 / 1 / 1 / 4; }
+   .imageforcard { grid-area: 1 / 1 / 1 / 4; }
    .mod-booking-card-header { grid-area: 1 / 4 / 2 / 5; }
    .mod-booking-card-body   { grid-area: 3 / 1 / 4 / 6; }
    .mod-booking-card-infos { grid-area: 4 / 1 / 5 / 6; }

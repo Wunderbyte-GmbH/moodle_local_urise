@@ -83,7 +83,7 @@
      <div class="wunderbyte_table_container {{#showfilterontop}}showontop{{/showfilterontop}}">
           {{#showfilterontop}}
             <div class="filterheader blockmobile">
-          
+
            <div class="filtermobile">
            <button class="filtermobilebutton gradienthover lexa-b1" data-toggle="collapse" data-target="#collapseMobileFilter" type="button" aria-expanded="false" aria-controls="collapseMobileFilter">
                   <i class="fas fa-sliders-h mr-2"></i>
@@ -102,6 +102,7 @@
           </aside>
           {{/showfilterontop}}
           <div class="row w-100 d-flex justify-content-end mt-3 filtermobilewrap">
+               {{> local_wunderbyte_table/component_switchtemplates }}
                {{> local_wunderbyte_table/component_sort }}
           </div>
           <div class= "wunderbyteTableClass" id='a{{idstring}}'>

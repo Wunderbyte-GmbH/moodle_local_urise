@@ -153,9 +153,9 @@
     {{/cardbody}}
   </div>
   <div class="mod-booking-card-infos lexa-copy mt-2 px-2">
-    <div class="{{cardlistclass}}">
+    <div class="{{uriseinfolistclass}}">
       <ul class="infolist">
-      {{#cardlist}}
+      {{#uriseinfolist}}
         <li class="d-flex mb-3" {{#columnalt}}title="{{.}}"{{/columnalt}}>
         {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
               <span {{^value}} style="display:none" {{/value}}>
@@ -181,7 +181,7 @@
               </span>
         {{#columnclass}}</div>{{/columnclass}}
         </li>
-      {{/cardlist}}
+      {{/uriseinfolist}}
       </ul>
     </div>
   </div>

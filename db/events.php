@@ -53,3 +53,8 @@ $observers[] = [
     'eventname' => '\core\event\user_created',
     'callback' => "\local_urise\observer::user_created",
 ];
+
+$observers[] = [
+    'eventname' => '\local_wunderbyte_table\event\template_switched',
+    'callback' => "\local_urise\observer::template_switched",
+];

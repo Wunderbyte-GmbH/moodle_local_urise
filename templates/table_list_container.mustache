@@ -12,7 +12,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template local_urise/table
+    @template local_wunderbyte_table/table
     Template which defines a mooduell view page.
     Classes required for JS:
     * none
@@ -59,62 +59,61 @@
        ]
     }
 }}
-
-{{#norecords}}
-    <div class="norecordsfound">
-        <div class="alert alert-warning" role="alert">{{#str}} norecords, local_wunderbyte_table {{/str}}</div>
-    </div>
-{{/norecords}}
-{{^norecords}}
-     <div class="wunderbyte_table_container_{{idstring}} {{uniqueid}}{{!
-          }}{{#showfilterbutton}} wunderbyte_table_filter_on{{/showfilterbutton}}{{!
-          }}{{#filterdeactivated}} inactivefilter{{/filterdeactivated}}{{!
-          }}{{#nofilteratall}} nofilter{{/nofilteratall}} mt-2">
-                <div class="text-left">
+<div class="wunderbyte_table_container_{{idstring}} {{#showcomponentstoggle}}wunderbyte_table_filter_on{{/showcomponentstoggle}} urise-courses-container">
+      <div class="text-left">
           {{> local_wunderbyte_table/component_toggle }}
           {{> local_wunderbyte_table/component_reload }}
           {{> local_wunderbyte_table/component_edit }}
           {{> local_wunderbyte_table/component_print }}
      </div>
-               <div class="col-md-6 text-right align-self-end">
-                    {{> local_wunderbyte_table/component_spinner }}
-               </div>
-               <div class="background d-flex justify-content-center align-items-center">
-                    <div class="container mw-90 d-flex justify-content-center">
-                         <div class="row mb-2 w-100 d-flex justify-content-left flex-column">
-                              <h1 class="lexa-h1 text-center mb-4 text-light">
-                              {{#str}} searchheadertext, local_urise {{/str}}
-                              </h1>
-                              {{> local_urise/component_search }}
-                         </div>
+     <div class="ml-0 header">
+          {{#search}}
+           <div class="background d-flex justify-content-center align-items-center">
+               <div class="container mw-90 d-flex justify-content-center">
+                    <div class="row mb-2 w-100 d-flex justify-content-center flex-column">
+                         <h1 class="lexa-h1 text-center mb-4 text-light">
+                         {{#str}} searchheadertext, local_urise {{/str}}
+                         </h1>
+                         {{> local_urise/component_search }}
                     </div>
                </div>
-               <div class="wunderbyte_table_container {{uniqueid}} {{#showfilterontop}}showontop{{/showfilterontop}}">
-               {{#showfilterontop}}
-               <div class="filterheader">
-                    <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
-                         {{> local_wunderbyte_table/component_filter }}
-                         {{> local_wunderbyte_table/component_infinitescroll }}
-                    </aside>
-               </div>
-               {{/showfilterontop}}
-               {{^showfilterontop}}
-               <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
+          </div>
+          {{/search}}
+     </div>
+     <div class="wunderbyte_table_container {{#showfilterontop}}showontop{{/showfilterontop}}">
+          {{#showfilterontop}}
+            <div class="filterheader blockmobile">
+
+           <div class="filtermobile">
+           <button class="filtermobilebutton gradienthover lexa-b1" data-toggle="collapse" data-target="#collapseMobileFilter" type="button" aria-expanded="false" aria-controls="collapseMobileFilter">
+                  <i class="fas fa-sliders-h mr-2"></i>
+                    {{#str}} filter, local_urise {{/str}}
+               </button>
+          </div><div class="collapse showfilterdesktop" id="collapseMobileFilter">          <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
                     {{> local_wunderbyte_table/component_filter }}
                     {{> local_wunderbyte_table/component_infinitescroll }}
-               </aside>
-               {{/showfilterontop}}
-                            <div class="row w-100 d-flex justify-content-end mt-3 filtermobilewrap">
-                         {{> local_wunderbyte_table/component_sort }}
-               </div>
-               <div class= "wunderbyteTableClass {{uniqueid}}" id="a{{idstring}}">
-               {{> local_urise/table_list }}
-               </div>
+               </aside></div>
           </div>
-    </div>
-    {{#js}}
-        require(['local_wunderbyte_table/init'], function(init) {
-            init.init('{{idstring}}', '{{encodedtable}}');
-        });
-    {{/js}}
+          {{/showfilterontop}}
+          {{^showfilterontop}}
+          <aside class="wunderbyte_table_components{{^showcomponentstoggle}} inactive{{/showcomponentstoggle}}">
+               {{> local_wunderbyte_table/component_filter }}
+               {{> local_wunderbyte_table/component_infinitescroll }}
+          </aside>
+          {{/showfilterontop}}
+          <div class="row w-100 d-flex justify-content-end mt-3 filtermobilewrap">
+               {{> local_wunderbyte_table/component_switchtemplates }}
+               {{> local_wunderbyte_table/component_sort }}
+          </div>
+          <div class= "wunderbyteTableClass" id='a{{idstring}}'>
+               {{> local_urise/table_list }}
+          </div>
+     </div>
+</div>
+{{^norecords}}
+{{#js}}
+    require(['local_wunderbyte_table/init'], function(init) {
+    init.init('{{idstring}}', '{{encodedtable}}');
+    });
+{{/js}}
 {{/norecords}}

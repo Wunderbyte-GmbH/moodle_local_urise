@@ -26,12 +26,14 @@
 namespace local_urise;
 
 use cache_helper;
+use local_wunderbyte_table\event\template_switched;
+use local_wunderbyte_table\wunderbyte_table;
+use local_urise\shortcodes;
 
 /**
  * Event observer for local_urise.
  */
 class observer {
-
     /**
      * Observer for the payment_added event
      */
@@ -77,6 +79,47 @@ class observer {
             // Assign the role to the user in the system context.
             $context = \context_system::instance();
             role_assign($roleid, $userdata->id, $context->id);
+        }
+    }
+
+    /**
+     * React on template_switched which is triggered by template switcher.
+     *
+     * @param template_switched $event
+     */
+    public static function template_switched(template_switched $event) {
+        $data = $event->get_data();
+        $encodedtable = $data["other"]["tablecachehash"];
+        $template = $data["other"]["template"];
+        // We currently don't need the viewparam in urise, because we only support 2 templates currently.
+        // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
+        /* $viewparam = $data["other"]["viewparam"]; */
+        // Only apply this for Booking templates!
+        if (
+            !empty($encodedtable)
+            && in_array($template, [
+                'local_urise/table_card',
+                'local_urise/table_list',
+            ])
+        ) {
+            $table = wunderbyte_table::instantiate_from_tablecache_hash($encodedtable);
+            $columns = array_keys($table->columns);
+            unset($columns['id']);
+
+            // Not necessary in urise, we only need this if we support different viewparams for the same template.
+            // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
+            /* $table->unset_template_data(); */
+
+            switch ($template) {
+                case 'local_urise/table_list':
+                    shortcodes::generate_table_for_list($table);
+                    break;
+                case 'local_urise/table_card':
+                default:
+                    shortcodes::generate_table_for_cards($table);
+                    break;
+            }
+            $table->return_encoded_table(true);
         }
     }
 }
