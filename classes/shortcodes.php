@@ -75,25 +75,15 @@ class shortcodes {
       */
     public static function unifiedlist($shortcode, $args, $content, $env, $next) {
         [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, true);
-
         if (empty($table)) {
             return get_string('nobookinginstancesselected', 'local_urise');
         }
-
-        // If we find "nolazy='1'", we return the table directly, without lazy loading.
-        if (!empty($args['lazy'])) {
-            [$idstring, $encodedtable, $out] = $table->lazyouthtml($perpage, true);
-            return $out;
-        }
-
-        $out = $table->outhtml($perpage, true);
-
-        return $out;
+        return self::generate_output($args, $table, $perpage);
     }
 
 
     /**
-     * Prints out list of bookingoptions.
+     * Prints out cards of bookingoptions.
      * Arguments can be 'category' or 'perpage'.
      *
      * @param string $shortcode
@@ -109,21 +99,11 @@ class shortcodes {
         if (empty($table)) {
             return get_string('nobookinginstancesselected', 'local_urise');
         }
-
-        // If we find "nolazy='1'", we return the table directly, without lazy loading.
-        if (!empty($args['lazy'])) {
-            [$idstring, $encodedtable, $out] = $table->lazyouthtml($perpage, true);
-            return $out;
-        }
-
-        $out = $table->outhtml($perpage, true);
-
-        return $out;
+        return self::generate_output($args, $table, $perpage);
     }
 
     /**
-     * Prints out list of bookingoptions.
-     * Arguments can be 'category' or 'perpage'.
+     *Unifiedview for List and Cards.
      *
      * @param string $shortcode
      * @param array $args
@@ -131,7 +111,7 @@ class shortcodes {
      * @param object $env
      * @param Closure $next
      * @param string $rendertype
-     * @return array
+     * @return mixed
      */
     public static function unifiedview($shortcode, $args, $content, $env, $next, $renderascard = false) {
         global $PAGE;
@@ -220,11 +200,8 @@ class shortcodes {
 
         $table->use_pages = true;
 
-        if (!empty($args['countlabel']) && $args['countlabel'] == "false") {
-            $table->showcountlabel = false;
-        } else {
-            $table->showcountlabel = true;
-        }
+        $table->showcountlabel = (!empty($args['countlabel']) && $args['countlabel'] == "false") ? false : true;
+
 
         if ($showimage !== false) {
             $table->set_tableclass('cardimageclass', 'pr-0 pl-1');
@@ -293,6 +270,7 @@ class shortcodes {
         global $USER, $PAGE;
 
         $userid = optional_param('userid', $USER->id, PARAM_INT);
+        $perpage = \mod_booking\shortcodes::check_perpage($args);
 
         if ($userid != $USER->id) {
             shopping_cart::buy_for_user($userid);
@@ -319,14 +297,6 @@ class shortcodes {
 
         if (empty($args['filterontop'])) {
             $args['filterontop'] = false;
-        }
-
-        if (
-            !isset($args['perpage'])
-            || !is_int((int)$args['perpage'])
-            || !$perpage = ($args['perpage'])
-        ) {
-            $perpage = 100;
         } else {
             $infinitescrollpage = 0;
         }
@@ -337,11 +307,8 @@ class shortcodes {
             $table = self::inittableforcourses('unifiedmybookingslist');
         }
 
-        if (!empty($args['countlabel']) && $args['countlabel'] == "false") {
-            $table->showcountlabel = false;
-        } else {
-            $table->showcountlabel = true;
-        }
+        $table->showcountlabel = (!empty($args['countlabel']) && $args['countlabel'] == "false") ? false : true;
+
 
         if (empty($args['reload'])) {
             $args['reload'] = false;
@@ -448,15 +415,7 @@ class shortcodes {
 
         $table->define_cache('mod_booking', 'mybookingoptionstable');
 
-        // If we find "nolazy='1'", we return the table directly, without lazy loading.
-        if (!empty($args['lazy'])) {
-            [$idstring, $encodedtable, $out] = $table->lazyouthtml($perpage, true);
-            return $out;
-        }
-
-        $out = $table->outhtml($perpage, true);
-
-        return $out;
+        return self::generate_output($args, $table, $perpage);
     }
 
     /**
@@ -468,7 +427,7 @@ class shortcodes {
      * @param string|null $content
      * @param object $env
      * @param Closure $next
-     * @return void
+     * @return string
      */
     public static function mytaughtcourses($shortcode, $args, $content, $env, $next) {
 
@@ -479,6 +438,7 @@ class shortcodes {
         self::fix_args($args);
 
         $bookingids = explode(',', get_config('local_urise', 'multibookinginstances'));
+        $perpage = \mod_booking\shortcodes::check_perpage($args);
 
         $bookingids = array_filter($bookingids, fn($a) => !empty($a));
 
@@ -516,11 +476,6 @@ class shortcodes {
 
         $table = self::inittableforcourses('mytaughtcourses');
 
-        if (!empty($args['countlabel']) && $args['countlabel'] == "false") {
-            $table->showcountlabel = false;
-        } else {
-            $table->showcountlabel = true;
-        }
         $table->showreloadbutton = $args['reload'];
 
         $wherearray = ['bookingid' => $bookingids];
@@ -563,16 +518,7 @@ class shortcodes {
         $table->showfilterontop = $args['filterontop'];
         $table->showfilterbutton = false;
 
-        // If we find "nolazy='1'", we return the table directly, without lazy loading.
-        if (!empty($args['lazy'])) {
-            [$idstring, $encodedtable, $out] = $table->lazyouthtml($perpage, true);
-
-            return $out;
-        }
-
-        $out = $table->outhtml($perpage, true);
-
-        return $out;
+        return self::generate_output($args, $table, $perpage);
     }
 
     /**
@@ -642,7 +588,7 @@ class shortcodes {
      * @param string|null $content
      * @param object $env
      * @param Closure $next
-     * @return void
+     * @return string
      */
     public static function userdashboardcards($shortcode, $args, $content, $env, $next) {
         global $DB, $PAGE, $USER;
@@ -773,8 +719,8 @@ class shortcodes {
     /**
      * Define filtercolumns.
      *
-     * @param mixed $table
-     * @param mixed $args
+     * @param urise_table $table
+     * @param array $args
      *
      * @return void
      *
@@ -935,9 +881,9 @@ class shortcodes {
     /**
      * Get booking from shortcode arguments.
      *
-     * @param mixed $args
+     * @param array $args
      *
-     * @return [type]
+     * @return mixed
      *
      */
     private static function get_booking($args) {
@@ -962,16 +908,15 @@ class shortcodes {
     /**
      * Set table from shortcodes arguments.
      *
-     * @param mixed $table
-     * @param mixed $args
+     * @param urise_table$table
+     * @param array $args
      *
-     * @return [type]
+     * @return void
      *
      */
     private static function set_table_options_from_arguments(&$table, $args) {
         self::fix_args($args);
 
-        /** @var urise_table $table */
         $table->set_display_options($args);
         \mod_booking\shortcodes::set_common_table_options_from_arguments($table, $args);
         self::set_common_table_options_from_arguments($table, $args);
@@ -1025,7 +970,7 @@ class shortcodes {
     /**
      * Sets columns for calendar.
      *
-     * @return wunderbyte_table
+     * @return void
      *
      */
     private static function generate_table_for_calendar(&$table, $args) {
@@ -1038,7 +983,7 @@ class shortcodes {
      * Generate table for card design.
      * @param mixed $table
      * @param mixed $args
-     * @return [type]
+     * @return void
      */
     public static function generate_table_for_cards(&$table) {
         $table->define_cache('mod_booking', 'bookingoptionstable');
@@ -1061,6 +1006,28 @@ class shortcodes {
 
         self::add_urise_infolist($table);
 
+        $table->add_classes_to_subcolumns(
+            'cardlist',
+            ['columniclassbefore' => 'fa-regular fa-message fa-fw text-primary mr-2'],
+            ['kurssprache']
+        );
+        $table->add_classes_to_subcolumns(
+            'cardlist',
+            ['columniclassbefore' => 'fa fa-clock-o text-primary fa-fw  showdatesicon mr-2'],
+            ['umfang']
+        );
+        $table->add_classes_to_subcolumns(
+            'cardlist',
+            ['columniclassbefore' => 'fa-solid fa-computer fa-fw  text-primary mr-2'],
+            ['format']
+        );
+        $table->add_classes_to_subcolumns(
+            'cardlist',
+            ['columniclassbefore' => 'fa-solid fa-hashtag fa-fw  text-primary mr-2'],
+            ['kompetenzen']
+        );
+        $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-calendar text-primary fa-fw  showdatesicon mr-2'], ['showdates']);
+        $table->add_classes_to_subcolumns('cardlist', ['columnclass' => 'd-flex align-item-center'], ['showdates']);
         $table->add_classes_to_subcolumns('cardheader', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'mr-auto'], ['botags']);
         $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'ml-auto'], ['bookings']);
@@ -1070,6 +1037,7 @@ class shortcodes {
 
         $table->add_classes_to_subcolumns('cardbody', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('cardfooter', ['columnkeyclass' => 'd-none']);
+        $table->tabletemplate = 'local_urise/table_card';
     }
 
     /**
@@ -1109,30 +1077,15 @@ class shortcodes {
 
         $table->set_tableclass('cardimageclass', 'imageforlist');
 
-        // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-        /* $table->add_subcolumns('top', ['organisation', 'action']);*/
         $table->add_subcolumns('top', ['botags', 'action', 'bookings' ]);
-        // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-        /* phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-        $table->add_subcolumns('top', ['botags', 'bookings' ]);*/
         $table->add_subcolumns('leftside', $subcolumnsleftside);
         $table->add_subcolumns('info', $subcolumnsinfo);
         $table->add_subcolumns('footer', $subcolumnsfooter);
 
-        // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-        /* $table->add_subcolumns('rightside', ['organisation', 'invisibleoption', 'price']);*/
+        $table->add_subcolumns('rightside', ['organisation', 'invisibleoption', 'course', 'price']);
 
         $table->add_classes_to_subcolumns('top', ['columnkeyclass' => 'd-none']);
-        /* phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-        // $table->add_classes_to_subcolumns('top', ['columniclassbefore' => 'fa-solid fa-people-group'], ['bookings']);
-        // $table->add_classes_to_subcolumns('top',
-            ['columnclass' => 'border border-2 border-dark p-1 rounded d-flex align-items-center'], ['bookings']);*/
         $table->add_classes_to_subcolumns('top', ['columnclass' => 'mr-auto text-uppercase'], ['botags']);
-        // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-        /* $table->add_classes_to_subcolumns('top', ['columnclass' => 'text-left col-md-8'], ['organisation']);
-        // $table->add_classes_to_subcolumns('top', ['columnvalueclass' =>
-        // 'organisation-badge rounded-sm text-gray-800 mt-2'], ['organisation']);
-        // $table->add_classes_to_subcolumns('top', ['columnclass' => 'text-right col-md-2 position-relative pr-0'], ['action']);*/
 
         $table->add_classes_to_subcolumns('leftside', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-1 title'], ['text']);
@@ -1178,7 +1131,7 @@ class shortcodes {
              ['columniclassbefore' => 'fa-solid fa-hashtag text-primary'],
              ['kompetenzen']
          );
-
+        $table->tabletemplate = 'local_urise/table_list';
         $table->is_downloading('', 'List of booking options');
     }
 
@@ -1234,7 +1187,7 @@ class shortcodes {
     }
 
     /**
-     * Modify there wherearray via arguments.
+     * Modify the wherearray via arguments.
      *
      * @param array $args
      *
@@ -1278,7 +1231,6 @@ class shortcodes {
                         } else {
                             $wherearray[$key] = strip_tags(trim($value));
                         }
-
                         break;
                     }
                 }
@@ -1498,5 +1450,23 @@ class shortcodes {
             '5' => get_string('pupilsandteachers', 'local_urise'),
             '6' => get_string('generalpublic', 'local_urise'),
         ];
+    }
+
+    /**
+     * Helperfunction to generate output
+     *
+     * @param mixed $args
+     * @param urise_table $table
+     * @param int $perpage
+     *
+     * @return string
+     *
+     */
+    private static function generate_output($args, $table, $perpage) {
+        if (!empty($args['lazy'])) {
+            [$idstring, $encodedtable, $out] = $table->lazyouthtml($perpage, true);
+            return $out;
+        }
+        return $table->outhtml($perpage, true);
     }
 }
