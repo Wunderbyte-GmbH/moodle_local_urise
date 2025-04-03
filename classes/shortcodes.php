@@ -103,7 +103,7 @@ class shortcodes {
     }
 
     /**
-     *Unifiedview for List and Cards.
+     * Unifiedview for List and Cards.
      *
      * @param string $shortcode
      * @param array $args
@@ -133,8 +133,15 @@ class shortcodes {
         if (empty($args['filterontop'])) {
             $args['filterontop'] = false;
         }
-
-        $perpage = \mod_booking\shortcodes::check_perpage($args);
+        if (
+            !isset($args['perpage'])
+            || !is_int((int)$args['perpage'])
+            || !$perpage = ($args['perpage'])
+        ) {
+            $perpage = 100;
+        } else {
+            $infinitescrollpage = 0;
+        }
 
         $table = self::inittableforcourses('unifiedview');
 
@@ -188,13 +195,9 @@ class shortcodes {
 
         if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
             $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
-            [$fields, $from, $where, $params, $filter] =
-                booking::get_options_filter_sql(0, 0, '', null, $context, [], $wherearray, null, [], $additionalwhere);
-        } else {
-            [$fields, $from, $where, $params, $filter] =
-                booking::get_options_filter_sql(0, 0, '', null, $context, [], $wherearray, null, [], $additionalwhere);
         }
 
+        [$fields, $from, $where, $params, $filter] = self::get_sql_params($context, $wherearray, $additionalwhere);
         $params['timenow'] = strtotime('today 00:00');
         $table->set_filter_sql($fields, $from, $where, $filter, $params);
 
@@ -271,6 +274,11 @@ class shortcodes {
 
         $userid = optional_param('userid', $USER->id, PARAM_INT);
         $perpage = \mod_booking\shortcodes::check_perpage($args);
+        $bookingparams = [MOD_BOOKING_STATUSPARAM_BOOKED,
+        MOD_BOOKING_STATUSPARAM_RESERVED,
+        MOD_BOOKING_STATUSPARAM_WAITINGLIST,
+        MOD_BOOKING_STATUSPARAM_NOTIFYMELIST,
+        MOD_BOOKING_STATUSPARAM_DELETED];
 
         if ($userid != $USER->id) {
             shopping_cart::buy_for_user($userid);
@@ -336,47 +344,9 @@ class shortcodes {
         // If we want to find only the teacher relevant options, we chose different sql.
         if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
             $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
-            [$fields, $from, $where, $params, $filter] =
-                booking::get_options_filter_sql(
-                    0,
-                    0,
-                    '',
-                    null,
-                    null,
-                    [],
-                    $wherearray,
-                    $userid,
-                    [
-                        MOD_BOOKING_STATUSPARAM_BOOKED,
-                        MOD_BOOKING_STATUSPARAM_RESERVED,
-                        MOD_BOOKING_STATUSPARAM_WAITINGLIST,
-                        MOD_BOOKING_STATUSPARAM_NOTIFYMELIST,
-                        MOD_BOOKING_STATUSPARAM_DELETED,
-                    ],
-                    $additionalwhere
-                );
-        } else {
-            [$fields, $from, $where, $params, $filter] =
-                booking::get_options_filter_sql(
-                    0,
-                    0,
-                    '',
-                    null,
-                    null,
-                    [],
-                    $wherearray,
-                    $userid,
-                    [
-                        MOD_BOOKING_STATUSPARAM_BOOKED,
-                        MOD_BOOKING_STATUSPARAM_RESERVED,
-                        MOD_BOOKING_STATUSPARAM_WAITINGLIST,
-                        MOD_BOOKING_STATUSPARAM_NOTIFYMELIST,
-                        MOD_BOOKING_STATUSPARAM_DELETED,
-                    ],
-                    $additionalwhere
-                );
         }
-
+        [$fields, $from, $where, $params, $filter] =
+            self::get_sql_params(null, $wherearray, $additionalwhere, $bookingparams, $userid);
         $params['timenow'] = strtotime('today 00:00');
         $table->set_filter_sql($fields, $from, $where, $filter, $params);
 
@@ -491,7 +461,7 @@ class shortcodes {
         // This is the important part: We only filter for booking options where the current user is a teacher!
         // Also we only want to show courses for the currently set booking instance (semester instance).
         [$fields, $from, $where, $params, $filter] =
-            booking::get_all_options_of_teacher_sql($teacherid, (int)$booking->id);
+            booking::get_all_options_of_teacher_sql($teacherid, (int)$bookingids);
 
         $table->set_filter_sql($fields, $from, $where, $filter, $params);
 
@@ -1468,5 +1438,34 @@ class shortcodes {
             return $out;
         }
         return $table->outhtml($perpage, true);
+    }
+
+    /**
+     * [Description for get_sql_params]
+     *
+     * @param mixed $context
+     * @param mixed $wherearray
+     * @param string $additionalwhere
+     * @param array $bookingparams
+     * @param int $userid
+     *
+     * @return [type]
+     *
+     */
+    private static function get_sql_params($context, $wherearray, $additionalwhere, $bookingparams = [], $userid = null) {
+        return  [$fields, $from, $where, $params, $filter] =
+                booking::get_options_filter_sql(
+                    0,
+                    0,
+                    '',
+                    null,
+                    $context,
+                    [],
+                    $wherearray,
+                    $userid,
+                    $bookingparams,
+                    $additionalwhere
+                );
+
     }
 }
