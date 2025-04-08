@@ -462,10 +462,10 @@ class urise_table extends wunderbyte_table {
 
     /**
      * This function is called for each data row to allow processing of the
-     * sports value.
+     * kompetenzen value.
      *
      * @param object $values Contains object with all the values of record.
-     * @return string $sports Returns rendered sport.
+     * @return string Returns rendered kompetenzen.
      * @throws coding_exception
      */
     public function col_kompetenzen($values) {
@@ -474,7 +474,6 @@ class urise_table extends wunderbyte_table {
 
         if (isset($settings->customfields) && isset($settings->customfields['kompetenzen'])) {
             if (is_array($settings->customfields['kompetenzen'])) {
-
                 $returnorgas = [];
                 foreach ($settings->customfields['kompetenzen'] as $orgaid) {
                     $organisations = shortcodes::get_kompetenzen();
@@ -485,7 +484,6 @@ class urise_table extends wunderbyte_table {
                             $organisations[$orgaid]['localizedname'],
                             ['class' => 'bg-secondary pl-1 pr-1 mr-1 rounded category']
                         );
-
                     }
                 }
 
@@ -501,11 +499,8 @@ class urise_table extends wunderbyte_table {
 
         // The error message should only be shown to admins.
         if (has_capability('moodle/site:config', $context)) {
-
-            $message = get_string('youneedcustomfieldsport', 'local_urise');
-
+            $message = get_string('youneedcustomfieldkompetenzen', 'local_urise');
             $message = "<div class='alert alert-danger'>$message</div>";
-
             return $message;
         }
 

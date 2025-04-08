@@ -164,8 +164,7 @@ $string['createbotag:helptext'] = '<p>
 </div>
 </div>';
 
-// Edit sports.
-$string['youneedcustomfieldsport'] = 'The customfield with the shortname "organisation" is not set for this booking option.';
+$string['youneedcustomfieldkompetenzen'] = 'The Booking option customfield "Kompetenzen (Shortname: kompetenzen)" is missing or no value for this field is set.';
 
 // Shortcodes.
 $string['shortcodeslistofbookingoptions'] = 'List of booking options';

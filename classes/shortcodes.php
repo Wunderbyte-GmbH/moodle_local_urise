@@ -1055,6 +1055,10 @@ class shortcodes {
         $table->define_cache('mod_booking', 'bookingoptionstable');
 
         $table->tabletemplate = 'local_urise/table_card';
+
+        // We also need to set the user preference for the template.
+        set_user_preference('wbtable_chosen_template_' . $table->uniqueid, 'local_urise/table_card');
+
         $table->add_subcolumns('ariasection', ['puretext']);
 
         // We define it here so we can pass it with the mustache template.
@@ -1103,6 +1107,9 @@ class shortcodes {
         // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
         /* $table->infinitescroll = $infinitescrollpage; // We don't want this currently. */
         $table->tabletemplate = 'local_urise/table_list';
+
+        // We also need to set the user preference for the template.
+        set_user_preference('wbtable_chosen_template_' . $table->uniqueid, 'local_urise/table_list');
 
         $table->define_cache('mod_booking', 'bookingoptionstable');
 

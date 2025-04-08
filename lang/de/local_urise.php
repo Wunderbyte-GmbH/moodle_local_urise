@@ -166,8 +166,7 @@ $string['createbotag:helptext'] = '<p>
 </div>
 </div>';
 
-// Edit sports.
-$string['youneedcustomfieldsport'] = 'Diese Veranstaltung ist keiner Organisation zugeordnet';
+$string['youneedcustomfieldkompetenzen'] = 'Das benutzerdefinierte Buchungsoptionsfeld "Kompetenzen (Shortname: kompetenzen)" ist nicht angelegt oder enthält keinen Wert.';
 
 // Shortcodes.
 $string['shortcodeslistofbookingoptions'] = 'Liste der buchbaren Kurse';
