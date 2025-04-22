@@ -889,6 +889,8 @@ class shortcodes {
                 11 => get_string('literatursuche', 'local_urise'),
                 12 => get_string('orgauethikwissenschaft', 'local_urise'),
                 13 => get_string('spezialwissenbiblio', 'local_urise'),
+                14 => get_string('sciencecommunicationprogramme', 'local_urise'),
+                15 => get_string('kompakttrainingfuehrungs', 'local_urise'),
             ];
 
             $standardfilter->add_options($options);
