@@ -783,7 +783,6 @@ class shortcodes {
 
             $options = [
                 0 => 'wbt_suppress',
-                14 => get_string('sciencecommunicationprogramme', 'local_urise'),
                 1 => get_string('basicqualification', 'local_urise'),
                 2 => get_string('teachingcompetence', 'local_urise'),
                 3 => get_string('teachingconversations', 'local_urise'),
@@ -996,7 +995,11 @@ class shortcodes {
             ['columniclassbefore' => 'fa-solid fa-hashtag fa-fw  text-primary mr-2'],
             ['kompetenzen']
         );
-        $table->add_classes_to_subcolumns('cardlist', ['columniclassbefore' => 'fa fa-calendar text-primary fa-fw  showdatesicon mr-2'], ['showdates']);
+        $table->add_classes_to_subcolumns(
+            'cardlist',
+            ['columniclassbefore' => 'fa fa-calendar text-primary fa-fw  showdatesicon mr-2'],
+            ['showdates']
+        );
         $table->add_classes_to_subcolumns('cardlist', ['columnclass' => 'd-flex align-item-center'], ['showdates']);
         $table->add_classes_to_subcolumns('cardheader', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'mr-auto'], ['botags']);
@@ -1466,6 +1469,5 @@ class shortcodes {
                     $bookingparams,
                     $additionalwhere
                 );
-
     }
 }
