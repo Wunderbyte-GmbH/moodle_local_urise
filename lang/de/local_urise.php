@@ -505,6 +505,7 @@ $string['lpallgemeinesuniversitaetspersonal'] = "LP Allgemeines Universitätsper
 $string['lpstudierende'] = "LP Studierende";
 $string['lpexterne'] = "LP Externe";
 $string['lpbibliothek'] = "LP Bibliothek";
+$string['teachinglibrary'] = "Teaching Library";
 
 $string['phdstudents'] = "PhD Students";
 $string['postdoc'] = "PostDocs";
