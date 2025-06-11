@@ -50,7 +50,10 @@ if ($hassiteconfig) {
             FROM {course_modules} cm
             LEFT JOIN {booking} b
             ON b.id = cm.instance
-            WHERE cm.module IN (
+            WHERE cm.visible = 1
+            AND cm.deletioninprogress <> 1
+            AND b.id IS NOT NULL
+            AND cm.module IN (
                 SELECT id
                 FROM {modules} m
                 WHERE m.name = 'booking'
