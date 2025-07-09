@@ -95,7 +95,6 @@ class shortcodes {
      */
     public static function unifiedcards($shortcode, $args, $content, $env, $next) {
         [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, true);
-
         if (empty($table)) {
             return get_string('nobookinginstancesselected', 'local_urise');
         }
@@ -1168,7 +1167,6 @@ class shortcodes {
      *
      */
     private static function set_wherearray_from_arguments(array &$args, &$wherearray) {
-
         global $DB;
 
         $customfields = booking_handler::get_customfields();
@@ -1209,7 +1207,6 @@ class shortcodes {
                 }
             }
         }
-
         return $additonalwhere;
     }
 
