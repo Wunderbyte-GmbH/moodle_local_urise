@@ -59,15 +59,14 @@
        ]
     }
 }}
-
 <div class="card listcard sk-fade mb-4 shadowcustom flex-md-row align-items-center row gx-0" {{#datafields}} data-{{key}}="{{value}}" {{/datafields}}>
   <div class="content w-100">
-    <div class="row optionrow foroptionid-{{#optionid}}{{#value}}{{.}}{{/value}}{{/optionid}}">
+    <div class="optionrow d-flex foroptionid-{{#optionid}}{{#value}}{{.}}{{/value}}{{/optionid}} h-100">
       {{#cardimage}}
-      <div class="{{cardimageclass}} col-md-3 p0">
+      <div class="col-md-4 p0 imageforlist">
       {{#cardimage}}
       {{#value}}
-        <img class="img-fluid list-img" src="{{{value}}}">
+        <img class="  " src="{{{value}}}">
       {{/value}}
       {{^value}}
         <div class="placeholderimage">
@@ -81,11 +80,12 @@
       {{/value}}
       {{/cardimage}}
       </div>
-      <div class="col-md-9">
+      <div class="col-md-8">
       {{/cardimage}}
       <div class="urise-listrow-content-container mx-auto w-100 h-100 d-flex flex-column">
-        <div class="urise-list-maincontent row">
-          <div class="urise-list-mainarea col-md-8 d-flex flex-column p-0 mt-1 pr-3">
+        <div class="urise-list-maincontent row h-100">
+          <div class="urise-list-mainarea col-md-8 d-flex flex-column p-0 mt-1 mb-3 pr-3 justify-content-between">
+              <div class="urise-list-mainarea-top">
               {{#leftside}}
                 {{#columnclass}}<div class="{{.}} {{key}}">{{/columnclass}}
                   <span {{^value}} style="display:none" {{/value}}>
@@ -112,38 +112,12 @@
                   </span>
                 {{#columnclass}}</div>{{/columnclass}}
               {{/leftside}}
-              <div class="">
-                  <ul class="nav mb-2 mt-2 d-flex align-items-center">
+              </div>
+                 <div class="">
+                <div class="d-flex mb-2 mt-2 pb-2 flex-column">
                   {{#info}}
                     <span {{^value}} style="display:none" {{/value}}>
-                      <li class="nav-item pr-3 {{#columnclass}}{{.}} {{key}}{{/columnclass}}">
-                        <div class="d-flex align-items-center" {{#columnalt}}title="{{.}}"{{/columnalt}}>
-                          <div class=" {{#columnclassinner}}{{.}}{{/columnclassinner}} mr-2 d-flex text-dark font-size-m icon-uxs align-middle">
-                            {{#columniclassbefore}}
-                                <i class="{{.}}  mt-auto mb-auto mr-1 fa-fw" aria-hidden="true" aria-label="
-                                  {{^keystring}}
-                                    {{{key}}}
-                                {{/keystring}}
-                                    {{#keystring}}
-                                        {{.}}
-                                    {{/keystring}}"></i>
-                            {{/columniclassbefore}}
-                            {{{value}}}
-                            {{#columniclassafter}}
-                                <i class="value {{.}}" aria-hidden="true"></i>
-                            {{/columniclassafter}}
-                          </div>
-                        </div>
-                      </li>
-                    </span>
-                  {{/info}}
-                  </ul>
-              </div>
-              <div class="">
-                <ul class="nav mb-2 mt-2">
-                  {{#footer}}
-                    <span {{^value}} style="display:none" {{/value}}>
-                      <li class="nav-item pr-3">
+                      <div class="pr-3">
                         <div class="d-flex align-items-center" {{#columnalt}}title="{{.}}"{{/columnalt}}>
                           <div class="mr-2 d-flex text-dark font-size-m icon-uxs align-middle">
                             {{#columniclassbefore}}
@@ -161,15 +135,69 @@
                             {{/columniclassafter}}
                           </div>
                         </div>
-                      </li>
+                      </div>
                     </span>
-                  {{/footer}}
-                </ul>
+                  {{/info}}
+                </div>
+              </div>      
+              <div class="">
+                <div class="d-flex mb-2 mt-2 pb-2 flex-column">
+                  <div class="d-flex mb-2 align-items-center">
+                    {{#uriseinfolist}}
+                      <span {{^value}} style="display:none" {{/value}}>
+                        <div class="pr-3">
+                          <div class="d-flex align-items-center {{key}}" {{#columnalt}}title="{{.}}"{{/columnalt}}>
+                            <div class="mr-2 d-flex text-dark font-size-m icon-uxs align-middle align-items-center">
+                              {{#columniclassbefore}}
+                                  <i class="{{#.}}{{.}}{{/.}}mt-auto mr-1 fa-fw" aria-hidden="true" aria-label="
+                                    {{^keystring}}
+                                      {{{key}}}
+                                  {{/keystring}}
+                                      {{#keystring}}
+                                          {{.}}
+                                      {{/keystring}}"></i>
+                              {{/columniclassbefore}}
+                              {{{value}}}
+                              {{#columniclassafter}}
+                                  <i class="value {{.}}" aria-hidden="true"></i>
+                              {{/columniclassafter}}
+                            </div>
+                          </div>
+                        </div>
+                      </span>
+                    {{/uriseinfolist}}
+                  </div>
+                  <div>
+                    {{#footer}}
+                      <span {{^value}} style="display:none" {{/value}}>
+                        <div class="pr-3">
+                          <div class="d-flex align-items-center" {{#columnalt}}title="{{.}}"{{/columnalt}}>
+                            <div class="mr-2 d-flex text-dark font-size-m icon-uxs align-middle">
+                              {{#columniclassbefore}}
+                                  <i class="{{.}}  mt-auto mb-auto mr-1 fa-fw" aria-hidden="true" aria-label="
+                                    {{^keystring}}
+                                      {{{key}}}
+                                  {{/keystring}}
+                                      {{#keystring}}
+                                          {{.}}
+                                      {{/keystring}}"></i>
+                              {{/columniclassbefore}}
+                              {{{value}}}
+                              {{#columniclassafter}}
+                                  <i class="value {{.}}" aria-hidden="true"></i>
+                              {{/columniclassafter}}
+                            </div>
+                          </div>
+                        </div>
+                      </span>
+                    {{/footer}}
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="urise-list-rightarea col-md-4 row mt-auto mr-0 ml-0 mb-3">
-              <div class="urise-list-availableplaces row w-100">
-                <div class="col-md-12 toprow d-flex">
+            <div class="urise-list-rightarea col-md-4 d-flex flex-column mr-0 ml-0 mb-3 justify-content-between">
+              <div class="urise-list-availableplaces w-100">
+                <div class="toprow d-flex">
                     {{#top}}
                       {{#columnclass}}
                       <div class="{{.}} {{key}}">
@@ -204,11 +232,11 @@
                     {{/top}}
                 </div>
               </div>
-              <div class="urise-list-infos col-md-12 row lexa-copy mt-2 px-2">
+              <div class="urise-list-infos lexa-copy mt-2 px-2">
                 <div class="{{uriseinfolistclass}}">
-                  <ul class="infolist">
-                  {{#uriseinfolist}}
-                    <li class="d-flex mb-3" {{#columnalt}}title="{{.}}"{{/columnalt}}>
+                  <div class="infolist float-right">
+                  {{#rightside}}
+                    <div class="d-flex mb-3" {{#columnalt}}title="{{.}}"{{/columnalt}}>
                     {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
                           <span {{^value}} style="display:none" {{/value}}>
                           {{#columniclassbefore}}
@@ -232,9 +260,9 @@
                           {{/columniclassafter}}
                           </span>
                     {{#columnclass}}</div>{{/columnclass}}
-                    </li>
-                  {{/uriseinfolist}}
-                  </ul>
+                    </div>
+                  {{/rightside}}
+                  </div>
                 </div>
               </div>
             </div>

@@ -95,8 +95,8 @@ class renderer extends plugin_renderer_base {
         $o = '';
         // Check if multiple dates.
         $data = $data->export_for_template($this);
-        if (!empty($data['datestrings']) && count($data['datestrings']) > 1) {
-            $data['firstDate'] = $data['datestrings'][0]['datestring'];
+        if (!empty($data['dates']) && count($data['dates']) > 1) {
+            $data['firstDate'] = $data['dates'][0]['datestring'];
         }
         $o .= $this->render_from_template('local_urise/col_coursestarttime', $data);
         return $o;

@@ -38,19 +38,21 @@
         ]
     }
 }}
+
 {{^selflearningcourse}}
-    {{#datestrings.0}}
+    {{#dates.0}}
         <div class='booking-showdates-collapse mt-1'>
             {{#firstDate}}
                 {{#str}}fromdate, local_urise{{/str}}{{firstDate}}
             {{/firstDate}}
             {{^firstDate}}
-            {{#datestrings}}
+            {{#dates}}
                 <div>{{{datestring}}}</div>
-            {{/datestrings}}
+            {{/dates}}
             {{/firstDate}}
         </div>
-    {{/datestrings.0}}
+    {{/dates.0}}
+
 {{/selflearningcourse}}
 {{#selflearningcourseshowdurationinfo}}
     {{^timeremaining}}

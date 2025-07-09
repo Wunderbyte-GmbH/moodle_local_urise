@@ -490,7 +490,7 @@ class urise_table extends wunderbyte_table {
                 return implode("", $returnorgas);
             } else {
                 $value = $settings->customfields['kompetenzen'];
-                $message = "<span class='bg-secondary orga'>$value</span>";
+                $message = "<span class='bg-secondary pl-1 pr-1 mr-1 rounded category'>$value</span>";
                 return $message;
             }
         }

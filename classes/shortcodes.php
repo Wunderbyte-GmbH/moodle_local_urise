@@ -1024,7 +1024,7 @@ class shortcodes {
 
         // Columns.
         $subcolumnsleftside = ['text', 'description'];
-        $subcolumnsfooter = ['kurssprache', 'format', 'kompetenzen'];
+        $subcolumnsfooter = ['organisation'];
         $subcolumnsinfo = ['showdates'];
 
         // Check if we should add the description.
@@ -1054,7 +1054,8 @@ class shortcodes {
         $table->add_subcolumns('info', $subcolumnsinfo);
         $table->add_subcolumns('footer', $subcolumnsfooter);
 
-        $table->add_subcolumns('rightside', ['organisation', 'invisibleoption', 'course', 'price']);
+        $table->add_subcolumns('rightside', ['invisibleoption', 'course', 'price']);
+        $table->add_classes_to_subcolumns('rightside', ['columnkeyclass' => 'd-none']);
 
         $table->add_classes_to_subcolumns('top', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('top', ['columnclass' => 'mr-auto text-uppercase'], ['botags']);
@@ -1078,31 +1079,19 @@ class shortcodes {
         $table->add_classes_to_subcolumns('cardimage', ['cardimagealt' => get_string('imagealt', 'local_urise')], ['image']);
 
         // We still need to clean this up.
-        $table->add_subcolumns('userinfolist', ['organisation', 'invisibleoption', 'course', 'price']);
+        $table->add_subcolumns('userinfolist', ['organisation', 'invisibleoption', 'price']);
         $table->add_classes_to_subcolumns(
             'uriseinfolist',
             ['columnvalueclass' => 'text-right mb-auto align-self-end shortcodes_option_info_invisible '],
             ['invisibleoption']
         );
-        $table->add_classes_to_subcolumns('uriseinfolist', ['columnclass' =>
-             'theme-text-color bold ml-auto'], ['price']);
-        self::add_urise_infolist($table);
 
-        $table->add_classes_to_subcolumns(
-            'footer',
-            ['columniclassbefore' => 'fa-regular fa-message text-primary'],
-            ['kurssprache']
-        );
-         $table->add_classes_to_subcolumns(
-             'footer',
-             ['columniclassbefore' => 'fa-solid fa-computer text-primary'],
-             ['format']
-         );
-         $table->add_classes_to_subcolumns(
-             'footer',
-             ['columniclassbefore' => 'fa-solid fa-hashtag text-primary'],
-             ['kompetenzen']
-         );
+        self::add_urise_infolist($table);
+        // Unset some elements used in cards.
+        unset($table->subcolumns['uriseinfolist']['course']);
+        unset($table->subcolumns['uriseinfolist']['organisation']);
+        unset($table->subcolumns['uriseinfolist']['showdates']);
+
         $table->tabletemplate = 'local_urise/table_list';
         $table->is_downloading('', 'List of booking options');
     }

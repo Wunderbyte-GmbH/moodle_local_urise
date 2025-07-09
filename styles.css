@@ -650,3 +650,43 @@ a.booking-card-image-link:hover {
    .mod-booking-card-infos { grid-area: 4 / 1 / 5 / 6; }
    .mod-booking-card-footer { grid-area: 4 / 1 / 5 / 5; }
 }
+
+.urise-list-container .listcard .imageforlist {
+    height: auto;
+}
+
+.urise-list-container .listcard .imageforlist img {
+    width: 100%;
+    height: 250px;
+    min-height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 7px 0 0 7px !important;
+}
+
+.urise-list-container .listcard .placeholderimage {
+    border-radius: 7px 0 0 7px !important;
+}
+
+.urise-list-container .bg-secondary.rounded {
+    margin-bottom: 0;
+}
+.urise-list-container .kompetenzen span.bg-secondary {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 100px;
+    font-size: 14px;
+    background: var(--lightgrayurise) !important;
+}
+
+.urise-list-container  .bg-secondary.orga {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 100px;
+    font-size: 14px;
+    background: #CCEBFF !important;
+}
