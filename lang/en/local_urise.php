@@ -86,6 +86,9 @@ $string['titleprefix'] = 'Course number';
 $string['unknown'] = 'Unknown';
 $string['merchantref'] = 'MerchantRef';
 $string['customorderid'] = 'CustomOrderID';
+$string['viewcards'] = 'Cards view';
+$string['viewlist'] = 'List view with image';
+$string['viewtextlist'] = 'List view (text only)';
 
 $string['format'] = "Format";
 $string['german'] = 'German';
@@ -318,7 +321,6 @@ $string['bookusers'] = 'For Import, to book users directly';
 $string['timemodified'] = 'Time modified';
 $string['waitforconfirmation'] = 'Book only after confirmation';
 
-
 // Filter.
 $string['organisation'] = 'Organisation';
 $string['location'] = 'Location';
@@ -381,7 +383,10 @@ $string['add_sports_division'] = 'Add course type';
 // Sports division.
 $string['nosportsdivision'] = 'No course types set on this site';
 
+$string['shortcodes::unifiedcards'] = "Shortcode unified cards";
 $string['shortcodes::unifiedlist'] = "Shortcode unified list";
+$string['shortcodes::unifiedtextlist'] = "Shortcode unified list (text only)";
+$string['shortcodes::unifiedmybookingslist'] = "Shortcode unified my bookings list";
 $string['shortcodes::calendarblock'] = "Shortcode calendarblock";
 $string['shortcodes::navbarhtml'] = "Shortcode that returns html defined in the settings of this plugin";
 $string['shortcodes::filterview'] = "Shortcode for a special filter element";

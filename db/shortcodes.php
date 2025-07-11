@@ -35,12 +35,17 @@ $shortcodes = [
     'unifiedcards' => [
         'callback' => 'local_urise\shortcodes::unifiedcards',
         'wraps' => false,
-        'description' => 'shortcodes::unifiedlist',
+        'description' => 'shortcodes::unifiedcards',
+    ],
+    'unifiedtextlist' => [
+        'callback' => 'local_urise\shortcodes::unifiedtextlist',
+        'wraps' => false,
+        'description' => 'shortcodes::unifiedtextlist',
     ],
     'unifiedmybookingslist' => [
         'callback' => 'local_urise\shortcodes::unifiedmybookingslist',
         'wraps' => false,
-        'description' => 'shortcodes::unifiedlist',
+        'description' => 'shortcodes::unifiedmybookingslist',
     ],
     'unifiedtrainercourseslist' => [
         'callback' => 'local_urise\shortcodes::mytaughtcourses',

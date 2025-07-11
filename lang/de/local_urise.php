@@ -87,6 +87,9 @@ $string['titleprefix'] = 'Kursnummer';
 $string['unknown'] = 'Unbekannt';
 $string['merchantref'] = 'MerchantRef';
 $string['customorderid'] = 'CustomOrderID';
+$string['viewcards'] = 'Karten-Ansicht';
+$string['viewlist'] = 'Listen-Ansicht mit Bild';
+$string['viewtextlist'] = 'Listen-Ansicht (nur Text)';
 
 $string['format'] = "Format";
 $string['german'] = 'Deutsch';
@@ -398,7 +401,10 @@ $string['add_sports_division'] = 'Die Sparten zu den Sportarten automatisch hinz
 // Sports division.
 $string['nosportsdivision'] = 'Keine Sparten auf dieser Website verfügbar';
 
+$string['shortcodes::unifiedcards'] = "Shortcode unified cards";
 $string['shortcodes::unifiedlist'] = "Shortcode unified list";
+$string['shortcodes::unifiedtextlist'] = "Shortcode unified list (text only)";
+$string['shortcodes::unifiedmybookingslist'] = "Shortcode unified my bookings list";
 $string['shortcodes::calendarblock'] = "Shortcode calendarblock";
 $string['shortcodes::navbarhtml'] = "Shortcode der html zurückgibt das in den Einstellungen dieses Plugins definiert werden kann";
 $string['shortcodes::filterview'] = "Shortcode um ein spezielles Filterelement anzuzeigen";

@@ -100,6 +100,7 @@ class observer {
             && in_array($template, [
                 'local_urise/table_card',
                 'local_urise/table_list',
+                'local_urise/table_listtext',
             ])
         ) {
             $table = wunderbyte_table::instantiate_from_tablecache_hash($encodedtable);
@@ -113,6 +114,9 @@ class observer {
             switch ($template) {
                 case 'local_urise/table_list':
                     shortcodes::generate_table_for_list($table);
+                    break;
+                case 'local_urise/table_listtext':
+                    shortcodes::generate_table_for_textlist($table);
                     break;
                 case 'local_urise/table_card':
                 default:

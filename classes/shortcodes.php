@@ -62,25 +62,42 @@ class shortcodes {
         return $filter;
     }
 
-     /**
-      * Prints out list of bookingoptions.
-      * Arguments can be 'category' or 'perpage'.
-      *
-      * @param string $shortcode
-      * @param array $args
-      * @param string|null $content
-      * @param object $env
-      * @param Closure $next
-      * @return string
-      */
+    /**
+     * Prints out list of bookingoptions with images.
+     * Arguments can be 'category' or 'perpage'.
+     *
+     * @param string $shortcode
+     * @param array $args
+     * @param string|null $content
+     * @param object $env
+     * @param Closure $next
+     * @return string
+     */
     public static function unifiedlist($shortcode, $args, $content, $env, $next) {
-        [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, true);
+        [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, 'local_urise/table_list');
         if (empty($table)) {
             return get_string('nobookinginstancesselected', 'local_urise');
         }
         return self::generate_output($args, $table, $perpage);
     }
 
+    /**
+     * Prints out list of bookingoptions without images.
+     *
+     * @param string $shortcode
+     * @param array $args
+     * @param string|null $content
+     * @param object $env
+     * @param Closure $next
+     * @return string
+     */
+    public static function unifiedtextlist($shortcode, $args, $content, $env, $next) {
+        [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, 'local_urise/table_listtext');
+        if (empty($table)) {
+            return get_string('nobookinginstancesselected', 'local_urise');
+        }
+        return self::generate_output($args, $table, $perpage);
+    }
 
     /**
      * Prints out cards of bookingoptions.
@@ -94,7 +111,7 @@ class shortcodes {
      * @return string
      */
     public static function unifiedcards($shortcode, $args, $content, $env, $next) {
-        [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, true);
+        [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, 'local_urise/table_card');
         if (empty($table)) {
             return get_string('nobookinginstancesselected', 'local_urise');
         }
@@ -109,12 +126,10 @@ class shortcodes {
      * @param string|null $content
      * @param object $env
      * @param Closure $next
-     * @param string $rendertype
-     * @return mixed
+     * @param string $template default is 'local_urise/table_card'
+     * @return array|string
      */
-    public static function unifiedview($shortcode, $args, $content, $env, $next, $renderascard = false) {
-        global $PAGE;
-
+    public static function unifiedview($shortcode, $args, $content, $env, $next, $template = 'local_urise/table_card') {
         self::fix_args($args);
         $booking = self::get_booking($args);
 
@@ -204,7 +219,6 @@ class shortcodes {
 
         $table->showcountlabel = (!empty($args['countlabel']) && $args['countlabel'] == "false") ? false : true;
 
-
         if ($showimage !== false) {
             $table->set_tableclass('cardimageclass', 'pr-0 pl-1');
             $table->add_subcolumns('cardimage', ['image']);
@@ -217,38 +231,42 @@ class shortcodes {
             // Template switcher is activated.
             $table->add_template_to_switcher(
                 'local_urise/table_card',
-                get_string('viewcards', 'local_wunderbyte_table'),
-                $renderascard
+                get_string('viewcards', 'local_urise'),
+                $template == 'local_urise/table_card'
             );
             $table->add_template_to_switcher(
                 'local_urise/table_list',
-                get_string('viewlist', 'local_wunderbyte_table'),
-                !$renderascard
+                get_string('viewlist', 'local_urise'),
+                $template == 'local_urise/table_list'
+            );
+            $table->add_template_to_switcher(
+                'local_urise/table_listtext',
+                get_string('viewtextlist', 'local_urise'),
+                $template == 'local_urise/table_listtext'
             );
 
             // If template switcher is active, we need to check if the user has already a saved preferred template.
             $chosentemplate = get_user_preferences('wbtable_chosen_template_' . $table->uniqueid);
             if (empty($chosentemplate)) {
-                $chosentemplate = 'local_urise/table_card'; // Fallback.
+                $chosentemplate = $template; // Fallback.
             }
 
-            // Switch view type (cards view or list view).
-            switch ($chosentemplate) {
-                case 'local_urise/table_list':
-                    self::generate_table_for_list($table);
-                    break;
-                case 'local_urise/table_card':
-                default:
-                    self::generate_table_for_cards($table);
-                    break;
-            }
-        } else {
-            // Template switcher is not activated.
-            if ($renderascard) {
-                self::generate_table_for_cards($table);
-            } else {
+            // Now we replace the original template with the chosen one.
+            $template = $chosentemplate;
+        }
+
+        // Switch view type (cards view or list view).
+        switch ($template) {
+            case 'local_urise/table_list':
                 self::generate_table_for_list($table);
-            }
+                break;
+            case 'local_urise/table_listtext':
+                self::generate_table_for_textlist($table);
+                break;
+            case 'local_urise/table_card':
+            default:
+                self::generate_table_for_cards($table);
+                break;
         }
 
         $table->showfilterontop = $args['filterontop'];
@@ -504,7 +522,7 @@ class shortcodes {
      */
     public static function filterview($shortcode, $args, $content, $env, $next) {
 
-        [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, true);
+        [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next);
 
         $table->tabletemplate = 'local_wunderbyte_table/filterview';
 
@@ -538,7 +556,7 @@ class shortcodes {
             $args['sortby'] = 'coursestarttime';
         }
 
-        [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next, true);
+        [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next);
 
         $table->tabletemplate = 'local_wunderbyte_table/calendarview';
         $table->define_columns(['text']);
@@ -1065,7 +1083,11 @@ class shortcodes {
             $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-3 col-md-auto'], ['description']);
         }
 
-        $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-calendar text-primary fa-fw  showdatesicon'], ['showdates']);
+        $table->add_classes_to_subcolumns(
+            'info',
+            ['columniclassbefore' => 'fa fa-calendar text-primary fa-fw  showdatesicon'],
+            ['showdates']
+        );
         $table->add_classes_to_subcolumns(
             'info',
             ['columniclassbefore' => 'fa fa-clock-o text-primary fa-fw mr-2'],
@@ -1122,10 +1144,10 @@ class shortcodes {
         $table->cardsort = true;
         // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
         /* $table->infinitescroll = $infinitescrollpage; // We don't want this currently. */
-        $table->tabletemplate = 'local_urise/table_list';
+        $table->tabletemplate = 'local_urise/table_listtext';
 
         // We also need to set the user preference for the template.
-        set_user_preference('wbtable_chosen_template_' . $table->uniqueid, 'local_urise/table_list');
+        set_user_preference('wbtable_chosen_template_' . $table->uniqueid, 'local_urise/table_listtext');
 
         $table->define_cache('mod_booking', 'bookingoptionstable');
 
@@ -1150,7 +1172,11 @@ class shortcodes {
             $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-3 col-md-auto'], ['description']);
         }
 
-        $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-calendar text-primary fa-fw  showdatesicon'], ['showdates']);
+        $table->add_classes_to_subcolumns(
+            'info',
+            ['columniclassbefore' => 'fa fa-calendar text-primary fa-fw  showdatesicon'],
+            ['showdates']
+        );
         $table->add_classes_to_subcolumns(
             'info',
             ['columniclassbefore' => 'fa fa-clock-o text-primary fa-fw mr-2'],
@@ -1181,7 +1207,7 @@ class shortcodes {
         unset($table->subcolumns['uriseinfolist']['showdates']);
         unset($table->subcolumns['uriseinfolist']['umfang']);
 
-        $table->tabletemplate = 'local_urise/table_list';
+        $table->tabletemplate = 'local_urise/table_listtext';
         $table->is_downloading('', 'List of booking options');
     }
 
