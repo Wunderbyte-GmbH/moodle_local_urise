@@ -1025,7 +1025,7 @@ class shortcodes {
         // Columns.
         $subcolumnsleftside = ['text', 'description'];
         $subcolumnsfooter = ['organisation'];
-        $subcolumnsinfo = ['showdates'];
+        $subcolumnsinfo = ['showdates', 'umfang'];
 
         // Check if we should add the description.
         if (get_config('local_urise', 'shortcodelists_showdescriptions')) {
@@ -1066,8 +1066,12 @@ class shortcodes {
             $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-3 col-md-auto'], ['description']);
         }
 
-        $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-clock-o text-primary
-        showdatesicon'], ['showdates']);
+        $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-calendar text-primary fa-fw  showdatesicon'], ['showdates']);
+        $table->add_classes_to_subcolumns(
+            'info',
+            ['columniclassbefore' => 'fa fa-clock-o text-primary fa-fw mr-2'],
+            ['umfang']
+        );
         $table->add_classes_to_subcolumns('info', ['columnclassinner' => 'align-items-center'], ['showdates']);
         if (get_config('local_urise', 'uriseshortcodesshowend')) {
             $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-stop'], ['courseendtime']);
@@ -1091,6 +1095,7 @@ class shortcodes {
         unset($table->subcolumns['uriseinfolist']['course']);
         unset($table->subcolumns['uriseinfolist']['organisation']);
         unset($table->subcolumns['uriseinfolist']['showdates']);
+        unset($table->subcolumns['uriseinfolist']['umfang']);
 
         $table->tabletemplate = 'local_urise/table_list';
         $table->is_downloading('', 'List of booking options');
