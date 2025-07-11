@@ -1021,7 +1021,6 @@ class shortcodes {
      * @throws coding_exception
      */
     public static function generate_table_for_list(&$table) {
-
         // Columns.
         $subcolumnsleftside = ['text', 'description'];
         $subcolumnsfooter = ['organisation'];
@@ -1048,6 +1047,91 @@ class shortcodes {
         $table->add_subcolumns('cardimage', ['image']);
 
         $table->set_tableclass('cardimageclass', 'imageforlist');
+
+        $table->add_subcolumns('top', ['botags', 'action', 'bookings' ]);
+        $table->add_subcolumns('leftside', $subcolumnsleftside);
+        $table->add_subcolumns('info', $subcolumnsinfo);
+        $table->add_subcolumns('footer', $subcolumnsfooter);
+
+        $table->add_subcolumns('rightside', ['invisibleoption', 'course', 'price']);
+        $table->add_classes_to_subcolumns('rightside', ['columnkeyclass' => 'd-none']);
+
+        $table->add_classes_to_subcolumns('top', ['columnkeyclass' => 'd-none']);
+        $table->add_classes_to_subcolumns('top', ['columnclass' => 'mr-auto text-uppercase'], ['botags']);
+
+        $table->add_classes_to_subcolumns('leftside', ['columnkeyclass' => 'd-none']);
+        $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-1 title'], ['text']);
+        if (get_config('local_urise', 'shortcodelists_showdescriptions')) {
+            $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-3 col-md-auto'], ['description']);
+        }
+
+        $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-calendar text-primary fa-fw  showdatesicon'], ['showdates']);
+        $table->add_classes_to_subcolumns(
+            'info',
+            ['columniclassbefore' => 'fa fa-clock-o text-primary fa-fw mr-2'],
+            ['umfang']
+        );
+        $table->add_classes_to_subcolumns('info', ['columnclassinner' => 'align-items-center'], ['showdates']);
+        if (get_config('local_urise', 'uriseshortcodesshowend')) {
+            $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-stop'], ['courseendtime']);
+        }
+        if (get_config('local_urise', 'uriseshortcodesshowbookablefrom')) {
+            $table->add_classes_to_subcolumns('info', ['columniclassbefore' => 'fa fa-forward'], ['bookingopeningtime']);
+        }
+        $table->add_classes_to_subcolumns('info', ['columnalt' => get_string('locationalt', 'local_urise')], ['location']);
+        $table->add_classes_to_subcolumns('cardimage', ['cardimagealt' => get_string('imagealt', 'local_urise')], ['image']);
+
+        // We still need to clean this up.
+        $table->add_subcolumns('userinfolist', ['organisation', 'invisibleoption', 'price']);
+        $table->add_classes_to_subcolumns(
+            'uriseinfolist',
+            ['columnvalueclass' => 'text-right mb-auto align-self-end shortcodes_option_info_invisible '],
+            ['invisibleoption']
+        );
+
+        self::add_urise_infolist($table);
+        // Unset some elements used in cards.
+        unset($table->subcolumns['uriseinfolist']['course']);
+        unset($table->subcolumns['uriseinfolist']['organisation']);
+        unset($table->subcolumns['uriseinfolist']['showdates']);
+        unset($table->subcolumns['uriseinfolist']['umfang']);
+
+        $table->tabletemplate = 'local_urise/table_list';
+        $table->is_downloading('', 'List of booking options');
+    }
+
+    /**
+     * Generate table for textlist.
+     * @param mixed $table
+     * @param mixed $args
+     * @return void
+     * @throws dml_exception
+     * @throws coding_exception
+     */
+    public static function generate_table_for_textlist(&$table) {
+        // Columns.
+        $subcolumnsleftside = ['text', 'description'];
+        $subcolumnsfooter = ['organisation'];
+        $subcolumnsinfo = ['showdates', 'umfang'];
+
+        // Check if we should add the description.
+        if (get_config('local_urise', 'shortcodelists_showdescriptions')) {
+            $subcolumnsleftside[] = 'description';
+        }
+
+        $table->cardsort = true;
+        // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
+        /* $table->infinitescroll = $infinitescrollpage; // We don't want this currently. */
+        $table->tabletemplate = 'local_urise/table_list';
+
+        // We also need to set the user preference for the template.
+        set_user_preference('wbtable_chosen_template_' . $table->uniqueid, 'local_urise/table_list');
+
+        $table->define_cache('mod_booking', 'bookingoptionstable');
+
+        // We define it here so we can pass it with the mustache template.
+        $table->add_subcolumns('optionid', ['id']);
+
 
         $table->add_subcolumns('top', ['botags', 'action', 'bookings' ]);
         $table->add_subcolumns('leftside', $subcolumnsleftside);

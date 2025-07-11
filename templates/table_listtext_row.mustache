@@ -1,0 +1,270 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_urise/table
+    Template which defines a mooduell view page.
+    Classes required for JS:
+    * none
+    Data attributes required for JS:
+    * none
+    Context variables required for this template:
+    * statistics - array: An array with values.
+    * opengames - array: empty array, will be filled with JS.
+    * finishedgames - array: empty array, will be filled with JS.
+    * highscores - array: empty array, will be filled with JS.
+
+    Example context (json):
+    {
+       "listheaderclass" : "listheaderclass",
+       "cardheaderclass" : "cardheaderclass",
+       "cardfooterclass" : "cardfooterclass",
+       "cardimageclass" : "cardimageclass",
+       "cardheader": [
+            "columnclass" : "columnclass",
+            "columnkeyclass" : "columnkeyclass",
+            "key" : "columnname",
+            "keystring" : "localized column name",
+            "columnvalueclass" : "columnvalueclass"
+            "value" : "value"
+       ],
+       "cardbody": [
+            "columnclass" : "columnclass",
+            "columnkeyclass" : "columnkeyclass",
+            "key" : "columnname",
+            "keystring" : "localized column name",
+            "columnvalueclass" : "columnvalueclass"
+            "value" : "value"
+       ],
+       "cardfooter": [
+            "columnclass" : "columnclass",
+            "columnkeyclass" : "columnkeyclass",
+            "key" : "columnname",
+            "keystring" : "localized column name",
+            "columnvalueclass" : "columnvalueclass"
+            "value" : "value"
+       ],
+       "cardimage": [
+            "value" : "value"
+       ]
+    }
+}}
+<div class="card listcard sk-fade mb-4 shadowcustom flex-md-row align-items-center row gx-0 p-2" {{#datafields}} data-{{key}}="{{value}}" {{/datafields}}>
+  <div class="content w-100">
+    <div class="optionrow d-md-flex foroptionid-{{#optionid}}{{#value}}{{.}}{{/value}}{{/optionid}} h-100">
+      <div class="urise-listrow-content-container mx-auto w-100 h-100 d-flex flex-column px-md-4">
+        <div class="urise-list-maincontent row h-100">
+          <div class="urise-list-mainarea col-md-10 d-flex flex-column p-0 mt-1  pr-3">
+            <div class="row">
+              <div class="urise-list-mainarea-top col-md-8">
+              {{#leftside}}
+                {{#columnclass}}<div class="{{.}} {{key}}">{{/columnclass}}
+                  <span {{^value}} style="display:none" {{/value}}>
+                  {{#columniclassbefore}}
+                    <i class="{{.}}" aria-hidden="true"></i>
+                  {{/columniclassbefore}}
+                  </span>
+                  {{#columnkeyclass}}<span class="key {{.}}">{{/columnkeyclass}}
+                    {{^keystring}}
+                    {{{key}}}
+                  {{/keystring}}
+                  {{#keystring}}
+                    {{.}}
+                  {{/keystring}}:
+                  {{#columnkeyclass}}</span>{{/columnkeyclass}}
+                  <span {{^value}} style="display:none" {{/value}} class="{{columnvalueclass}} ">
+                    {{{value}}}
+                  </span>
+                  {{#columnvalueclass}}</span>{{/columnvalueclass}}
+                  <span {{^value}} style="display:none" {{/value}}>
+                  {{#columniclassafter}}
+                    <i class="value {{.}}" aria-hidden="true"></i>
+                  {{/columniclassafter}}
+                  </span>
+                {{#columnclass}}</div>{{/columnclass}}
+              {{/leftside}}
+              </div>
+              <div class="col-md-4">
+       {{#footer}}
+                      <span {{^value}} style="display:none" {{/value}}>
+                        <div class="pr-3">
+                          <div class="d-flex align-items-center" {{#columnalt}}title="{{.}}"{{/columnalt}}>
+                            <div class="mr-2 d-flex text-dark font-size-m icon-uxs align-middle">
+                              {{#columniclassbefore}}
+                                  <i class="{{.}}  mt-auto mb-auto mr-1 fa-fw" aria-hidden="true" aria-label="
+                                    {{^keystring}}
+                                      {{{key}}}
+                                  {{/keystring}}
+                                      {{#keystring}}
+                                          {{.}}
+                                      {{/keystring}}"></i>
+                              {{/columniclassbefore}}
+                              {{{value}}}
+                              {{#columniclassafter}}
+                                  <i class="value {{.}}" aria-hidden="true"></i>
+                              {{/columniclassafter}}
+                            </div>
+                          </div>
+                        </div>
+                      </span>
+                    {{/footer}}
+                    </div>
+                </div>
+                 <div class="">
+                <div class="d-flex  pb-2 flex-column">
+                  {{#info}}
+                    <span {{^value}} style="display:none" {{/value}}>
+                      <div class="pr-3">
+                        <div class="d-flex align-items-center" {{#columnalt}}title="{{.}}"{{/columnalt}}>
+                          <div class="mr-2 d-flex text-dark font-size-m icon-uxs align-middle">
+                            {{#columniclassbefore}}
+                                <i class="{{.}}  mt-auto mb-auto mr-1 fa-fw" aria-hidden="true" aria-label="
+                                  {{^keystring}}
+                                    {{{key}}}
+                                {{/keystring}}
+                                    {{#keystring}}
+                                        {{.}}
+                                    {{/keystring}}"></i>
+                            {{/columniclassbefore}}
+                            {{{value}}}
+                            {{#columniclassafter}}
+                                <i class="value {{.}}" aria-hidden="true"></i>
+                            {{/columniclassafter}}
+                          </div>
+                        </div>
+                      </div>
+                    </span>
+                  {{/info}}
+                </div>
+              </div>      
+              <div class="">
+                <div class="d-flex pb-2 flex-column">
+                  <div class="d-flex align-items-center">
+                    {{#uriseinfolist}}
+                      <span {{^value}} style="display:none" {{/value}}>
+                        <div class="pr-3">
+                          <div class="d-flex align-items-center {{key}}" {{#columnalt}}title="{{.}}"{{/columnalt}}>
+                            <div class="mr-2 d-flex text-dark font-size-m icon-uxs align-middle align-items-center">
+                              {{#columniclassbefore}}
+                                  <i class="{{#.}}{{.}}{{/.}}mt-auto mr-1 fa-fw" aria-hidden="true" aria-label="
+                                    {{^keystring}}
+                                      {{{key}}}
+                                  {{/keystring}}
+                                      {{#keystring}}
+                                          {{.}}
+                                      {{/keystring}}"></i>
+                              {{/columniclassbefore}}
+                              {{{value}}}
+                              {{#columniclassafter}}
+                                  <i class="value {{.}}" aria-hidden="true"></i>
+                              {{/columniclassafter}}
+                            </div>
+                          </div>
+                        </div>
+                      </span>
+                    {{/uriseinfolist}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="urise-list-rightarea col-md-2 d-flex flex-column mr-0 ml-0 mb-3 justify-content-between">
+              <div class="urise-list-availableplaces w-100">
+                <div class="toprow d-flex">
+                    {{#top}}
+                      {{#columnclass}}
+                      <div class="{{.}} {{key}}">
+                      {{/columnclass}}
+                        <span {{^value}} style="display:none" {{/value}}>
+                          {{#columniclassbefore}}
+                            <i class="{{.}}" aria-hidden="true"></i>
+                          {{/columniclassbefore}}
+                        </span>
+                        {{#columnkeyclass}}
+                          <span class="key {{.}}">
+                        {{/columnkeyclass}}
+                        {{^keystring}}
+                            {{{key}}}
+                        {{/keystring}}
+                        {{#keystring}}
+                            {{.}}
+                        {{/keystring}}:
+                        {{#columnkeyclass}}</span>{{/columnkeyclass}}
+                        <span {{^value}} style="display:none" {{/value}} class="{{columnvalueclass}} ">
+                          {{{value}}}
+                        </span>
+                        {{#columnvalueclass}}</span>{{/columnvalueclass}}
+                        <span {{^value}} style="display:none" {{/value}}>
+                        {{#columniclassafter}}
+                          <i class="value {{.}}" aria-hidden="true"></i>
+                        {{/columniclassafter}}
+                        </span>
+                      {{#columnclass}}
+                      </div>
+                      {{/columnclass}}
+                    {{/top}}
+                </div>
+              </div>
+              <div class="urise-list-infos lexa-copy mt-2 px-2">
+                <div class="{{uriseinfolistclass}}">
+                  <div class="infolist float-right">
+                  {{#rightside}}
+                    <div class="d-flex mb-3" {{#columnalt}}title="{{.}}"{{/columnalt}}>
+                    {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
+                          <span {{^value}} style="display:none" {{/value}}>
+                          {{#columniclassbefore}}
+                            <i class="{{.}}" aria-hidden="true"></i>
+                          {{/columniclassbefore}}
+                          </span>
+                          {{#columnkeyclass}}<span class="key {{.}}">{{/columnkeyclass}}
+                            {{^keystring}}
+                          {{{key}}}
+                          {{/keystring}}
+                          {{#keystring}}
+                            {{.}}:
+                          {{/keystring}}
+                          {{#columnkeyclass}}</span>{{/columnkeyclass}}
+                          <span {{^value}} style="display:none" {{/value}} class="{{columnvalueclass}}{{#key}} {{key}}{{/key}}">
+                            {{{value}}}
+                          </span>
+                          <span {{^value}} style="display:none" {{/value}}>
+                          {{#columniclassafter}}
+                            <i class="value {{.}}" aria-hidden="true"></i>
+                          {{/columniclassafter}}
+                          </span>
+                    {{#columnclass}}</div>{{/columnclass}}
+                    </div>
+                  {{/rightside}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{#cardimage}}
+      </div>
+      {{/cardimage}}
+    </div>
+  </div>
+</div>
+{{#js}}
+{{^norecords}}
+  require(['local_urise/easyavailabilitymodal'], function(fn) {
+    fn.init(
+      '{{#optionid}}{{#value}}{{{value}}}{{/value}}{{/optionid}}',
+      'a.editavailability[data-optionid="{{#optionid}}{{#value}}{{{.}}}{{/value}}{{/optionid}}"]',
+      '{{#str}} editavailabilityanddescription, local_urise {{/str}}',
+    );
+  });
+{{/norecords}}
+{{/js}}
