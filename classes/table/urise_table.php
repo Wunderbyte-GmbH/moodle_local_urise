@@ -482,7 +482,7 @@ class urise_table extends wunderbyte_table {
                         $returnorgas[] = html_writer::tag(
                             'span',
                             $organisations[$orgaid]['localizedname'],
-                            ['class' => 'bg-secondary pl-1 pr-1 mr-1 rounded category']
+                            ['class' => 'bg-secondary pl-1 pr-1 mr-1 mb-1 rounded category']
                         );
                     }
                 }
@@ -490,7 +490,7 @@ class urise_table extends wunderbyte_table {
                 return implode("", $returnorgas);
             } else {
                 $value = $settings->customfields['kompetenzen'];
-                $message = "<span class='bg-secondary pl-1 pr-1 mr-1 rounded category'>$value</span>";
+                $message = "<span class='bg-secondary pl-1 pr-1 mr-1 mb-1 rounded category '>$value</span>";
                 return $message;
             }
         }
