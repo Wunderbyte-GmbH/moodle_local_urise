@@ -912,22 +912,64 @@ class urise_table extends wunderbyte_table {
      */
     public function col_responsiblecontact($values) {
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id);
-        $ret = '';
+
         if (empty($settings->responsiblecontact)) {
-            return $ret;
+            return '';
         }
-        if ($user = singleton_service::get_instance_of_user($settings->responsiblecontact)) {
-            $userstring = "$user->firstname $user->lastname";
-            $emailstring = " ($user->email)";
+
+        $contacts = [];
+        foreach ($settings->responsiblecontact as $contactid) {
+            $user = singleton_service::get_instance_of_user((int) $contactid);
+            if (empty($user)) {
+                continue;
+            }
+            if (empty($user->firstname)) {
+                debugging(
+                    "musi_table function col_responsiblecontact: firstname is missing for user with id $contactid",
+                    DEBUG_DEVELOPER
+                );
+                $user->firstname = '';
+            }
+            if (empty($user->lastname)) {
+                debugging(
+                    "musi_table function col_responsiblecontact: lastname is missing for user with id $contactid",
+                    DEBUG_DEVELOPER
+                );
+                $user->lastname = '';
+            }
+            if (empty($user->email)) {
+                debugging(
+                    "musi_table function col_responsiblecontact: email is missing for user with id $contactid",
+                    DEBUG_DEVELOPER
+                );
+                $user->email = '';
+            }
+            if (empty($user->firstname) && empty($user->lastname)) {
+                continue;
+            }
+
+            $userstring = $user->firstname . ' ' . $user->lastname;
             if ($this->is_downloading()) {
-                $ret = $userstring . $emailstring;
+                $contacts[] = $userstring . " (" . $user->email . ")";
             } else {
-                $profileurl = new moodle_url('/user/profile.php', ['id' => $settings->responsiblecontact]);
-                $ret = get_string('responsible', 'mod_booking')
-                    . ":&nbsp;" . html_writer::link($profileurl, $userstring);
+                $url = '';
+                if (empty($settings->teacherids)) {
+                    $settings->teacherids = [];
+                }
+                if (in_array($contactid, $settings->teacherids)) {
+                    $url = new moodle_url('/mod/booking/teacher.php', ['teacherid' => $contactid]);
+                } else {
+                    $url = new moodle_url('/user/profile.php', ['id' => $contactid]);
+                }
+                $contacts[] = html_writer::link($url, $userstring);
             }
         }
-        return $ret;
+
+        if (empty($contacts)) {
+            return '';
+        }
+
+        return get_string('responsible', 'mod_booking') . ':&nbsp;' . implode(',&nbsp;', $contacts);
     }
 
     /**
