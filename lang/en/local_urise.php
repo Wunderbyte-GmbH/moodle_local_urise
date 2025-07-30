@@ -340,7 +340,7 @@ $string['contractformulatest'] = 'Test the contract formula';
 $string['editcontractformula'] = 'Edit contract formula';
 
 // My Courses List.
-$string['tocoursecontent'] = 'Course content';
+$string['tocoursecontent'] = 'To the Moodle course';
 
 // Shortlist section information.
 $string['dayofweekalt'] = 'Day of week and the time slot, when a course will take place';
