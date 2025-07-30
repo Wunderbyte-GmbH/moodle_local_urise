@@ -181,6 +181,20 @@ class shortcodes {
             $table->showpagination = true;
         }
 
+        // Gotopage is on by default
+        if (
+            isset($args['gotopage'])
+            && (
+                $args['gotopage'] == "false"
+                || $args['gotopage'] == "0"
+            )
+        ) {
+            $table->gotopage = false;
+        } else {
+            // By default, showpagination is turned on.
+            $table->gotopage = true;
+        }
+
         if (!empty($args['showminanswers'])) {
             $subcolumnsinfo[] = 'minanswers';
         }
