@@ -181,7 +181,7 @@ class shortcodes {
             $table->showpagination = true;
         }
 
-        // Gotopage is on by default
+        // Gotopage is on by default.
         if (
             isset($args['gotopage'])
             && (
