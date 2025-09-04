@@ -530,7 +530,7 @@ class urise_table extends wunderbyte_table {
                         $returnorgas[] = html_writer::tag(
                             'span',
                             $organisations[$orgaid]['localizedname'],
-                            ['class' => 'bg-secondary pl-2 pr-2 mr-1 rounded organization']
+                            ['class' => 'bg-secondary pl-2 pr-2 mr-1 mb-1 rounded organization']
                         );
                         $strlen += strlen($organisations[$orgaid]['localizedname']);
                     }
@@ -540,7 +540,7 @@ class urise_table extends wunderbyte_table {
                     $output = html_writer::tag(
                         'span',
                         get_string('jointevent', 'local_urise'),
-                        ['class' => 'bg-secondary pl-2 pr-1 mr-2 rounded category']
+                        ['class' => 'bg-secondary pl-2 pr-1 mr-2 mb-1 rounded category']
                     );
                 } else {
                     $output = implode(" ", $returnorgas);
