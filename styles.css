@@ -675,6 +675,8 @@ a.booking-card-image-link:hover {
     padding-left: 10px !important;
     padding-top: 4px;
     padding-bottom: 4px;
+    border-radius: 25px !important;
+
 }
 .urise-list-container .kompetenzen span.bg-secondary {
     padding-right: 10px !important;
@@ -687,12 +689,12 @@ a.booking-card-image-link:hover {
 }
 
 .urise-list-container  .bg-secondary.orga,
-.urise-list-container .bg-secondar.organization {
+.urise-list-container .bg-secondary.organization {
     padding-right: 10px !important;
     padding-left: 10px !important;
     padding-top: 4px;
     padding-bottom: 4px;
-    border-radius: 100px;
+    border-radius: 25px !important;
     font-size: 14px;
     background: #ccebff !important;
 }
