@@ -628,7 +628,7 @@ a.booking-card-image-link:hover {
 }
 
 @media (max-width: 768px) {
-    .mod-booking-card-content {
+    /* .mod-booking-card-content {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-column-gap: 0;
@@ -649,7 +649,7 @@ a.booking-card-image-link:hover {
     }
     .mod-booking-card-footer {
         grid-area: 4 / 1 / 5 / 5;
-    }
+    } */
 }
 
 .urise-list-container .listcard .imageforlist {
@@ -748,7 +748,7 @@ a.booking-card-image-link:hover {
 }
 .urise-list-container .listcard,
 .urise-listtext-container .listcard,
-.wunderbyte_table_container .card.listcard{
+.wunderbyte_table_container .card.listcard {
     border-radius: 7px !important;
     box-shadow: 0 12px 30px 0 rgba(0, 0, 0, 0.05), 5px 0 10px 0 rgba(0, 0, 0, 0.02), -5px 0 10px 0 rgba(0, 0, 0, 0.02) !important;
 }
