@@ -764,4 +764,7 @@ a.booking-card-image-link:hover {
 .lexa-templateswitcher-text {
     display: none;
 }
+.bg-secondary.rounded {
+    border-radius: 25px !important;
+}
 /* stylelint-enable declaration-no-important */
