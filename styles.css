@@ -747,7 +747,8 @@ a.booking-card-image-link:hover {
     }
 }
 .urise-list-container .listcard,
-.urise-listtext-container .listcard {
+.urise-listtext-container .listcard,
+.wunderbyte_table_container .card.listcard{
     border-radius: 7px !important;
     box-shadow: 0 12px 30px 0 rgba(0, 0, 0, 0.05), 5px 0 10px 0 rgba(0, 0, 0, 0.02), -5px 0 10px 0 rgba(0, 0, 0, 0.02) !important;
 }
