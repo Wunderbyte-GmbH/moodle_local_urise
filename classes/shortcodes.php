@@ -1119,7 +1119,7 @@ class shortcodes {
         $table->add_classes_to_subcolumns('cardimage', ['cardimagealt' => get_string('imagealt', 'local_urise')], ['image']);
 
         // We still need to clean this up.
-        $table->add_subcolumns('userinfolist', ['organisation', 'invisibleoption', 'price']);
+        $table->add_subcolumns('userinfolist', ['organisation', 'price']);
         $table->add_classes_to_subcolumns(
             'uriseinfolist',
             ['columnvalueclass' => 'text-right mb-auto align-self-end shortcodes_option_info_invisible '],
