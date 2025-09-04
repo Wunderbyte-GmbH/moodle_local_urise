@@ -1095,7 +1095,7 @@ class shortcodes {
         $table->add_classes_to_subcolumns('leftside', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-1 title'], ['text']);
         if (get_config('local_urise', 'shortcodelists_showdescriptions')) {
-            $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-3 col-md-auto'], ['description']);
+            $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-3'], ['description']);
         }
 
         $table->add_classes_to_subcolumns(
