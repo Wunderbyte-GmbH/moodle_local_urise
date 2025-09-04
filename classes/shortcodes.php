@@ -1134,6 +1134,7 @@ class shortcodes {
         unset($table->subcolumns['uriseinfolist']['organisation']);
         unset($table->subcolumns['uriseinfolist']['showdates']);
         unset($table->subcolumns['uriseinfolist']['umfang']);
+        unset($table->subcolumns['uriseinfolist']['kompetenzen']);
 
         $table->tabletemplate = 'local_urise/table_list';
         $table->is_downloading('', 'List of booking options');
@@ -1224,6 +1225,7 @@ class shortcodes {
         unset($table->subcolumns['uriseinfolist']['organisation']);
         unset($table->subcolumns['uriseinfolist']['showdates']);
         unset($table->subcolumns['uriseinfolist']['umfang']);
+        unset($table->subcolumns['uriseinfolist']['kompetenzen']);
 
         $table->tabletemplate = 'local_urise/table_listtext';
         $table->is_downloading('', 'List of booking options');

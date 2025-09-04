@@ -679,7 +679,7 @@ a.booking-card-image-link:hover {
 
 }
 .urise-list-container .kompetenzen span.bg-secondary,
-.urise-listtext-container .bg-secondary.kompetenzen{
+.urise-listtext-container .bg-secondary.kompetenzen {
     padding-right: 10px !important;
     padding-left: 10px !important;
     padding-top: 4px;
@@ -691,7 +691,8 @@ a.booking-card-image-link:hover {
 
 .urise-list-container  .bg-secondary.orga,
 .urise-list-container .bg-secondary.organization,
-.urise-listtext-container .bg-secondary.organization {
+.urise-listtext-container .bg-secondary.organization,
+.urise-listrow-content-container .bg-secondary.organization {
     padding-right: 10px !important;
     padding-left: 10px !important;
     padding-top: 4px;
