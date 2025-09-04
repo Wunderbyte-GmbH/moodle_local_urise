@@ -1,3 +1,4 @@
+/* stylelint-disable declaration-no-important */
 :root {
     --lightgrayurise: rgb(220, 218, 218);
 }
@@ -217,7 +218,7 @@
 }
 
 
-.wunderbyte-table-grid .list-group-item+.list-group-item {
+.wunderbyte-table-grid .list-group-item + .list-group-item {
     border-top: 1px solid rgba(0, 0, 0, .125);
     border-top-width: 1px;
     display: flex;
@@ -243,7 +244,7 @@ div.columnclass.titleprefix {
     display: none;
 }
 
-.wunderbyteTableFilter>div {
+.wunderbyteTableFilter > div {
     background-color: #fff;
 }
 
@@ -261,7 +262,7 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     width: 100%;
     margin: 0 auto;
     border: none;
-    color: black
+    color: black;
 }
 
 .row.optionrow {
@@ -274,11 +275,6 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     object-fit: cover;
 }
 
-.filterheader {
-    /* margin-left: -5em;
-    margin-right: -5em; */
-}
-
 .toprow {
     height: fit-content;
     padding-top: 1em;
@@ -286,7 +282,7 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
 }
 
 .urise-table-option-title a {
-    color: #0B131F
+    color: #0b131f;
 }
 
 .imageforlist .img-fluid.list-img {
@@ -301,8 +297,8 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
 
 /* Some of this needs important because the buttons are styled inline in booking template */
 
-booking-button-area.footerdivider.btn-secondary.disabled,
-booking-button-area.btn-secondary:disabled {
+.booking-button-area.footerdivider.btn-secondary.disabled,
+.booking-button-area.btn-secondary:disabled {
     /* eslint-disable-next-line */
     border: none !important;
     background-color: #dadada !important;
@@ -415,7 +411,7 @@ booking-button-area.btn-secondary:disabled {
 
 .booking-showdates-collapse span a {
     /* eslint-disable-next-line */
-    color: black !important
+    color: black !important;
 }
 
 .urise-avail {
@@ -525,16 +521,10 @@ a.booking-card-image-link:hover {
     justify-content: space-between;
 }
 
-.showdatesicon {
-    /* eslint-disable-next-line */
-    /* line-height: 32px !important;
-    font-size: 16px; */
-}
-
 .background {
     margin-left: -10em;
     margin-right: -10em;
-    background: linear-gradient(258.38deg, #0CBAC5 1.99%, #0063A6 98.96%);
+    background: linear-gradient(258.38deg, #0cbac5 1.99%, #0063a6 98.96%);
     min-height: 15em;
 
 }
@@ -546,7 +536,7 @@ a.booking-card-image-link:hover {
 }
 
 .search.urise {
-    color: var(--interface-dark_secondary, #242A3A);
+    color: var(--interface-dark_secondary, #242a3a);
     font-family: Roboto;
     font-size: 16px;
     font-style: normal;
@@ -612,7 +602,8 @@ a.booking-card-image-link:hover {
 
 .mod-booking-card.list-group-item {
     padding-bottom: 20px;
-    box-shadow: -5px 0 10px 0 rgba(0, 0, 0, 0.02),
+    box-shadow:
+        -5px 0 10px 0 rgba(0, 0, 0, 0.02),
         /* First shadow */
         5px 0 10px 0 rgba(0, 0, 0, 0.02);
 }
@@ -640,8 +631,8 @@ a.booking-card-image-link:hover {
     .mod-booking-card-content {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        grid-column-gap: 0px;
-        grid-row-gap: 0px;
+        grid-column-gap: 0;
+        grid-row-gap: 0;
     }
 
     .imageforcard {
@@ -698,5 +689,74 @@ a.booking-card-image-link:hover {
     padding-bottom: 4px;
     border-radius: 100px;
     font-size: 14px;
-    background: #CCEBFF !important;
+    background: #ccebff !important;
 }
+.mod-booking-card-footer .course a,
+.urise-list-infos .infolist .course a {
+    width: fit-content !important;
+    padding: 0 10px !important;
+    min-height: 2.25rem !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: .625rem;
+    font-family: Roboto;
+    font-size: .875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.125rem;
+}
+.mod-booking-card-footer .course,
+.urise-list-infos .infolist .course {
+    margin-right: 7px;
+}
+.urise-list-container,
+.wunderbyte_table_container .wunderbyteTableClass {
+    overflow: visible;
+}
+
+@media (max-width: 768px) {
+    .mod-booking-card .mod-booking-card-content {
+        display: grid !important;
+        grid-template-columns: 70% 1fr;
+        column-gap: 12px;
+        align-items: start;
+    }
+
+    .mod-booking-card .mod-booking-card-content .imageforcard {
+        grid-column: 1;
+    }
+
+    .mod-booking-card .mod-booking-card-content .mod-booking-card-header {
+        grid-column: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+        width: auto !important;
+        margin: 0;
+    }
+
+    .mod-booking-card .mod-booking-card-content .mod-booking-card-body,
+    .mod-booking-card .mod-booking-card-content .mod-booking-card-infos,
+    .mod-booking-card .mod-booking-card-content .mod-booking-card-footer {
+        grid-column: 1 / -1 !important;
+    }
+}
+.urise-list-container .listcard,
+.urise-listtext-container .listcard {
+    border-radius: 7px !important;
+    box-shadow: 0 12px 30px 0 rgba(0, 0, 0, 0.05), 5px 0 10px 0 rgba(0, 0, 0, 0.02), -5px 0 10px 0 rgba(0, 0, 0, 0.02) !important;
+}
+
+.wunderbyteTableSelect.mr-3 {
+    margin-right: 0 !important;
+}
+.wunderbyte_table_container .filtermobilewrap {
+    max-width: 1600px;
+}
+
+.lexa-templateswitcher-text {
+    display: none;
+}
+/* stylelint-enable declaration-no-important */

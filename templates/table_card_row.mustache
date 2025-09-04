@@ -68,7 +68,7 @@
     aria-label="{{value}}"
 {{/ariasection}}
 >
-  <div class="d-flex flex-column flex-grow-1 mod-booking-card-content">
+  <div class="d-flex flex-column flex-grow-1 mod-booking-card-content h-100">
     <div class="{{cardimageclass}}">
       {{#url}}
         {{#value}}
@@ -185,7 +185,7 @@
       </ul>
     </div>
   </div>
-  <div class="mod-booking-card-footer lexa-copy px-3 text-center mt-auto mb-2 pt-2">
+  <div class="mod-booking-card-footer d-flex lexa-copy px-3 text-center mt-auto ml-auto mb-2 pt-2">
     {{#cardfooter}}
       {{#columnclass}}<div class="{{.}}{{#key}} {{key}}{{/key}}">{{/columnclass}}
             <span {{^value}} style="display:none" {{/value}}>

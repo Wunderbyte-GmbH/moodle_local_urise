@@ -1002,9 +1002,10 @@ class shortcodes {
         $table->add_subcolumns('cardimage', ['image']);
         $table->set_tableclass('cardimageclass', 'imageforcard');
         $table->add_subcolumns('cardheader', ['botags', 'action', 'bookings']);
-        $table->add_subcolumns('cardfooter', ['price']);
+        $table->add_subcolumns('cardfooter', ['course', 'price']);
 
         self::add_urise_infolist($table);
+        unset($table->subcolumns['uriseinfolist']['course']);
 
         $table->add_classes_to_subcolumns(
             'cardlist',
@@ -1085,7 +1086,7 @@ class shortcodes {
         $table->add_subcolumns('info', $subcolumnsinfo);
         $table->add_subcolumns('footer', $subcolumnsfooter);
 
-        $table->add_subcolumns('rightside', ['invisibleoption', 'course', 'price']);
+        $table->add_subcolumns('rightside', ['course', 'price']);
         $table->add_classes_to_subcolumns('rightside', ['columnkeyclass' => 'd-none']);
 
         $table->add_classes_to_subcolumns('top', ['columnkeyclass' => 'd-none']);
@@ -1207,7 +1208,7 @@ class shortcodes {
         $table->add_classes_to_subcolumns('cardimage', ['cardimagealt' => get_string('imagealt', 'local_urise')], ['image']);
 
         // We still need to clean this up.
-        $table->add_subcolumns('userinfolist', ['organisation', 'invisibleoption', 'price']);
+        $table->add_subcolumns('userinfolist', [ 'invisibleoption', 'price']);
         $table->add_classes_to_subcolumns(
             'uriseinfolist',
             ['columnvalueclass' => 'text-right mb-auto align-self-end shortcodes_option_info_invisible '],

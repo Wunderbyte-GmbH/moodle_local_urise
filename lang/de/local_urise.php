@@ -87,9 +87,9 @@ $string['titleprefix'] = 'Kursnummer';
 $string['unknown'] = 'Unbekannt';
 $string['merchantref'] = 'MerchantRef';
 $string['customorderid'] = 'CustomOrderID';
-$string['viewcards'] = 'Karten-Ansicht';
-$string['viewlist'] = 'Listen-Ansicht mit Bild';
-$string['viewtextlist'] = 'Listen-Ansicht (nur Text)';
+$string['viewcards'] = 'Karten';
+$string['viewlist'] = 'Listen';
+$string['viewtextlist'] = 'Listen (Text)';
 
 $string['format'] = "Format";
 $string['german'] = 'Deutsch';
@@ -357,7 +357,7 @@ $string['contractformulatest'] = 'Vertragsformel testen';
 $string['editcontractformula'] = 'Vertragsformel bearbeiten';
 
 // My Courses List.
-$string['tocoursecontent'] = 'Zum Moodle Kurs';
+$string['tocoursecontent'] = 'Kurs';
 
 // Shortlist section information.
 $string['dayofweekalt'] = 'Wochentag und Termin, an dem eine Kurseinheit stattfindet';
