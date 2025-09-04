@@ -1126,6 +1126,8 @@ class shortcodes {
             ['invisibleoption']
         );
 
+        $table->add_subcolumns('kompetenzen', [ 'kompetenzen']);
+
         self::add_urise_infolist($table);
         // Unset some elements used in cards.
         unset($table->subcolumns['uriseinfolist']['course']);
@@ -1214,6 +1216,7 @@ class shortcodes {
             ['columnvalueclass' => 'text-right mb-auto align-self-end shortcodes_option_info_invisible '],
             ['invisibleoption']
         );
+        $table->add_subcolumns('kompetenzen', [ 'kompetenzen']);
 
         self::add_urise_infolist($table);
         // Unset some elements used in cards.
