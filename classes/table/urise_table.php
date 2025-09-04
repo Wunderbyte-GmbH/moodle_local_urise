@@ -540,7 +540,7 @@ class urise_table extends wunderbyte_table {
                     $output = html_writer::tag(
                         'span',
                         get_string('jointevent', 'local_urise'),
-                        ['class' => 'bg-secondary pl-2 pr-2 mr-2 mb-1 rounded category']
+                        ['class' => 'bg-secondary pl-2 pr-2 mr-2 ml-0 mb-1 rounded organization']
                     );
                 } else {
                     $output = implode(" ", $returnorgas);

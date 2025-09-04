@@ -682,7 +682,8 @@ a.booking-card-image-link:hover {
     background: var(--lightgrayurise) !important;
 }
 
-.urise-list-container  .bg-secondary.orga {
+.urise-list-container  .bg-secondary.orga,
+.urise-list-container .bg-secondar.organization {
     padding-right: 10px !important;
     padding-left: 10px !important;
     padding-top: 4px;
