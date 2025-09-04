@@ -681,7 +681,7 @@ a.booking-card-image-link:hover {
     padding-left: 10px !important;
     padding-top: 4px;
     padding-bottom: 4px;
-    border-radius: 100px;
+    border-radius: 25px;
     font-size: 14px;
     background: var(--lightgrayurise) !important;
 }
