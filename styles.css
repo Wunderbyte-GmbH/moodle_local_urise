@@ -671,6 +671,10 @@ a.booking-card-image-link:hover {
 
 .urise-list-container .bg-secondary.rounded {
     margin-bottom: 0;
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 .urise-list-container .kompetenzen span.bg-secondary {
     padding-right: 10px !important;
