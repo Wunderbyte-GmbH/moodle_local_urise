@@ -16,14 +16,13 @@
 
 namespace local_urise\table;
 use local_urise\shortcodes;
-use mod_booking\booking_answers;
-use mod_booking\local\modechecker;
+use mod_booking\booking_answers\booking_answers;
 
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once(__DIR__ . '/../../lib.php');
-require_once($CFG->libdir.'/tablelib.php');
+require_once($CFG->libdir . '/tablelib.php');
 
 use cache;
 use coding_exception;
@@ -47,13 +46,22 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Search results for managers are shown in a table (student search results use the template searchresults_student).
+ *
+ * @package local_urise
+ * @copyright 2025 Wunderbyte GmbH <info@wunderbyte.at>
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class urise_table extends wunderbyte_table {
-
     /** @var array $displayoptions */
     private $displayoptions = [];
 
-    public function set_display_options($displayoptions) {
+    /**
+     * Set display options for the table.
+     *
+     * @param array $displayoptions
+     * @return void
+     */
+    public function set_display_options(array $displayoptions) {
 
         // Units, e.g. "(UE: 1,3)".
         if (isset($displayoptions['showunits'])) { // Do not use empty here!!
@@ -140,7 +148,8 @@ class urise_table extends wunderbyte_table {
             }
         }
         $output = singleton_service::get_renderer('local_urise');
-        return $output->render_col_teacher($data);;
+        return $output->render_col_teacher($data);
+        ;
     }
 
        /**
@@ -159,6 +168,7 @@ class urise_table extends wunderbyte_table {
             $value = $settings->customfieldsfortemplates['kurssprache']['value'];
             return format_string($value);
         }
+        return '';
     }
 
     /**
@@ -167,7 +177,7 @@ class urise_table extends wunderbyte_table {
      *
      * @param object $values Contains object with all the values of record.
      * @return string $string Return name of the booking option.
-     * @throws dml_exceptiond
+     * @throws dml_exception
      */
     public function col_format($values) {
 
@@ -177,46 +187,8 @@ class urise_table extends wunderbyte_table {
                 $value = $settings->customfieldsfortemplates['format']['value'];
                 return format_string($value);
         }
-
+        return '';
     }
-
-    //     /**
-    //      * This function is called for each data row to allow processing of the
-    //      * category value.
-    //      *
-    //      * @param object $values Contains object with all the values of record.
-    //      * @return string $string Return name of the booking option.
-    //      * @throws dml_exceptiond
-    //      */
-    // public function col_category($values) {
-
-    //     $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
-
-    //     if (isset($settings->customfields) && isset($settings->customfields['category'])) {
-    //         if (strpos($settings->customfields['category'], ',') !== false) {
-    //             // Split the string by commas into an array
-    //             $values = explode(',', $settings->customfields['category']);
-    //             // Loop over each value in the array
-    //             $string = '';
-    //             foreach ($values as $value) {
-    //                 // Optionally trim whitespace from each value
-    //                 $value = trim($value);
-    //                 $stringpart = "<span class='bg-secondary pl-1 pr-1 mr-1 rounded category'>
-    //                 $value
-    //                 </span>";
-    //                 $string = $string . $stringpart;
-    //             }
-    //             return $string;
-    //         } else {
-    //             $value = $settings->customfields['category'];
-    //             $string = "<span class='bg-secondary pl-1 pr-1 mr-1 rounded category'>
-    //             $value
-    //             </span>";
-    //             return $string;
-    //         }
-    //     }
-
-    // }
 
     /**
      * This function is called for each data row to allow processing of the
@@ -274,7 +246,6 @@ class urise_table extends wunderbyte_table {
         }
 
         if (!$this->is_downloading()) {
-
             $attributes = [
                 'href' => $url,
                 'class' => 'urise-table-option-title',
@@ -337,6 +308,11 @@ class urise_table extends wunderbyte_table {
         return $url->out(false);
     }
 
+    /**
+     * Umfang.
+     * @param mixed $values
+     * @return string
+     */
     public function col_umfang($values) {
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
 
@@ -344,9 +320,15 @@ class urise_table extends wunderbyte_table {
             $value = $settings->customfieldsfortemplates['umfang']['value'];
             return format_string($value);
         }
+        return '';
     }
 
-    public function col_more($values)  {
+    /**
+     * More.
+     * @param mixed $values
+     * @return string
+     */
+    public function col_more($values) {
 
         $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid);
         $buyforuser = price::return_user_to_buy_for();
@@ -358,7 +340,7 @@ class urise_table extends wunderbyte_table {
         } else {
             $url = '#';
         }
-        return "<a href='$url' target='_blank' class=''>".get_string('more', 'local_urise')."</a>";
+        return "<a href='$url' target='_blank' class=''>" . get_string('more', 'local_urise') . "</a>";
     }
 
     /**
@@ -375,7 +357,6 @@ class urise_table extends wunderbyte_table {
         $ret = $fulldescription;
 
         if (!empty(get_config('local_urise', 'collapsedescriptionmaxlength'))) {
-
             $maxlength = (int)get_config('local_urise', 'collapsedescriptionmaxlength');
 
             // Show collapsible for long descriptions.
@@ -444,7 +425,6 @@ class urise_table extends wunderbyte_table {
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
 
         if (isset($settings->entity) && (count($settings->entity) > 0)) {
-
             $url = new moodle_url('/local/entities/view.php', ['id' => $settings->entity['id']]);
             // Full name of the entity (NOT the shortname).
 
@@ -576,14 +556,14 @@ class urise_table extends wunderbyte_table {
         if (isset($settings->customfields) && isset($settings->customfields['botags'])) {
             $botagsarray = $settings->customfields['botags'];
             if (!empty($botagsarray)) {
-
                 if (!is_array($botagsarray)) {
                     $botagsarray = (array)$botagsarray;
                 }
                 foreach ($botagsarray as $botag) {
                     if (!empty($botag)) {
                         $botagsstring .=
-                            "<span class='urise-table-botag rounded-sm bg-info text-light pl-2 pr-2 pt-1 pb-1 mr-1 d-inline-block text-center lexa-caption'>
+                            "<span class='urise-table-botag rounded-sm bg-info text-light " .
+                            "pl-2 pr-2 pt-1 pb-1 mr-1 d-inline-block text-center lexa-caption'>
                             $botag
                             </span>";
                     } else {
@@ -633,17 +613,22 @@ class urise_table extends wunderbyte_table {
             $context = $this->get_context();
         }
 
-        // When we have this seeting, we never show the link here:
-        if (get_config('booking', 'linktomoodlecourseonbookedbutton')
+        // When we have this seeting, we never show the link here.
+        if (
+            get_config('booking', 'linktomoodlecourseonbookedbutton')
             && (!has_capability('mod/booking:updatebooking', $context)
-            && !$isteacherofthisoption)) {
+            && !$isteacherofthisoption)
+        ) {
             return '';
         }
 
-        if (!empty($settings->courseid) && (
+        if (
+            !empty($settings->courseid)
+            && (
                 $status == 0 // MOD_BOOKING_STATUSPARAM_BOOKED.
-                || has_capability('mod/booking:updatebooking', $context) ||
-                $isteacherofthisoption)) {
+                || has_capability('mod/booking:updatebooking', $context)
+                || $isteacherofthisoption)
+        ) {
             // The link will be shown to everyone who...
             // ...has booked this option.
             // ...is a teacher of this option.
@@ -725,9 +710,9 @@ class urise_table extends wunderbyte_table {
         $link = '';
 
         $settings = singleton_service::get_instance_of_booking_option_settings($values->optionid, $values);
-        $bookinganswers = singleton_service::get_instance_of_booking_answers($settings, 0);
+        $bookinganswers = singleton_service::get_instance_of_booking_answers($settings);
 
-        if (booking_answers::count_places($bookinganswers->usersonlist) > 0) {
+        if (booking_answers::count_places($bookinganswers->get_usersonlist()) > 0) {
             // Add a link to redirect to the booking option.
             $link = new moodle_url(
                 $CFG->wwwroot . '/mod/booking/report.php',
@@ -926,21 +911,24 @@ class urise_table extends wunderbyte_table {
             }
             if (empty($user->firstname)) {
                 debugging(
-                    "musi_table function col_responsiblecontact: firstname is missing for user with id $contactid  in bookingoption $values->id ",
+                    "musi_table function col_responsiblecontact: " .
+                    "firstname is missing for user with id $contactid  in bookingoption $values->id ",
                     DEBUG_DEVELOPER
                 );
                 $user->firstname = '';
             }
             if (empty($user->lastname)) {
                 debugging(
-                    "musi_table function col_responsiblecontact: lastname is missing for user with id $contactid in bookingoption $values->id ",
+                    "musi_table function col_responsiblecontact: " .
+                    "lastname is missing for user with id $contactid in bookingoption $values->id ",
                     DEBUG_DEVELOPER
                 );
                 $user->lastname = '';
             }
             if (empty($user->email)) {
                 debugging(
-                    " musi_table function col_responsiblecontact: email is missing for user with id $contactid  in bookingoption $values->id ",
+                    " musi_table function col_responsiblecontact: " .
+                    "email is missing for user with id $contactid  in bookingoption $values->id ",
                     DEBUG_DEVELOPER
                 );
                 $user->email = '';
@@ -984,7 +972,7 @@ class urise_table extends wunderbyte_table {
      */
     public function col_action($values) {
 
-        $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid, $values);
+        $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid);
 
         $data = new stdClass();
 
@@ -1005,7 +993,6 @@ class urise_table extends wunderbyte_table {
         if (!empty($values->id)) {
             $bosettings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
             if (!empty($bosettings)) {
-
                 $context = context_module::instance($bosettings->cmid);
 
                 // ONLY users with the mod/booking:updatebooking capability can edit options.
@@ -1052,7 +1039,6 @@ class urise_table extends wunderbyte_table {
 
                 // If the user has no capability to editoptions, the URLs will not be added.
                 if ($canviewreports) {
-
                     if (isset($bosettings->manageresponsesurl)) {
                         // Get the URL to manage responses (answers) for the option.
                         $data->manageresponsesurl = $bosettings->manageresponsesurl;
@@ -1070,8 +1056,9 @@ class urise_table extends wunderbyte_table {
             // If booking option is already cancelled, we want to show the "undo cancel" button instead.
             if ($values->status == 1) {
                 $data->showundocancel = true;
-                $data->undocancellink = html_writer::link('#',
-                '<i class="fa fa-undo fa-fw" aria-hidden="true"></i> ' .
+                $data->undocancellink = html_writer::link(
+                    '#',
+                    '<i class="fa fa-undo fa-fw" aria-hidden="true"></i> ' .
                     get_string('undocancelthisbookingoption', 'mod_booking'),
                     [
                         'class' => 'dropdown-item undocancelallusers',
@@ -1081,14 +1068,16 @@ class urise_table extends wunderbyte_table {
                         'onclick' =>
                             "require(['mod_booking/confirm_cancel'], function(init) {
                                 init.init('" . $values->id . "', '" . $values->status . "');
-                            });"
-                    ]);
+                            });",
+                    ]
+                );
             } else {
                 // Else we show the default cancel button.
                 // We do NOT set $data->undocancel here.
                 $data->showcancel = true;
-                $data->cancellink = html_writer::link('#',
-                '<i class="fa fa-ban fa-fw" aria-hidden="true"></i> ' .
+                $data->cancellink = html_writer::link(
+                    '#',
+                    '<i class="fa fa-ban fa-fw" aria-hidden="true"></i> ' .
                     get_string('cancelallusers', 'mod_booking'),
                     [
                         'class' => 'dropdown-item cancelallusers',
@@ -1098,8 +1087,9 @@ class urise_table extends wunderbyte_table {
                         'onclick' =>
                             "require(['local_shopping_cart/menu'], function(menu) {
                                 menu.confirmCancelAllUsersAndSetCreditModal('" . $values->id . "', 'mod_booking', 'option');
-                            });"
-                    ]);
+                            });",
+                    ]
+                );
             }
         } else {
             $data->showcancel = null;
