@@ -53,7 +53,7 @@
       </table>
     </div>
     <div class="courses mt-3">
-        <h5 v-if="tabIndex != 0" class="mb-4">{{ store.state.strings.courses }}: {{ bookingstats.coursecount }} <a role="button" data-toggle="collapse" href="#collapseCourses"
+        <h5 v-if="tabIndex != 0" class="mb-4">{{ store.state.strings.courses }}: {{ bookingstats.coursecount }} <a role="button" data-toggle="collapse" data-bs-toggle="collapse" href="#collapseCourses"
             aria-expanded="false" aria-controls="collapseCourses"><i class="fa-solid fa-square-caret-down"></i></a></h5>
         <h5 v-else class="mb-4">{{ store.state.strings.courses }}: {{ bookingstats.coursecount }}</h5>
         <div class="collapse" id="collapseCourses">
