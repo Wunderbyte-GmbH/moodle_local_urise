@@ -71,18 +71,17 @@ if (!empty($archivecmidsstring)) {
 }
 
 if (has_capability('local/shopping_cart:cansearchusers', context_system::instance())) {
-     $changeuserbutton = html_writer::tag(
-         'a',
-         get_string('changeuser', 'local_urise'),
-         [
-                        'class' => 'btn btn-primary',
-                        'data-toggle' => 'collapse',
-                        'href' => '#changeUser',
-                        'role' => 'button',
-                        'aria-expanded' => 'false',
-                        'aria-controls' => 'changeUser',
-                     ]
-     );
+     $changeuserbutton = html_writer::tag('a', get_string('changeuser', 'local_urise'),
+        [
+            'class' => 'btn btn-primary',
+            'data-toggle' => 'collapse',
+            'data-bs-toggle' => 'collapse',
+            'href' => '#changeUser',
+            'role' => 'button',
+            'aria-expanded' => 'false',
+            'aria-controls' => 'changeUser',
+            ]
+    );
      $changeuserelement = html_writer::start_tag('div', ['class' => 'collapse', 'id' => 'changeUser']);
      $changeuserelement .= html_writer::start_tag('div', ['class' => 'card card-body']);
      $changeuserelement .= html_writer::tag('div', '', ['data-id' => 'urise-selectuserformcontainer']);
