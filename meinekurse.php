@@ -41,13 +41,7 @@ if (!$context = context_system::instance()) {
 }
 
 $isteacher = false;
-
-if (has_capability('local/shopping_cart:cashier', context_system::instance())) {
-    $userid = optional_param('userid', $USER->id, PARAM_INT);
-} else {
-    $userid = $USER->id;
-}
-
+$userid = optional_param('userid', $USER->id, PARAM_INT);
 
 // Check if optionid is valid.
 $PAGE->set_context($context);
@@ -56,7 +50,7 @@ $title = get_string('mycourses', 'local_urise');
 $archive = get_string('archive', 'local_urise');
 
 $PAGE->set_url('/local/urise/meinekurse.php');
-
+// $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_pagelayout('base');
 $PAGE->add_body_class('local_urise-meinekurse');
@@ -71,18 +65,17 @@ if (!empty($archivecmidsstring)) {
 }
 
 if (has_capability('local/shopping_cart:cansearchusers', context_system::instance())) {
-     $changeuserbutton = html_writer::tag(
-         'a',
-         get_string('changeuser', 'local_urise'),
-         [
-                        'class' => 'btn btn-primary',
-                        'data-toggle' => 'collapse',
-                        'href' => '#changeUser',
-                        'role' => 'button',
-                        'aria-expanded' => 'false',
-                        'aria-controls' => 'changeUser',
-                     ]
-     );
+     $changeuserbutton = html_writer::tag('a', get_string('changeuser', 'local_urise'),
+        [
+            'class' => 'btn btn-primary',
+            'data-toggle' => 'collapse',
+            'data-bs-toggle' => 'collapse',
+            'href' => '#changeUser',
+            'role' => 'button',
+            'aria-expanded' => 'false',
+            'aria-controls' => 'changeUser',
+            ]
+    );
      $changeuserelement = html_writer::start_tag('div', ['class' => 'collapse', 'id' => 'changeUser']);
      $changeuserelement .= html_writer::start_tag('div', ['class' => 'card card-body']);
      $changeuserelement .= html_writer::tag('div', '', ['data-id' => 'urise-selectuserformcontainer']);
@@ -110,7 +103,7 @@ $adminelement .= html_writer::end_div();
 echo $OUTPUT->header();
 
 $selectuserform = new dynamic_select_users();
-
+// echo html_writer::div($selectuserform->render(), '', ['data-id' => 'urise-selectuserformcontainer']);
 $PAGE->requires->js_call_amd('local_urise/userselectorform', 'init');
 
 if ($userid != $USER->id) {
@@ -119,6 +112,7 @@ if ($userid != $USER->id) {
 } else {
     $whosspace = get_string('myspace', 'local_urise');
 }
+
 echo '<div class="background d-flex justify-content-center align-items-center">
                <div class="container mw-90">
                ' . $changeuserelement . '
