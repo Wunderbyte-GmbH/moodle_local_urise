@@ -27,7 +27,6 @@ use stdClass;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class botags_modal_form extends \core_form\dynamic_form {
-
     protected function get_context_for_dynamic_submission(): \context {
         return \context_system::instance();
     }
@@ -42,13 +41,18 @@ class botags_modal_form extends \core_form\dynamic_form {
 
         $existingbotagsarray = self::get_existing_botags_array();
 
-        $mform->addElement('autocomplete', 'botags', get_string('editbotags', 'local_urise'),
-            $existingbotagsarray, [
+        $mform->addElement(
+            'autocomplete',
+            'botags',
+            get_string('editbotags', 'local_urise'),
+            $existingbotagsarray,
+            [
                 'tags' => true,
                 'multiple' => true,
                 'placeholder' => get_string('createbotag', 'local_urise'),
                 'showsuggestions' => false,
-            ]);
+            ]
+        );
 
         $mform->addElement('html', get_string('createbotag:helptext', 'local_urise'));
     }
@@ -86,7 +90,7 @@ class botags_modal_form extends \core_form\dynamic_form {
 
         foreach ($data->botags as $key => $value) {
             if (!$DB->get_record('local_urise_botags', ['botag' => $value])) {
-                $newbotagrecord = new stdClass;
+                $newbotagrecord = new stdClass();
                 $newbotagrecord->botag = $value;
                 $DB->insert_record('local_urise_botags', $newbotagrecord);
             }

@@ -21,7 +21,7 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once(__DIR__ . '/../../lib.php');
-require_once($CFG->libdir.'/tablelib.php');
+require_once($CFG->libdir . '/tablelib.php');
 
 use cache;
 use coding_exception;
@@ -48,7 +48,6 @@ defined('MOODLE_INTERNAL') || die();
  * @package local_urise
  */
 class calendar_table extends wunderbyte_table {
-
     public function col_text($values) {
 
         $title = format_text($values->text);
