@@ -17,7 +17,7 @@
 /**
  * This class contains a list of webservice functions related to the Local URISE Plugin by Wunderbyte.
  *
- * @package    mod_booking
+ * @package    local_urise
  * @copyright  2024 Georg Maißer <info@wunderbyte.at>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -126,7 +126,6 @@ class get_parent_categories extends external_api {
             $record->participated = 0;
             $record->excused = 0;
             $record->noshows = 0;
-
 
             $excludedcoursenames = explode(',', get_config('local_urise', 'excludecourselistindashboard') ?? '');
             if (

@@ -113,7 +113,7 @@ class card_content_stats1 implements renderable, templatable {
         foreach ($this->data as $key => $value) {
 
             $item = [
-                'key' => get_string($key, 'local_urise')
+                'key' => get_string($key, 'local_urise'),
             ];
 
             // We only have value & link at the time as types, but might have more at one point.
