@@ -92,13 +92,15 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
         $editteacherlink = '';
     }
 
-    if (has_capability('local/wb_news:editinstances', context_system::instance())) {
-        $editnewslink = '<a class="dropdown-item" href="'
-                . $CFG->wwwroot . '/local/wb_news/index.php">'
-                . get_string('editnews', 'local_urise') . '</a>';
-    } else {
-        $editnewslink = '';
+    $editnewslink = '';
+    if (class_exists('local_wb_news\news')) {
+        if (has_capability('local/wb_news:editinstances', context_system::instance())) {
+            $editnewslink = '<a class="dropdown-item" href="'
+                    . $CFG->wwwroot . '/local/wb_news/index.php">'
+                    . get_string('editnews', 'local_urise') . '</a>';
+        }
     }
+
 
     if (has_capability('local/shopping_cart:cashier', context_system::instance())) {
         $viewsapfiles = '<a class="dropdown-item" href="'
