@@ -41,7 +41,7 @@ class contractmanager {
 
         $hourrate = 0.0; // Default value.
 
-        if (!$user = $DB->get_record('user', array('id' => $userid))) {
+        if (!$user = $DB->get_record('user', ['id' => $userid])) {
             return (float) 0.0;
         }
 

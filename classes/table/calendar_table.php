@@ -45,6 +45,7 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Search results for managers are shown in a table (student search results use the template searchresults_student).
+ * @package local_urise
  */
 class calendar_table extends wunderbyte_table {
 
@@ -58,7 +59,7 @@ class calendar_table extends wunderbyte_table {
         return $title;
     }
 
-    public function col_more($values)  {
+    public function col_more($values) {
 
         $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid);
         $buyforuser = price::return_user_to_buy_for();
