@@ -38,15 +38,19 @@ if ($hassiteconfig) {
 
     if ($ADMIN->fulltree) {
         $settings->add(
-            new admin_setting_heading('shortcodessetdefaultinstance',
+            new admin_setting_heading(
+                'shortcodessetdefaultinstance',
                 get_string('shortcodessetdefaultinstance', 'local_urise'),
-                get_string('shortcodessetdefaultinstancedesc', 'local_urise')));
+                get_string('shortcodessetdefaultinstancedesc', 'local_urise')
+            )
+        );
 
         $allowedinstances = [];
         $multiinstances = [];
 
-        if ($records = $DB->get_records_sql(
-            "SELECT cm.id cmid, b.id bookingid, b.name bookingname
+        if (
+            $records = $DB->get_records_sql(
+                "SELECT cm.id cmid, b.id bookingid, b.name bookingname
             FROM {course_modules} cm
             LEFT JOIN {booking} b
             ON b.id = cm.instance
@@ -58,7 +62,8 @@ if ($hassiteconfig) {
                 FROM {modules} m
                 WHERE m.name = 'booking'
             )"
-        )) {
+            )
+        ) {
             foreach ($records as $record) {
                 $allowedinstances[$record->cmid] = "$record->bookingname (ID: $record->cmid)";
                 $multiinstances[$record->bookingid] = $record->bookingname;
@@ -76,71 +81,119 @@ if ($hassiteconfig) {
         } else {
             // Show select for cmids of booking instances.
             $settings->add(
-                new admin_setting_configselect('local_urise/shortcodessetinstance',
+                new admin_setting_configselect(
+                    'local_urise/shortcodessetinstance',
                     get_string('shortcodessetinstance', 'local_urise'),
                     get_string('shortcodessetinstancedesc', 'local_urise'),
-                    $defaultcmid, $allowedinstances));
+                    $defaultcmid,
+                    $allowedinstances
+                )
+            );
         }
 
         if (!empty($multiinstances)) {
             // Booking default instances.
             $componentname = 'local_urise';
             $settings->add(new admin_setting_configmultiselect(
-                    $componentname . '/multibookinginstances',
-                    get_string('multibookinginstances', $componentname),
-                    get_string('multibookinginstances_desc', $componentname),
-                    [],
-                    $multiinstances)
-            );
+                $componentname . '/multibookinginstances',
+                get_string('multibookinginstances', $componentname),
+                get_string('multibookinginstances_desc', $componentname),
+                [],
+                $multiinstances
+            ));
         }
 
         $settings->add(
-            new admin_setting_configtext('local_urise/shortcodesarchivecmids',
+            new admin_setting_configtext(
+                'local_urise/shortcodesarchivecmids',
                 get_string('shortcodesarchivecmids', 'local_urise'),
-                get_string('shortcodesarchivecmids_desc', 'local_urise'), ''));
+                get_string('shortcodesarchivecmids_desc', 'local_urise'),
+                ''
+            )
+        );
 
         $settings->add(
-            new admin_setting_configtext('local_urise/excludecourselistindashboard',
+            new admin_setting_configtext(
+                'local_urise/excludecourselistindashboard',
                 get_string('excludecourselistindashboard', 'local_urise'),
-                get_string('excludecourselistindashboard_desc', 'local_urise'), ''));
+                get_string('excludecourselistindashboard_desc', 'local_urise'),
+                ''
+            )
+        );
 
 
         // Shortcode lists.
         $settings->add(
-            new admin_setting_heading('shortcodelists',
+            new admin_setting_heading(
+                'shortcodelists',
                 get_string('shortcodelists', 'local_urise'),
-                get_string('shortcodelists_desc', 'local_urise')));
+                get_string('shortcodelists_desc', 'local_urise')
+            )
+        );
 
         $settings->add(
-            new admin_setting_configcheckbox('local_urise/shortcodelists_showdescriptions',
-                get_string('shortcodelists_showdescriptions', 'local_urise'), '', 0));
+            new admin_setting_configcheckbox(
+                'local_urise/shortcodelists_showdescriptions',
+                get_string('shortcodelists_showdescriptions', 'local_urise'),
+                '',
+                0
+            )
+        );
 
         $settings->add(
-            new admin_setting_configcheckbox('local_urise/uriseshortcodesshowstart',
-                get_string('uriseshortcodes:showstart', 'local_urise'), '', 0));
+            new admin_setting_configcheckbox(
+                'local_urise/uriseshortcodesshowstart',
+                get_string('uriseshortcodes:showstart', 'local_urise'),
+                '',
+                0
+            )
+        );
 
         $settings->add(
-            new admin_setting_configcheckbox('local_urise/uriseshortcodesshowend',
-                get_string('uriseshortcodes:showend', 'local_urise'), '', 0));
+            new admin_setting_configcheckbox(
+                'local_urise/uriseshortcodesshowend',
+                get_string('uriseshortcodes:showend', 'local_urise'),
+                '',
+                0
+            )
+        );
 
         $settings->add(
-            new admin_setting_configcheckbox('local_urise/uriseshortcodesshowbookablefrom',
-                get_string('uriseshortcodes:showbookablefrom', 'local_urise'), '', 0));
+            new admin_setting_configcheckbox(
+                'local_urise/uriseshortcodesshowbookablefrom',
+                get_string('uriseshortcodes:showbookablefrom', 'local_urise'),
+                '',
+                0
+            )
+        );
 
         $settings->add(
-            new admin_setting_configcheckbox('local_urise/uriseshortcodesshowbookableuntil',
-                get_string('uriseshortcodes:showbookableuntil', 'local_urise'), '', 0));
+            new admin_setting_configcheckbox(
+                'local_urise/uriseshortcodesshowbookableuntil',
+                get_string('uriseshortcodes:showbookableuntil', 'local_urise'),
+                '',
+                0
+            )
+        );
 
-        $showfiltercoursetimesetting = new admin_setting_configcheckbox('local_urise/uriseshortcodesshowfiltercoursetime',
-            get_string('uriseshortcodes:showfiltercoursetime', 'local_urise'), '', 0);
-        $showfiltercoursetimesetting->set_updatedcallback(function() {
+        $showfiltercoursetimesetting = new admin_setting_configcheckbox(
+            'local_urise/uriseshortcodesshowfiltercoursetime',
+            get_string('uriseshortcodes:showfiltercoursetime', 'local_urise'),
+            '',
+            0
+        );
+        $showfiltercoursetimesetting->set_updatedcallback(function () {
             cache_helper::purge_by_event('setbackoptionstable');
         });
         $settings->add($showfiltercoursetimesetting);
 
-        $showfilterbookingtimesetting = new admin_setting_configcheckbox('local_urise/uriseshortcodesshowfilterbookingtime',
-            get_string('uriseshortcodes:showfilterbookingtime', 'local_urise'), '', 0);
-        $showfilterbookingtimesetting->set_updatedcallback(function() {
+        $showfilterbookingtimesetting = new admin_setting_configcheckbox(
+            'local_urise/uriseshortcodesshowfilterbookingtime',
+            get_string('uriseshortcodes:showfilterbookingtime', 'local_urise'),
+            '',
+            0
+        );
+        $showfilterbookingtimesetting->set_updatedcallback(function () {
             cache_helper::purge_by_event('setbackoptionstable');
         });
         $settings->add($showfilterbookingtimesetting);
@@ -165,7 +218,10 @@ if ($hassiteconfig) {
                 'local_urise/collapsedescriptionmaxlength',
                 get_string('collapsedescriptionmaxlength', 'local_urise'),
                 get_string('collapsedescriptionmaxlength_desc', 'local_urise'),
-                300, $collapsedescriptionoptions));
+                300,
+                $collapsedescriptionoptions
+            )
+        );
 
         $settings->add(new admin_setting_configtextarea(
             'local_urise/organisationfilter',

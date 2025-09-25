@@ -36,7 +36,6 @@ use stdClass;
  * @package local_urise
  */
 class sports_form extends dynamic_form {
-
     /**
      * {@inheritdoc}
      * @see moodleform::definition()

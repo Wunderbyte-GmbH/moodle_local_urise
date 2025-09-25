@@ -100,7 +100,6 @@ class renderer extends plugin_renderer_base {
         }
         $o .= $this->render_from_template('local_urise/col_coursestarttime', $data);
         return $o;
-
     }
 
     /** Function to render the teacher column.
@@ -147,5 +146,4 @@ class renderer extends plugin_renderer_base {
         $o .= $this->render_from_template('local_urise/urise_bookingoption_menu', $data);
         return $o;
     }
-
 }
