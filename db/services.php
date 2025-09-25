@@ -43,4 +43,3 @@ $functions = [
                 'ajax' => 1,
         ],
 ];
-

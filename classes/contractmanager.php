@@ -25,7 +25,6 @@ namespace local_urise;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class contractmanager {
-
     /**
      * Calculate the hourly rate of a teacher for a certain booking option
      * using the contract formula.
@@ -37,7 +36,7 @@ class contractmanager {
     public static function get_hourrate(int $userid) {
 
         global $CFG, $DB;
-        require_once($CFG->dirroot.'/user/profile/lib.php'); // Needed for profile_load_data.
+        require_once($CFG->dirroot . '/user/profile/lib.php'); // Needed for profile_load_data.
 
         $hourrate = 0.0; // Default value.
 
@@ -56,7 +55,6 @@ class contractmanager {
         }
 
         foreach ($jsonobject as $formulacomponent) {
-
             // For invalid JSON.
             if (is_string($formulacomponent)) {
                 // We return an hour rate of 0 if the formula is invalid.
@@ -68,9 +66,11 @@ class contractmanager {
 
             if ($key === 'customfield') {
                 foreach ($value as $cfval) {
-                    if (empty($cfval->hourrate)
+                    if (
+                        empty($cfval->hourrate)
                         || empty($cfval->value)
-                        || empty($user->{'profile_field_' . $cfval->name})) {
+                        || empty($user->{'profile_field_' . $cfval->name})
+                    ) {
                         continue;
                     }
                     if ($user->{'profile_field_' . $cfval->name} === $cfval->value) {

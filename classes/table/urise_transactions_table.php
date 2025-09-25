@@ -20,7 +20,7 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once(__DIR__ . '/../../lib.php');
-require_once($CFG->libdir.'/tablelib.php');
+require_once($CFG->libdir . '/tablelib.php');
 
 use cache_helper;
 use local_shopping_cart\interfaces\interface_transaction_complete;
@@ -35,8 +35,6 @@ defined('MOODLE_INTERNAL') || die();
  * @package local_urise
  */
 class urise_transactions_table extends wunderbyte_table {
-
-
     /**
      * Constructor
      * @param string $uniqueid all tables have to have a unique id, this is used
@@ -46,7 +44,6 @@ class urise_transactions_table extends wunderbyte_table {
         parent::__construct($uniqueid);
 
         global $PAGE;
-
     }
 
     /**
@@ -57,7 +54,7 @@ class urise_transactions_table extends wunderbyte_table {
      */
     public function col_status($values) {
         // TODO: Comment cases.
-        switch($values->status) {
+        switch ($values->status) {
             case 0:
                 return get_string('openorder', 'local_urise');
             case 1:
@@ -124,7 +121,6 @@ class urise_transactions_table extends wunderbyte_table {
         if ($values->status == 0) {
             return $OUTPUT->render_from_template('local_wunderbyte_table/component_actionbutton', ['showactionbuttons' => $data]);
         }
-
     }
 
     /**
@@ -205,13 +201,13 @@ class urise_transactions_table extends wunderbyte_table {
                         );
                     } else {
                         throw new moodle_exception(
-                            'ERROR: transaction_complete does not implement transaction_complete interface!');
+                            'ERROR: transaction_complete does not implement transaction_complete interface!'
+                        );
                     }
                 } catch (\Throwable $e) {
                     echo($e);
                 }
             }
-
         } catch (\Exception $e) {
             // Transaction could not be verified.
             return [
