@@ -232,7 +232,12 @@ class get_parent_categories extends external_api {
                         VALUE_OPTIONAL
                     ),
                     'json' => new external_value(PARAM_RAW, 'json', VALUE_DEFAULT, '{}'),
-                    'showbookingoptionfields' => new external_value(PARAM_BOOL, 'Show bookingoptionfields Tab', VALUE_DEFAULT, false),
+                    'showbookingoptionfields' => new external_value(
+                        PARAM_BOOL,
+                        'Show bookingoptionfields Tab',
+                        VALUE_DEFAULT,
+                        false
+                    ),
                 ]
             )
         );
