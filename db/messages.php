@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $messageproviders = [
 
-    'sendmessages' => array(
-        'capability' => 'local/urise:cansendmessages'
-    ),
+    'sendmessages' => [
+        'capability' => 'local/urise:cansendmessages',
+    ],
 ];

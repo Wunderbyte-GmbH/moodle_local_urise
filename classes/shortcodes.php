@@ -348,7 +348,6 @@ class shortcodes {
 
         $table->showcountlabel = (!empty($args['countlabel']) && $args['countlabel'] == "false") ? false : true;
 
-
         if (empty($args['reload'])) {
             $args['reload'] = false;
         }
@@ -462,8 +461,6 @@ class shortcodes {
         if (empty($args['filterontop'])) {
             $args['filterontop'] = false;
         }
-
-
 
         $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
 
@@ -1171,7 +1168,6 @@ class shortcodes {
 
         // We define it here so we can pass it with the mustache template.
         $table->add_subcolumns('optionid', ['id']);
-
 
         $table->add_subcolumns('top', ['botags', 'action', 'bookings' ]);
         $table->add_subcolumns('leftside', $subcolumnsleftside);
