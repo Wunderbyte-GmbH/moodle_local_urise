@@ -30,6 +30,12 @@ use stdClass;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class substitutionspool_form extends \core_form\dynamic_form {
+    /**
+     * Get context for dynamic submission
+     *
+     * @return \context
+     *
+     */
     protected function get_context_for_dynamic_submission(): \context {
         return context_system::instance();
     }
@@ -89,6 +95,12 @@ class substitutionspool_form extends \core_form\dynamic_form {
     }
 
 
+    /**
+     * Set data for dynamic submission
+     *
+     * @return void
+     *
+     */
     public function set_data_for_dynamic_submission(): void {
         global $DB;
         $data = new stdClass();
@@ -101,7 +113,13 @@ class substitutionspool_form extends \core_form\dynamic_form {
         $this->set_data($data);
     }
 
-    public function process_dynamic_submission() {
+    /**
+     * Process dynamic submission
+     *
+     * @return mixed
+     *
+     */
+    public function process_dynamic_submission(): mixed {
         global $DB, $USER;
 
         // We get the data prepared by set_data_for_dynamic_submission().
@@ -136,12 +154,27 @@ class substitutionspool_form extends \core_form\dynamic_form {
         return true;
     }
 
-    public function validation($data, $files) {
+    /**
+     * Submission validation
+     *
+     * @param mixed $data
+     * @param mixed $files
+     *
+     * @return array
+     *
+     */
+    public function validation($data, $files): array {
         $errors = [];
         // Currently not needed.
         return $errors;
     }
 
+    /**
+     * Get page url for dynamic submission
+     *
+     * @return \moodle_url
+     *
+     */
     protected function get_page_url_for_dynamic_submission(): \moodle_url {
         return new \moodle_url('/local/urise/sparten.php');
     }

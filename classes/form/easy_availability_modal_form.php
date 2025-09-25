@@ -33,6 +33,12 @@ use stdClass;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class easy_availability_modal_form extends \core_form\dynamic_form {
+    /**
+     * Get context for dynamic submission
+     *
+     * @return \context
+     *
+     */
     protected function get_context_for_dynamic_submission(): \context {
         $settings = singleton_service::get_instance_of_booking_option_settings($this->_ajaxformdata['optionid']);
         return context_module::instance($settings->cmid);
@@ -84,7 +90,11 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
 
         // Add the selectusers condition:
         // Select users who can override booking_time condition.
-        $mform->addElement('advcheckbox', 'bo_cond_selectusers_restrict', get_string('easyavailability:selectusers', 'local_urise'));
+        $mform->addElement(
+            'advcheckbox',
+            'bo_cond_selectusers_restrict',
+            get_string('easyavailability:selectusers', 'local_urise')
+        );
 
         $mform->addElement('checkbox', 'selectusersoverbookcheckbox', get_string('easyavailability:overbook', 'local_urise'));
         $mform->setDefault('selectusersoverbookcheckbox', 'checked');
@@ -201,6 +211,12 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
     }
 
 
+    /**
+     * Set data for dynamic submission
+     *
+     * @return void
+     *
+     */
     public function set_data_for_dynamic_submission(): void {
 
         $data = new stdClass();
@@ -260,7 +276,13 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
         $this->set_data($data);
     }
 
-    public function process_dynamic_submission() {
+    /**
+     * Process dynamic submission
+     *
+     * @return bool
+     *
+     */
+    public function process_dynamic_submission(): bool {
 
         // We get the data prepared by set_data_for_dynamic_submission().
         $data = $this->get_data();
@@ -332,7 +354,16 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
         return false;
     }
 
-    public function validation($data, $files) {
+    /**
+     * Validation
+     *
+     * @param mixed $data
+     * @param mixed $files
+     *
+     * @return array
+     *
+     */
+    public function validation($data, $files): array {
         $errors = [];
 
         if ($data['bookingopeningtime'] >= $data['bookingclosingtime']) {
@@ -343,6 +374,12 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
         return $errors;
     }
 
+    /**
+     *  Get page url for dynamic submission
+     *
+     * @return \moodle_url
+     *
+     */
     protected function get_page_url_for_dynamic_submission(): \moodle_url {
         return new \moodle_url('/local/urise/dashboard.php');
     }

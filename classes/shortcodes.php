@@ -937,7 +937,7 @@ class shortcodes {
     /**
      * Set table from shortcodes arguments.
      *
-     * @param urise_table$table
+     * @param urise_table $table
      * @param array $args
      *
      * @return void
