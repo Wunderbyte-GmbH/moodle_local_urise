@@ -48,7 +48,6 @@ require_once($CFG->libdir . '/externallib.php');
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class get_parent_categories extends external_api {
-
     /**
      * Describes the paramters for add_item_to_cart.
      *
@@ -111,7 +110,6 @@ class get_parent_categories extends external_api {
         }
 
         foreach ($records as $record) {
-
             $context = context_coursecat::instance($record->id);
 
             if (!has_capability('local/urise:view', $context)) {
@@ -165,7 +163,6 @@ class get_parent_categories extends external_api {
                         $record->participated += $value->participated ?? 0;
                     }
                     $value->checked = $defaultchecked;
-
                 }
                 $record->json = json_encode([
                     'booking' => array_values($bookingoptions),

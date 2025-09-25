@@ -26,8 +26,6 @@ use context;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class permissions {
-
-
     /**
      * Checks a capability in all possible contexts. It's expensive.
      * @param string $capability

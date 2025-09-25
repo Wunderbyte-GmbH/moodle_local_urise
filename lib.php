@@ -112,7 +112,7 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
     $output = '<div class="popover-region nav-link icon-no-margin dropdown" data-id="urise-popover-region">
         <button class="btn btn-secondary dropdown-toggle" type="button"
         id="dropdownMenuButton" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        '. get_string('urise', 'local_urise') .'
+        ' . get_string('urise', 'local_urise') . '
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="'

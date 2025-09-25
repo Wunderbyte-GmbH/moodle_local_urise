@@ -27,7 +27,6 @@ use dml_exception;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class coursecategories {
-
     /**
      * Returns coursecategories.
      * When 0, it returns all coursecateogries, else only the specific one.
@@ -120,5 +119,4 @@ class coursecategories {
 
         return $records;
     }
-
 }
