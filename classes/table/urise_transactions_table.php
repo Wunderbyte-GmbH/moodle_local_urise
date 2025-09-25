@@ -32,6 +32,7 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Definitions for transactionstable iteration of wb_table
+ * @package local_urise
  */
 class urise_transactions_table extends wunderbyte_table {
 
@@ -111,12 +112,12 @@ class urise_transactions_table extends wunderbyte_table {
             'id' => $rowid,
             'methodname' => 'update_status', // The method needs to be added to your child of wunderbyte_table class.
             'nomodal' => true,
-            'data' => array(
+            'data' => [
                 'itemid' => $values->itemid,
                 'orderid' => $values->tid,
                 'userid' => $values->userid,
-                'gateway' => $values->gateway
-            )
+                'gateway' => $values->gateway,
+            ],
         ];
         table::transform_actionbuttons_array($data);
 
@@ -215,7 +216,7 @@ class urise_transactions_table extends wunderbyte_table {
             // Transaction could not be verified.
             return [
                 'success' => 0,
-                'message' => get_string('statusnotchanged', 'local_urise') . " : " . $e->getMessage()
+                'message' => get_string('statusnotchanged', 'local_urise') . " : " . $e->getMessage(),
             ];
         }
         // Delete cache if successfull -> data has been changed.
@@ -223,12 +224,12 @@ class urise_transactions_table extends wunderbyte_table {
             cache_helper::purge_by_event('setbackcachedpaymenttable');
             return [
                 'success' => 1,
-                'message' => get_string('statuschanged', 'local_urise')
+                'message' => get_string('statuschanged', 'local_urise'),
             ];
         } else {
             return [
                 'success' => 0,
-                'message' => get_string('statusnotchanged', 'local_urise') . " : " . $result['message']
+                'message' => get_string('statusnotchanged', 'local_urise') . " : " . $result['message'],
             ];
         }
     }

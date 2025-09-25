@@ -62,7 +62,7 @@ class substitutionspool_form extends \core_form\dynamic_form {
                 ];
                 return $OUTPUT->render_from_template(
                         'mod_booking/form-user-selector-suggestion', $details);
-            }
+            },
         ];
         $mform->addElement('autocomplete', 'substitutionspoolteachers',
             get_string('substitutionspool:infotext', 'local_urise', $sport), [], $options);

@@ -47,7 +47,7 @@ function local_urise_extend_navigation(navigation_node $navigation) {
             $nodehome = $navigation;
         }
         $pluginname = get_string('pluginname', 'local_urise');
-        $link = new moodle_url('/local/urise/dashboard.php', array());
+        $link = new moodle_url('/local/urise/dashboard.php', []);
         $icon = new pix_icon('i/dashboard', $pluginname, 'local_urise');
         $nodecreatecourse = $nodehome->add($pluginname, $link, navigation_node::NODETYPE_LEAF, $pluginname, 'urise_editor', $icon);
         $nodecreatecourse->showinflatnavigation = true;
@@ -61,7 +61,7 @@ function local_urise_extend_navigation(navigation_node $navigation) {
  */
 function local_urise_get_fontawesome_icon_map() {
     return [
-        'local_urise:i/dashboard' => 'fa-tachometer'
+        'local_urise:i/dashboard' => 'fa-tachometer',
     ];
 }
 
@@ -101,7 +101,6 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
         }
     }
 
-
     if (has_capability('local/shopping_cart:cashier', context_system::instance())) {
         $viewsapfiles = '<a class="dropdown-item" href="'
                 . $CFG->wwwroot . '/local/urise/viewsapdailysums.php">'
@@ -109,7 +108,6 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
     } else {
         $viewsapfiles = '';
     }
-
 
     $output = '<div class="popover-region nav-link icon-no-margin dropdown" data-id="urise-popover-region">
         <button class="btn btn-secondary dropdown-toggle" type="button"

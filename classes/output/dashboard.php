@@ -168,28 +168,28 @@ class dashboard implements renderable, templatable {
      * @return array
      */
     public function export_for_template(renderer_base $output) {
-        $returnarray = array(
+        $returnarray = [
                 'coursecategoriesnav' => [
                     [
                         'label' => 'mylabelx',
-                        'identifier' => 'identifierx'
+                        'identifier' => 'identifierx',
                     ],
                     [
                         'label' => 'mylabely',
-                        'identifier' => 'identifiery'
+                        'identifier' => 'identifiery',
                     ],
                 ],
                 'coursecategories' => [
                     [
                         'identifier' => 'identifiery',
-                        'cards' => (array)$this->cards
+                        'cards' => (array)$this->cards,
                     ],
                     [
                         'identifier' => 'identifiery',
-                        'cards' => (array)$this->cards
-                    ]
-                ]
-        );
+                        'cards' => (array)$this->cards,
+                    ],
+                ],
+        ];
         return null;
     }
 }

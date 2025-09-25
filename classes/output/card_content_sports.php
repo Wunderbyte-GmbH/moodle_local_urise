@@ -99,7 +99,7 @@ class card_content_sports implements renderable, templatable {
         foreach ($this->data as $key => $value) {
 
             $item = [
-                'key' => $key
+                'key' => $key,
             ];
 
             // We only have value & link at the time as types, but might have more at one point.

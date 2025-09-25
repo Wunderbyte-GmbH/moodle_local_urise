@@ -100,7 +100,7 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
                 ];
                 return $OUTPUT->render_from_template(
                         'mod_booking/form-user-selector-suggestion', $details);
-            }
+            },
         ];
         $mform->addElement('autocomplete', 'bo_cond_selectusers_userids',
             get_string('bo_cond_selectusers_userids', 'mod_booking'), [], $options);
@@ -135,7 +135,7 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
                 ];
                 return $OUTPUT->render_from_template(
                         'mod_booking/form_booking_options_selector_suggestion', $details);
-            }
+            },
         ];
         $mform->addElement('autocomplete', 'bo_cond_previouslybooked_optionid',
             get_string('bo_cond_previouslybooked_optionid', 'mod_booking'), [], $previouslybookedoptions);
@@ -191,7 +191,7 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
         $settings = singleton_service::get_instance_of_booking_option_settings($data->optionid);
 
         // The booking option description.
-        $data->description = array('text' => $settings->description, 'format' => FORMAT_HTML);
+        $data->description = ['text' => $settings->description, 'format' => FORMAT_HTML];
 
         $data->bookingopeningtime = $settings->bookingopeningtime ?? $this->_ajaxformdata['bookingopeningtime'];
         $data->bookingclosingtime = $settings->bookingclosingtime ?? $this->_ajaxformdata['bookingclosingtime'];
@@ -262,7 +262,7 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
             // We always override these conditions, so users are always allowed to book outside time restrictions.
             $optionvalues->bo_cond_selectusers_overridecondition = [
                 MOD_BOOKING_BO_COND_BOOKING_TIME,
-                MOD_BOOKING_BO_COND_OPTIONHASSTARTED
+                MOD_BOOKING_BO_COND_OPTIONHASSTARTED,
             ];
 
             // If the overbook checkbox has been checked, we also add the conditions so the user(s) can overbook.
@@ -283,7 +283,7 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
             // We always override these 2 conditions, so users are always allowed to book outside time restrictions.
             $optionvalues->bo_cond_previouslybooked_overridecondition = [
                 MOD_BOOKING_BO_COND_BOOKING_TIME,
-                MOD_BOOKING_BO_COND_OPTIONHASSTARTED
+                MOD_BOOKING_BO_COND_OPTIONHASSTARTED,
             ];
 
             // If the overbook checkbox has been checked, we also add the conditions so the user(s) can overbook.

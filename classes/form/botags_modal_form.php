@@ -22,7 +22,7 @@ use stdClass;
 /**
  * Modal form to create single option dates which are not part of the date series.
  *
- * @package     mod_booking
+ * @package     local_urise
  * @copyright   2024 Wunderbyte GmbH <info@wunderbyte.at>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -47,7 +47,7 @@ class botags_modal_form extends \core_form\dynamic_form {
                 'tags' => true,
                 'multiple' => true,
                 'placeholder' => get_string('createbotag', 'local_urise'),
-                'showsuggestions' => false
+                'showsuggestions' => false,
             ]);
 
         $mform->addElement('html', get_string('createbotag:helptext', 'local_urise'));
@@ -109,7 +109,7 @@ class botags_modal_form extends \core_form\dynamic_form {
      *
      * @return array array of existing botags
      */
-    private static function get_existing_botags_array (): array {
+    private static function get_existing_botags_array(): array {
         global $DB;
         $existingbotagrecords = $DB->get_records('local_urise_botags');
         $existingbotagsarray = [];

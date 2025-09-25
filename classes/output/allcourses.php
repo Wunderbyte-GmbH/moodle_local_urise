@@ -59,9 +59,9 @@ class allcourses implements renderable, templatable {
      */
     public function export_for_template(renderer_base $output) {
 
-        $returnarray = array(
-                'cards' => (array)$this->cards
-        );
+        $returnarray = [
+                'cards' => (array)$this->cards,
+        ];
 
         return $returnarray;
     }

@@ -25,15 +25,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'urise Plugin';
-
 $string['dashboard'] = 'Dashboard';
 $string['messageprovider:sendmessages'] = 'Verschicke Nachrichten';
+$string['pluginname'] = 'urise Plugin';
+
 $string['urise:cansendmessages'] = 'Kann Nachrichten schicken.';
 $string['urise:editavailability'] = 'Kann die Verfügbarkeit von Buchungsoptionen ändern und Vorreservierungen anlegen';
 $string['urise:editsubstitutionspool'] = 'Kann den Vertretungspool für einzelne Kursarten bearbeiten';
-$string['urise:viewsubstitutionspool'] = 'Kann den Vertretungspool für einzelne Kursarten sehen und E-Mails an den Vertretungspool senden';
 $string['urise:viewcourselistindashboard'] = 'Kann Kursliste im Dashboard sehen';
+$string['urise:viewsubstitutionspool'] = 'Kann den Vertretungspool für einzelne Kursarten sehen und E-Mails an den Vertretungspool senden';
 // Caches.
 $string['cachedef_cachedpaymenttable'] = 'Zahlungstransaktionen (Cache)';
 

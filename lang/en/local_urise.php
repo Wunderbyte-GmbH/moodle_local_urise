@@ -25,10 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'urise Plugin';
-
 $string['dashboard'] = 'Dashboard';
 $string['messageprovider:sendmessages'] = 'Send messages';
+$string['pluginname'] = 'urise Plugin';
+
 $string['urise:cansendmessages'] = 'Can send messages';
 $string['urise:editavailability'] = 'Can change availability and reservations';
 $string['urise:editsubstitutionspool'] = 'Can edit the substitutions pool of teachers for different courses';
