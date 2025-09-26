@@ -73,14 +73,15 @@ class card_content_stats1 implements renderable, templatable {
 
         $coursesbooked = $DB->count_records('booking_answers', ['waitinglist' => local_urise_STATUSPARAM_BOOKED]);
         $coursesincart = $DB->count_records('booking_answers', ['waitinglist' => local_urise_STATUSPARAM_RESERVED]);
-        // urise does not use the normal waiting list but observer list instead.
+        // Urise does not use the normal waiting list but observer list instead.
         $bookinganswersdeleted = $DB->count_records('booking_answers', ['waitinglist' => local_urise_STATUSPARAM_DELETED]);
 
         $coursesboughtcard = $DB->count_records('local_shopping_cart_history', ['payment' => LOCAL_SHOPPING_CART_PAYMENT_SUCCESS]);
         $coursespending = $DB->count_records('local_shopping_cart_history', ['payment' => LOCAL_SHOPPING_CART_PAYMENT_PENDING]);
         $paymentsaborted = $DB->count_records('local_shopping_cart_history', ['payment' => LOCAL_SHOPPING_CART_PAYMENT_ABORTED]);
 
-        // We have a couple of payment methods for cashier, they are all bigger (or equal) than 3 (LOCAL_SHOPPING_CART_PAYMENT_METHOD_CASHIER_CASH).
+        // We have a couple of payment methods for cashier, they are all bigger (or equal) than 3
+        // (LOCAL_SHOPPING_CART_PAYMENT_METHOD_CASHIER_CASH).
         $sql = "SELECT COUNT(*)
             FROM {local_shopping_cart_history}
             WHERE payment >= :cashpayment";
@@ -103,6 +104,8 @@ class card_content_stats1 implements renderable, templatable {
     }
 
     /**
+     * Export for template
+     *
      * @param renderer_base $output
      * @return array
      */
