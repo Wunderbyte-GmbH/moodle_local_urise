@@ -42,8 +42,6 @@ class dashboard implements renderable, templatable {
 
     /**
      * Constructor
-     *
-     * @param card|null $card
      */
     public function __construct() {
 
@@ -77,6 +75,8 @@ class dashboard implements renderable, templatable {
      */
     public function card_sports() {
         global $PAGE;
+
+        /** @var renderer $output */
         $output = $PAGE->get_renderer('local_urise');
         $data = new card_content_sports();
 
@@ -96,6 +96,8 @@ class dashboard implements renderable, templatable {
      */
     public function card_entities() {
         global $PAGE;
+
+        /** @var renderer $output */
         $output = $PAGE->get_renderer('local_urise');
         $data = new card_content_entities();
 
@@ -116,6 +118,7 @@ class dashboard implements renderable, templatable {
     public function card_stats1() {
         global $PAGE;
 
+        /** @var renderer $output */
         $output = $PAGE->get_renderer('local_urise');
         $data = new card_content_stats1();
 
@@ -136,6 +139,7 @@ class dashboard implements renderable, templatable {
     public function card_settings() {
         global $PAGE;
 
+        /** @var renderer $output */
         $output = $PAGE->get_renderer('local_urise');
         $data = new card_content_settings();
 
@@ -151,10 +155,10 @@ class dashboard implements renderable, templatable {
     /**
      * Add dashboard card.
      *
-     * @param card|null $card
+     * @param ?card $card
      * @return void
      */
-    public function add_card(card $card = null) {
+    public function add_card(?card $card = null) {
         if ($card) {
             $this->cards[] = $card;
         } else {
@@ -163,6 +167,8 @@ class dashboard implements renderable, templatable {
     }
 
     /**
+     * Export for template
+     *
      * @param renderer_base $output
      * @return array
      */
