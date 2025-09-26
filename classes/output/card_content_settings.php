@@ -109,6 +109,8 @@ class card_content_settings implements renderable, templatable {
     }
 
     /**
+     * Export for template
+     *
      * @param renderer_base $output
      * @return array
      */
