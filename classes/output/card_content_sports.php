@@ -86,6 +86,8 @@ class card_content_sports implements renderable, templatable {
     }
 
     /**
+     * Export for template
+     *
      * @param renderer_base $output
      * @return array
      */
