@@ -39,7 +39,7 @@ use templatable;
  */
 class card implements renderable, templatable {
     /** @var string $title */
-    public $titel = '';
+    public $title = '';
 
     /** @var string $content */
     public $content = '';

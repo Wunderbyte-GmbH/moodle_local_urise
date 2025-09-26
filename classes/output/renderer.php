@@ -67,18 +67,26 @@ class renderer extends plugin_renderer_base {
 
     /**
      * Function to render the cards table
-     * @param any $data
+     * @param mixed $data
      * @param string $data
      * @return string
      */
-    public function render_table($data, string $templatename) {
+    public function render_table($data, string $templatename): string {
         $o = '';
         $data = $data->export_for_template($this);
         $o .= $this->render_from_template($templatename, $data);
         return $o;
     }
 
-    public function render_col_availableplaces($data) {
+    /**
+     * Function to render the col availableplaces
+     *
+     * @param mixed $data
+     *
+     * @return string
+     *
+     */
+    public function render_col_availableplaces($data): string {
         $o = '';
         $templatedata = $data->export_for_template($this);
         $templatedata['showmaxanswers'] = $data->showmaxanswers;
@@ -87,11 +95,12 @@ class renderer extends plugin_renderer_base {
     }
 
     /**
-     * Render function.
+     * Render function for the col coursestarttime
+     *
      * @param object $data
      * @return string
      */
-    public function render_col_coursestarttime($data) {
+    public function render_col_coursestarttime($data): string {
         $o = '';
         // Check if multiple dates.
         $data = $data->export_for_template($this);
@@ -102,30 +111,35 @@ class renderer extends plugin_renderer_base {
         return $o;
     }
 
-    /** Function to render the teacher column.
-     * @param any $data
+    /**
+     * Function to render the teacher column.
+     *
+     * @param mixed $data
      * @return string
      */
-    public function render_col_teacher($data) {
+    public function render_col_teacher($data): string {
         $o = '';
         $data = $data->export_for_template($this);
         $o .= $this->render_from_template('local_urise/col_teacher', $data);
         return $o;
     }
 
-    /** Function to render the overview cards in user dashboard
-     * @param any $data
-     * @param string $data
+    /**
+     * Function to render the overview cards in user dashboard
+     *
+     * @param mixed $data
      * @return string
      */
-    public function render_user_dashboard_overview($data) {
+    public function render_user_dashboard_overview($data): string {
         $o = '';
         $o .= $this->render_from_template('local_urise/userdashboardoverview', $data);
         return $o;
     }
 
-    /** Function to render the transactions list.
-     * @param any $data
+    /**
+     * Function to render the transactions list.
+     *
+     * @param mixed $data
      * @return string
      */
     public function render_transactions_list($page): string {
@@ -137,7 +151,8 @@ class renderer extends plugin_renderer_base {
 
     /**
      * Function to render booking option menu for local_urise.
-     * @param any $data
+     *
+     * @param mixed $data
      * @return string
      */
     public function render_urise_bookingoption_menu($data): string {
