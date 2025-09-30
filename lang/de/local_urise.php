@@ -512,6 +512,7 @@ $string['lpstudierende'] = "LP Studierende";
 $string['lpexterne'] = "LP Externe";
 $string['lpbibliothek'] = "LP Bibliothek";
 $string['teachinglibrary'] = "Teaching Library";
+$string['hroperations'] = "HR Operations";
 
 $string['phdstudents'] = "PhD Students";
 $string['postdoc'] = "PostDocs";

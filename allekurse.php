@@ -32,7 +32,6 @@ global $DB, $PAGE, $OUTPUT, $USER;
 if (!$context = context_system::instance()) {
     throw new moodle_exception('badcontext');
 }
-
 $type = optional_param('type', 'liste', PARAM_TEXT);
 
 // Check if optionid is valid.
