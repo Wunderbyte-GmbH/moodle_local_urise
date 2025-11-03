@@ -438,11 +438,11 @@ $string['fbbildungswissenschaftsprachwissenschaftundvergleichendeliteraturwissen
 $string['fbbiologieundbotanikstandortbiologie'] = "Biology Library";
 $string['fbbiologieundbotanikstandortbotanik'] = "Botany Library";
 $string['fbbyzantistikundneograezistik'] = "Byzantine and Modern Greek Studies Library";
-$string['fbgeographieundregionalforschung'] = "Geography and Regional Research Library";
 $string['fberdwissenschaftenundmeteorologie'] = "Earth Sciences and Meteorology Library";
 $string['fbeuropaeischeethnologie'] = "European Ethnology Library";
 $string['fbfinnougristik'] = "Finno-Ugrian Studies Library";
-$string['fbgermanistiknederlandistikundskandinavistik'] = "German, Dutch and Scandinavian Studies Library";
+$string['fbgeographieundregionalforschung'] = "Geography and Regional Research Library";
+$string['fbgermanistiknederlandistikundskandinavistik'] = "German and Scandinavian Studies Library";
 $string['fbgeschichtswissenschaften'] = "Historical Studies Library";
 $string['fbjudaistik'] = "Jewish Studies Library";
 $string['fbklassischephilologiemittelundneulatein'] = "Classical Philology, Medieval and Neo-Latin Studies Library";
