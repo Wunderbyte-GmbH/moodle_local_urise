@@ -32,6 +32,7 @@ use context_system;
 use context_module;
 use dml_exception;
 use local_wunderbyte_table\filters\types\hierarchicalfilter;
+use local_wunderbyte_table\local\helper\actforuser;
 use local_wunderbyte_table\wunderbyte_table;
 use mod_booking\customfield\booking_handler;
 use mod_booking\output\page_allteachers;
@@ -88,7 +89,13 @@ class shortcodes {
         // If the id argument was not passed on, we have a fallback in the connfig.
         $context = context_system::instance();
         if (empty($userid) && has_capability('local/shopping_cart:cashier', $context)) {
-            $userid = shopping_cart::return_buy_for_userid();
+            // Check if rendering is for another user id.
+            if ($urlparamforuserid = actforuser::get_urlparamforuserid($args)) {
+                $userid = optional_param($urlparamforuserid, 0, PARAM_INT);
+                $userid = $userid > 0 ? $userid : 0;
+            } else {
+                $userid = 0;
+            }
         } else if (!has_capability('local/shopping_cart:cashier', $context)) {
             $userid = $USER->id;
         }

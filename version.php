@@ -31,7 +31,7 @@ $plugin->requires = 2022112800; // Requires this Moodle version. Current: Moodle
 $plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = [
     'mod_booking' => 2024121800,
-    'local_wunderbyte_table' => 2024121200,
+    'local_wunderbyte_table' => 2025111400,
     'local_shopping_cart' => 2024121200,
     'local_entities' => 2024111100,
 ];
