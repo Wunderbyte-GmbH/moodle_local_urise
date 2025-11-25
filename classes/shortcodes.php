@@ -29,6 +29,7 @@ namespace local_urise;
 use Closure;
 use coding_exception;
 use dml_exception;
+use local_wunderbyte_table\filters\types\customfieldfilter;
 use local_wunderbyte_table\filters\types\hierarchicalfilter;
 use local_wunderbyte_table\wunderbyte_table;
 use mod_booking\customfield\booking_handler;
@@ -348,7 +349,6 @@ class shortcodes {
 
         $table->showcountlabel = (!empty($args['countlabel']) && $args['countlabel'] == "false") ? false : true;
 
-
         if (empty($args['reload'])) {
             $args['reload'] = false;
         }
@@ -462,8 +462,6 @@ class shortcodes {
         if (empty($args['filterontop'])) {
             $args['filterontop'] = false;
         }
-
-
 
         $infinitescrollpage = is_numeric($args['infinitescrollpage'] ?? '') ? (int)$args['infinitescrollpage'] : 30;
 
@@ -735,9 +733,17 @@ class shortcodes {
             $filtercolumns = [];
         }
 
+        $customfields = booking_handler::get_customfields();
+
         if (empty($filtercolumns) || in_array('zgcommunities', $filtercolumns)) {
-            $standardfilter = new standardfilter('zgcommunities', get_string('zgcommunities', 'local_urise'));
-            $standardfilter->add_options([
+            // Find zgcommunities from list of custom fields.
+            $zgcommunities = array_filter($customfields, fn($cf) => $cf->shortname === 'zgcommunities');
+            $zgcommunities = reset($zgcommunities);
+
+            // Add zgcommunities as a filter.
+            $customfieldfilter = new customfieldfilter('zgcommunities', get_string('zgcommunities', 'local_urise'));
+            $customfieldfilter->set_sql_for_fieldid($zgcommunities->id);
+            $customfieldfilter->add_options([
                 'explode' => ',',
                 1 => get_string('wissenschaftlichespersonal', 'local_urise'),
                 2 => get_string('phdstudents', 'local_urise'),
@@ -748,7 +754,7 @@ class shortcodes {
                 7 => get_string('interessierteoeffentlichkeit', 'local_urise'),
                 8 => get_string('studentmultipliers', 'local_urise'),
             ]);
-            $table->add_filter($standardfilter);
+            $table->add_filter($customfieldfilter);
         }
 
         if (empty($filtercolumns) || in_array('bibliothekszielgruppe', $filtercolumns)) {
@@ -770,19 +776,31 @@ class shortcodes {
         }
 
         if (empty($filtercolumns) || in_array('kurssprache', $filtercolumns)) {
-            $standardfilter = new standardfilter('kurssprache', get_string('kurssprache', 'local_urise'));
-            $standardfilter->add_options([
+            // Find kurssprache from list of custom fields.
+            $kurssprache = array_filter($customfields, fn($cf) => $cf->shortname === 'kurssprache');
+            $kurssprache = reset($kurssprache);
+
+            // Add kurssprache as a filter.
+            $customfieldfilter = new customfieldfilter('kurssprache', get_string('kurssprache', 'local_urise'));
+            $customfieldfilter->set_sql_for_fieldid($kurssprache->id);
+            $customfieldfilter->add_options([
                 0 => 'wbt_suppress',
                 1 => get_string('german', 'local_urise'),
                 2 => get_string('english', 'local_urise'),
                 3 => get_string('germanenglish', 'local_urise'),
             ]);
-            $table->add_filter($standardfilter);
+            $table->add_filter($customfieldfilter);
         }
 
         if (empty($filtercolumns) || in_array('format', $filtercolumns)) {
-            $standardfilter = new standardfilter('format', get_string('format', 'local_urise'));
-            $standardfilter->add_options([
+            // Find format from list of custom fields.
+            $cfformat = array_filter($customfields, fn($cf) => $cf->shortname === 'format');
+            $cfformat = reset($cfformat);
+
+            // Add format as a filter.
+            $customfieldfilter = new customfieldfilter('format', get_string('format', 'local_urise'));
+            $customfieldfilter->set_sql_for_fieldid($cfformat->id);
+            $customfieldfilter->add_options([
                 0 => 'wbt_suppress',
                 1 => get_string('onsite', 'local_urise'),
                 2 => get_string('hybrid', 'local_urise'),
@@ -792,7 +810,7 @@ class shortcodes {
                 6 => get_string('online', 'local_urise'),
                 7 => get_string('selfpaced', 'local_urise'),
             ]);
-            $table->add_filter($standardfilter);
+            $table->add_filter($customfieldfilter);
         }
 
         if (empty($filtercolumns) || in_array('dayofweek', $filtercolumns)) {
@@ -810,9 +828,14 @@ class shortcodes {
         }
 
         if (empty($filtercolumns) || in_array('reihenprogramm', $filtercolumns)) {
-            $standardfilter = new standardfilter('reihenprogramm', get_string('reihenprogramm', 'local_urise'));
+            // Find reihenprogramm from list of custom fields.
+            $cfreihenprogramm = array_filter($customfields, fn($cf) => $cf->shortname === 'reihenprogramm');
+            $cfreihenprogramm = reset($cfreihenprogramm);
 
-            $options = [
+            // Add reihenprogramm as a filter.
+            $customfieldfilter = new customfieldfilter('reihenprogramm', get_string('format', 'local_urise'));
+            $customfieldfilter->set_sql_for_fieldid($cfreihenprogramm->id);
+            $customfieldfilter->add_options([
                 0 => 'wbt_suppress',
                 1 => get_string('basicqualification', 'local_urise'),
                 2 => get_string('teachingcompetence', 'local_urise'),
@@ -829,10 +852,8 @@ class shortcodes {
                 13 => get_string('spezialwissenbiblio', 'local_urise'),
                 14 => get_string('sciencecommunicationprogramme', 'local_urise'),
                 15 => get_string('kompakttrainingfuehrungs', 'local_urise'),
-            ];
-
-            $standardfilter->add_options($options);
-            $table->add_filter($standardfilter);
+            ]);
+            $table->add_filter($customfieldfilter);
         }
 
         if (empty($filtercolumns) || in_array('location', $filtercolumns)) {
@@ -1171,7 +1192,6 @@ class shortcodes {
 
         // We define it here so we can pass it with the mustache template.
         $table->add_subcolumns('optionid', ['id']);
-
 
         $table->add_subcolumns('top', ['botags', 'action', 'bookings' ]);
         $table->add_subcolumns('leftside', $subcolumnsleftside);
@@ -1582,7 +1602,7 @@ class shortcodes {
                     0,
                     0,
                     '',
-                    null,
+                    's1.*, kompetenzen, organisation',
                     $context,
                     [],
                     $wherearray,
