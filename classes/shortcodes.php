@@ -758,9 +758,15 @@ class shortcodes {
         }
 
         if (empty($filtercolumns) || in_array('bibliothekszielgruppe', $filtercolumns)) {
-            $standardfilter = new standardfilter('bibliothekszielgruppe', get_string('bibliothekszielgruppe', 'local_urise'));
-            $standardfilter->add_options(self::get_bibliothekszielgruppe());
-            $table->add_filter($standardfilter);
+            // Find bibliothekszielgruppe from list of custom fields.
+            $cfbibliothekszielgruppe = array_filter($customfields, fn($cf) => $cf->shortname === 'kurssprache');
+            $cfbibliothekszielgruppe = reset($cfbibliothekszielgruppe);
+
+            // Add bibliothekszielgruppe as a filter.
+            $customfieldfilter = new customfieldfilter('bibliothekszielgruppe', get_string('bibliothekszielgruppe', 'local_urise'));
+            $customfieldfilter->set_sql_for_fieldid($cfbibliothekszielgruppe->id);
+            $customfieldfilter->add_options(self::get_bibliothekszielgruppe());
+            $table->add_filter($customfieldfilter);
         }
 
         if (empty($filtercolumns) || in_array('kompetenzen', $filtercolumns)) {
