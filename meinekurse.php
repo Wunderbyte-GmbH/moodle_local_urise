@@ -41,7 +41,13 @@ if (!$context = context_system::instance()) {
 }
 
 $isteacher = false;
-$userid = optional_param('userid', $USER->id, PARAM_INT);
+
+if (has_capability('local/shopping_cart:cashier', context_system::instance())) {
+    $userid = optional_param('userid', $USER->id, PARAM_INT);
+} else {
+    $userid = $USER->id;
+}
+
 
 // Check if optionid is valid.
 $PAGE->set_context($context);
