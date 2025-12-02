@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This class contains a list of webservice functions related to the Shopping Cart Module by Wunderbyte.
+ * This class contains a list of webservice functions related to the Local URISE Plugin by Wunderbyte.
  *
  * @package    mod_booking
  * @copyright  2024 Georg Maißer <info@wunderbyte.at>
@@ -61,7 +61,7 @@ class get_parent_categories extends external_api {
     }
 
     /**
-     * Webservice for shopping_cart class to add a new item to the cart.
+     * Webservice for local_urise to return the course category data.
      *
      * @param int $coursecategoryid
      *

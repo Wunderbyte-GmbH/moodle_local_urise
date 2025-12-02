@@ -35,7 +35,7 @@ $functions = [
                 'ajax' => 1,
         ],
         'local_urise_set_parent_content' => [
-                                'classname' => 'mod_booking\external\save_option_field_config',
+                'classname' => 'mod_booking\external\save_option_field_config',
                 'classpath' => '',
                 'description' => 'Set content of parent category',
                 'type' => 'read',

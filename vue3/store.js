@@ -16,7 +16,7 @@
 /**
  * Validate if the string does excist.
  *
- * @package     local_berta
+ * @package     local_urise
  * @author      Jacob Viertel
  * @copyright  2023 Wunderbyte GmbH
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
