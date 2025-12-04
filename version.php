@@ -18,15 +18,15 @@
  * Plugin version and other meta-data are defined here.
  *
  * @package     local_urise
- * @copyright   2024 Wunderbyte Gmbh <info@wunderbyte.at>
+ * @copyright   2025 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_urise';
-$plugin->release = '0.2.40';
-$plugin->version = 2025110500;
+$plugin->release = '0.2.42';
+$plugin->version = 2025120400;
 $plugin->requires = 2022112800; // Requires this Moodle version. Current: Moodle 4.1.
 $plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = [
