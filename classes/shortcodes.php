@@ -839,7 +839,7 @@ class shortcodes {
             $cfreihenprogramm = reset($cfreihenprogramm);
 
             // Add reihenprogramm as a filter.
-            $customfieldfilter = new customfieldfilter('reihenprogramm', get_string('format', 'local_urise'));
+            $customfieldfilter = new customfieldfilter('reihenprogramm', get_string('reihenprogramm', 'local_urise'));
             $customfieldfilter->set_sql_for_fieldid($cfreihenprogramm->id);
             $customfieldfilter->add_options([
                 0 => 'wbt_suppress',
@@ -858,6 +858,8 @@ class shortcodes {
                 13 => get_string('spezialwissenbiblio', 'local_urise'),
                 14 => get_string('sciencecommunicationprogramme', 'local_urise'),
                 15 => get_string('kompakttrainingfuehrungs', 'local_urise'),
+                16 => get_string('websitesgestaltungtypo3', 'local_urise'),
+                17 => get_string('ailiteracy', 'local_urise'),
             ]);
             $table->add_filter($customfieldfilter);
         }
