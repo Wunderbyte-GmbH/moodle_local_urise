@@ -612,5 +612,7 @@ $string['orgauethikwissenschaft'] = "Organisation und Ethik des wissenschaftlich
 $string['spezialwissenbiblio'] = "Spezialwissen Bibliothek";
 $string['sciencecommunicationprogramme'] = "Science Communication Programme";
 $string['kompakttrainingfuehrungs'] = "Condensed Leadership Training";
+$string['ailiteracy'] = 'AI Literacy';
+$string['websitesgestaltungtypo3'] = 'Creating Websites in TYPO3';
 
 $string['roleforselfregisteredusers'] = "Role for self-registered users";
