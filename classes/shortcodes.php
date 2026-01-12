@@ -860,6 +860,7 @@ class shortcodes {
                 15 => get_string('kompakttrainingfuehrungs', 'local_urise'),
                 16 => get_string('websitesgestaltungtypo3', 'local_urise'),
                 17 => get_string('ailiteracy', 'local_urise'),
+                18 => get_string('naturemasterclass', 'local_urise'),
             ]);
             $table->add_filter($customfieldfilter);
         }
