@@ -627,5 +627,6 @@ $string['kompakttrainingfuehrungs'] = "Kompakttraining für Führungskräfte";
 
 $string['ailiteracy'] = 'AI Literacy';
 $string['websitesgestaltungtypo3'] = 'Websites-Gestaltung in TYPO3';
+$string['naturemasterclass'] = 'Nature Masterclasses On Demand';
 
 $string['roleforselfregisteredusers'] = "Rolle für selbstregistrierte Nutzer:innen";

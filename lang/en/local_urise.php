@@ -614,5 +614,6 @@ $string['sciencecommunicationprogramme'] = "Science Communication Programme";
 $string['kompakttrainingfuehrungs'] = "Condensed Leadership Training";
 $string['ailiteracy'] = 'AI Literacy';
 $string['websitesgestaltungtypo3'] = 'Creating Websites in TYPO3';
+$string['naturemasterclass'] = 'Nature Masterclasses On Demand';
 
 $string['roleforselfregisteredusers'] = "Role for self-registered users";
