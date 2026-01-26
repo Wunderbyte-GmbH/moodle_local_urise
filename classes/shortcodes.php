@@ -225,8 +225,16 @@ class shortcodes {
         if (isset($args['teacherid']) && (is_int((int)$args['teacherid']))) {
             $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
         }
+        self::set_table_options_from_arguments($table, $args);
 
-        [$fields, $from, $where, $params, $filter] = self::get_sql_params($context, $wherearray, $additionalwhere);
+        [$fields, $from, $where, $params, $filter] = self::get_sql_params(
+            $context,
+            $wherearray,
+            $additionalwhere,
+            [],
+            null,
+            $table
+        );
         $params['timenow'] = strtotime('today 00:00');
         $table->set_filter_sql($fields, $from, $where, $filter, $params);
 
@@ -239,8 +247,6 @@ class shortcodes {
             $table->add_subcolumns('cardimage', ['image']);
             $table->add_subcolumns('ariasection', ['puretext']);
         }
-
-        self::set_table_options_from_arguments($table, $args);
 
         if (!empty($args['switchtemplates'])) {
             // Template switcher is activated.
@@ -377,7 +383,7 @@ class shortcodes {
             $wherearray['teacherobjects'] = '%"id":' . $args['teacherid'] . ',%';
         }
         [$fields, $from, $where, $params, $filter] =
-            self::get_sql_params(null, $wherearray, $additionalwhere, $bookingparams, $userid);
+            self::get_sql_params(null, $wherearray, $additionalwhere, $bookingparams, $userid, $table);
         $params['timenow'] = strtotime('today 00:00');
         $table->set_filter_sql($fields, $from, $where, $filter, $params);
 
@@ -1601,11 +1607,12 @@ class shortcodes {
      * @param string $additionalwhere
      * @param array $bookingparams
      * @param int $userid
+     * @param wunderbyte_table|null $table
      *
      * @return [type]
      *
      */
-    private static function get_sql_params($context, $wherearray, $additionalwhere, $bookingparams = [], $userid = null) {
+    private static function get_sql_params($context, $wherearray, $additionalwhere, $bookingparams = [], $userid = null, $table = null) {
         return  [$fields, $from, $where, $params, $filter] =
                 booking::get_options_filter_sql(
                     0,
@@ -1617,7 +1624,9 @@ class shortcodes {
                     $wherearray,
                     $userid,
                     $bookingparams,
-                    $additionalwhere
+                    $additionalwhere,
+                    '',
+                    $table
                 );
     }
 }
