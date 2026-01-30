@@ -776,13 +776,22 @@ class shortcodes {
         }
 
         if (empty($filtercolumns) || in_array('kompetenzen', $filtercolumns)) {
+            // Find bibliothekszielgruppe from list of custom fields.
+            $cfkompetenzen = array_filter($customfields, fn($cf) => $cf->shortname === 'kompetenzen');
+            $cfkompetenzen = reset($cfkompetenzen);
+
             $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_urise'));
+            $hierarchicalfilter->set_sql_for_fieldid($cfkompetenzen->id);
             $hierarchicalfilter->add_options(self::get_kompetenzen());
             $table->add_filter($hierarchicalfilter);
         }
 
         if (empty($filtercolumns) || in_array('organisation', $filtercolumns)) {
+            $cforganisation = array_filter($customfields, fn($cf) => $cf->shortname === 'organisation');
+            $cforganisation = reset($cforganisation);
+
             $hierarchicalfilter = new hierarchicalfilter('organisation', get_string('organisationfilter', 'local_urise'));
+            $hierarchicalfilter->set_sql_for_fieldid($cforganisation->id);
             $hierarchicalfilter->add_options(self::organisations());
             $table->add_filter($hierarchicalfilter);
         }
