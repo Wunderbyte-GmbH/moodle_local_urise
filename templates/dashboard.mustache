@@ -25,21 +25,22 @@
 
     Example context (json):
     {
+        "identifier": "coursecategories",
         "coursecategoriesnav": [
             {
+                "identifier": "coursecategoriesnav",
                 "label": "mylabel",
-                "identifier": "identifier"
-            }
-        ],
-        "coursecategories": [
-            {
-                "identifier": "identifier",
-                "label": "mylabel",
-                "cards" : [],
+                "cards" : [
+                    {
+                        "headerbgcolor": "bg-light",
+                        "title": "Assignment Overview",
+                        "content": "<p>This card contains a short summary of the current assignment.</p>",
+                        "footer": "Last updated: 31 May 2025"
+                    }
+                ],
                 "showactive": "show active"
             }
         ]
-
     }
 }}
 
@@ -58,7 +59,7 @@
                 {{#cards}}
                     {{> local_urise/dashboard_card }}
                 {{/cards}}
-            <div>
+            </div>
         </div>
   {{/coursecategoriesnav}}
 </div>
