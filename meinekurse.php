@@ -50,7 +50,6 @@ $title = get_string('mycourses', 'local_urise');
 $archive = get_string('archive', 'local_urise');
 
 $PAGE->set_url('/local/urise/meinekurse.php');
-// $PAGE->navbar->add($title);
 $PAGE->set_title(format_string($title));
 $PAGE->set_pagelayout('base');
 $PAGE->add_body_class('local_urise-meinekurse');
@@ -105,6 +104,7 @@ $adminelement .= html_writer::end_div();
 echo $OUTPUT->header();
 
 $selectuserform = new dynamic_select_users();
+// phpcs:ignore
 // echo html_writer::div($selectuserform->render(), '', ['data-id' => 'urise-selectuserformcontainer']);
 $PAGE->requires->js_call_amd('local_urise/userselectorform', 'init');
 

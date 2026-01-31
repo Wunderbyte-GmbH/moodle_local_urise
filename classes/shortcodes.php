@@ -1622,7 +1622,14 @@ class shortcodes {
      * @return [type]
      *
      */
-    private static function get_sql_params($context, $wherearray, $additionalwhere, $bookingparams = [], $userid = null, $table = null) {
+    private static function get_sql_params(
+        $context,
+        $wherearray,
+        $additionalwhere,
+        $bookingparams = [],
+        $userid = null,
+        $table = null
+    ) {
         return  [$fields, $from, $where, $params, $filter] =
                 booking::get_options_filter_sql(
                     0,

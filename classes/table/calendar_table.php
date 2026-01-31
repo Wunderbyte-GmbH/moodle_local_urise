@@ -45,10 +45,22 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Search results for managers are shown in a table (student search results use the template searchresults_student).
+ *
  * @package local_urise
+ * @copyright 2025 Wunderbyte GmbH <info@wunderbyte.at>
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class calendar_table extends wunderbyte_table {
-    public function col_text($values) {
+
+    /**
+     * Col_text
+     *
+     * @param mixed $values
+     *
+     * @return string
+     *
+     */
+    public function col_text($values): string {
 
         $title = format_text($values->text);
         $title = strip_tags($title);
@@ -58,7 +70,15 @@ class calendar_table extends wunderbyte_table {
         return $title;
     }
 
-    public function col_more($values) {
+    /**
+     * Col_more
+     *
+     * @param mixed $values
+     *
+     * @return string
+     *
+     */
+    public function col_more($values): string {
 
         $booking = singleton_service::get_instance_of_booking_by_bookingid($values->bookingid);
         $buyforuser = price::return_user_to_buy_for();
@@ -73,7 +93,15 @@ class calendar_table extends wunderbyte_table {
         return "<a href='$url' target='_blank' class=''>mehr</a>";
     }
 
-    public function col_coursestarttime($values) {
+    /**
+     * Col_coursestarttime
+     *
+     * @param mixed $values
+     *
+     * @return string
+     *
+     */
+    public function col_coursestarttime($values): string {
         $coursestarttime = $values->coursestarttime;
         if (empty($coursestarttime)) {
             return '';

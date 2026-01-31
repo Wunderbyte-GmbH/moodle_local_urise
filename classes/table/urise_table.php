@@ -634,7 +634,8 @@ class urise_table extends wunderbyte_table {
             // ...is a teacher of this option.
             // ...has the system-wide "updatebooking" capability (admins).
             $gotomoodlecourse = get_string('tocoursecontent', 'local_urise');
-            $ret = "<a href='$courseurl' target='_self' class='urisebutton gradienthover p-1 btn btn-secondary mt-1 mb-1 w-100 text-center mb-1 mt-1  p-1'>
+            $ret = "<a href='$courseurl' target='_self'
+                class='urisebutton gradienthover p-1 btn btn-secondary mt-1 mb-1 w-100 text-center mb-1 mt-1 p-1'>
                 <i class='fa fa-graduation-cap fa-fw' aria-hidden='true'></i>&nbsp;&nbsp;$gotomoodlecourse
             </a>";
         }

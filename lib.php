@@ -27,11 +27,11 @@ use local_urise\permissions;
 use mod_booking\singleton_service;
 
 // Define booking status parameters.
-define('local_urise_STATUSPARAM_BOOKED', 0);
-define('local_urise_STATUSPARAM_WAITINGLIST', 1);
-define('local_urise_STATUSPARAM_RESERVED', 2);
-define('local_urise_STATUSPARAM_NOTBOOKED', 4);
-define('local_urise_STATUSPARAM_DELETED', 5);
+define('LOCAL_URISE_STATUSPARAM_BOOKED', 0);
+define('LOCAL_URISE_STATUSPARAM_WAITINGLIST', 1);
+define('LOCAL_URISE_STATUSPARAM_RESERVED', 2);
+define('LOCAL_URISE_STATUSPARAM_NOTBOOKED', 4);
+define('LOCAL_URISE_STATUSPARAM_DELETED', 5);
 
 /**
  * Adds module specific settings to the settings block

@@ -71,10 +71,10 @@ class card_content_stats1 implements renderable, templatable {
             $coursesavailable = 0;
         }
 
-        $coursesbooked = $DB->count_records('booking_answers', ['waitinglist' => local_urise_STATUSPARAM_BOOKED]);
-        $coursesincart = $DB->count_records('booking_answers', ['waitinglist' => local_urise_STATUSPARAM_RESERVED]);
+        $coursesbooked = $DB->count_records('booking_answers', ['waitinglist' => LOCAL_URISE_STATUSPARAM_BOOKED]);
+        $coursesincart = $DB->count_records('booking_answers', ['waitinglist' => LOCAL_URISE_STATUSPARAM_RESERVED]);
         // Urise does not use the normal waiting list but observer list instead.
-        $bookinganswersdeleted = $DB->count_records('booking_answers', ['waitinglist' => local_urise_STATUSPARAM_DELETED]);
+        $bookinganswersdeleted = $DB->count_records('booking_answers', ['waitinglist' => LOCAL_URISE_STATUSPARAM_DELETED]);
 
         $coursesboughtcard = $DB->count_records('local_shopping_cart_history', ['payment' => LOCAL_SHOPPING_CART_PAYMENT_SUCCESS]);
         $coursespending = $DB->count_records('local_shopping_cart_history', ['payment' => LOCAL_SHOPPING_CART_PAYMENT_PENDING]);

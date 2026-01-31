@@ -32,7 +32,10 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Definitions for transactionstable iteration of wb_table
+ *
  * @package local_urise
+ * @copyright 2025 Wunderbyte GmbH <info@wunderbyte.at>
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class urise_transactions_table extends wunderbyte_table {
     /**
