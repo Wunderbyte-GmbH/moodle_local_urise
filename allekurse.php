@@ -52,7 +52,8 @@ echo $OUTPUT->header();
 switch ($type) {
     case 'karten':
         echo format_text(
-            "[unifiedcards filter=1 search=1 sort=1 sortby=text sortorder=asc perpage=6 requirelogin=false all=true initcourses=false]",
+            "[unifiedcards filter=1 search=1 sort=1 sortby=text
+            sortorder=asc perpage=6 requirelogin=false all=true initcourses=false]",
             FORMAT_HTML
         );
         break;

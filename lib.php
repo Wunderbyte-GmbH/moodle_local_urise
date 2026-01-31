@@ -124,7 +124,9 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
             . $editteacherlink .
             $editnewslink
             . $viewsapfiles . '
-            <a class="dropdown-item" href="https://servicedesk.univie.ac.at/plugins/servlet/desk/portal/163/create/1918" target="_blank">'
+            <a class="dropdown-item"
+                href="https://servicedesk.univie.ac.at/plugins/servlet/desk/portal/163/create/1918"
+                target="_blank">'
                 . get_string('servicedesk', 'local_urise') . '</a>
         </div>
     </div>';
