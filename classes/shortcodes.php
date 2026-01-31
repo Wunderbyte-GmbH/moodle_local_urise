@@ -1015,6 +1015,9 @@ class shortcodes {
     /**
      * Sets columns for calendar.
      *
+     * @param mixed $table
+     * @param mixed $args
+     *
      * @return void
      *
      */
@@ -1027,7 +1030,6 @@ class shortcodes {
     /**
      * Generate table for card design.
      * @param mixed $table
-     * @param mixed $args
      * @return void
      */
     public static function generate_table_for_cards(&$table) {
@@ -1093,7 +1095,6 @@ class shortcodes {
     /**
      * Generate table for list.
      * @param mixed $table
-     * @param mixed $args
      * @return void
      * @throws dml_exception
      * @throws coding_exception
@@ -1188,7 +1189,6 @@ class shortcodes {
     /**
      * Generate table for textlist.
      * @param mixed $table
-     * @param mixed $args
      * @return void
      * @throws dml_exception
      * @throws coding_exception
@@ -1316,7 +1316,7 @@ class shortcodes {
 
     /**
      * Helper function to remove quotation marks from args.
-     * @param array &$args reference to arguments array
+     * @param array $args reference to arguments array
      */
     private static function fix_args(array &$args) {
         foreach ($args as $key => &$value) {
@@ -1330,11 +1330,12 @@ class shortcodes {
      * Modify the wherearray via arguments.
      *
      * @param array $args
+     * @param array $wherearray
      *
      * @return string
      *
      */
-    private static function set_wherearray_from_arguments(array &$args, &$wherearray) {
+    private static function set_wherearray_from_arguments(array &$args, array &$wherearray) {
         global $DB;
 
         $customfields = booking_handler::get_customfields();

@@ -151,7 +151,8 @@ class sports_form extends dynamic_form {
     /**
      * Validate dates.
      *
-     * {@inheritdoc}
+     * @param array $data
+     * @param array $files
      * @see moodleform::validation()
      */
     public function validation($data, $files) {

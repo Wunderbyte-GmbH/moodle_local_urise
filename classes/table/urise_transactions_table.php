@@ -177,7 +177,7 @@ class urise_transactions_table extends wunderbyte_table {
     /**
      * Tries to verify a transaction and delivers order if successful
      *
-     * @param integer $id
+     * @param int $id
      * @param string $data
      * @return array
      */

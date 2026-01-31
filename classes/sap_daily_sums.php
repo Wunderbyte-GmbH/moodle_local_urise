@@ -224,12 +224,13 @@ class sap_daily_sums {
     /**
      * Helper function to generate SAP line for record.
      * @param string $paymenttype e.g. '6' for credit paid back by cash or '8' for credit paid back by transfer
-     * @param string &$content reference to $content
-     * @param string &$errorcontent reference to $errorcontent
-     * @param array &$datafordb reference to $datafordb array
+     * @param string $content reference to $content
+     * @param string $errorcontent reference to $errorcontent
+     * @param array $datafordb reference to $datafordb array
      * @param int $startofday unix timestamp
      * @param int $endofday unix timestamp
      * @param string $filename the filename (without _errors suffix)
+     *
      * @return void
      */
     private static function add_sap_data_for_ledger_records(
@@ -639,7 +640,7 @@ class sap_daily_sums {
 
     /**
      * Create SAP files for a specific date.
-     * @param string $starttimestamp
+     * @param int $starttimestamp
      * @return void
      * @throws \file_exception
      * @throws \stored_file_creation_exception

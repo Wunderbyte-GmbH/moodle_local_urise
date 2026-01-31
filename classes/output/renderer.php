@@ -68,7 +68,7 @@ class renderer extends plugin_renderer_base {
     /**
      * Function to render the cards table
      * @param mixed $data
-     * @param string $data
+     * @param string $templatename
      * @return string
      */
     public function render_table($data, string $templatename): string {
@@ -139,7 +139,7 @@ class renderer extends plugin_renderer_base {
     /**
      * Function to render the transactions list.
      *
-     * @param mixed $data
+     * @param mixed $page
      * @return string
      */
     public function render_transactions_list($page): string {

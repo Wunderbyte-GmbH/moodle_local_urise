@@ -42,8 +42,9 @@ class allcourses implements renderable, templatable {
 
     /**
      * Constructor.
+     * @param card|null $card
      */
-    public function __construct($card = null) {
+    public function __construct(?card $card = null) {
 
         if ($card) {
             $this->cards[] = $card;

@@ -36,7 +36,7 @@ define('LOCAL_URISE_STATUSPARAM_DELETED', 5);
 /**
  * Adds module specific settings to the settings block
  *
- * @param navigation_node $modnode The node to add module settings to
+ * @param navigation_node $navigation The node to add module settings to
  * @return void
  */
 function local_urise_extend_navigation(navigation_node $navigation) {
@@ -136,19 +136,19 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
 /**
  * Callback checking permissions and preparing the file for serving plugin files, see File API.
  *
- * @param $course
- * @param $cm
- * @param $context
- * @param $filearea
- * @param $args
- * @param $forcedownload
- * @param array $options
- * @return mixed
+ * @param stdClass $course course object
+ * @param stdClass $cm course module object
+ * @param stdClass $context context object
+ * @param string $filearea file area
+ * @param array $args extra arguments
+ * @param bool $forcedownload whether or not force download
+ * @param array $options additional options affecting the file serving
+ * @return ?bool false if file not found, does not return if found - justsend the file
  * @throws coding_exception
  * @throws moodle_exception
  * @throws require_login_exception
  */
-function local_urise_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
+function local_urise_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []): ?bool {
     // Check the contextlevel is as expected - if your plugin is a block.
     // We need context course if we like to access template files.
     if (!in_array($context->contextlevel, [CONTEXT_SYSTEM])) {
