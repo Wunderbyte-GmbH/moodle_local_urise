@@ -22,6 +22,31 @@
 
     Data attributes required for JS:
     * data-region
+
+    Example context (json):
+    {
+        "item": [
+            {
+                "key": "participants",
+                "value": "25",
+                "link": "https://moodle.example.com/course/participants.php?id=42"
+            },
+            {
+                "key": "assignments",
+                "value": "4",
+                "data-action": "open-assignments"
+            },
+            {
+                "key": "completion",
+                "html": "<span class=\"badge badge-success\">Completed</span>"
+            },
+            {
+                "key": "messages",
+                "value": "",
+                "data-action": "open-messages"
+            }
+        ]
+    }
 }}
 
 {{#item}}

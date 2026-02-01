@@ -25,18 +25,17 @@
 
     Example context (json):
     {
-        "itemid" : 3,
-        "componentname" : "local_urise",
-        "modalcounter" : 1,
-        "modaltitle" : "main",
-        "userid" : 133,
-        "editoptionurl" : "URL",
-        "manageresponsesurl" : "URL",
-        "optiondatesteachersurl" : "URL",
-        "showundocancel" : true,
-        "undocancellink" : "URL",
-        "showcancel" : true,
-        "cancellink": "URL"
+        "optiondatesteachersurl": "https://moodle.example.com/mod/booking/optiondatesteachers.php?optionid=42",
+        "editoptionurl": "https://moodle.example.com/mod/booking/editoption.php?id=42",
+        "sendmailtoallbookedusers": true,
+        "mailtobookeduserslink": "https://moodle.example.com/mod/booking/mailtobookedusers.php?optionid=42",
+        "editavailability": true,
+        "optionid": 42,
+        "manageresponsesurl": "https://moodle.example.com/mod/booking/manageresponses.php?optionid=42",
+        "showcancel": true,
+        "cancellink": "<a class=\"dropdown-item canceloption\" href=\"https://moodle.example.com/mod/booking/cancel.php?optionid=42\"><i class=\"fa fa-ban fa-fw\" aria-hidden=\"true\"></i> Cancel option</a>",
+        "showundocancel": false,
+        "undocancellink": ""
     }
 }}
 
