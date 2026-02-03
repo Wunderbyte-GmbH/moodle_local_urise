@@ -1572,6 +1572,7 @@ class shortcodes {
 
         return [
             'explode' => ',',
+            '0' => get_string('sonstige', 'local_urise'),
             '1' => get_string('students', 'local_urise'),
             '2' => get_string('doctoralcandidates', 'local_urise'),
             '3' => get_string('lecturers', 'local_urise'),
