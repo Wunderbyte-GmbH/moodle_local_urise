@@ -765,7 +765,7 @@ class shortcodes {
 
         if (empty($filtercolumns) || in_array('bibliothekszielgruppe', $filtercolumns)) {
             // Find bibliothekszielgruppe from list of custom fields.
-            $cfbibliothekszielgruppe = array_filter($customfields, fn($cf) => $cf->shortname === 'kurssprache');
+            $cfbibliothekszielgruppe = array_filter($customfields, fn($cf) => $cf->shortname === 'bibliothekszielgruppe');
             $cfbibliothekszielgruppe = reset($cfbibliothekszielgruppe);
 
             // Add bibliothekszielgruppe as a filter.
