@@ -20,7 +20,7 @@ jobs:
         moodle-plugin-ci add-plugin --branch main Wunderbyte-GmbH/moodle-mod_booking
         moodle-plugin-ci add-plugin --branch main Wunderbyte-GmbH/moodle-local_entities
 
-      # mustache_ignore_names: ''
+      mustache_ignore_names: 'table_listtext_row.mustache,transactions_list.mustache,col_availableplaces.mustache,table_list_row.mustache'
 
       workarounds: |
         # WORKAROUND 17/04/2025: The following code is a workaround for the "File is stale and needs to be rebuilt" error
@@ -83,7 +83,7 @@ jobs:
         moodle-plugin-ci add-plugin --branch main Wunderbyte-GmbH/moodle-mod_booking
         moodle-plugin-ci add-plugin --branch main Wunderbyte-GmbH/moodle-local_entities
 
-      # mustache_ignore_names: ''
+      mustache_ignore_names: 'table_listtext_row.mustache,transactions_list.mustache,col_availableplaces.mustache,table_list_row.mustache'
 
       workarounds: |
         # WORKAROUND 17/04/2025: The following code is a workaround for the "File is stale and needs to be rebuilt" error
