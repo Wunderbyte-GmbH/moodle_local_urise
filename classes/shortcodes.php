@@ -1637,7 +1637,7 @@ class shortcodes {
                     0,
                     0,
                     '',
-                    's1.*, kompetenzen, organisation',
+                    's1.*',
                     $context,
                     [],
                     $wherearray,
