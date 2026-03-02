@@ -1361,8 +1361,9 @@ class shortcodes {
 
                             foreach ($values as $vkey => $vvalue) {
                                 $additonalwhere .= $vkey > 0 ? ' OR ' : '';
-                                $vvalue = "'%$vvalue%'";
-                                $additonalwhere .= " $key LIKE $vvalue ";
+                                $vvalue = (int)$vvalue; // Ensure numeric id.
+                                $additonalwhere .= $DB->sql_concat("','", "COALESCE($key, '')", "','")
+                                    . " LIKE '%,$vvalue,%'";
                             }
 
                             if (!empty($values)) {
