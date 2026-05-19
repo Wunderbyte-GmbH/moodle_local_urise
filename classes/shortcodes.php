@@ -542,6 +542,10 @@ class shortcodes {
 
         [$table, $perpage] = self::unifiedview($shortcode, $args, $content, $env, $next);
 
+        // Manipulate this SQL to make sure, there it's not identical to the one of the list or card view.
+        // This is a workaround to prevent caching problems, because we want to have a different cache for the filter view.
+        $table->sql->where .= " AND 2 = 2 ";
+
         $table->tabletemplate = 'local_wunderbyte_table/filterview';
 
         if (!empty($args['customurl'])) {
