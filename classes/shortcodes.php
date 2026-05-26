@@ -1086,7 +1086,7 @@ class shortcodes {
         $table->add_classes_to_subcolumns('cardlist', ['columnclass' => 'd-flex align-item-center'], ['showdates']);
         $table->add_classes_to_subcolumns('cardheader', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'mr-auto'], ['botags']);
-        $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'ml-auto'], ['bookings']);
+        $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'ml-auto d-flex'], ['bookings']);
 
         $table->add_subcolumns('cardbody', ['text', 'description']);
         $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' => 'mr-auto'], ['text']);
