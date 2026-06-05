@@ -993,19 +993,19 @@ class shortcodes {
 
         if (!empty($args['sort'])) {
             $sortablecolumns = [
-                'text' => get_string('coursename', 'local_urise'),
+                'text' => ['label' => 'coursename', 'component' => 'local_urise'],
             ];
             if (get_config('local_urise', 'uriseshortcodesshowstart')) {
-                $sortablecolumns['coursestarttime'] = get_string('coursestarttime', 'mod_booking');
+                $sortablecolumns['coursestarttime'] = ['label' => 'coursestarttime', 'component' => 'mod_booking'];
             }
             if (get_config('local_urise', 'uriseshortcodesshowend')) {
-                $sortablecolumns['courseendtime'] = get_string('courseendtime', 'mod_booking');
+                $sortablecolumns['courseendtime'] = ['label' => 'courseendtime', 'component' => 'mod_booking'];
             }
             if (get_config('local_urise', 'uriseshortcodesshowbookablefrom')) {
-                $sortablecolumns['bookingopeningtime'] = get_string('bookingopeningtime', 'mod_booking');
+                $sortablecolumns['bookingopeningtime'] = ['label' => 'bookingopeningtime', 'component' => 'mod_booking'];
             }
             if (get_config('local_urise', 'uriseshortcodesshowbookableuntil')) {
-                $sortablecolumns['bookingclosingtime'] = get_string('bookingclosingtime', 'mod_booking');
+                $sortablecolumns['bookingclosingtime'] = ['label' => 'bookingclosingtime', 'component' => 'mod_booking'];
             }
             $table->define_sortablecolumns($sortablecolumns);
         }
