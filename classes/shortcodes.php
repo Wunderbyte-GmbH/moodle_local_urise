@@ -1052,7 +1052,7 @@ class shortcodes {
         $table->add_subcolumns('url', ['url']);
         $table->add_subcolumns('cardimage', ['image']);
         $table->set_tableclass('cardimageclass', 'imageforcard');
-        $table->add_subcolumns('cardheader', ['botags', 'action', 'bookings']);
+        $table->add_subcolumns('cardheader', ['action', 'botags', 'bookings']);
         $table->add_subcolumns('cardfooter', ['course', 'price']);
 
         self::add_urise_infolist($table);
@@ -1085,8 +1085,9 @@ class shortcodes {
         );
         $table->add_classes_to_subcolumns('cardlist', ['columnclass' => 'd-flex align-item-center'], ['showdates']);
         $table->add_classes_to_subcolumns('cardheader', ['columnkeyclass' => 'd-none']);
-        $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'mr-auto'], ['botags']);
-        $table->add_classes_to_subcolumns('cardheader', ['columnvalueclass' => 'ml-auto d-flex'], ['bookings']);
+        $table->add_classes_to_subcolumns('cardheader', ['columnclass' => 'col-auto'], ['action']);
+        $table->add_classes_to_subcolumns('cardheader', ['columnclass' => 'col-auto mr-auto', 'columnvalueclass' => 'mr-auto'], ['botags']);
+        $table->add_classes_to_subcolumns('cardheader', ['columnclass' => 'col-auto ml-auto', 'columnvalueclass' => 'ml-auto d-flex'], ['bookings']);
 
         $table->add_subcolumns('cardbody', ['text', 'description']);
         $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' => 'mr-auto'], ['text']);
@@ -1131,7 +1132,7 @@ class shortcodes {
 
         $table->set_tableclass('cardimageclass', 'imageforlist');
 
-        $table->add_subcolumns('top', ['botags', 'action', 'bookings' ]);
+        $table->add_subcolumns('top', ['action', 'botags', 'bookings' ]);
         $table->add_subcolumns('leftside', $subcolumnsleftside);
         $table->add_subcolumns('info', $subcolumnsinfo);
         $table->add_subcolumns('footer', $subcolumnsfooter);
@@ -1140,7 +1141,9 @@ class shortcodes {
         $table->add_classes_to_subcolumns('rightside', ['columnkeyclass' => 'd-none']);
 
         $table->add_classes_to_subcolumns('top', ['columnkeyclass' => 'd-none']);
-        $table->add_classes_to_subcolumns('top', ['columnclass' => 'mr-auto text-uppercase'], ['botags']);
+        $table->add_classes_to_subcolumns('top', ['columnclass' => 'flex-shrink-0'], ['action']);
+        $table->add_classes_to_subcolumns('top', ['columnclass' => 'ml-2 mr-auto text-uppercase'], ['botags']);
+        $table->add_classes_to_subcolumns('top', ['columnclass' => 'ml-auto flex-shrink-0', 'columnvalueclass' => 'd-flex'], ['bookings']);
 
         $table->add_classes_to_subcolumns('leftside', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-1 title'], ['text']);
@@ -1221,7 +1224,7 @@ class shortcodes {
         // We define it here so we can pass it with the mustache template.
         $table->add_subcolumns('optionid', ['id']);
 
-        $table->add_subcolumns('top', ['botags', 'action', 'bookings' ]);
+        $table->add_subcolumns('top', ['action', 'botags', 'bookings' ]);
         $table->add_subcolumns('leftside', $subcolumnsleftside);
         $table->add_subcolumns('info', $subcolumnsinfo);
         $table->add_subcolumns('footer', $subcolumnsfooter);
@@ -1230,7 +1233,9 @@ class shortcodes {
         $table->add_classes_to_subcolumns('rightside', ['columnkeyclass' => 'd-none']);
 
         $table->add_classes_to_subcolumns('top', ['columnkeyclass' => 'd-none']);
-        $table->add_classes_to_subcolumns('top', ['columnclass' => 'mr-auto text-uppercase'], ['botags']);
+        $table->add_classes_to_subcolumns('top', ['columnclass' => 'flex-shrink-0'], ['action']);
+        $table->add_classes_to_subcolumns('top', ['columnclass' => 'ml-2 mr-auto text-uppercase'], ['botags']);
+        $table->add_classes_to_subcolumns('top', ['columnclass' => 'ml-auto flex-shrink-0', 'columnvalueclass' => 'd-flex'], ['bookings']);
 
         $table->add_classes_to_subcolumns('leftside', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-1 title'], ['text']);
