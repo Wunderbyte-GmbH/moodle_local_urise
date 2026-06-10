@@ -29,6 +29,7 @@ namespace local_urise;
 use Closure;
 use coding_exception;
 use dml_exception;
+use local_wunderbyte_table\filters\types\alloptionshierarchicalfilter;
 use local_wunderbyte_table\filters\types\customfieldfilter;
 use local_wunderbyte_table\filters\types\hierarchicalfilter;
 use local_wunderbyte_table\wunderbyte_table;
@@ -743,6 +744,13 @@ class shortcodes {
             $filtercolumns = [];
         }
 
+        // Parse displayemptycategories parameter to show all options including those with 0 entries.
+        if (!empty($args['displayemptycategories'])) {
+            $displayemptycategories = explode(',', $args['displayemptycategories']);
+        } else {
+            $displayemptycategories = [];
+        }
+
         $customfields = booking_handler::get_customfields();
 
         if (empty($filtercolumns) || in_array('zgcommunities', $filtercolumns)) {
@@ -784,7 +792,12 @@ class shortcodes {
             $cfkompetenzen = array_filter($customfields, fn($cf) => $cf->shortname === 'kompetenzen');
             $cfkompetenzen = reset($cfkompetenzen);
 
-            $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_urise'));
+            // Use alloptionshierarchicalfilter if displayemptycategories includes this column.
+            if (in_array('kompetenzen', $displayemptycategories)) {
+                $hierarchicalfilter = new alloptionshierarchicalfilter('kompetenzen', get_string('competency', 'local_urise'));
+            } else {
+                $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_urise'));
+            }
             $hierarchicalfilter->set_sql_for_fieldid($cfkompetenzen->id);
             $hierarchicalfilter->add_options(self::get_kompetenzen());
             $table->add_filter($hierarchicalfilter);
@@ -794,7 +807,18 @@ class shortcodes {
             $cforganisation = array_filter($customfields, fn($cf) => $cf->shortname === 'organisation');
             $cforganisation = reset($cforganisation);
 
-            $hierarchicalfilter = new hierarchicalfilter('organisation', get_string('organisationfilter', 'local_urise'));
+            // Use alloptionshierarchicalfilter if displayemptycategories includes this column.
+            if (in_array('organisation', $displayemptycategories)) {
+                $hierarchicalfilter = new alloptionshierarchicalfilter(
+                    'organisation',
+                    get_string('organisationfilter', 'local_urise')
+                );
+            } else {
+                $hierarchicalfilter = new hierarchicalfilter(
+                    'organisation',
+                    get_string('organisationfilter', 'local_urise')
+                );
+            }
             $hierarchicalfilter->set_sql_for_fieldid($cforganisation->id);
             $hierarchicalfilter->add_options(self::organisations());
             $table->add_filter($hierarchicalfilter);
