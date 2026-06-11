@@ -1110,8 +1110,16 @@ class shortcodes {
         $table->add_classes_to_subcolumns('cardlist', ['columnclass' => 'd-flex align-item-center'], ['showdates']);
         $table->add_classes_to_subcolumns('cardheader', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('cardheader', ['columnclass' => 'col-auto'], ['action']);
-        $table->add_classes_to_subcolumns('cardheader', ['columnclass' => 'col-auto mr-auto', 'columnvalueclass' => 'mr-auto'], ['botags']);
-        $table->add_classes_to_subcolumns('cardheader', ['columnclass' => 'col-auto ml-auto', 'columnvalueclass' => 'ml-auto d-flex'], ['bookings']);
+        $table->add_classes_to_subcolumns(
+            'cardheader',
+            ['columnclass' => 'col-auto mr-auto', 'columnvalueclass' => 'mr-auto'],
+            ['botags']
+        );
+        $table->add_classes_to_subcolumns(
+            'cardheader',
+            ['columnclass' => 'col-auto ml-auto', 'columnvalueclass' => 'ml-auto d-flex'],
+            ['bookings']
+        );
 
         $table->add_subcolumns('cardbody', ['text', 'description']);
         $table->add_classes_to_subcolumns('cardbody', ['columnvalueclass' => 'mr-auto'], ['text']);
@@ -1167,7 +1175,11 @@ class shortcodes {
         $table->add_classes_to_subcolumns('top', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('top', ['columnclass' => 'flex-shrink-0'], ['action']);
         $table->add_classes_to_subcolumns('top', ['columnclass' => 'ml-2 mr-auto text-uppercase'], ['botags']);
-        $table->add_classes_to_subcolumns('top', ['columnclass' => 'ml-auto flex-shrink-0', 'columnvalueclass' => 'd-flex'], ['bookings']);
+        $table->add_classes_to_subcolumns(
+            'top',
+            ['columnclass' => 'ml-auto flex-shrink-0', 'columnvalueclass' => 'd-flex'],
+            ['bookings']
+        );
 
         $table->add_classes_to_subcolumns('leftside', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-1 title'], ['text']);
@@ -1259,7 +1271,11 @@ class shortcodes {
         $table->add_classes_to_subcolumns('top', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('top', ['columnclass' => 'flex-shrink-0'], ['action']);
         $table->add_classes_to_subcolumns('top', ['columnclass' => 'ml-2 mr-auto text-uppercase'], ['botags']);
-        $table->add_classes_to_subcolumns('top', ['columnclass' => 'ml-auto flex-shrink-0', 'columnvalueclass' => 'd-flex'], ['bookings']);
+        $table->add_classes_to_subcolumns(
+            'top',
+            ['columnclass' => 'ml-auto flex-shrink-0', 'columnvalueclass' => 'd-flex'],
+            ['bookings']
+        );
 
         $table->add_classes_to_subcolumns('leftside', ['columnkeyclass' => 'd-none']);
         $table->add_classes_to_subcolumns('leftside', ['columnclass' => 'text-left mt-1 mb-1 title'], ['text']);
