@@ -30,6 +30,7 @@ use context_module;
 use context_system;
 use dml_exception;
 use html_writer;
+use local_wunderbyte_table\local\customfield\wbt_field_controller_info;
 use local_wunderbyte_table\wunderbyte_table;
 use mod_booking\booking_bookit;
 use mod_booking\booking_option;
@@ -152,6 +153,28 @@ class urise_table extends wunderbyte_table {
         ;
     }
 
+    /**
+     * Resolve a select customfield's label in the CURRENT language from its raw key.
+     *
+     * The pre-formatted value in $settings->customfieldsfortemplates[...]['value'] is baked at
+     * cache-build time (the bookingoptionsettings APPLICATION cache key has no language component),
+     * so reading it shows the wrong language after a language switch. Instead we resolve the label
+     * from the raw, language-neutral key in $settings->customfields[...] at render time via the
+     * field controller, which applies format_string() in current_language() - mirroring col_showdates.
+     *
+     * @param object $settings booking_option_settings instance.
+     * @param string $shortname customfield shortname.
+     * @return string the localized value, or '' if not set.
+     */
+    private function get_localized_customfield_value($settings, string $shortname): string {
+        if (!isset($settings->customfields[$shortname]) || $settings->customfields[$shortname] === '') {
+            return '';
+        }
+        $fieldcontroller = wbt_field_controller_info::get_instance_by_shortname($shortname, 'mod_booking', 'booking');
+        // $formatstring defaults to true -> format_string() runs now, in the current language.
+        return $fieldcontroller->get_option_value_by_key($settings->customfields[$shortname]);
+    }
+
        /**
         * This function is called for each data row to allow processing of the
         * kurssprache value.
@@ -164,11 +187,7 @@ class urise_table extends wunderbyte_table {
 
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
 
-        if (isset($settings->customfieldsfortemplates) && isset($settings->customfieldsfortemplates['kurssprache'])) {
-            $value = $settings->customfieldsfortemplates['kurssprache']['value'];
-            return format_string($value);
-        }
-        return '';
+        return $this->get_localized_customfield_value($settings, 'kurssprache');
     }
 
     /**
@@ -183,11 +202,7 @@ class urise_table extends wunderbyte_table {
 
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
 
-        if (isset($settings->customfieldsfortemplates) && isset($settings->customfieldsfortemplates['format'])) {
-                $value = $settings->customfieldsfortemplates['format']['value'];
-                return format_string($value);
-        }
-        return '';
+        return $this->get_localized_customfield_value($settings, 'format');
     }
 
     /**
@@ -316,11 +331,7 @@ class urise_table extends wunderbyte_table {
     public function col_umfang($values) {
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
 
-        if (isset($settings->customfieldsfortemplates) && isset($settings->customfieldsfortemplates['umfang'])) {
-            $value = $settings->customfieldsfortemplates['umfang']['value'];
-            return format_string($value);
-        }
-        return '';
+        return $this->get_localized_customfield_value($settings, 'umfang');
     }
 
     /**
