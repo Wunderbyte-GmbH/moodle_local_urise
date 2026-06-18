@@ -25,13 +25,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_urise';
-$plugin->release = '0.2.47';
-$plugin->version = 2026061600;
+$plugin->release = '0.2.48';
+$plugin->version = 2026061800;
 $plugin->requires = 2022112800; // Requires this Moodle version. Current: Moodle 4.1.
 $plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = [
     'mod_booking' => 2025052100,
-    'local_wunderbyte_table' => 2025060802,
+    'local_wunderbyte_table' => 2026061800,
     'local_shopping_cart' => 2025052101,
     'local_entities' => 2024111100,
 ];
