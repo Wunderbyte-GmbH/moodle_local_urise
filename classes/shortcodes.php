@@ -29,7 +29,6 @@ namespace local_urise;
 use Closure;
 use coding_exception;
 use dml_exception;
-use local_wunderbyte_table\filters\types\alloptionshierarchicalfilter;
 use local_wunderbyte_table\filters\types\customfieldfilter;
 use local_wunderbyte_table\filters\types\hierarchicalfilter;
 use local_wunderbyte_table\wunderbyte_table;
@@ -792,11 +791,10 @@ class shortcodes {
             $cfkompetenzen = array_filter($customfields, fn($cf) => $cf->shortname === 'kompetenzen');
             $cfkompetenzen = reset($cfkompetenzen);
 
-            // Use alloptionshierarchicalfilter if displayemptycategories includes this column.
+            $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_urise'));
+            // Also display categories without records if requested for this column.
             if (in_array('kompetenzen', $displayemptycategories)) {
-                $hierarchicalfilter = new alloptionshierarchicalfilter('kompetenzen', get_string('competency', 'local_urise'));
-            } else {
-                $hierarchicalfilter = new hierarchicalfilter('kompetenzen', get_string('competency', 'local_urise'));
+                $hierarchicalfilter->show_all_options();
             }
             $hierarchicalfilter->set_sql_for_fieldid($cfkompetenzen->id);
             $hierarchicalfilter->add_options(self::get_kompetenzen());
@@ -807,17 +805,13 @@ class shortcodes {
             $cforganisation = array_filter($customfields, fn($cf) => $cf->shortname === 'organisation');
             $cforganisation = reset($cforganisation);
 
-            // Use alloptionshierarchicalfilter if displayemptycategories includes this column.
+            $hierarchicalfilter = new hierarchicalfilter(
+                'organisation',
+                get_string('organisationfilter', 'local_urise')
+            );
+            // Also display categories without records if requested for this column.
             if (in_array('organisation', $displayemptycategories)) {
-                $hierarchicalfilter = new alloptionshierarchicalfilter(
-                    'organisation',
-                    get_string('organisationfilter', 'local_urise')
-                );
-            } else {
-                $hierarchicalfilter = new hierarchicalfilter(
-                    'organisation',
-                    get_string('organisationfilter', 'local_urise')
-                );
+                $hierarchicalfilter->show_all_options();
             }
             $hierarchicalfilter->set_sql_for_fieldid($cforganisation->id);
             $hierarchicalfilter->add_options(self::organisations());
