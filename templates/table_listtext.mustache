@@ -145,7 +145,6 @@
 {{/norecords}}
 {{^norecords}}
      {{#table}}
-
      {{#infinitescroll}}
           {{^displayelementsontop}}
                <div>
@@ -191,6 +190,9 @@
                </table>
           </div>
      </div>
+     {{/table}}
+     {{^table}}
+        {{> local_wunderbyte_table/component_countlabel }}
      {{/table}}
 {{#js}}
     require(['local_wunderbyte_table/init'], function(init) {
