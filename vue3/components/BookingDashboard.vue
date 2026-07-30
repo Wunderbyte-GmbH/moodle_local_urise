@@ -33,13 +33,16 @@
             </div>
           </div>
         </div>
-        <a @click="scrollRight()" class="text-white mr5em ml-auto" style="font-size: 1.3em;
+        <a @click="scrollRight()" class="text-white mr5em" style="font-size: 1.3em;
     margin-left: 1rem; padding-bottom: 10px;"><i class="fa-solid fa-arrow-right dashboardicon"></i></a>
         <!-- Confirmation dialog -->
         <div v-if="showConfirmationModal">
           <ConfirmationModal :show-confirmation-modal="showConfirmationModal" :strings="store.state.strings"
             @confirmBack="confirmBack" />
         </div>
+      </div>
+      <div class="db-scrollbar" ref="dbScrollbar" @mousedown="onScrollbarTrack">
+        <div class="db-scrollbar-thumb" :style="thumbStyle" @mousedown.stop.prevent="onThumbDown"></div>
       </div>
     </div>
     <transition name="fade" mode="out-in">
@@ -89,7 +92,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, nextTick } from 'vue'
 import Searchbar from '../components/FilterSearchbar.vue'
 import { useStore } from 'vuex'
 import SkeletonTab from '../components/helper/SkeletonTab.vue';
@@ -124,11 +127,19 @@ onMounted(async () => {
   tabsstored.value = store.state.tabs
   tabs.value = store.state.tabs
   content.value = store.state.content
+  await nextTick();
+  if (scrollMe.value) {
+    scrollMe.value.addEventListener('scroll', updateThumb);
+  }
+  window.addEventListener('resize', updateThumb);
+  updateThumb();
 });
 
 watch(() => store.state.tabs, async () => {
   tabsstored.value = store.state.tabs
   tabs.value = store.state.tabs
+  await nextTick();
+  updateThumb();
 }, { deep: true });
 
 watch(() => store.state.content, async () => {
@@ -182,6 +193,48 @@ const scrollRight = () => {
       behavior: 'smooth'
     });
   }
+};
+
+// LMS-826: always-visible custom scrollbar for the tab strip. The theme hides all
+// native scrollbars, and macOS overlay scrollbars only appear while scrolling.
+const dbScrollbar = ref(null);
+const thumbStyle = ref({ width: '100%', left: '0%' });
+
+const updateThumb = () => {
+  const c = scrollMe.value;
+  if (!c) return;
+  if (c.scrollWidth <= c.clientWidth) {
+    thumbStyle.value = { width: '100%', left: '0%' };
+    return;
+  }
+  thumbStyle.value = {
+    width: (c.clientWidth / c.scrollWidth) * 100 + '%',
+    left: (c.scrollLeft / c.scrollWidth) * 100 + '%',
+  };
+};
+
+let sbDrag = null;
+const onThumbDown = (e) => {
+  if (!scrollMe.value) return;
+  sbDrag = { x: e.clientX, left: scrollMe.value.scrollLeft };
+  window.addEventListener('mousemove', onThumbMove);
+  window.addEventListener('mouseup', onThumbUp);
+};
+const onThumbMove = (e) => {
+  if (!sbDrag || !scrollMe.value || !dbScrollbar.value) return;
+  const c = scrollMe.value;
+  c.scrollLeft = sbDrag.left + ((e.clientX - sbDrag.x) / dbScrollbar.value.clientWidth) * c.scrollWidth;
+};
+const onThumbUp = () => {
+  sbDrag = null;
+  window.removeEventListener('mousemove', onThumbMove);
+  window.removeEventListener('mouseup', onThumbUp);
+};
+const onScrollbarTrack = (e) => {
+  const c = scrollMe.value, track = dbScrollbar.value;
+  if (!c || !track) return;
+  const rect = track.getBoundingClientRect();
+  c.scrollLeft = ((e.clientX - rect.left) / rect.width) * c.scrollWidth - c.clientWidth / 2;
 };
 
 const toggleSearchbar = () => {
@@ -252,9 +305,41 @@ function findElementById(jsonData, idToFind) {
 }
 
 .overflow-tabs-container {
-  overflow-x: auto;
+  overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  // LMS-826: fill the space between the arrows and scroll internally.
+  flex: 1 1 auto;
+  min-width: 0;
+  // Native scrollbars are hidden site-wide by the theme; a custom always-visible
+  // scrollbar (.db-scrollbar) is rendered instead, so keep the native one hidden.
+  scrollbar-width: none;
+}
+.overflow-tabs-container::-webkit-scrollbar {
+  display: none;
+}
+
+// LMS-826: custom always-visible horizontal scrollbar for the tab strip.
+.db-scrollbar {
+  height: 8px;
+  margin: 6px 5em 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+  cursor: pointer;
+  z-index: 3;
+}
+.db-scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  min-width: 24px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  cursor: grab;
+}
+.db-scrollbar-thumb:active {
+  cursor: grabbing;
 }
 
 .nav-item {

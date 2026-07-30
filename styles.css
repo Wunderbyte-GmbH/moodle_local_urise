@@ -782,4 +782,33 @@ a.booking-card-image-link:hover {
 .fitem:has([name="bo_cond_booking_time_sqlfiltercheck"]) {
     display: none !important;
 }
+
+/* LMS-826: mobile fixes for the dashboard tab strip. */
+@media (max-width: 767.98px) {
+    /* Shrink the header's fixed 5em margins so the tab strip uses the full width. */
+    .local_urise-dashboard .ml5em {
+        margin-left: 0.75rem !important;
+    }
+    .local_urise-dashboard .mr5em {
+        margin-right: 0.75rem !important;
+    }
+    .local_urise-dashboard .db-scrollbar {
+        margin-left: 0.75rem !important;
+        margin-right: 0.75rem !important;
+    }
+    /* The theme paints NON-active tabs with --body-bg (white) on mobile, so unselected tabs
+       become white boxes with unreadable white text. Restore: non-active = transparent + white
+       text (readable on the teal header), active = white background + dark text. */
+    .local_urise-dashboard .nav-tabs .nav-link:not(.active) {
+        background-color: transparent !important;
+        color: #fff !important;
+    }
+    .local_urise-dashboard .nav-tabs .nav-link.active {
+        background-color: #fff !important;
+    }
+    .local_urise-dashboard .nav-tabs .nav-link.active,
+    .local_urise-dashboard .nav-tabs .nav-link.active .tabunselected {
+        color: #001f33 !important;
+    }
+}
 /* stylelint-enable declaration-no-important */
