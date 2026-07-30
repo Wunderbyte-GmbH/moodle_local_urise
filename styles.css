@@ -776,4 +776,10 @@ a.booking-card-image-link:hover {
 .bg-secondary.rounded {
     border-radius: 25px !important;
 }
+
+/* LMS-812: hide mod_booking bo_cond_booking_time_sqlfiltercheck for everyone. */
+#fitem_id_bo_cond_booking_time_sqlfiltercheck,
+.fitem:has([name="bo_cond_booking_time_sqlfiltercheck"]) {
+    display: none !important;
+}
 /* stylelint-enable declaration-no-important */

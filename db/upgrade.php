@@ -39,5 +39,12 @@ function xmldb_local_urise_upgrade($oldversion) {
     // You will also have to create the db/install.xml file by using the XMLDB Editor.
     // Documentation for the XMLDB Editor can be found at {@link https://docs.moodle.org/dev/XMLDB_editor}.
 
+    if ($oldversion < 2026073000) {
+        // LMS-812: deactivate the "hide outside booking time" filter (sqlfilter 2 -> 0) for existing options.
+        $DB->set_field('booking_options', 'sqlfilter', 0, ['sqlfilter' => 2]);
+
+        upgrade_plugin_savepoint(true, 2026073000, 'local', 'urise');
+    }
+
     return true;
 }
