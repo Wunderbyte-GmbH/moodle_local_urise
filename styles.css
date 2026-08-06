@@ -777,9 +777,8 @@ a.booking-card-image-link:hover {
     border-radius: 25px !important;
 }
 
-/* LMS-812: hide mod_booking bo_cond_booking_time_sqlfiltercheck for everyone. */
-#fitem_id_bo_cond_booking_time_sqlfiltercheck,
-.fitem:has([name="bo_cond_booking_time_sqlfiltercheck"]) {
+/* LMS-812: hide only the bo_cond_booking_time_sqlfiltercheck checkbox (leaf .fitem, 5.2-safe). */
+.fitem:not(:has(.fitem)):has([name="bo_cond_booking_time_sqlfiltercheck"]) {
     display: none !important;
 }
 
