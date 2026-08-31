@@ -90,6 +90,20 @@ class renderer extends plugin_renderer_base {
         $o = '';
         $templatedata = $data->export_for_template($this);
         $templatedata['showmaxanswers'] = $data->showmaxanswers;
+        // Fully booked but with free places on the waiting list: show "Waiting list" instead of "Full".
+        // Freeonwaitinglist == -1 only means unlimited when maxoverbooking is empty.
+        $maxoverbooking = $templatedata['maxoverbooking'] ?? 0;
+        $freeonwaitinglist = $templatedata['freeonwaitinglist'] ?? 0;
+        $waitinglistopen = !empty($maxoverbooking)
+            ? $freeonwaitinglist > 0
+            : $freeonwaitinglist == -1;
+        if (
+            !empty($templatedata['fullybooked'])
+            && $waitinglistopen
+        ) {
+            $templatedata['waitinglistavailable'] = true;
+            $templatedata['bookingplacesclass'] = 'text-warning waitinglistavail';
+        }
         $o .= $this->render_from_template('local_urise/col_availableplaces', $templatedata);
         return $o;
     }

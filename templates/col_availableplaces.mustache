@@ -28,6 +28,7 @@
         "booked": 12,
         "showmaxanswers": true,
         "fullybooked": false,
+        "waitinglistavailable": false,
         "bookingplacesclass": "text-success",
         "unlimited_example": {
             "maxanswers": false,
@@ -64,7 +65,12 @@
         </svg>
             {{#fullybooked}}
                 <span class="text-dark align-middle">
-                    {{#str}} availplacesfull, mod_booking {{/str}}
+                    {{#waitinglistavailable}}
+                        {{#str}} waitinglist, mod_booking {{/str}}
+                    {{/waitinglistavailable}}
+                    {{^waitinglistavailable}}
+                        {{#str}} availplacesfull, mod_booking {{/str}}
+                    {{/waitinglistavailable}}
                 </span>
             {{/fullybooked}}
             {{^fullybooked}}

@@ -435,6 +435,11 @@ div[id*="substitutionspoolteachers"] .form-autocomplete-suggestions {
     color: var(--danger);
 }
 
+.waitinglistavail {
+    border-color: var(--warning, orange);
+    color: var(--warning, orange);
+}
+
 .placeholderimage {
     background: lightgray;
     height: 100%;
