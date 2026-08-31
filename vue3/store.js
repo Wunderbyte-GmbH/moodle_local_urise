@@ -131,11 +131,17 @@ export function createAppStore() {
                   content[0].json = jsonCombined;
                 }
                 context.commit('setContent', tabcontent);
-                const configlist = await ajax('mod_booking_get_option_field_config', {
-                  contextid: params.contextid
-                });
-                context.commit('setConfigList', configlist);
-                return configlist;
+                // Only fetch the option field config if the user is allowed to see the tab.
+                // The webservice requires mod/booking:editoptionformconfig and throws otherwise.
+                if (tabcontent.showbookingoptionfields) {
+                    const configlist = await ajax('mod_booking_get_option_field_config', {
+                      contextid: params.contextid
+                    });
+                    context.commit('setConfigList', configlist);
+                    return configlist;
+                }
+                context.commit('setConfigList', []);
+                return [];
             },
             async setParentContent(context, index) {
               return await ajax('mod_booking_set_parent_content', {

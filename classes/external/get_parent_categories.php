@@ -102,7 +102,7 @@ class get_parent_categories extends external_api {
                     'description' => get_string('dashboardsummary_desc', 'mod_booking'),
                     'path' => '',
                     'json' => '',
-                    'showbookingoptionfields' => has_capability('mod/booking:expertoptionform', $context),
+                    'showbookingoptionfields' => has_capability('mod/booking:editoptionformconfig', $context),
                 ],
             ];
         } else {
@@ -168,7 +168,11 @@ class get_parent_categories extends external_api {
                     'booking' => array_values($bookingoptions),
                 ]);
 
-                $record->showbookingoptionfields = has_capability('mod/booking:expertoptionform', $context);
+                // The webservice mod_booking_get_option_field_config requires this capability at system context.
+                $record->showbookingoptionfields = has_capability(
+                    'mod/booking:editoptionformconfig',
+                    context_system::instance()
+                );
             }
             $returnarray[] = (array)$record;
 
