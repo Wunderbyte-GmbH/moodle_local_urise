@@ -171,7 +171,7 @@ class urise_table extends wunderbyte_table {
             return '';
         }
         $fieldcontroller = wbt_field_controller_info::get_instance_by_shortname($shortname, 'mod_booking', 'booking');
-        // $formatstring defaults to true -> format_string() runs now, in the current language.
+        // Comment: $formatstring defaults to true -> format_string() runs now, in the current language.
         return $fieldcontroller->get_option_value_by_key($settings->customfields[$shortname]);
     }
 
