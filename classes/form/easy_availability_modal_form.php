@@ -168,7 +168,7 @@ class easy_availability_modal_form extends \core_form\dynamic_form {
             has_capability('local/urise:editavailability', $context) ||
             // Or: Teachers can edit the availability of their own option.
             (has_capability('mod/booking:limitededitownoption', $context) && $this->check_if_teacher($optionid)) ||
-            (has_capability('mod/booking:addeditownoption', $context) && $this->check_if_teacher($optionid))
+            (has_capability('mod/booking:editownoption', $context) && $this->check_if_teacher($optionid))
         );
         if (!$alloweditavailability) {
             throw new moodle_exception('norighttoaccess', 'local_urise');
