@@ -1020,7 +1020,7 @@ class urise_table extends wunderbyte_table {
                 $allowsendmailtoallbookedusers = (
                     get_config('booking', 'teachersallowmailtobookedusers') && (
                         has_capability('mod/booking:updatebooking', $context) ||
-                        (has_capability('mod/booking:addeditownoption', $context) && booking_check_if_teacher($values)) ||
+                        (has_capability('mod/booking:sendmailownoption', $context) && booking_check_if_teacher($values)) ||
                         (has_capability('mod/booking:limitededitownoption', $context) && booking_check_if_teacher($values))
                     )
                 );
@@ -1036,7 +1036,7 @@ class urise_table extends wunderbyte_table {
                 $alloweditavailability = (
                     has_capability('local/urise:editavailability', $context) &&
                     (has_capability('mod/booking:updatebooking', $context) ||
-                    (has_capability('mod/booking:addeditownoption', $context) && booking_check_if_teacher($values)) ||
+                    (has_capability('mod/booking:editownoption', $context) && booking_check_if_teacher($values)) ||
                     (has_capability('mod/booking:limitededitownoption', $context) && booking_check_if_teacher($values)))
                 );
                 if ($alloweditavailability) {
