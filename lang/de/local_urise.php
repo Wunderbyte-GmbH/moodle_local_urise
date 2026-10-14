@@ -534,6 +534,6 @@ $string['wissenschaftlichespersonal'] = "Wissenschaftliches Personal";
 $string['wissenschaftlichespublizieren'] = 'Wissenschaftliches Publizieren';
 $string['youareusingconfig'] = 'Sie verwenden folgende Formular-Konfiguration: {$a}';
 $string['youneedcustomfieldkompetenzen'] = 'Das benutzerdefinierte Buchungsoptionsfeld "Kompetenzen (Shortname: kompetenzen)" ist nicht angelegt oder enthält keinen Wert.';
-$string['zbphysikundchemie'] = "ZB Physik und Chemie";
+$string['zbphysikundchemie'] = "FB Physik, Chemie und Astronomie";
 $string['zentralerinformatikdienst'] = "Zentraler Informatikdienst";
 $string['zgcommunities'] = "Interessant für";

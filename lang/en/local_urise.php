@@ -524,6 +524,6 @@ $string['wissenschaftlichespersonal'] = "Academic staff";
 $string['wissenschaftlichespublizieren'] = 'Academic writing & publishing';
 $string['youareusingconfig'] = 'Your are using the following form configuration: {$a}';
 $string['youneedcustomfieldkompetenzen'] = 'The Booking option customfield "Kompetenzen (Shortname: kompetenzen)" is missing or no value for this field is set.';
-$string['zbphysikundchemie'] = "Physics and Chemistry Library";
+$string['zbphysikundchemie'] = "Physics, Chemistry and Astronomy Library";
 $string['zentralerinformatikdienst'] = "Vienna University Computer Center";
 $string['zgcommunities'] = "Interesting for";
