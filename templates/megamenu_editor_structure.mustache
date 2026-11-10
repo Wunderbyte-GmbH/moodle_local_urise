@@ -1,0 +1,188 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_urise/megamenu_editor_structure
+
+    The structure of the mega menu draft: toolbar, entries of the left column and the content of the selected entry.
+    Actions are handled by amd/src/megamenu_editor.js.
+
+    Example context (json):
+    {
+        "revision": 3, "enabled": true, "haschanges": true, "previewurl": "https://example.com/?megamenupreview=1",
+        "hastabs": true, "tabspath": "[\"tabs\"]",
+        "tabs": [{"id": "phd", "label": "PhD", "typename": "Community", "haspanel": true, "color": "blue",
+            "colorname": "Blau", "selected": true, "path": "[\"tabs\",\"phd\"]", "blockspath": "[]",
+            "ctapath": "[]", "secondarylinkspath": "[]", "blocks": [], "secondarylinks": []}]
+    }
+}}
+<div data-region="megamenu-editor-data" data-revision="{{revision}}">
+    <div class="mm-toolbar d-flex flex-wrap align-items-center mb-3">
+        <div class="mr-auto me-auto">
+            {{#haschanges}}
+                <span class="badge bg-warning text-dark">{{#str}}megamenu:status_draft, local_urise{{/str}}</span>
+            {{/haschanges}}
+            {{^haschanges}}
+                <span class="badge bg-success">{{#str}}megamenu:status_published, local_urise{{/str}}</span>
+            {{/haschanges}}
+            {{^enabled}}
+                <span class="badge bg-secondary">{{#str}}megamenu:status_disabled, local_urise{{/str}}</span>
+            {{/enabled}}
+        </div>
+        <button type="button" class="btn btn-secondary mr-2 me-2" data-action="mm-edit" data-form="settings" data-path="[]">
+            {{#str}}settings{{/str}}
+        </button>
+        <a class="btn btn-secondary mr-2 me-2" href="{{previewurl}}" target="_blank">
+            {{#str}}megamenu:preview, local_urise{{/str}}
+        </a>
+        <button type="button" class="btn btn-secondary mr-2 me-2" data-action="mm-discard" {{^haschanges}}disabled{{/haschanges}}>
+            {{#str}}megamenu:discard, local_urise{{/str}}
+        </button>
+        <button type="button" class="btn btn-primary" data-action="mm-publish" {{^haschanges}}disabled{{/haschanges}}>
+            {{#str}}megamenu:publish, local_urise{{/str}}
+        </button>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <h3 class="h5">{{#str}}megamenu:tabs, local_urise{{/str}}</h3>
+            <ul class="list-unstyled mm-list" data-listtype="tabs" data-listpath="{{tabspath}}">
+                {{#tabs}}
+                    <li class="mm-item mm-tab d-flex align-items-center {{#selected}}selected{{/selected}}" data-path="{{path}}">
+                        <span class="mm-drag" data-drag="tabs" role="button" tabindex="0">{{#pix}}i/dragdrop, core, {{#str}}move{{/str}}{{/pix}}</span>
+                        {{#haspanel}}<span class="mm-swatch mm-color-{{color}}" title="{{colorname}}"></span>{{/haspanel}}
+                        <button type="button" class="btn btn-link text-left text-start flex-grow-1 p-1" data-action="mm-select" data-tab="{{id}}">
+                            {{label}} <small class="text-muted">· {{typename}}</small>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-link p-1" data-action="mm-edit" data-form="tab" data-path="{{path}}"
+                            title="{{#str}}edit{{/str}}">{{#pix}}t/edit, core, {{#str}}edit{{/str}}{{/pix}}</button>
+                        <button type="button" class="btn btn-sm btn-link p-1" data-action="mm-delete" data-path="{{path}}" data-name="{{label}}"
+                            title="{{#str}}delete{{/str}}">{{#pix}}t/delete, core, {{#str}}delete{{/str}}{{/pix}}</button>
+                    </li>
+                {{/tabs}}
+            </ul>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-action="mm-edit" data-form="tab" data-path="{{tabspath}}">
+                {{#pix}}t/add, core{{/pix}} {{#str}}megamenu:addtab, local_urise{{/str}}
+            </button>
+        </div>
+
+        <div class="col-md-8">
+            {{^hastabs}}
+                <div class="alert alert-info">{{#str}}megamenu:empty, local_urise{{/str}}</div>
+            {{/hastabs}}
+            {{#tabs}}
+                <div class="mm-tabcontent" data-region="mm-tabcontent" data-tab="{{id}}" {{^selected}}hidden{{/selected}}>
+                    <div class="d-flex align-items-center mb-3">
+                        <h3 class="h5 m-0">{{label}} <small class="text-muted">· {{typename}}</small></h3>
+                        <button type="button" class="btn btn-sm btn-outline-secondary ml-auto ms-auto" data-action="mm-edit" data-form="tab" data-path="{{path}}">
+                            {{#pix}}t/edit, core{{/pix}} {{#str}}megamenu:edittab, local_urise{{/str}}
+                        </button>
+                    </div>
+
+                    {{^haspanel}}
+                        <p class="text-muted">{{#str}}megamenu:linktabinfo, local_urise{{/str}}</p>
+                    {{/haspanel}}
+                    {{#isoverview}}
+                        <p class="text-muted">{{#str}}megamenu:overviewinfo, local_urise{{/str}}</p>
+                    {{/isoverview}}
+                    {{^haspanel}}{{> local_urise/megamenu_editor_slot_link}}{{/haspanel}}
+                    {{#isoverview}}{{> local_urise/megamenu_editor_slot_link}}{{/isoverview}}
+
+                    {{#haspanel}}
+                        <div class="mm-section">
+                            <h4 class="h6">{{#str}}megamenu:middlecolumn, local_urise{{/str}}</h4>
+                            {{#heading}}<p class="mb-1"><strong>{{heading}}</strong></p>{{/heading}}
+                            {{#intro}}<p class="text-muted small mb-1">{{intro}}</p>{{/intro}}
+                            {{#hint}}<p class="text-muted small mb-1">← {{hint}}</p>{{/hint}}
+
+                            <ul class="list-unstyled mm-list" data-listtype="blocks" data-listpath="{{blockspath}}">
+                                {{#blocks}}
+                                    <li class="mm-item mm-block" data-path="{{path}}">
+                                        <div class="d-flex align-items-center mm-block-header">
+                                            <span class="mm-drag" data-drag="blocks" role="button" tabindex="0">{{#pix}}i/dragdrop, core, {{#str}}move{{/str}}{{/pix}}</span>
+                                            <strong class="flex-grow-1">{{typename}}{{#title}}: {{title}}{{/title}}</strong>
+                                            {{#boxed}}<span class="badge bg-light text-dark border mr-2 me-2">{{#str}}megamenu:boxed, local_urise{{/str}}</span>{{/boxed}}
+                                            <button type="button" class="btn btn-sm btn-link p-1" data-action="mm-edit" data-form="block" data-path="{{path}}"
+                                                title="{{#str}}edit{{/str}}">{{#pix}}t/edit, core, {{#str}}edit{{/str}}{{/pix}}</button>
+                                            <button type="button" class="btn btn-sm btn-link p-1" data-action="mm-delete" data-path="{{path}}" data-name="{{typename}}"
+                                                title="{{#str}}delete{{/str}}">{{#pix}}t/delete, core, {{#str}}delete{{/str}}{{/pix}}</button>
+                                        </div>
+                                        {{#iscardrow}}
+                                            <ul class="list-unstyled mm-list mm-cards" data-listtype="cards" data-listpath="{{cardspath}}">
+                                                {{#cards}}
+                                                    <li class="mm-item mm-card" data-path="{{path}}">
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="mm-drag" data-drag="cards" role="button" tabindex="0">{{#pix}}i/dragdrop, core, {{#str}}move{{/str}}{{/pix}}</span>
+                                                            <strong class="flex-grow-1">{{title}}{{#subtitle}} <small class="text-muted">{{subtitle}}</small>{{/subtitle}}</strong>
+                                                            <button type="button" class="btn btn-sm btn-link p-1" data-action="mm-edit" data-form="card" data-path="{{path}}"
+                                                                title="{{#str}}edit{{/str}}">{{#pix}}t/edit, core, {{#str}}edit{{/str}}{{/pix}}</button>
+                                                            <button type="button" class="btn btn-sm btn-link p-1" data-action="mm-delete" data-path="{{path}}" data-name="{{title}}"
+                                                                title="{{#str}}delete{{/str}}">{{#pix}}t/delete, core, {{#str}}delete{{/str}}{{/pix}}</button>
+                                                        </div>
+                                                        {{> local_urise/megamenu_editor_links}}
+                                                    </li>
+                                                {{/cards}}
+                                            </ul>
+                                            <button type="button" class="btn btn-sm btn-link" data-action="mm-edit" data-form="card" data-path="{{cardspath}}">
+                                                {{#pix}}t/add, core{{/pix}} {{#str}}megamenu:addcard, local_urise{{/str}}
+                                            </button>
+                                        {{/iscardrow}}
+                                        {{^iscardrow}}
+                                            {{> local_urise/megamenu_editor_links}}
+                                        {{/iscardrow}}
+                                    </li>
+                                {{/blocks}}
+                            </ul>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-action="mm-addblock" data-path="{{blockspath}}">
+                                {{#pix}}t/add, core{{/pix}} {{#str}}megamenu:addblock, local_urise{{/str}}
+                            </button>
+                        </div>
+
+                        <div class="mm-section">
+                            <h4 class="h6">{{#str}}megamenu:rightcolumn, local_urise{{/str}}</h4>
+                            <p class="mb-2">
+                                <strong>{{#str}}megamenu:news, local_urise{{/str}}:</strong>
+                                {{#news}}{{headline}}{{/news}}{{^news}}<span class="text-muted">{{#str}}none{{/str}}</span>{{/news}}
+                                <small class="text-muted">({{#str}}megamenu:newsinfo, local_urise{{/str}})</small>
+                            </p>
+                            <p class="mb-1"><strong>{{#str}}megamenu:cta, local_urise{{/str}}</strong></p>
+                            {{#cta}}
+                                <div class="mm-item">{{> local_urise/megamenu_editor_link}}</div>
+                            {{/cta}}
+                            {{^cta}}
+                                <button type="button" class="btn btn-sm btn-link" data-action="mm-edit" data-form="link" data-path="{{ctapath}}">
+                                    {{#pix}}t/add, core{{/pix}} {{#str}}megamenu:addcta, local_urise{{/str}}
+                                </button>
+                            {{/cta}}
+                            <p class="mb-1 mt-3"><strong>{{#str}}megamenu:secondarylinks, local_urise{{/str}}</strong></p>
+                            <ul class="list-unstyled mm-list" data-listtype="secondarylinks" data-listpath="{{secondarylinkspath}}">
+                                {{#secondarylinks}}
+                                    <li class="mm-item d-flex align-items-center" data-path="{{path}}">
+                                        <span class="mm-drag" data-drag="secondarylinks" role="button" tabindex="0">{{#pix}}i/dragdrop, core, {{#str}}move{{/str}}{{/pix}}</span>
+                                        {{> local_urise/megamenu_editor_link}}
+                                    </li>
+                                {{/secondarylinks}}
+                            </ul>
+                            <button type="button" class="btn btn-sm btn-link" data-action="mm-edit" data-form="link" data-path="{{secondarylinkspath}}">
+                                {{#pix}}t/add, core{{/pix}} {{#str}}megamenu:addlink, local_urise{{/str}}
+                            </button>
+                        </div>
+                    {{/haspanel}}
+                </div>
+            {{/tabs}}
+        </div>
+    </div>
+</div>

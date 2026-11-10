@@ -34,6 +34,13 @@ $functions = [
                 'capabilities' => '',
                 'ajax' => 1,
         ],
+        'local_urise_megamenu_edit' => [
+                'classname' => 'local_urise\\external\\megamenu_edit',
+                'description' => 'Deletes or moves elements of the mega menu draft, publishes or discards it',
+                'type' => 'write',
+                'capabilities' => 'local/urise:canedit',
+                'ajax' => 1,
+        ],
         'local_urise_set_parent_content' => [
                 'classname' => 'mod_booking\external\save_option_field_config',
                 'classpath' => '',
