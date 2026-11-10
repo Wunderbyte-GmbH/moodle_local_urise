@@ -1,0 +1,45 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_urise/megamenu_preview_mobile
+
+    The phone preview of the mega menu in the editor: the mobile drawer of theme_lexa with the menu item open,
+    rendered with the theme templates theme_lexa/megamenu_mobile and theme_lexa/megamenu_mobile_panels.
+
+    Context: the mega menu of \local_urise\megamenu\menu::export_for_template() with menulabel, logourl and sitename.
+
+    Example context (json):
+    {
+        "menulabel": "Angebot", "sitename": "u:rise", "logourl": "",
+        "tabs": [{"id": "phd", "label": "Doctoral Candidates", "haspanel": true, "color": "petrol", "iconsvg": "<svg></svg>"}]
+    }
+}}
+<div class="mm-phone">
+    <div class="mm-phone-header">
+        {{#logourl}}<img src="{{logourl}}" alt="{{sitename}}" class="mm-phone-logo">{{/logourl}}
+        {{^logourl}}<span class="mm-phone-sitename">{{sitename}}</span>{{/logourl}}
+        <span class="mm-phone-close" aria-hidden="true">✕</span>
+    </div>
+    <div class="drawercontent">
+        <div class="lexa-mm-mobile" data-region="lexa-megamenu-mobile">
+            <div class="list-group lexa-mm-mobile-level" data-region="lexa-megamenu-mobile-level1">
+                {{> theme_lexa/megamenu_mobile }}
+            </div>
+            {{> theme_lexa/megamenu_mobile_panels }}
+        </div>
+    </div>
+</div>

@@ -101,6 +101,13 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
         }
     }
 
+    $megamenulink = '';
+    if (has_capability('local/urise:canedit', $context)) {
+        $megamenulink = '<a class="dropdown-item" href="'
+                . $CFG->wwwroot . '/local/urise/megamenu.php">'
+                . get_string('megamenu:editor', 'local_urise') . '</a>';
+    }
+
     if (has_capability('local/shopping_cart:cashier', context_system::instance())) {
         $viewsapfiles = '<a class="dropdown-item" href="'
                 . $CFG->wwwroot . '/local/urise/viewsapdailysums.php">'
@@ -123,6 +130,7 @@ function local_urise_render_navbar_output(\renderer_base $renderer) {
                 . get_string('entities', 'local_urise') . '</a>'
             . $editteacherlink .
             $editnewslink
+            . $megamenulink
             . $viewsapfiles . '
             <a class="dropdown-item"
                 href="https://servicedesk.univie.ac.at/plugins/servlet/desk/portal/163/create/1918"
