@@ -1004,9 +1004,11 @@ class shortcodes {
         }
 
         if (!empty($args['search'])) {
+            // Teachers are searched by their names (teachernames). The column teacherobjects is JSON,
+            // a search in it also finds the ids of the users and the keys of the JSON.
             $table->define_fulltextsearchcolumns([
                 'titleprefix', 'text', 'organisation', 'description', 'location',
-                'teacherobjects', 'botags', 'inhalte', 'zielgruppe']);
+                'teachernames', 'botags', 'inhalte', 'zielgruppe']);
         }
 
         if (!empty($args['sort'])) {
