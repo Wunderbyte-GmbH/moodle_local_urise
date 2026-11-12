@@ -19,6 +19,7 @@ jobs:
         moodle-plugin-ci add-plugin --branch main Wunderbyte-GmbH/moodle-local_shopping_cart
         moodle-plugin-ci add-plugin --branch main Wunderbyte-GmbH/moodle-mod_booking
         moodle-plugin-ci add-plugin --branch main Wunderbyte-GmbH/moodle-local_entities
+        moodle-plugin-ci add-plugin --branch main Wunderbyte-GmbH/moodle-tool_mocktesttime
 
       mustache_ignore_names: 'table_listtext_row.mustache,transactions_list.mustache,col_availableplaces.mustache,table_list_row.mustache'
 
