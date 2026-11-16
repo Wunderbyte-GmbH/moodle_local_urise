@@ -527,6 +527,7 @@ $string['vuenotificationtitleactionfail'] = 'Die Konfiguration wurde nicht erfol
 $string['vuenotificationtitleactionsuccess'] = 'Die Konfiguration wurde erfolgreich {$a}';
 $string['vuenotificationtitleunsave'] = 'Keine ungespeicherten Änderungen erkannt';
 $string['waitforconfirmation'] = 'Buchen nur nach Bestätigung';
+$string['waitinglistplace'] = 'Warteliste: Platz {$a}';
 $string['websitesgestaltungtypo3'] = 'Websites-Gestaltung in TYPO3';
 $string['weiterentwicklungderlehre'] = 'Weiterentwicklung der Lehre';
 $string['wissensaustauschinnovation'] = 'Wissensaustausch & Innovation';
