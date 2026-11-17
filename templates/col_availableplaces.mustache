@@ -29,7 +29,6 @@
         "showmaxanswers": true,
         "fullybooked": false,
         "waitinglistavailable": false,
-        "placeonwaitinglist": 0,
         "bookingplacesclass": "text-success",
         "unlimited_example": {
             "maxanswers": false,
@@ -66,17 +65,12 @@
         </svg>
             {{#fullybooked}}
                 <span class="text-dark align-middle">
-                    {{#placeonwaitinglist}}
-                        {{#str}} waitinglistplace, local_urise, {{placeonwaitinglist}} {{/str}}
-                    {{/placeonwaitinglist}}
-                    {{^placeonwaitinglist}}
-                        {{#waitinglistavailable}}
-                            {{#str}} waitinglist, mod_booking {{/str}}
-                        {{/waitinglistavailable}}
-                        {{^waitinglistavailable}}
-                            {{#str}} availplacesfull, mod_booking {{/str}}
-                        {{/waitinglistavailable}}
-                    {{/placeonwaitinglist}}
+                    {{#waitinglistavailable}}
+                        {{#str}} waitinglist, mod_booking {{/str}}
+                    {{/waitinglistavailable}}
+                    {{^waitinglistavailable}}
+                        {{#str}} availplacesfull, mod_booking {{/str}}
+                    {{/waitinglistavailable}}
                 </span>
             {{/fullybooked}}
             {{^fullybooked}}

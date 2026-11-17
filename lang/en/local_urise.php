@@ -515,7 +515,6 @@ $string['vuenotificationtitleactionfail'] = 'Configuration was not  {$a}';
 $string['vuenotificationtitleactionsuccess'] = 'Configuration was {$a}';
 $string['vuenotificationtitleunsave'] = 'No unsaved changes detected';
 $string['waitforconfirmation'] = 'Book only after confirmation';
-$string['waitinglistplace'] = 'Waiting list: place {$a}';
 $string['websitesgestaltungtypo3'] = 'Creating Websites in TYPO3';
 $string['weiterentwicklungderlehre'] = 'Continuous development of teaching skills';
 $string['wissensaustauschinnovation'] = 'Knowledge exchange & innovation';

@@ -82,12 +82,11 @@ class renderer extends plugin_renderer_base {
      * Function to render the col availableplaces
      *
      * @param mixed $data
-     * @param int $placeonwaitinglist place of the user on the waiting list, 0 or less if not on the list
      *
      * @return string
      *
      */
-    public function render_col_availableplaces($data, int $placeonwaitinglist = 0): string {
+    public function render_col_availableplaces($data): string {
         $o = '';
         $templatedata = $data->export_for_template($this);
         $templatedata['showmaxanswers'] = $data->showmaxanswers;
@@ -103,11 +102,6 @@ class renderer extends plugin_renderer_base {
             && $waitinglistopen
         ) {
             $templatedata['waitinglistavailable'] = true;
-            $templatedata['bookingplacesclass'] = 'text-warning waitinglistavail';
-        }
-        // The user is on the waiting list: show the place instead of the generic label.
-        if ($placeonwaitinglist > 0) {
-            $templatedata['placeonwaitinglist'] = $placeonwaitinglist;
             $templatedata['bookingplacesclass'] = 'text-warning waitinglistavail';
         }
         $o .= $this->render_from_template('local_urise/col_availableplaces', $templatedata);

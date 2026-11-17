@@ -392,7 +392,7 @@ class urise_table extends wunderbyte_table {
      */
     public function col_bookings($values) {
 
-        global $PAGE, $USER;
+        global $PAGE;
 
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
         // Render col_bookings using a template.
@@ -403,16 +403,8 @@ class urise_table extends wunderbyte_table {
         if (!empty($this->displayoptions['showmaxanwers'])) {
             $data->showmaxanswers = $this->displayoptions['showmaxanwers'];
         }
-        // Show the place on the waiting list, if the user is on it and ranked waiting list is active.
-        $placeonwaitinglist = 0;
-        if (get_config('booking', 'waitinglistshowplaceonwaitinglist')) {
-            $userid = !empty($buyforuser->id) ? (int) $buyforuser->id : (int) $USER->id;
-            $bookinganswers = singleton_service::get_instance_of_booking_answers($settings);
-            $placeonwaitinglist = (int) $bookinganswers->return_place_on_waitinglist($userid);
-        }
-
         $output = singleton_service::get_renderer('local_urise');
-        return $output->render_col_availableplaces($data, $placeonwaitinglist);
+        return $output->render_col_availableplaces($data);
     }
 
     /**
