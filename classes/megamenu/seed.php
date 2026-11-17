@@ -19,14 +19,64 @@ namespace local_urise\megamenu;
 /**
  * Example content for the mega menu, taken from the screen design (Figma "Megamenü").
  *
- * Topic links are search links for now, as the topics of the design don't match
- * existing filter values. Editors replace them with the real targets.
+ * Topic links filter the catalogue by the values the topics of the design stand for,
+ * within the audience of their community. Topics without such a value are search links.
  *
  * @package local_urise
  * @copyright 2026 Wunderbyte GmbH <info@wunderbyte.at>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class seed {
+    /** @var array Value of the audience filter (zgcommunities) per community tab. */
+    public const COMMUNITIES = [
+        'phd' => '2',
+        'postdocs' => '3',
+        'leaders' => '5',
+        'staff' => '4',
+        'students' => '6',
+    ];
+
+    /** @var array Catalogue filters of the topics. Topics without a matching filter value are search links. */
+    public const TOPICS = [
+        'Equality, Diversity & Inclusion' => ['kompetenzen' => ['24']],
+        'IT Services & Tools' => ['kompetenzen' => ['38']],
+        'Datenmanagement' => ['kompetenzen' => ['37']],
+        'Fachspezifische Recherche' => ['reihenprogramm' => ['11']],
+        'Funding Your PhD' => ['kompetenzen' => ['15']],
+        'Good Scientific Practice' => ['kompetenzen' => ['12']],
+        'Publizieren & wissenschaftlich kommunizieren' => ['kompetenzen' => ['9']],
+        'Presentation Skills' => ['kompetenzen' => ['17']],
+        'Wissenschaftliches Schreiben' => ['kompetenzen' => ['8']],
+        'Wissenschaftskommunikation' => ['reihenprogramm' => ['14']],
+        'Karriereplanung & berufliche Entwicklung' => ['kompetenzen' => ['16']],
+        'Basisqualifizierung für Erstlehrende' => ['reihenprogramm' => ['1']],
+        'Lehrkompetenzentwicklung' => ['kompetenzen' => ['1', '2', '3', '4', '5', '6', '7']],
+        'Well-Being in Academia' => ['kompetenzen' => ['33']],
+        'Academic English' => ['kompetenzen' => ['21']],
+        'Positionierung & Netzwerken' => ['kompetenzen' => ['13']],
+        'Zeit-, Projekt- und Selbstmanagement' => ['kompetenzen' => ['27', '28']],
+        'Forschungskompetenz & akademische Exzellenz' => ['kompetenzen' => ['8', '9', '10', '11', '12', '13', '14', '15']],
+        'Führung & Supervision' => ['kompetenzen' => ['39', '41', '42', '43', '44', '45']],
+        'Funding Research' => ['kompetenzen' => ['15']],
+        'Karriere & strategische Positionierung' => ['kompetenzen' => ['16']],
+        'Kommunikation' => ['kompetenzen' => ['17', '18', '19', '20', '22', '23']],
+        'Lehre' => ['kompetenzen' => ['1', '2', '3', '4', '5', '6', '7']],
+        'Teamführung & -entwicklung' => ['kompetenzen' => ['41']],
+        'Selbstführung' => ['kompetenzen' => ['42']],
+        'Mitarbeitende fördern' => ['kompetenzen' => ['43']],
+        'Strategische Planung & Umsetzung' => ['kompetenzen' => ['45']],
+        'People & Collaboration' => ['kompetenzen' => ['25']],
+        'Self-Leadership' => ['kompetenzen' => ['42']],
+        'Drittmittelkoordination' => ['kompetenzen' => ['15']],
+        'Eventmanagement' => ['kompetenzen' => ['26']],
+        'Wissenschaftliches Arbeiten' => ['kompetenzen' => ['8']],
+        'Präsentation' => ['kompetenzen' => ['17']],
+        'Zeit- & Selbstmanagement' => ['kompetenzen' => ['27', '28']],
+        'Sprachkenntnisse' => ['kompetenzen' => ['21']],
+        'Recherche & Datenbanken' => ['reihenprogramm' => ['11']],
+        'Open Access & Publizieren' => ['kompetenzen' => ['9', '10']],
+    ];
+
     /**
      * Returns the example menu.
      *
@@ -238,6 +288,10 @@ class seed {
             'id' => $id,
             'type' => 'panel',
             'label' => ['de' => $de, 'en' => $en],
+            'basefilter' => [
+                'enabled' => isset(self::COMMUNITIES[$id]),
+                'filters' => isset(self::COMMUNITIES[$id]) ? ['zgcommunities' => [self::COMMUNITIES[$id]]] : [],
+            ],
             'color' => $color,
             'icon' => $icon,
             'heading' => ['de' => "Empfohlene Angebote für $de", 'en' => "Recommended for $en"],
@@ -271,7 +325,7 @@ class seed {
             'id' => $id,
             'title' => ['de' => $de, 'en' => $en],
             'subtitle' => ['de' => $subtitle],
-            'links' => self::searches($id, $topics),
+            'links' => self::topics($id, $topics),
         ];
     }
 
@@ -291,7 +345,7 @@ class seed {
             'type' => 'linkgrid',
             'title' => ['de' => $de, 'en' => $en],
             'boxed' => $boxed,
-            'links' => self::searches($id, $topics),
+            'links' => self::topics($id, $topics),
         ];
     }
 
@@ -307,21 +361,24 @@ class seed {
             'id' => $id,
             'type' => 'chips',
             'title' => ['de' => 'Weitere Schwerpunkte', 'en' => 'More topics'],
-            'links' => self::searches($id, $topics),
+            'links' => self::topics($id, $topics),
         ];
     }
 
     /**
-     * Search links for a list of topics.
+     * Links for a list of topics.
      *
      * @param string $prefix
      * @param string[] $topics
      * @return array
      */
-    private static function searches(string $prefix, array $topics): array {
+    private static function topics(string $prefix, array $topics): array {
         $links = [];
         foreach (array_values($topics) as $index => $topic) {
-            $links[] = self::search("$prefix-$index", $topic);
+            $id = "$prefix-$index";
+            $links[] = isset(self::TOPICS[$topic])
+                ? ['id' => $id, 'type' => 'filter', 'label' => ['de' => $topic], 'filters' => self::TOPICS[$topic]]
+                : self::search($id, $topic);
         }
         return $links;
     }

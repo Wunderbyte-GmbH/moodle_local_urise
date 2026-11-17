@@ -27,6 +27,9 @@ use MoodleQuickForm;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class megamenu_block_form extends megamenu_form {
+    /** @var array Links chosen in the filter loader. */
+    private array $loaded = [];
+
     /**
      * Adds the fields.
      *
@@ -48,6 +51,22 @@ class megamenu_block_form extends megamenu_form {
         $mform->addElement('advcheckbox', 'boxed', get_string('megamenu:boxed', 'local_urise'));
         $mform->addHelpButton('boxed', 'megamenu:boxed', 'local_urise');
         $mform->hideIf('boxed', 'type', 'neq', 'linkgrid');
+
+        // A card row has no links of its own, its cards have.
+        $this->add_filter_loader($mform);
+        $mform->hideIf('loadcolumn', 'type', 'eq', 'cardrow');
+    }
+
+    /**
+     * Validation.
+     *
+     * @param array $data
+     * @param array $files
+     * @return array
+     */
+    public function validation($data, $files): array {
+        $errors = parent::validation($data, $files);
+        return $data['type'] === 'cardrow' ? $errors : $this->validate_filter_loader($data, $errors);
     }
 
     /**
@@ -73,10 +92,23 @@ class megamenu_block_form extends megamenu_form {
      * @return array
      */
     protected function from_form(\stdClass $data): array {
+        $this->loaded = $data->type === 'cardrow' ? [] : $this->links_from_filter_loader($data);
         return [
             'type' => $data->type,
             'title' => $this->texts_from_form($data, 'title'),
             'boxed' => !empty($data->boxed),
         ];
+    }
+
+    /**
+     * Applies the block and adds the loaded links.
+     *
+     * @param array $menu
+     * @param array $path
+     * @param array $item
+     * @return array
+     */
+    protected function apply(array $menu, array $path, array $item): array {
+        return parent::apply($menu, $path, $this->append_loaded_links($menu, $path, $item, $this->loaded));
     }
 }

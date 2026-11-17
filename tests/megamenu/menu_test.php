@@ -144,6 +144,42 @@ final class menu_test extends advanced_testcase {
     }
 
     /**
+     * The base filter of a tab is added to its filter links only, and the link wins on the same column.
+     */
+    public function test_base_filter(): void {
+        $link = fn(array $values) => ['id' => 'l' . count($values), 'label' => ['en' => 'Link'], 'type' => 'filter'] + $values;
+        $menu = [
+            'enabled' => true,
+            'tabs' => [[
+                'id' => 'phd',
+                'label' => ['en' => 'PhD'],
+                'basefilter' => ['enabled' => true, 'filters' => ['zgcommunities' => [2], 'bad column' => ['1']]],
+                'cta' => $link(['filters' => ['format' => ['1']]]),
+                'secondarylinks' => [
+                    ['id' => 's1', 'label' => ['en' => 'Own'], 'type' => 'filter', 'filters' => ['zgcommunities' => ['3']]],
+                    ['id' => 's2', 'label' => ['en' => 'All'], 'type' => 'filter', 'filters' => ['format' => ['1']],
+                        'nobasefilter' => true],
+                    ['id' => 's3', 'label' => ['en' => 'Search'], 'type' => 'search', 'search' => 'funding'],
+                ],
+            ]],
+        ];
+        menu::save($menu, 0);
+        $this->assertSame(['zgcommunities' => ['2']], menu::base_filters(menu::get()['tabs'][0]));
+
+        $filter = fn(string $url) => (new moodle_url($url))->param('wbtfilter');
+        $tab = menu::export_for_template()['tabs'][0];
+        $this->assertSame('{"format":["1"],"zgcommunities":["2"]}', $filter($tab['cta']['url']));
+        $this->assertSame('{"zgcommunities":["3"]}', $filter($tab['secondarylinks'][0]['url']));
+        $this->assertSame('{"format":["1"]}', $filter($tab['secondarylinks'][1]['url']));
+        $this->assertNull($filter($tab['secondarylinks'][2]['url']));
+
+        $menu['tabs'][0]['basefilter']['enabled'] = false;
+        menu::save($menu, 1);
+        $this->assertSame([], menu::base_filters(menu::get()['tabs'][0]));
+        $this->assertSame('{"format":["1"]}', $filter(menu::export_for_template()['tabs'][0]['cta']['url']));
+    }
+
+    /**
      * Texts fall back to the site language and then to any language.
      */
     public function test_text_fallback(): void {

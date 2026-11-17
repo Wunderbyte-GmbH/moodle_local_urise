@@ -946,6 +946,32 @@ class shortcodes {
     }
 
     /**
+     * Returns the filters a catalogue shortcode defines, without building a table.
+     *
+     * @param array $args Arguments of the shortcode.
+     * @return array column => options as the filter adds them to the table
+     */
+    public static function get_filter_definitions(array $args = []): array {
+        $collector = new class {
+            /** @var array */
+            public $filters = [];
+
+            /**
+             * Collects the settings of a filter.
+             *
+             * @param \local_wunderbyte_table\filters\base $filter
+             * @param bool $invisible
+             */
+            public function add_filter($filter, $invisible = false) {
+                $filter->add_filter($this->filters, $invisible);
+            }
+        };
+        self::define_filtercolumns($collector, $args);
+        unset($collector->filters['id']);
+        return $collector->filters;
+    }
+
+    /**
      * Get booking from shortcode arguments.
      *
      * @param array $args

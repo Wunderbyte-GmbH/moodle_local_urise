@@ -26,6 +26,9 @@ use MoodleQuickForm;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class megamenu_card_form extends megamenu_form {
+    /** @var array Links chosen in the filter loader. */
+    private array $loaded = [];
+
     /**
      * Adds the fields.
      *
@@ -34,6 +37,7 @@ class megamenu_card_form extends megamenu_form {
     protected function define_fields(MoodleQuickForm $mform): void {
         $this->add_texts($mform, 'title', get_string('megamenu:title', 'local_urise'));
         $this->add_texts($mform, 'subtitle', get_string('megamenu:subtitle', 'local_urise'));
+        $this->add_filter_loader($mform);
     }
 
     /**
@@ -44,7 +48,8 @@ class megamenu_card_form extends megamenu_form {
      * @return array
      */
     public function validation($data, $files): array {
-        return $this->validate_texts_required($data, 'title', parent::validation($data, $files));
+        $errors = $this->validate_texts_required($data, 'title', parent::validation($data, $files));
+        return $this->validate_filter_loader($data, $errors);
     }
 
     /**
@@ -67,9 +72,22 @@ class megamenu_card_form extends megamenu_form {
      * @return array
      */
     protected function from_form(\stdClass $data): array {
+        $this->loaded = $this->links_from_filter_loader($data);
         return [
             'title' => $this->texts_from_form($data, 'title'),
             'subtitle' => $this->texts_from_form($data, 'subtitle'),
         ];
+    }
+
+    /**
+     * Applies the card and adds the loaded links.
+     *
+     * @param array $menu
+     * @param array $path
+     * @param array $item
+     * @return array
+     */
+    protected function apply(array $menu, array $path, array $item): array {
+        return parent::apply($menu, $path, $this->append_loaded_links($menu, $path, $item, $this->loaded));
     }
 }

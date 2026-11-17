@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace local_urise\form;
+use local_urise\megamenu\editor;
 use local_urise\megamenu\filteroptions;
 use local_urise\megamenu\menu;
 use MoodleQuickForm;
@@ -57,12 +58,29 @@ class megamenu_link_form extends megamenu_form {
                 'autocomplete',
                 "filter_{$shortname}",
                 get_string('megamenu:filtervalues', 'local_urise'),
-                $column['options'],
+                filteroptions::get_form_options($column),
                 ['multiple' => true]
             );
             $mform->hideIf("filter_{$shortname}", 'type', 'neq', 'filter');
             $mform->hideIf("filter_{$shortname}", 'filtercolumn', 'neq', $shortname);
         }
+
+        $path = $this->get_path();
+        $tab = ($path[0] ?? '') === 'tabs' ? editor::get(menu::get(true), array_slice($path, 0, 2)) : null;
+        $base = menu::base_filters($tab ?? []);
+        if (empty($base)) {
+            $mform->addElement('hidden', 'nobasefilter');
+        } else {
+            $mform->addElement(
+                'advcheckbox',
+                'nobasefilter',
+                get_string('megamenu:nobasefilter', 'local_urise'),
+                filteroptions::describe($base)
+            );
+            $mform->addHelpButton('nobasefilter', 'megamenu:nobasefilter', 'local_urise');
+            $mform->hideIf('nobasefilter', 'type', 'neq', 'filter');
+        }
+        $mform->setType('nobasefilter', PARAM_BOOL);
 
         $mform->addElement('text', 'search', get_string('megamenu:search', 'local_urise'), ['size' => 60]);
         $mform->setType('search', PARAM_TEXT);
@@ -119,6 +137,7 @@ class megamenu_link_form extends megamenu_form {
             'type' => $item['type'] ?? 'filter',
             'url' => $item['url'] ?? '',
             'search' => $item['search'] ?? '',
+            'nobasefilter' => empty($item['nobasefilter']) ? 0 : 1,
             'filtercolumn' => array_key_first($filters) ?? array_key_first(filteroptions::get_columns()),
         ];
         foreach ($filters as $column => $values) {
@@ -137,7 +156,7 @@ class megamenu_link_form extends megamenu_form {
         $column = $data->filtercolumn ?? '';
         $filters = [];
         if ($data->type === 'filter' && !empty($data->{"filter_{$column}"})) {
-            $filters[$column] = array_values((array)$data->{"filter_{$column}"});
+            $filters[$column] = filteroptions::expand_groups($column, (array)$data->{"filter_{$column}"});
         }
         return [
             'type' => $data->type,
@@ -145,6 +164,7 @@ class megamenu_link_form extends megamenu_form {
             'url' => $data->type === 'url' ? trim($data->url) : '',
             'search' => $data->type === 'search' ? trim($data->search) : '',
             'filters' => $filters,
+            'nobasefilter' => $data->type === 'filter' && !empty($data->nobasefilter),
         ];
     }
 }

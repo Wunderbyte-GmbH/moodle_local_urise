@@ -21,6 +21,7 @@ use core_external\external_api;
 use local_urise\external\megamenu_edit;
 use local_urise\form\megamenu_link_form;
 use local_urise\form\megamenu_tab_form;
+use mod_booking\customfield\hierarchy_manager;
 use moodle_exception;
 use required_capability_exception;
 
@@ -263,6 +264,208 @@ final class editor_test extends advanced_testcase {
         $this->assertSame('owl', $tab['icon']);
         // The blocks are kept by the upsert.
         $this->assertSame(['b1', 'b2'], array_column($tab['blocks'], 'id'));
+    }
+
+    /**
+     * The tab form stores the base filter and keeps its values when it is switched off.
+     */
+    public function test_tab_form_base_filter(): void {
+        $this->setAdminUser();
+        $this->create_filter_field();
+        menu::save($this->menu(), 0, true);
+
+        $submit = function (array $values, int $revision): megamenu_tab_form {
+            $formdata = megamenu_tab_form::mock_ajax_submit($values + [
+                'path' => json_encode(['tabs', 'phd']),
+                'revision' => $revision,
+                'type' => 'panel',
+                'label_en' => 'PhD',
+                'color' => 'blue',
+                'icon' => '',
+                'newsid' => 0,
+            ]);
+            $form = new megamenu_tab_form(null, null, 'post', '', [], true, $formdata);
+            $form->set_data_for_dynamic_submission();
+            return $form;
+        };
+
+        $form = $submit(['basefilterenabled' => 1, 'basefiltercolumn' => 'format'], 1);
+        $this->assertFalse($form->is_validated());
+
+        $form = $submit(['basefilterenabled' => 1, 'basefiltercolumn' => 'format', 'basefilter_format' => ['2']], 1);
+        $this->assertTrue($form->is_validated());
+        $structure = $form->process_dynamic_submission();
+        $this->assertSame(
+            ['enabled' => true, 'filters' => ['format' => ['2']]],
+            editor::get(menu::get(true), ['tabs', 'phd'])['basefilter']
+        );
+        $this->assertStringContainsString(get_string('hybrid', 'local_urise'), $structure['tabs'][0]['basefilter']);
+
+        $form = $submit(['basefilterenabled' => 0], 2);
+        $this->assertTrue($form->is_validated());
+        $structure = $form->process_dynamic_submission();
+        $this->assertSame(
+            ['enabled' => false, 'filters' => ['format' => ['2']]],
+            editor::get(menu::get(true), ['tabs', 'phd'])['basefilter']
+        );
+        $this->assertSame('', $structure['tabs'][0]['basefilter']);
+    }
+
+    /**
+     * The link form offers to ignore the base filter of its tab.
+     */
+    public function test_link_form_ignores_base_filter(): void {
+        $this->setAdminUser();
+        $this->create_filter_field();
+        $menu = $this->menu();
+        $menu['tabs'][0]['basefilter'] = ['enabled' => true, 'filters' => ['format' => ['2']]];
+        menu::save($menu, 0, true);
+
+        $formdata = megamenu_link_form::mock_ajax_submit([
+            'path' => json_encode(['tabs', 'phd', 'cta']),
+            'revision' => 1,
+            'label_en' => 'All in person',
+            'type' => 'filter',
+            'filtercolumn' => 'format',
+            'filter_format' => ['1'],
+            'nobasefilter' => 1,
+        ]);
+        $form = new megamenu_link_form(null, null, 'post', '', [], true, $formdata);
+        $form->set_data_for_dynamic_submission();
+        $this->assertTrue($form->is_validated());
+        $form->process_dynamic_submission();
+
+        $cta = editor::get(menu::get(true), ['tabs', 'phd', 'cta']);
+        $this->assertTrue($cta['nobasefilter']);
+        $this->assertSame(['format' => ['1']], $cta['filters']);
+    }
+
+    /**
+     * The options come from the catalogue until mod_booking stores a hierarchy with the field.
+     */
+    public function test_filter_sources(): void {
+        $this->setAdminUser();
+        $this->create_filter_field();
+        $fieldid = $this->create_competence_field();
+
+        $columns = filteroptions::get_columns();
+        $this->assertSame('catalogue', $columns['format']['source']);
+        $this->assertSame(get_string('hybrid', 'local_urise'), $columns['format']['options']['2']);
+        $this->assertSame([], $columns['format']['groups']);
+        $this->assertSame('catalogue', $columns['kompetenzen']['source']);
+        $this->assertSame(
+            ['1', '2', '3', '4', '5', '6', '7'],
+            $columns['kompetenzen']['groups'][get_string('lehrkompetenzen', 'local_urise')]
+        );
+
+        if (!class_exists(hierarchy_manager::class)) {
+            $this->markTestSkipped('mod_booking has no hierarchy manager');
+        }
+        hierarchy_manager::save($fieldid, [
+            ['id' => 1, 'label' => 'Research', 'parentid' => 0],
+            ['id' => 2, 'label' => 'Writing', 'parentid' => 1],
+            ['id' => 3, 'label' => 'Publishing', 'parentid' => 1],
+        ]);
+        filteroptions::reset();
+        $column = filteroptions::get_columns()['kompetenzen'];
+        $this->assertSame('hierarchy', $column['source']);
+        $this->assertSame(['1' => 'Research', '2' => 'Writing', '3' => 'Publishing'], $column['options']);
+        $this->assertSame(['Research' => ['1', '2', '3']], $column['groups']);
+    }
+
+    /**
+     * The shortcode on the catalogue page decides which filters the editor offers.
+     */
+    public function test_filters_follow_shortcode(): void {
+        $this->setAdminUser();
+        $this->create_filter_field();
+        $this->create_competence_field();
+        $this->assertSame(['kompetenzen', 'format'], array_keys(filteroptions::get_columns()));
+
+        $category = $this->getDataGenerator()->create_category();
+        $this->getDataGenerator()->create_block('html', [
+            'parentcontextid' => \context_coursecat::instance($category->id)->id,
+            'configdata' => base64_encode(serialize((object)[
+                'text' => '<p>[unifiedcards perpage=4]</p>[unifiedcards filter=1 onlyfilterforcolumns="kompetenzen,coursetime"]',
+            ])),
+        ]);
+        $menu = $this->menu();
+        $menu['catalogueurl'] = '/course/index.php?categoryid=' . $category->id;
+        menu::save($menu, 0, true);
+        filteroptions::reset();
+
+        $this->assertSame(['kompetenzen'], array_keys(filteroptions::get_columns()));
+        $this->assertSame([], filteroptions::get_loadable_columns());
+    }
+
+    /**
+     * A group chosen in the link form is stored as its options.
+     */
+    public function test_link_form_expands_groups(): void {
+        $this->setAdminUser();
+        $this->create_competence_field();
+        menu::save($this->menu(), 0, true);
+
+        $choices = filteroptions::get_form_options(filteroptions::get_columns()['kompetenzen']);
+        $this->assertSame(
+            get_string('megamenu:wholegroup', 'local_urise', get_string('lehrkompetenzen', 'local_urise')),
+            $choices['group:0']
+        );
+
+        $formdata = megamenu_link_form::mock_ajax_submit([
+            'path' => json_encode(['tabs', 'phd', 'cta']),
+            'revision' => 1,
+            'label_en' => 'Teaching',
+            'type' => 'filter',
+            'filtercolumn' => 'kompetenzen',
+            'filter_kompetenzen' => ['group:0', '7', '8'],
+        ]);
+        $form = new megamenu_link_form(null, null, 'post', '', [], true, $formdata);
+        $form->set_data_for_dynamic_submission();
+        $this->assertTrue($form->is_validated());
+        $form->process_dynamic_submission();
+
+        $this->assertSame(
+            ['kompetenzen' => ['1', '2', '3', '4', '5', '6', '7', '8']],
+            editor::get(menu::get(true), ['tabs', 'phd', 'cta'])['filters']
+        );
+    }
+
+    /**
+     * Creates the booking option custom field "kompetenzen".
+     *
+     * @return int The id of the field.
+     */
+    private function create_competence_field(): int {
+        $generator = $this->getDataGenerator()->get_plugin_generator('core_customfield');
+        $category = $generator->create_category(['component' => 'mod_booking', 'area' => 'booking']);
+        $field = $generator->create_field([
+            'categoryid' => $category->get('id'),
+            'shortname' => 'kompetenzen',
+            'name' => 'Competences',
+            'type' => 'dynamicformat',
+            'configdata' => ['dynamicsql' => "SELECT '8' AS id, 'Writing' AS data", 'multiselect' => 1],
+        ]);
+        \cache::make('mod_booking', 'customfields')->purge();
+        filteroptions::reset();
+        return $field->get('id');
+    }
+
+    /**
+     * Creates the booking option custom field "format" with two options.
+     */
+    private function create_filter_field(): void {
+        $generator = $this->getDataGenerator()->get_plugin_generator('core_customfield');
+        $category = $generator->create_category(['component' => 'mod_booking', 'area' => 'booking']);
+        $generator->create_field([
+            'categoryid' => $category->get('id'),
+            'shortname' => 'format',
+            'name' => 'Format',
+            'type' => 'select',
+            'configdata' => ['options' => "In person\nOnline"],
+        ]);
+        \cache::make('mod_booking', 'customfields')->purge();
+        filteroptions::reset();
     }
 
     /**

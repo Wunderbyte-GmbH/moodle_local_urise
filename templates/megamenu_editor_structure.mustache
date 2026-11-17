@@ -92,6 +92,9 @@
                         </button>
                     </div>
 
+                    {{#basefilter}}
+                        <p class="text-muted">{{#str}}megamenu:basefilterinfo, local_urise, {{basefilter}}{{/str}}</p>
+                    {{/basefilter}}
                     {{^haspanel}}
                         <p class="text-muted">{{#str}}megamenu:linktabinfo, local_urise{{/str}}</p>
                     {{/haspanel}}

@@ -219,6 +219,10 @@ class menu {
             'type' => $type,
             'label' => self::clean_texts($tab['label'] ?? []),
             'link' => empty($tab['link']) || !is_array($tab['link']) ? null : self::normalise_link($tab['link']),
+            'basefilter' => [
+                'enabled' => !empty($tab['basefilter']['enabled']),
+                'filters' => self::clean_filters($tab['basefilter']['filters'] ?? []),
+            ],
             'color' => array_key_exists($tab['color'] ?? '', self::COLORS) ? $tab['color'] : 'blue',
             'icon' => in_array($tab['icon'] ?? '', self::ICONS, true) ? $tab['icon'] : '',
             'heading' => self::clean_texts($tab['heading'] ?? []),
@@ -279,8 +283,26 @@ class menu {
      * @return array
      */
     private static function normalise_link(array $link): array {
+        return [
+            'id' => self::clean_id($link['id'] ?? ''),
+            'type' => in_array($link['type'] ?? '', self::LINKTYPES, true) ? $link['type'] : 'url',
+            'label' => self::clean_texts($link['label'] ?? []),
+            'url' => self::clean_url($link['url'] ?? ''),
+            'filters' => self::clean_filters($link['filters'] ?? []),
+            'nobasefilter' => !empty($link['nobasefilter']),
+            'search' => clean_param((string)($link['search'] ?? ''), PARAM_TEXT),
+        ];
+    }
+
+    /**
+     * Cleans filters, dropping invalid columns and empty values.
+     *
+     * @param mixed $raw
+     * @return array column => values
+     */
+    private static function clean_filters($raw): array {
         $filters = [];
-        foreach ((array)($link['filters'] ?? []) as $column => $values) {
+        foreach ((array)$raw as $column => $values) {
             if (!is_string($column) || !preg_match('/^[a-z0-9_]+$/', $column)) {
                 continue;
             }
@@ -292,15 +314,17 @@ class menu {
                 $filters[$column] = $values;
             }
         }
+        return $filters;
+    }
 
-        return [
-            'id' => self::clean_id($link['id'] ?? ''),
-            'type' => in_array($link['type'] ?? '', self::LINKTYPES, true) ? $link['type'] : 'url',
-            'label' => self::clean_texts($link['label'] ?? []),
-            'url' => self::clean_url($link['url'] ?? ''),
-            'filters' => $filters,
-            'search' => clean_param((string)($link['search'] ?? ''), PARAM_TEXT),
-        ];
+    /**
+     * Returns the filters a tab adds to its filter links.
+     *
+     * @param array $tab
+     * @return array column => values, empty if the base filter is switched off.
+     */
+    public static function base_filters(array $tab): array {
+        return empty($tab['basefilter']['enabled']) ? [] : ($tab['basefilter']['filters'] ?? []);
     }
 
     /**
@@ -320,10 +344,9 @@ class menu {
         $news = self::load_news($menu['tabs']);
         $ids = array_column(array_filter($menu['tabs'], fn($tab) => $tab['type'] !== 'link'), 'id');
         $activetab = in_array($activetab, $ids, true) ? $activetab : ($ids[0] ?? '');
-        $context = ['menu' => $menu, 'edit' => $edit];
-
         $tabs = [];
         foreach ($menu['tabs'] as $tab) {
+            $context = ['menu' => $menu, 'edit' => $edit, 'basefilters' => self::base_filters($tab)];
             $path = ['tabs', $tab['id']];
             $counts = [];
             $secondarylinks = self::export_links($tab['secondarylinks'], array_merge($path, ['secondarylinks']), $context);
@@ -340,7 +363,9 @@ class menu {
                 'active' => $tab['id'] === $activetab,
                 // The first tab with a panel is shown again whenever the menu opens.
                 'default' => $tab['id'] === ($ids[0] ?? ''),
-                'url' => $tab['link'] ? self::resolve_url($tab['link'], $menu['catalogueurl']) : '',
+                'url' => $tab['link']
+                    ? self::resolve_url($tab['link'], $menu['catalogueurl'], $context['basefilters'])
+                    : '',
                 'linkeditpath' => self::edit_path(array_merge($path, ['link']), $context),
                 'color' => $tab['color'],
                 'colors' => self::COLORS[$tab['color']],
@@ -426,7 +451,7 @@ class menu {
      */
     private static function export_link(array $link, array $path, array $context): ?array {
         $label = self::text($link['label']);
-        $url = self::resolve_url($link, $context['menu']['catalogueurl']);
+        $url = self::resolve_url($link, $context['menu']['catalogueurl'], $context['basefilters']);
         if (!$context['edit'] && ($label === '' || $url === '')) {
             return null;
         }
@@ -458,16 +483,18 @@ class menu {
      *
      * @param array $link
      * @param string $catalogueurl
+     * @param array $basefilters Filters of the tab, added to filter links. The link wins on the same column.
      * @return string
      */
-    public static function resolve_url(array $link, string $catalogueurl): string {
+    public static function resolve_url(array $link, string $catalogueurl, array $basefilters = []): string {
         switch ($link['type']) {
             case 'filter':
                 if (empty($link['filters'])) {
                     return '';
                 }
+                $filters = empty($link['nobasefilter']) ? $link['filters'] + $basefilters : $link['filters'];
                 $url = new moodle_url($catalogueurl);
-                $url->param('wbtfilter', json_encode($link['filters'], JSON_UNESCAPED_UNICODE));
+                $url->param('wbtfilter', json_encode($filters, JSON_UNESCAPED_UNICODE));
                 return $url->out(false);
             case 'search':
                 if ($link['search'] === '') {

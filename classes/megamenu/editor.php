@@ -217,6 +217,7 @@ class editor {
         $tabs = [];
         foreach ($menu['tabs'] as $tab) {
             $tabpath = ['tabs', $tab['id']];
+            $base = menu::base_filters($tab);
             $blocks = [];
             foreach ($tab['blocks'] as $block) {
                 $blockpath = array_merge($tabpath, ['blocks', $block['id']]);
@@ -228,7 +229,7 @@ class editor {
                         'title' => self::label($card['title']),
                         'subtitle' => menu::text($card['subtitle']),
                         'path' => self::path($cardpath),
-                        'links' => self::export_links($card['links'], array_merge($cardpath, ['links'])),
+                        'links' => self::export_links($card['links'], array_merge($cardpath, ['links']), $base),
                         'linkspath' => self::path(array_merge($cardpath, ['links'])),
                     ];
                 }
@@ -241,7 +242,7 @@ class editor {
                     'path' => self::path($blockpath),
                     'cards' => $cards,
                     'cardspath' => self::path(array_merge($blockpath, ['cards'])),
-                    'links' => self::export_links($block['links'], array_merge($blockpath, ['links'])),
+                    'links' => self::export_links($block['links'], array_merge($blockpath, ['links']), $base),
                     'linkspath' => self::path(array_merge($blockpath, ['links'])),
                 ];
             }
@@ -261,14 +262,19 @@ class editor {
                 'news' => empty($tab['news']['id']) ? null : [
                     'headline' => $newsheadlines[$tab['news']['id']] ?? get_string('megamenu:newsmissing', 'local_urise'),
                 ],
+                'basefilter' => empty($base) ? '' : filteroptions::describe($base),
                 'path' => self::path($tabpath),
-                'link' => $tab['link'] ? self::export_link($tab['link'], array_merge($tabpath, ['link'])) : null,
+                'link' => $tab['link'] ? self::export_link($tab['link'], array_merge($tabpath, ['link']), $base) : null,
                 'linkpath' => self::path(array_merge($tabpath, ['link'])),
                 'blocks' => $blocks,
                 'blockspath' => self::path(array_merge($tabpath, ['blocks'])),
-                'cta' => $tab['cta'] ? self::export_link($tab['cta'], array_merge($tabpath, ['cta'])) : null,
+                'cta' => $tab['cta'] ? self::export_link($tab['cta'], array_merge($tabpath, ['cta']), $base) : null,
                 'ctapath' => self::path(array_merge($tabpath, ['cta'])),
-                'secondarylinks' => self::export_links($tab['secondarylinks'], array_merge($tabpath, ['secondarylinks'])),
+                'secondarylinks' => self::export_links(
+                    $tab['secondarylinks'],
+                    array_merge($tabpath, ['secondarylinks']),
+                    $base
+                ),
                 'secondarylinkspath' => self::path(array_merge($tabpath, ['secondarylinks'])),
                 'selected' => false,
             ];
@@ -341,10 +347,14 @@ class editor {
      *
      * @param array $links
      * @param array $listpath
+     * @param array $basefilters Filters of the tab.
      * @return array
      */
-    private static function export_links(array $links, array $listpath): array {
-        return array_map(fn($link) => self::export_link($link, array_merge($listpath, [$link['id']])), $links);
+    private static function export_links(array $links, array $listpath, array $basefilters = []): array {
+        return array_map(
+            fn($link) => self::export_link($link, array_merge($listpath, [$link['id']]), $basefilters),
+            $links
+        );
     }
 
     /**
@@ -352,12 +362,17 @@ class editor {
      *
      * @param array $link
      * @param array $path
+     * @param array $basefilters Filters of the tab.
      * @return array
      */
-    private static function export_link(array $link, array $path): array {
+    private static function export_link(array $link, array $path, array $basefilters = []): array {
         switch ($link['type']) {
             case 'filter':
-                $target = filteroptions::describe($link['filters']);
+                $filters = $link['filters'];
+                if (!empty($filters) && empty($link['nobasefilter'])) {
+                    $filters += $basefilters;
+                }
+                $target = filteroptions::describe($filters);
                 break;
             case 'search':
                 $target = $link['search'] === '' ? '' : '"' . $link['search'] . '"';

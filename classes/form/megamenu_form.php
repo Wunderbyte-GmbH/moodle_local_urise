@@ -20,6 +20,7 @@ use context;
 use context_system;
 use core_form\dynamic_form;
 use local_urise\megamenu\editor;
+use local_urise\megamenu\filteroptions;
 use local_urise\megamenu\menu;
 use moodle_url;
 use MoodleQuickForm;
@@ -146,6 +147,92 @@ abstract class megamenu_form extends dynamic_form {
         }
         $item['id'] = (string)array_pop($path);
         return editor::upsert($menu, $path, $item);
+    }
+
+    /**
+     * Adds the fields to load the options of a catalogue filter as links.
+     *
+     * @param MoodleQuickForm $mform
+     */
+    protected function add_filter_loader(MoodleQuickForm $mform): void {
+        $columns = filteroptions::get_loadable_columns();
+        if (empty($columns)) {
+            return;
+        }
+        $names = ['' => get_string('megamenu:loadnone', 'local_urise')] + array_map(fn($column) => $column['name'], $columns);
+        $mform->addElement('select', 'loadcolumn', get_string('megamenu:loadcolumn', 'local_urise'), $names);
+        $mform->addHelpButton('loadcolumn', 'megamenu:loadcolumn', 'local_urise');
+
+        $mform->addElement('advcheckbox', 'loadall', get_string('megamenu:loadall', 'local_urise'));
+        $mform->setDefault('loadall', 1);
+        $mform->hideIf('loadall', 'loadcolumn', 'eq', '');
+
+        foreach ($columns as $shortname => $column) {
+            $mform->addElement(
+                'autocomplete',
+                "load_{$shortname}",
+                get_string('megamenu:loadvalues', 'local_urise'),
+                $column['options'],
+                ['multiple' => true]
+            );
+            $mform->hideIf("load_{$shortname}", 'loadcolumn', 'neq', $shortname);
+            $mform->hideIf("load_{$shortname}", 'loadall', 'checked');
+        }
+    }
+
+    /**
+     * Validates the fields of the filter loader.
+     *
+     * @param array $data
+     * @param array $errors
+     * @return array
+     */
+    protected function validate_filter_loader(array $data, array $errors): array {
+        $column = $data['loadcolumn'] ?? '';
+        if ($column !== '' && empty($data['loadall']) && empty($data["load_{$column}"])) {
+            $errors["load_{$column}"] = get_string('megamenu:filterrequired', 'local_urise');
+        }
+        return $errors;
+    }
+
+    /**
+     * Returns the links chosen in the filter loader.
+     *
+     * @param \stdClass $data
+     * @return array
+     */
+    protected function links_from_filter_loader(\stdClass $data): array {
+        $column = (string)($data->loadcolumn ?? '');
+        if ($column === '') {
+            return [];
+        }
+        $values = empty($data->loadall) ? array_values((array)($data->{"load_{$column}"} ?? [])) : null;
+        return filteroptions::build_links($column, $values);
+    }
+
+    /**
+     * Adds loaded links to the links an element already has. A filter that is linked already is skipped.
+     *
+     * @param array $menu
+     * @param array $path Path the form was opened with.
+     * @param array $item
+     * @param array $loaded
+     * @return array The element.
+     */
+    protected function append_loaded_links(array $menu, array $path, array $item, array $loaded): array {
+        if (empty($loaded)) {
+            return $item;
+        }
+        $links = $this->is_new($path) ? [] : (editor::get($menu, $path)['links'] ?? []);
+        $known = array_map(fn($link) => json_encode($link['filters'] ?? []), $links);
+        foreach ($loaded as $link) {
+            if (!in_array(json_encode($link['filters']), $known, true)) {
+                $link['id'] = editor::new_id();
+                $links[] = $link;
+            }
+        }
+        $item['links'] = $links;
+        return $item;
     }
 
     /**

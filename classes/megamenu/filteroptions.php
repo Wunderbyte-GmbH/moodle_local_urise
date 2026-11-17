@@ -16,29 +16,38 @@
 
 namespace local_urise\megamenu;
 
+use context_coursecat;
 use core_customfield\field_controller;
+use local_urise\shortcodes;
+use local_wunderbyte_table\filters\types\customfieldfilter;
+use mod_booking\customfield\booking_handler;
+use moodle_url;
 
 /**
  * The filters of the catalogue that mega menu links can use, with readable names for their values.
  *
- * The values are what the booking option custom fields store: the 1-based line for select fields,
- * the id for dynamic fields. Filter links pass them to the catalogue as wbtfilter.
+ * The filters are the custom field filters the shortcode on the catalogue page defines. Their values
+ * are what the booking options store, filter links pass them to the catalogue as wbtfilter. A field
+ * with a hierarchy stored by mod_booking takes its options from there.
  *
  * @package local_urise
  * @copyright 2026 Wunderbyte GmbH <info@wunderbyte.at>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class filteroptions {
-    /** @var string[] Custom fields the catalogue (category 6) offers as filters. */
-    public const COLUMNS = [
-        'zgcommunities',
-        'kompetenzen',
-        'bibliothekszielgruppe',
-        'organisation',
-        'format',
-        'kurssprache',
-        'reihenprogramm',
+    /** @var string[] Keys of a filter definition that are settings, not options. */
+    private const SETTINGS = [
+        'localizedname',
+        'wbfilterclass',
+        'wbbypasscache',
+        'showalloptions',
+        'explode',
+        'jsonattribute',
+        'json',
     ];
+
+    /** @var string Prefix of the form value that stands for all options of a group. */
+    private const GROUPPREFIX = 'group:';
 
     /** @var array|null Columns of this request. */
     private static ?array $columns = null;
@@ -46,70 +55,217 @@ class filteroptions {
     /**
      * Returns the filter columns with their options.
      *
-     * @return array shortname => ['name' => string, 'options' => [value => label]]
+     * @return array shortname => ['name' => string, 'options' => [value => label], 'groups' => [label => values],
+     *      'source' => string]
      */
     public static function get_columns(): array {
-        global $DB;
-
         if (self::$columns !== null) {
             return self::$columns;
         }
 
-        [$insql, $params] = $DB->get_in_or_equal(self::COLUMNS, SQL_PARAMS_NAMED);
-        $params['component'] = 'mod_booking';
-        $params['area'] = 'booking';
-        $records = $DB->get_records_sql(
-            "SELECT f.*
-               FROM {customfield_field} f
-               JOIN {customfield_category} c ON c.id = f.categoryid
-              WHERE c.component = :component AND c.area = :area AND f.shortname $insql",
-            $params
-        );
+        $fields = [];
+        foreach (booking_handler::get_customfields() as $field) {
+            $fields[$field->shortname] = $field;
+        }
+
+        // The catalogue expects the field of every filter it defines, so only ask for filters of existing fields.
+        $args = self::get_shortcode_args(menu::get(true)['catalogueurl']);
+        $wanted = array_keys($fields);
+        if (!empty($args['onlyfilterforcolumns'])) {
+            $wanted = array_intersect(array_map('trim', explode(',', $args['onlyfilterforcolumns'])), $wanted);
+        }
+        $args['onlyfilterforcolumns'] = implode(',', $wanted) ?: '-';
 
         $columns = [];
-        foreach ($records as $record) {
-            $field = field_controller::create(0, $record);
-            $options = self::get_field_options($field);
+        foreach (shortcodes::get_filter_definitions($args) as $shortname => $definition) {
+            if (!isset($fields[$shortname]) || !is_a($definition['wbfilterclass'] ?? '', customfieldfilter::class, true)) {
+                continue;
+            }
+            $name = trim(html_entity_decode(strip_tags((string)($definition['localizedname'] ?? $shortname)), ENT_QUOTES));
+            $source = 'catalogue';
+            $hierarchy = self::get_stored_hierarchy($fields[$shortname]);
+            if ($hierarchy !== null) {
+                $source = 'hierarchy';
+                $definition = $hierarchy;
+            }
+            [$options, $groups] = self::parse_definition($definition, $shortname);
             if (!empty($options)) {
-                $name = trim(html_entity_decode(strip_tags(format_string($record->name)), ENT_QUOTES));
-                $columns[$record->shortname] = ['name' => $name, 'options' => $options];
+                $columns[$shortname] = ['name' => $name, 'options' => $options, 'groups' => $groups, 'source' => $source];
             }
         }
 
-        // Keep the order of COLUMNS.
-        self::$columns = array_filter(array_replace(array_fill_keys(self::COLUMNS, null), $columns));
+        self::$columns = $columns;
         return self::$columns;
     }
 
     /**
-     * Returns the options of a custom field.
+     * Returns the arguments of the shortcode that shows the catalogue with its filters.
      *
-     * @param field_controller $field
-     * @return array value => label
+     * @param string $catalogueurl
+     * @return array Empty if the page is no category page or has no such shortcode.
      */
-    private static function get_field_options(field_controller $field): array {
-        switch ($field->get('type')) {
-            case 'select':
-                $options = $field->get_options();
-                break;
-            case 'dynamicformat':
-            case 'dynamic':
-                $class = '\\customfield_' . $field->get('type') . '\\field_controller';
-                $options = class_exists($class) ? $class::get_options_array($field) : [];
-                break;
-            default:
-                $options = [];
+    private static function get_shortcode_args(string $catalogueurl): array {
+        global $DB;
+
+        $categoryid = (int)(new moodle_url($catalogueurl))->param('categoryid');
+        $context = $categoryid ? context_coursecat::instance($categoryid, IGNORE_MISSING) : null;
+        if (!$context) {
+            return [];
         }
 
-        $result = [];
-        foreach ($options as $value => $label) {
-            // Labels are plain text, templates and forms escape them.
-            $label = trim(html_entity_decode(strip_tags($label), ENT_QUOTES));
-            if ((string)$value !== '' && (string)$value !== '0' && $label !== '') {
-                $result[(string)$value] = $label;
+        $blocks = $DB->get_records('block_instances', ['blockname' => 'html', 'parentcontextid' => $context->id], 'id');
+        foreach ($blocks as $block) {
+            $config = unserialize_object(base64_decode($block->configdata));
+            preg_match_all('/\[unified\w*\s([^\]]*)\]/', $config->text ?? '', $shortcodes);
+            foreach ($shortcodes[1] as $shortcode) {
+                preg_match_all('/(\w+)=(?:"([^"]*)"|(\S+))/', $shortcode, $matches, PREG_SET_ORDER);
+                $args = [];
+                foreach ($matches as $match) {
+                    $args[$match[1]] = $match[3] ?? $match[2];
+                }
+                if (!empty($args['filter'])) {
+                    return $args;
+                }
             }
         }
-        return $result;
+        return [];
+    }
+
+    /**
+     * Returns the options of a field whose hierarchy mod_booking stores, in the format of a filter definition.
+     *
+     * @param \stdClass $field Record of the custom field.
+     * @return array|null Null if the field has no stored hierarchy.
+     */
+    private static function get_stored_hierarchy(\stdClass $field): ?array {
+        $manager = '\\mod_booking\\customfield\\hierarchy_manager';
+        if ($field->type !== 'dynamicformat' || !class_exists($manager)) {
+            return null;
+        }
+        $controller = field_controller::create($field->id);
+        if (empty($controller->get_configdata_property($manager::CONFIGKEY_HIERARCHY))) {
+            return null;
+        }
+        // A field without groups has no filter options there, its own options are the stored rows.
+        $options = $manager::get_filter_options($field->id);
+        if (empty($options)) {
+            $options = \customfield_dynamicformat\field_controller::get_options_array($controller);
+            unset($options['']);
+        }
+        return $options;
+    }
+
+    /**
+     * Splits a filter definition into the options and the groups they belong to.
+     *
+     * @param array $definition
+     * @param string $shortname
+     * @return array [[value => label], [group label => values]]
+     */
+    private static function parse_definition(array $definition, string $shortname): array {
+        $options = [];
+        $groups = [];
+        foreach ($definition as $value => $option) {
+            $value = (string)$value;
+            if (in_array($value, self::SETTINGS, true) || $value === "{$shortname}_wb_checked") {
+                continue;
+            }
+            $label = is_array($option) ? ($option['localizedname'] ?? '') : $option;
+            // Labels are plain text, templates and forms escape them.
+            $label = trim(html_entity_decode(strip_tags((string)$label), ENT_QUOTES));
+            if ($value === '' || $value === '0' || $label === '' || $label === 'wbt_suppress') {
+                continue;
+            }
+            $options[$value] = $label;
+            if (is_array($option) && ($option['parent'] ?? '') !== '') {
+                $groups[trim(html_entity_decode(strip_tags($option['parent']), ENT_QUOTES))][] = $value;
+            }
+        }
+        return [$options, $groups];
+    }
+
+    /**
+     * Returns the choices of a column for a form: every group as a whole, then the single options.
+     *
+     * @param array $column
+     * @return array value => label
+     */
+    public static function get_form_options(array $column): array {
+        $choices = [];
+        foreach (array_keys($column['groups']) as $index => $group) {
+            $choices[self::GROUPPREFIX . $index] = get_string('megamenu:wholegroup', 'local_urise', $group);
+        }
+        return $choices + $column['options'];
+    }
+
+    /**
+     * Replaces the groups chosen in a form with their options.
+     *
+     * @param string $column
+     * @param array $values
+     * @return string[]
+     */
+    public static function expand_groups(string $column, array $values): array {
+        $groups = array_values(self::get_columns()[$column]['groups'] ?? []);
+        $result = [];
+        foreach ($values as $value) {
+            $value = (string)$value;
+            if (strpos($value, self::GROUPPREFIX) === 0) {
+                $result = array_merge($result, $groups[(int)substr($value, strlen(self::GROUPPREFIX))] ?? []);
+            } else {
+                $result[] = $value;
+            }
+        }
+        return array_values(array_unique($result));
+    }
+
+    /**
+     * Returns the columns whose options can be loaded as links. Columns with groups cannot yet.
+     *
+     * @return array shortname => ['name' => string, 'options' => [value => label]]
+     */
+    public static function get_loadable_columns(): array {
+        return array_filter(self::get_columns(), fn($column) => empty($column['groups']));
+    }
+
+    /**
+     * Builds one filter link per option of a column, labelled in every installed language.
+     *
+     * @param string $column
+     * @param array|null $values The options to use, or null for all of them.
+     * @return array Links without ids.
+     */
+    public static function build_links(string $column, ?array $values = null): array {
+        if (!array_key_exists($column, self::get_loadable_columns())) {
+            return [];
+        }
+
+        $labels = [];
+        $previous = force_current_language(current_language());
+        foreach (array_keys(get_string_manager()->get_list_of_translations()) as $lang) {
+            force_current_language($lang);
+            self::reset();
+            foreach (self::get_columns()[$column]['options'] ?? [] as $value => $label) {
+                $labels[(string)$value][$lang] = $label;
+            }
+        }
+        force_current_language($previous);
+        self::reset();
+
+        $links = [];
+        foreach ($labels as $value => $label) {
+            if ($values !== null && !in_array((string)$value, array_map('strval', $values), true)) {
+                continue;
+            }
+            $links[] = [
+                'type' => 'filter',
+                'label' => $label,
+                'url' => '',
+                'filters' => [$column => [(string)$value]],
+                'search' => '',
+            ];
+        }
+        return $links;
     }
 
     /**

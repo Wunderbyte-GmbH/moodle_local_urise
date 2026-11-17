@@ -16,6 +16,8 @@
 
 namespace local_urise\form;
 
+use local_urise\megamenu\editor;
+use local_urise\megamenu\filteroptions;
 use local_urise\megamenu\menu;
 use MoodleQuickForm;
 
@@ -80,6 +82,31 @@ class megamenu_tab_form extends megamenu_form {
             $mform->hideIf("kicker_{$lang}", 'type', 'eq', 'link');
             $mform->hideIf("kicker_{$lang}", 'newsid', 'eq', 0);
         }
+
+        $columns = filteroptions::get_columns();
+        if (empty($columns)) {
+            return;
+        }
+        $mform->addElement('advcheckbox', 'basefilterenabled', get_string('megamenu:basefilter', 'local_urise'));
+        $mform->addHelpButton('basefilterenabled', 'megamenu:basefilter', 'local_urise');
+        $mform->addElement(
+            'select',
+            'basefiltercolumn',
+            get_string('megamenu:basefiltercolumn', 'local_urise'),
+            array_map(fn($column) => $column['name'], $columns)
+        );
+        $mform->hideIf('basefiltercolumn', 'basefilterenabled');
+        foreach ($columns as $shortname => $column) {
+            $mform->addElement(
+                'autocomplete',
+                "basefilter_{$shortname}",
+                get_string('megamenu:filtervalues', 'local_urise'),
+                filteroptions::get_form_options($column),
+                ['multiple' => true]
+            );
+            $mform->hideIf("basefilter_{$shortname}", 'basefilterenabled');
+            $mform->hideIf("basefilter_{$shortname}", 'basefiltercolumn', 'neq', $shortname);
+        }
     }
 
     /**
@@ -90,7 +117,12 @@ class megamenu_tab_form extends megamenu_form {
      * @return array
      */
     public function validation($data, $files): array {
-        return $this->validate_texts_required($data, 'label', parent::validation($data, $files));
+        $errors = $this->validate_texts_required($data, 'label', parent::validation($data, $files));
+        $column = $data['basefiltercolumn'] ?? '';
+        if (!empty($data['basefilterenabled']) && empty($data["basefilter_{$column}"])) {
+            $errors["basefilter_{$column}"] = get_string('megamenu:filterrequired', 'local_urise');
+        }
+        return $errors;
     }
 
     /**
@@ -100,6 +132,14 @@ class megamenu_tab_form extends megamenu_form {
      * @return array
      */
     protected function to_form(array $item): array {
+        $filters = $item['basefilter']['filters'] ?? [];
+        $base = [
+            'basefilterenabled' => empty($item['basefilter']['enabled']) ? 0 : 1,
+            'basefiltercolumn' => array_key_first($filters) ?? array_key_first(filteroptions::get_columns()),
+        ];
+        foreach ($filters as $column => $values) {
+            $base["basefilter_{$column}"] = $values;
+        }
         return array_merge(
             [
                 'type' => $item['type'] ?? 'panel',
@@ -107,6 +147,7 @@ class megamenu_tab_form extends megamenu_form {
                 'icon' => $item['icon'] ?? '',
                 'newsid' => $item['news']['id'] ?? 0,
             ],
+            $base,
             $this->texts_to_form($item['label'] ?? [], 'label'),
             $this->texts_to_form($item['heading'] ?? [], 'heading'),
             $this->texts_to_form($item['intro'] ?? [], 'intro'),
@@ -123,7 +164,15 @@ class megamenu_tab_form extends megamenu_form {
      */
     protected function from_form(\stdClass $data): array {
         $newsid = (int)($data->newsid ?? 0);
-        return [
+        $item = [];
+        if (!empty($data->basefilterenabled)) {
+            $column = (string)($data->basefiltercolumn ?? '');
+            $item['basefilter'] = [
+                'enabled' => true,
+                'filters' => [$column => filteroptions::expand_groups($column, (array)($data->{"basefilter_{$column}"} ?? []))],
+            ];
+        }
+        return $item + [
             'type' => $data->type,
             'label' => $this->texts_from_form($data, 'label'),
             'color' => $data->color ?? 'blue',
@@ -133,6 +182,22 @@ class megamenu_tab_form extends megamenu_form {
             'hint' => $this->texts_from_form($data, 'hint'),
             'news' => $newsid ? ['id' => $newsid, 'kicker' => $this->texts_from_form($data, 'kicker')] : null,
         ];
+    }
+
+    /**
+     * Applies the tab. A base filter that is switched off keeps its values.
+     *
+     * @param array $menu
+     * @param array $path
+     * @param array $item
+     * @return array
+     */
+    protected function apply(array $menu, array $path, array $item): array {
+        if (!isset($item['basefilter'])) {
+            $existing = $this->is_new($path) ? [] : (editor::get($menu, $path) ?? []);
+            $item['basefilter'] = ['enabled' => false, 'filters' => $existing['basefilter']['filters'] ?? []];
+        }
+        return parent::apply($menu, $path, $item);
     }
 
     /**
