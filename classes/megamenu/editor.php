@@ -255,7 +255,7 @@ class editor {
                 'islink' => $tab['type'] === 'link',
                 'haspanel' => $tab['type'] !== 'link',
                 'color' => $tab['color'],
-                'colorname' => get_string('megamenu:color_' . $tab['color'], 'local_urise'),
+                'colorname' => appearance::color_name($tab['color']),
                 'heading' => menu::text($tab['heading']),
                 'intro' => menu::text($tab['intro']),
                 'hint' => menu::text($tab['hint']),
@@ -295,6 +295,7 @@ class editor {
             'tabs' => $tabs,
             'hastabs' => !empty($tabs),
             'tabspath' => self::path(['tabs']),
+            'customcss' => appearance::css(appearance::custom_colors($menu)),
         ];
     }
 

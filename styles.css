@@ -922,6 +922,149 @@ a.booking-card-image-link:hover {
     background-color: #f1b3b4;
 }
 
+/* Colour and icon pickers in the mega menu tab form. */
+.mform input[type="radio"]:has(+ .mm-pick) {
+    opacity: 0;
+    position: absolute;
+}
+
+.mform .mm-pick {
+    align-items: center;
+    border: 2px solid transparent;
+    border-radius: .5rem;
+    cursor: pointer;
+    display: inline-flex;
+    height: 2.75rem;
+    justify-content: center;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    width: 2.75rem;
+}
+
+.mform .mm-pick-color {
+    border-radius: 50%;
+}
+
+.mform .mm-pick-icon {
+    background-color: #0063a6;
+}
+
+.mform .mm-pick-icon svg {
+    height: 2rem;
+    width: 2rem;
+}
+
+.mform .mm-pick-none {
+    background-color: transparent;
+    border: 2px dashed #6a737b;
+}
+
+.mform input[type="radio"]:checked + .mm-pick {
+    outline-color: #1e2a32;
+}
+
+.mform input[type="radio"]:focus-visible + .mm-pick {
+    box-shadow: 0 0 0 .3rem rgba(0, 99, 166, .45);
+}
+
+.mform .mm-pick-blue {
+    background-color: #0063a6;
+}
+
+.mform:has(input[name="color"][value="blue"]:checked) .mm-pick-icon:not(.mm-pick-none) {
+    background-color: #0063a6;
+}
+
+.mform .mm-pick-petrol {
+    background-color: #1f7192;
+}
+
+.mform:has(input[name="color"][value="petrol"]:checked) .mm-pick-icon:not(.mm-pick-none) {
+    background-color: #1f7192;
+}
+
+.mform .mm-pick-yellow {
+    background-color: #d6b737;
+}
+
+.mform:has(input[name="color"][value="yellow"]:checked) .mm-pick-icon:not(.mm-pick-none) {
+    background-color: #d6b737;
+}
+
+.mform .mm-pick-purple {
+    background-color: #ca8adb;
+}
+
+.mform:has(input[name="color"][value="purple"]:checked) .mm-pick-icon:not(.mm-pick-none) {
+    background-color: #ca8adb;
+}
+
+.mform .mm-pick-green {
+    background-color: #a5c56c;
+}
+
+.mform:has(input[name="color"][value="green"]:checked) .mm-pick-icon:not(.mm-pick-none) {
+    background-color: #a5c56c;
+}
+
+.mform .mm-pick-teal {
+    background-color: #2ba4a6;
+}
+
+.mform:has(input[name="color"][value="teal"]:checked) .mm-pick-icon:not(.mm-pick-none) {
+    background-color: #2ba4a6;
+}
+
+.mform .mm-pick-brown {
+    background-color: #bea97a;
+}
+
+.mform:has(input[name="color"][value="brown"]:checked) .mm-pick-icon:not(.mm-pick-none) {
+    background-color: #bea97a;
+}
+
+.mform .mm-pick-salmon {
+    background-color: #e6936c;
+}
+
+.mform:has(input[name="color"][value="salmon"]:checked) .mm-pick-icon:not(.mm-pick-none) {
+    background-color: #e6936c;
+}
+
+.mform .mm-pick-rose {
+    background-color: #f1b3b4;
+}
+
+.mform:has(input[name="color"][value="rose"]:checked) .mm-pick-icon:not(.mm-pick-none) {
+    background-color: #f1b3b4;
+}
+
+.mform .mm-pick-new {
+    background-color: transparent;
+    border: 2px dashed #6a737b;
+    color: #1e2a32;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.mform .mm-newcolor {
+    display: none;
+}
+
+.mform:has(input[name="color"][value="new"]:checked) .mm-newcolor {
+    display: flex;
+}
+
+.mform .mm-newcolor input[type="color"] {
+    height: 2.75rem;
+    padding: .25rem;
+    width: 5.5rem;
+}
+
+.mform .mm-pick-notice .alert {
+    display: inline-block;
+}
+
 /* Preview in the mega menu editor. */
 .local-urise-megamenu-editor .mm-preview-frame {
     overflow: hidden;

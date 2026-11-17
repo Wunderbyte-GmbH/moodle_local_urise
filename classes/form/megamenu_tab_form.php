@@ -17,6 +17,7 @@
 namespace local_urise\form;
 
 use local_urise\megamenu\editor;
+use local_urise\megamenu\appearance;
 use local_urise\megamenu\filteroptions;
 use local_urise\megamenu\menu;
 use MoodleQuickForm;
@@ -29,6 +30,9 @@ use MoodleQuickForm;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class megamenu_tab_form extends megamenu_form {
+    /** @var array|null Icon uploaded with this submission. */
+    private $newicon = null;
+
     /**
      * Adds the fields.
      *
@@ -44,19 +48,99 @@ class megamenu_tab_form extends megamenu_form {
 
         $this->add_texts($mform, 'label', get_string('megamenu:label', 'local_urise'));
 
-        $colors = [];
-        foreach (array_keys(menu::COLORS) as $color) {
-            $colors[$color] = get_string('megamenu:color_' . $color, 'local_urise');
-        }
-        $mform->addElement('select', 'color', get_string('megamenu:color', 'local_urise'), $colors);
-        $mform->addHelpButton('color', 'megamenu:color', 'local_urise');
+        $menu = menu::get(true);
+        [$pendingcolors, $pendingicons, $notices] = $this->take_pending();
+        $mform->addElement('hidden', 'pendingcolors');
+        $mform->setType('pendingcolors', PARAM_RAW);
+        $mform->addElement('hidden', 'pendingicons');
+        $mform->setType('pendingicons', PARAM_RAW);
+        $swatch = fn($name, $class, $content = '') => \html_writer::span(
+            $content . \html_writer::span($name, 'visually-hidden'),
+            'mm-pick ' . $class,
+            ['title' => $name]
+        );
+        $notice = fn($notice) => \html_writer::div(
+            \html_writer::div('', 'col-md-3') . \html_writer::div(
+                \html_writer::div(
+                    $notice['text'],
+                    'alert mb-0 alert-' . ($notice['ok'] ? 'success' : 'danger'),
+                    ['role' => 'status']
+                ),
+                'col-md-9'
+            ),
+            'mb-3 row fitem mm-pick-notice'
+        );
 
-        $icons = ['' => get_string('none')];
-        foreach (menu::ICONS as $icon) {
-            $icons[$icon] = get_string('megamenu:icon_' . $icon, 'local_urise');
+        $custom = array_unique(array_merge(appearance::custom_colors($menu), $pendingcolors));
+        $css = appearance::css($custom);
+        if ($css !== '') {
+            $mform->addElement('html', \html_writer::tag('style', $css));
         }
-        $mform->addElement('select', 'icon', get_string('megamenu:icon', 'local_urise'), $icons);
-        $mform->addHelpButton('icon', 'megamenu:icon', 'local_urise');
+        $colors = [];
+        foreach (array_merge(array_keys(menu::COLORS), $custom) as $color) {
+            $label = $swatch(appearance::color_name($color), 'mm-pick-color mm-pick-' . $color);
+            $colors[] = $mform->createElement('radio', 'color', '', $label, $color);
+        }
+        $label = $swatch(get_string('megamenu:color_new', 'local_urise'), 'mm-pick-color mm-pick-new', '+');
+        $colors[] = $mform->createElement('radio', 'color', '', $label, 'new');
+        $mform->addGroup($colors, 'colorgroup', get_string('megamenu:color', 'local_urise'), ' ', false);
+        $mform->addHelpButton('colorgroup', 'megamenu:color', 'local_urise');
+        $mform->setDefault('color', 'blue');
+        if (isset($notices['color'])) {
+            $mform->addElement('html', $notice($notices['color']));
+        }
+        // Shown by the styles while "new colour" is chosen.
+        $mform->addElement('html', \html_writer::div(
+            \html_writer::div(
+                \html_writer::label(get_string('megamenu:newcolor', 'local_urise'), 'id_mm_newcolor', false),
+                'col-md-3 col-form-label'
+            ) . \html_writer::div(
+                \html_writer::empty_tag('input', [
+                    'type' => 'color',
+                    'name' => 'newcolor',
+                    'id' => 'id_mm_newcolor',
+                    'value' => '#7b328f',
+                    'class' => 'form-control form-control-color',
+                ]),
+                'col-md-9'
+            ),
+            'mb-3 row fitem mm-newcolor'
+        ));
+        $mform->registerNoSubmitButton('addcolor');
+        $mform->addElement('submit', 'addcolor', get_string('megamenu:addcolor', 'local_urise'));
+        $mform->hideIf('addcolor', 'color', 'neq', 'new');
+
+        $icons = [];
+        $names = ['' => get_string('none')];
+        foreach (menu::ICONS as $icon) {
+            $names[$icon] = get_string('megamenu:icon_' . $icon, 'local_urise');
+        }
+        $uploaded = $menu['icons'] + $pendingicons;
+        foreach ($names + array_map(fn($icon) => $icon['name'], $uploaded) as $icon => $name) {
+            $icon = (string)$icon;
+            $label = $swatch($name, 'mm-pick-icon' . ($icon === '' ? ' mm-pick-none' : ''), menu::icon_svg($icon, $uploaded));
+            $icons[] = $mform->createElement('radio', 'icon', '', $label, $icon);
+        }
+        $label = $swatch(get_string('megamenu:icon_new', 'local_urise'), 'mm-pick-icon mm-pick-none mm-pick-new', '+');
+        $icons[] = $mform->createElement('radio', 'icon', '', $label, 'new');
+        $mform->addGroup($icons, 'icongroup', get_string('megamenu:icon', 'local_urise'), ' ', false);
+        $mform->addHelpButton('icongroup', 'megamenu:icon', 'local_urise');
+        $mform->setDefault('icon', '');
+        if (isset($notices['icon'])) {
+            $mform->addElement('html', $notice($notices['icon']));
+        }
+        $mform->addElement(
+            'filepicker',
+            'newiconfile',
+            get_string('megamenu:newicon', 'local_urise'),
+            null,
+            ['accepted_types' => ['.svg'], 'maxbytes' => appearance::MAXICONBYTES]
+        );
+        $mform->addHelpButton('newiconfile', 'megamenu:newicon', 'local_urise');
+        $mform->hideIf('newiconfile', 'icon', 'neq', 'new');
+        $mform->registerNoSubmitButton('addicon');
+        $mform->addElement('submit', 'addicon', get_string('megamenu:addicon', 'local_urise'));
+        $mform->hideIf('addicon', 'icon', 'neq', 'new');
 
         $this->add_texts($mform, 'heading', get_string('megamenu:heading', 'local_urise'));
         $this->add_texts($mform, 'intro', get_string('megamenu:intro', 'local_urise'), 'textarea');
@@ -122,7 +206,109 @@ class megamenu_tab_form extends megamenu_form {
         if (!empty($data['basefilterenabled']) && empty($data["basefilter_{$column}"])) {
             $errors["basefilter_{$column}"] = get_string('megamenu:filterrequired', 'local_urise');
         }
+        if (($data['color'] ?? '') === 'new' && $this->get_new_color() === '') {
+            $errors['colorgroup'] = get_string('megamenu:newcolorinvalid', 'local_urise');
+        }
+        if (($data['icon'] ?? '') === 'new' && !$this->get_new_icon((int)($data['newiconfile'] ?? 0))) {
+            $errors['newiconfile'] = get_string('megamenu:newiconinvalid', 'local_urise');
+        }
         return $errors;
+    }
+
+    /**
+     * Returns the colours and icons added in this dialog that are not saved yet.
+     *
+     * "Add colour" and "add icon" show the form again: the new choice joins the list and is selected.
+     *
+     * @return array [string[] colours, array icons id => {name, svg}, array notices color|icon => {ok, text}]
+     */
+    private function take_pending(): array {
+        $data = is_array($this->_ajaxformdata) ? $this->_ajaxformdata : [];
+        $colors = array_filter(explode(',', (string)($data['pendingcolors'] ?? '')), [appearance::class, 'is_custom_color']);
+        $icons = $this->parse_pending_icons((string)($data['pendingicons'] ?? ''));
+        $notices = [];
+
+        if (!empty($data['addcolor'])) {
+            $color = $this->get_new_color();
+            if ($color !== '') {
+                $colors[] = $color;
+                $data['color'] = $color;
+            }
+            $notices['color'] = [
+                'ok' => $color !== '',
+                'text' => $color === ''
+                    ? get_string('megamenu:newcolorinvalid', 'local_urise')
+                    : get_string('megamenu:appearanceadded', 'local_urise', appearance::color_name($color)),
+            ];
+        }
+        if (!empty($data['addicon'])) {
+            $icon = $this->get_new_icon((int)($data['newiconfile'] ?? 0));
+            if ($icon) {
+                $icons[$icon['id']] = ['name' => $icon['name'], 'svg' => $icon['svg']];
+                $data['icon'] = $icon['id'];
+            }
+            $notices['icon'] = [
+                'ok' => !empty($icon),
+                'text' => $icon
+                    ? get_string('megamenu:appearanceadded', 'local_urise', s($icon['name']))
+                    : get_string('megamenu:newiconinvalid', 'local_urise'),
+            ];
+        }
+
+        $colors = array_values(array_unique($colors));
+        if (!empty($data)) {
+            $data['pendingcolors'] = implode(',', $colors);
+            $data['pendingicons'] = json_encode($icons);
+            $this->_ajaxformdata = $data;
+        }
+        return [$colors, $icons, $notices];
+    }
+
+    /**
+     * Reads the icons added in this dialog, cleaning them again.
+     *
+     * @param string $json
+     * @return array id => {name, svg}
+     */
+    private function parse_pending_icons(string $json): array {
+        $icons = [];
+        $raw = json_decode($json, true);
+        foreach (is_array($raw) ? $raw : [] as $id => $icon) {
+            $svg = preg_match('/^u[0-9a-f]{10}$/', (string)$id) && is_array($icon)
+                ? appearance::clean_svg((string)($icon['svg'] ?? ''), (string)$id)
+                : null;
+            if ($svg !== null) {
+                $icons[$id] = ['name' => clean_param($icon['name'] ?? '', PARAM_TEXT), 'svg' => $svg];
+            }
+        }
+        return $icons;
+    }
+
+    /**
+     * Returns the id of the colour chosen as new colour.
+     *
+     * @return string Empty if it is not a colour.
+     */
+    private function get_new_color(): string {
+        return appearance::color_id((string)($this->_ajaxformdata['newcolor'] ?? ''));
+    }
+
+    /**
+     * Returns the uploaded icon.
+     *
+     * @param int $draftitemid
+     * @return array|null Null if there is no usable file.
+     */
+    private function get_new_icon(int $draftitemid): ?array {
+        global $USER;
+
+        $context = \context_user::instance($USER->id);
+        $files = get_file_storage()->get_area_files($context->id, 'user', 'draft', $draftitemid, 'id DESC', false);
+        $file = reset($files);
+        if (!$file || $file->get_filesize() > appearance::MAXICONBYTES) {
+            return null;
+        }
+        return appearance::import_icon($file->get_content(), pathinfo($file->get_filename(), PATHINFO_FILENAME));
     }
 
     /**
@@ -172,11 +358,22 @@ class megamenu_tab_form extends megamenu_form {
                 'filters' => [$column => filteroptions::expand_groups($column, (array)($data->{"basefilter_{$column}"} ?? []))],
             ];
         }
+        $color = $data->color ?? 'blue';
+        $icon = $data->icon ?? '';
+        if ($icon === 'new') {
+            $this->newicon = $this->get_new_icon((int)($data->newiconfile ?? 0));
+            $icon = $this->newicon['id'] ?? '';
+        } else {
+            $pending = $this->parse_pending_icons((string)($data->pendingicons ?? ''));
+            if (isset($pending[$icon])) {
+                $this->newicon = ['id' => $icon] + $pending[$icon];
+            }
+        }
         return $item + [
             'type' => $data->type,
             'label' => $this->texts_from_form($data, 'label'),
-            'color' => $data->color ?? 'blue',
-            'icon' => $data->icon ?? '',
+            'color' => $color === 'new' ? $this->get_new_color() : $color,
+            'icon' => $icon,
             'heading' => $this->texts_from_form($data, 'heading'),
             'intro' => $this->texts_from_form($data, 'intro'),
             'hint' => $this->texts_from_form($data, 'hint'),
@@ -196,6 +393,9 @@ class megamenu_tab_form extends megamenu_form {
         if (!isset($item['basefilter'])) {
             $existing = $this->is_new($path) ? [] : (editor::get($menu, $path) ?? []);
             $item['basefilter'] = ['enabled' => false, 'filters' => $existing['basefilter']['filters'] ?? []];
+        }
+        if ($this->newicon) {
+            $menu['icons'][$this->newicon['id']] = ['name' => $this->newicon['name'], 'svg' => $this->newicon['svg']];
         }
         return parent::apply($menu, $path, $item);
     }

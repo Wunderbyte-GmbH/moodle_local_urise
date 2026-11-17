@@ -492,4 +492,165 @@ final class editor_test extends advanced_testcase {
         $this->expectException(required_capability_exception::class);
         megamenu_edit::execute('discard', 2);
     }
+
+    /**
+     * The tab form adds a new colour and an uploaded icon, which is cleaned.
+     */
+    public function test_tab_form_new_color_and_icon(): void {
+        global $USER;
+
+        $this->setAdminUser();
+        menu::save($this->menu(), 0, true);
+
+        $svg = '<?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" onload="alert(1)">'
+            . '<script>alert(1)</script><style>.a{fill:red}</style>'
+            . '<defs><clipPath id="c"><rect width="24" height="24"/></clipPath></defs>'
+            . '<g clip-path="url(#c)"><path d="M2 2L22 22" style="stroke:#ff0000;fill:none" onclick="x()"/>'
+            . '<a href="javascript:alert(1)"><circle cx="12" cy="12" r="4" fill="url(#g)"/></a></g>'
+            . '<image href="https://example.com/x.png"/><text>Hi</text></svg>';
+        $draftitemid = file_get_unused_draft_itemid();
+        get_file_storage()->create_file_from_string([
+            'contextid' => \context_user::instance($USER->id)->id,
+            'component' => 'user',
+            'filearea' => 'draft',
+            'itemid' => $draftitemid,
+            'filepath' => '/',
+            'filename' => 'Mein Icon.svg',
+        ], $svg);
+
+        $formdata = [
+            'path' => json_encode(['tabs', 'phd']),
+            'revision' => 1,
+            'type' => 'panel',
+            'label_en' => 'PhD',
+            'color' => 'new',
+            'newcolor' => '#F1B3B4',
+            'icon' => 'new',
+            'newiconfile' => $draftitemid,
+            'newsid' => 0,
+        ];
+        $form = new megamenu_tab_form(null, null, 'post', '', [], true, megamenu_tab_form::mock_ajax_submit($formdata));
+        $form->set_data_for_dynamic_submission();
+        $this->assertTrue($form->is_validated());
+        $structure = $form->process_dynamic_submission();
+
+        $menu = menu::get(true);
+        $tab = editor::get($menu, ['tabs', 'phd']);
+        $this->assertSame('xf1b3b4', $tab['color']);
+        $this->assertSame('#F1B3B4', $structure['tabs'][0]['colorname']);
+        $this->assertStringContainsString('.lexa-mm-color-xf1b3b4{--lexa-mm-accent:#F1B3B4;', $structure['customcss']);
+
+        $this->assertSame([$tab['icon']], array_keys($menu['icons']));
+        $icon = $menu['icons'][$tab['icon']];
+        $this->assertSame('Mein Icon', $icon['name']);
+        foreach (['script', 'style', 'onload', 'onclick', 'href', 'image', 'text', 'ff0000', 'alert'] as $unwanted) {
+            $this->assertStringNotContainsString($unwanted, $icon['svg']);
+        }
+        $this->assertStringContainsString('viewBox="0 0 24 24"', $icon['svg']);
+        $this->assertStringContainsString('stroke="white"', $icon['svg']);
+        $this->assertStringContainsString('clip-path="url(#' . $tab['icon'] . '-1)"', $icon['svg']);
+
+        $exported = menu::export_for_template(true);
+        $this->assertSame($icon['svg'], $exported['tabs'][0]['iconsvg']);
+        // The text colour is darkened until it is readable on the tint.
+        $this->assertSame('#F1B3B4', $exported['tabs'][0]['colors']['accent']);
+        $this->assertNotSame('#F1B3B4', $exported['tabs'][0]['colors']['text']);
+
+        // The new choices are offered to the other entries, and dropped when no entry uses them any more.
+        $form = new megamenu_tab_form(null, null, 'post', '', [], true, ['path' => json_encode(['tabs', 'phd'])]);
+        $html = $form->render();
+        $this->assertStringContainsString('value="xf1b3b4"', $html);
+        $this->assertStringContainsString('value="' . $tab['icon'] . '"', $html);
+
+        $menu['tabs'][0]['icon'] = 'owl';
+        $saved = menu::save($menu, $menu['revision'], true);
+        $this->assertSame([], $saved['icons']);
+    }
+
+    /**
+     * A new colour or icon that is not usable is refused.
+     */
+    public function test_tab_form_refuses_invalid_appearance(): void {
+        $this->setAdminUser();
+        menu::save($this->menu(), 0, true);
+
+        $formdata = [
+            'path' => json_encode(['tabs', 'phd']),
+            'revision' => 1,
+            'type' => 'panel',
+            'label_en' => 'PhD',
+            'color' => 'new',
+            'newcolor' => 'red;}body{display:none',
+            'icon' => 'new',
+            'newiconfile' => file_get_unused_draft_itemid(),
+            'newsid' => 0,
+        ];
+        $form = new megamenu_tab_form(null, null, 'post', '', [], true, megamenu_tab_form::mock_ajax_submit($formdata));
+        $form->set_data_for_dynamic_submission();
+        $this->assertFalse($form->is_validated());
+
+        $this->assertNull(\local_urise\megamenu\appearance::import_icon('<html><body>no</body></html>', 'x'));
+        $this->assertNull(\local_urise\megamenu\appearance::import_icon('<svg xmlns="http://www.w3.org/2000/svg"/>', 'x'));
+        $this->assertSame('', \local_urise\megamenu\appearance::css(['blue', 'x12', 'x</style>']));
+    }
+
+    /**
+     * "Add colour" shows the form again with the new colour in the list and selected, saving keeps it.
+     */
+    public function test_tab_form_add_buttons(): void {
+        global $USER;
+
+        $this->setAdminUser();
+        menu::save($this->menu(), 0, true);
+        $draftitemid = file_get_unused_draft_itemid();
+        get_file_storage()->create_file_from_string([
+            'contextid' => \context_user::instance($USER->id)->id,
+            'component' => 'user',
+            'filearea' => 'draft',
+            'itemid' => $draftitemid,
+            'filepath' => '/',
+            'filename' => 'Stern.svg',
+        ], '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 2L22 22" stroke="black"/></svg>');
+
+        $formdata = [
+            'path' => json_encode(['tabs', 'phd']),
+            'revision' => 1,
+            'type' => 'panel',
+            'label_en' => 'PhD',
+            'color' => 'new',
+            'newcolor' => '#8a2be2',
+            'icon' => 'new',
+            'newiconfile' => $draftitemid,
+            'newsid' => 0,
+            'addcolor' => 'x',
+            'addicon' => 'x',
+        ];
+        $form = new megamenu_tab_form(null, null, 'post', '', [], true, megamenu_tab_form::mock_ajax_submit($formdata));
+        $form->set_data_for_dynamic_submission();
+        $html = $form->render();
+        $this->assertMatchesRegularExpression('/value="x8a2be2"[^>]*checked|checked[^>]*value="x8a2be2"/', $html);
+        $this->assertMatchesRegularExpression('/name="pendingicons"[^>]*value="\{&quot;(u[0-9a-f]{10})&quot;/', $html);
+        $this->assertSame(2, substr_count($html, 'alert-success'));
+        $this->assertStringContainsString('#8A2BE2', $html);
+        $this->assertStringContainsString('Stern', $html);
+        // Nothing is saved before the dialog is saved.
+        $this->assertSame('blue', editor::get(menu::get(true), ['tabs', 'phd'])['color']);
+
+        preg_match('/name="pendingicons"[^>]*value="([^"]*)"/', $html, $matches);
+        $pendingicons = html_entity_decode($matches[1]);
+        $iconid = array_key_first(json_decode($pendingicons, true));
+        unset($formdata['addcolor'], $formdata['addicon']);
+        $formdata = ['color' => 'x8a2be2', 'icon' => $iconid, 'pendingcolors' => 'x8a2be2', 'pendingicons' => $pendingicons]
+            + $formdata;
+        $form = new megamenu_tab_form(null, null, 'post', '', [], true, megamenu_tab_form::mock_ajax_submit($formdata));
+        $form->set_data_for_dynamic_submission();
+        $this->assertTrue($form->is_validated());
+        $form->process_dynamic_submission();
+
+        $menu = menu::get(true);
+        $tab = editor::get($menu, ['tabs', 'phd']);
+        $this->assertSame('x8a2be2', $tab['color']);
+        $this->assertSame($iconid, $tab['icon']);
+        $this->assertSame('Stern', $menu['icons'][$iconid]['name']);
+    }
 }

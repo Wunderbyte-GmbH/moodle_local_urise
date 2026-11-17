@@ -28,7 +28,7 @@ use moodle_url;
  * version is written to the config log.
  *
  * Structure (schema version 1):
- * menu  = {schemaversion, revision, enabled, attachurl, catalogueurl, tabs[]}
+ * menu  = {schemaversion, revision, enabled, attachurl, catalogueurl, tabs[], icons{}}
  * tab   = {id, type: overview|panel|link, label{}, link|null, color, heading{}, intro{}, hint{},
  *          blocks[], news: {id, kicker{}}|null, cta: link|null, secondarylinks[]}
  * block = {id, type: cardrow|linkgrid|chips, title{}, boxed, cards[], links[]}
@@ -121,6 +121,10 @@ class menu {
         }
 
         $clean = self::normalise($menu);
+        foreach ($clean['icons'] as $id => $icon) {
+            $clean['icons'][$id]['svg'] = (string)appearance::clean_svg($icon['svg'], $id);
+        }
+        $clean = self::normalise($clean);
         $clean['revision'] = $current['revision'] + 1;
         $newjson = json_encode($clean, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
@@ -177,10 +181,18 @@ class menu {
      * @return array
      */
     public static function normalise(array $raw): array {
+        $icons = [];
+        foreach (is_array($raw['icons'] ?? null) ? $raw['icons'] : [] as $id => $icon) {
+            if (preg_match('/^u[0-9a-f]{10}$/', (string)$id) && !empty($icon['svg']) && is_string($icon['svg'])) {
+                $icons[$id] = ['name' => clean_param($icon['name'] ?? '', PARAM_TEXT), 'svg' => $icon['svg']];
+            }
+        }
         $tabs = [];
         foreach (self::list($raw['tabs'] ?? []) as $tab) {
-            $tabs[] = self::normalise_tab($tab);
+            $tabs[] = self::normalise_tab($tab, $icons);
         }
+        // Uploaded icons are kept as long as an entry uses them.
+        $icons = array_intersect_key($icons, array_flip(array_column($tabs, 'icon')));
 
         return [
             'schemaversion' => self::SCHEMAVERSION,
@@ -189,6 +201,7 @@ class menu {
             'attachurl' => self::clean_url($raw['attachurl'] ?? '') ?: self::DEFAULTCATALOGUEURL,
             'catalogueurl' => self::clean_url($raw['catalogueurl'] ?? '') ?: self::DEFAULTCATALOGUEURL,
             'tabs' => $tabs,
+            'icons' => $icons,
         ];
     }
 
@@ -196,9 +209,10 @@ class menu {
      * Normalises a tab.
      *
      * @param array $tab
+     * @param array $icons Uploaded icons of the menu.
      * @return array
      */
-    private static function normalise_tab(array $tab): array {
+    private static function normalise_tab(array $tab, array $icons = []): array {
         $type = in_array($tab['type'] ?? '', self::TABTYPES, true) ? $tab['type'] : 'panel';
 
         $blocks = [];
@@ -223,8 +237,8 @@ class menu {
                 'enabled' => !empty($tab['basefilter']['enabled']),
                 'filters' => self::clean_filters($tab['basefilter']['filters'] ?? []),
             ],
-            'color' => array_key_exists($tab['color'] ?? '', self::COLORS) ? $tab['color'] : 'blue',
-            'icon' => in_array($tab['icon'] ?? '', self::ICONS, true) ? $tab['icon'] : '',
+            'color' => appearance::colors((string)($tab['color'] ?? '')) ? $tab['color'] : 'blue',
+            'icon' => in_array($tab['icon'] ?? '', self::ICONS, true) || isset($icons[$tab['icon'] ?? '']) ? $tab['icon'] : '',
             'heading' => self::clean_texts($tab['heading'] ?? []),
             'intro' => self::clean_texts($tab['intro'] ?? []),
             'hint' => self::clean_texts($tab['hint'] ?? []),
@@ -368,9 +382,9 @@ class menu {
                     : '',
                 'linkeditpath' => self::edit_path(array_merge($path, ['link']), $context),
                 'color' => $tab['color'],
-                'colors' => self::COLORS[$tab['color']],
+                'colors' => appearance::colors($tab['color']),
                 'icon' => $tab['icon'],
-                'iconsvg' => self::icon_svg($tab['icon']),
+                'iconsvg' => self::icon_svg($tab['icon'], $menu['icons']),
                 'heading' => self::text($tab['heading']),
                 'intro' => self::text($tab['intro']),
                 'hint' => self::text($tab['hint']),
@@ -569,13 +583,17 @@ class menu {
     /**
      * Returns the markup of an icon, to be inlined in the templates.
      *
-     * @param string $name One of ICONS.
+     * @param string $name One of ICONS or the id of an uploaded icon.
+     * @param array $uploaded Uploaded icons of the menu.
      * @return string Empty if there is no such icon.
      */
-    public static function icon_svg(string $name): string {
+    public static function icon_svg(string $name, array $uploaded = []): string {
         global $CFG;
         static $cache = [];
 
+        if (isset($uploaded[$name])) {
+            return $uploaded[$name]['svg'];
+        }
         if (!in_array($name, self::ICONS, true)) {
             return '';
         }
