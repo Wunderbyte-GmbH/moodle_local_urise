@@ -815,4 +815,8 @@ a.booking-card-image-link:hover {
         color: #001f33 !important;
     }
 }
+
+.fitem:has(input[name="includeteachers"]) {
+    display: none;
+}
 /* stylelint-enable declaration-no-important */
