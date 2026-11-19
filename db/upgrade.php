@@ -46,5 +46,13 @@ function xmldb_local_urise_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2026073000, 'local', 'urise');
     }
 
+    if ($oldversion < 2026111900) {
+        // Priced options in the "24 hour mode": remove the person from the waiting list when the
+        // offer of a freed seat expires.
+        \local_urise\local\waitlist24h_migration::run();
+
+        upgrade_plugin_savepoint(true, 2026111900, 'local', 'urise');
+    }
+
     return true;
 }
