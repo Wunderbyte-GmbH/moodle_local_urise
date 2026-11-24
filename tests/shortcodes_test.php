@@ -19,7 +19,9 @@ namespace local_urise;
 use advanced_testcase;
 use context_course;
 use context_system;
+use mod_booking\booking_option;
 use mod_booking\singleton_service;
+use mod_booking\teachers_handler;
 use mod_booking_generator;
 use stdClass;
 use tool_mocktesttime\time_mock;
@@ -165,6 +167,90 @@ final class shortcodes_test extends advanced_testcase {
                 "Unexpected number of records when searching for '$searchtext'"
             );
         }
+    }
+
+    /**
+     * The course shortcodes show the teachers of a booking option in the order that was set in the option
+     * form of mod_booking (PRO), and sorted by name if no order was set.
+     *
+     * @covers \local_urise\shortcodes::unifiedview
+     * @covers \local_urise\table\urise_table::col_teacher
+     *
+     * @dataProvider template_provider
+     *
+     * @param string $template template of the shortcode ([unifiedlist], [unifiedcards], [unifiedtextlist])
+     */
+    public function test_teachers_are_shown_in_their_order(string $template): void {
+        global $PAGE;
+
+        $course = $this->getDataGenerator()->create_course(['enablecompletion' => 1]);
+        $bookingmanager = $this->getDataGenerator()->create_user();
+        $maier = $this->getDataGenerator()->create_user(['firstname' => 'Bea', 'lastname' => 'Maier']);
+        $zimmer = $this->getDataGenerator()->create_user(['firstname' => 'Anna', 'lastname' => 'Zimmer']);
+        $adler = $this->getDataGenerator()->create_user(['firstname' => 'Carl', 'lastname' => 'Adler']);
+        $booking = $this->getDataGenerator()->create_module('booking', [
+            'name' => 'Test Booking',
+            'eventtype' => 'Test event',
+            'course' => $course->id,
+            'bookingmanager' => $bookingmanager->username,
+        ]);
+        $this->setAdminUser();
+
+        set_config('multibookinginstances', $booking->id, 'local_urise');
+        set_config('shortcodessetinstance', $booking->cmid, 'local_urise');
+
+        /** @var mod_booking_generator $plugingenerator */
+        $plugingenerator = self::getDataGenerator()->get_plugin_generator('mod_booking');
+        $record = new stdClass();
+        $record->bookingid = $booking->id;
+        $record->text = 'Option with teachers';
+        $record->teachersforoption = implode(',', [$maier->username, $zimmer->username, $adler->username]);
+        $option = $plugingenerator->create_option($record);
+
+        $PAGE->set_context(context_course::instance($course->id));
+        $PAGE->set_course($course);
+        $PAGE->set_url(new \moodle_url('/local/urise/tests/shortcodes_test.php'));
+
+        $env = new stdClass();
+        $next = function () {
+        };
+
+        // Without an order: sorted by name.
+        $this->assertSame(
+            ['Carl Adler', 'Bea Maier', 'Anna Zimmer'],
+            $this->get_teachers_of_first_row($template, $env, $next)
+        );
+
+        // The order of the option form.
+        $record->id = $option->id;
+        $record->cmid = $booking->cmid;
+        $record->teachersforoption = [(int)$maier->id, (int)$zimmer->id, (int)$adler->id];
+        $record->{teachers_handler::FORM_TEACHERSORDER} = [$zimmer->id, $adler->id, $maier->id];
+        booking_option::update($record);
+
+        $this->assertSame(
+            ['Anna Zimmer', 'Carl Adler', 'Bea Maier'],
+            $this->get_teachers_of_first_row($template, $env, $next)
+        );
+    }
+
+    /**
+     * Returns the names of the teachers of the first row of the shortcode, in the order of the column "teacher".
+     *
+     * The column is not part of the default columns of the shortcode, so it is rendered for the row directly.
+     *
+     * @param string $template template of the shortcode
+     * @param stdClass $env
+     * @param \Closure $next
+     * @return string[]
+     */
+    private function get_teachers_of_first_row(string $template, stdClass $env, \Closure $next): array {
+        [$table] = shortcodes::unifiedview('unifiedlist', ['all' => 1], null, $env, $next, $template);
+        $table->printtable(100, $table->useinitialsbar, $table->downloadhelpbutton);
+        $this->assertEquals(1, $table->totalrows);
+        $html = $table->col_teacher(reset($table->rawdata));
+        preg_match_all('/(Bea Maier|Anna Zimmer|Carl Adler)/', (string) $html, $matches);
+        return $matches[1];
     }
 
     /**
