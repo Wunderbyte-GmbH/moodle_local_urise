@@ -137,20 +137,10 @@ class urise_table extends wunderbyte_table {
 
         // Render col_teacher using a template.
         $settings = singleton_service::get_instance_of_booking_option_settings($values->id, $values);
+        // The flag "last" for the separator of the template is set by col_teacher.
         $data = new col_teacher($values->id, $settings);
-
-        $numitems = count($data->teachers);
-        $i = 0;
-        foreach ($data->teachers as $key => &$value) {
-            if (++$i === $numitems) {
-                $value['last'] = true;
-            } else {
-                $value['last'] = false;
-            }
-        }
         $output = singleton_service::get_renderer('local_urise');
         return $output->render_col_teacher($data);
-        ;
     }
 
     /**
