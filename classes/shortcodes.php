@@ -266,14 +266,9 @@ class shortcodes {
                 $template == 'local_urise/table_listtext'
             );
 
-            // If template switcher is active, we need to check if the user has already a saved preferred template.
-            $chosentemplate = get_user_preferences('wbtable_chosen_template_' . $table->uniqueid);
-            if (empty($chosentemplate)) {
-                $chosentemplate = $template; // Fallback.
-            }
-
-            // Now we replace the original template with the chosen one.
-            $template = $chosentemplate;
+            // The table definition is cached once for everybody, so it is always built with the template
+            // of the shortcode. The template a user has chosen is applied by the table on every request,
+            // see urise_table::apply_template_layout().
         }
 
         // Switch view type (cards view or list view).
@@ -1061,9 +1056,6 @@ class shortcodes {
 
         $table->tabletemplate = 'local_urise/table_card';
 
-        // We also need to set the user preference for the template.
-        set_user_preference('wbtable_chosen_template_' . $table->uniqueid, 'local_urise/table_card');
-
         $table->add_subcolumns('ariasection', ['puretext']);
 
         // We define it here so we can pass it with the mustache template.
@@ -1147,9 +1139,6 @@ class shortcodes {
         // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
         /* $table->infinitescroll = $infinitescrollpage; // We don't want this currently. */
         $table->tabletemplate = 'local_urise/table_list';
-
-        // We also need to set the user preference for the template.
-        set_user_preference('wbtable_chosen_template_' . $table->uniqueid, 'local_urise/table_list');
 
         $table->define_cache('mod_booking', 'bookingoptionstable');
 
@@ -1247,9 +1236,6 @@ class shortcodes {
         // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
         /* $table->infinitescroll = $infinitescrollpage; // We don't want this currently. */
         $table->tabletemplate = 'local_urise/table_listtext';
-
-        // We also need to set the user preference for the template.
-        set_user_preference('wbtable_chosen_template_' . $table->uniqueid, 'local_urise/table_listtext');
 
         $table->define_cache('mod_booking', 'bookingoptionstable');
 

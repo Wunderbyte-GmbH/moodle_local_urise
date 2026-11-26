@@ -15,7 +15,6 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace local_urise\table;
-use local_urise\shortcodes;
 use mod_booking\booking_answers\booking_answers;
 
 defined('MOODLE_INTERNAL') || die();
@@ -30,6 +29,7 @@ use context_module;
 use context_system;
 use dml_exception;
 use html_writer;
+use local_urise\shortcodes;
 use local_wunderbyte_table\local\customfield\wbt_field_controller_info;
 use local_wunderbyte_table\wunderbyte_table;
 use mod_booking\booking_bookit;
@@ -53,6 +53,32 @@ defined('MOODLE_INTERNAL') || die();
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class urise_table extends wunderbyte_table {
+    /**
+     * Arrange the columns for the template of the current user (cards, list or text list).
+     * Runs on every request, the cached table definition keeps the template of the shortcode.
+     *
+     * @param string $template
+     * @param int $viewparam
+     * @return void
+     */
+    public function apply_template_layout(string $template, int $viewparam): void {
+        $table = $this;
+        switch ($template) {
+            case 'local_urise/table_list':
+                shortcodes::generate_table_for_list($table);
+                break;
+            case 'local_urise/table_listtext':
+                shortcodes::generate_table_for_textlist($table);
+                break;
+            case 'local_urise/table_card':
+                shortcodes::generate_table_for_cards($table);
+                break;
+            default:
+                // Not one of the switchable course templates (calendar...): keep the arrangement as it is.
+                break;
+        }
+    }
+
     /** @var array $displayoptions */
     private $displayoptions = [];
 

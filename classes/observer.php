@@ -88,42 +88,8 @@ class observer {
      * @param template_switched $event
      */
     public static function template_switched(template_switched $event) {
-        $data = $event->get_data();
-        $encodedtable = $data["other"]["tablecachehash"];
-        $template = $data["other"]["template"];
-        // We currently don't need the viewparam in urise, because we only support 2 templates currently.
-        // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-        /* $viewparam = $data["other"]["viewparam"]; */
-        // Only apply this for Booking templates!
-        if (
-            !empty($encodedtable)
-            && in_array($template, [
-                'local_urise/table_card',
-                'local_urise/table_list',
-                'local_urise/table_listtext',
-            ])
-        ) {
-            $table = wunderbyte_table::instantiate_from_tablecache_hash($encodedtable);
-            $columns = array_keys($table->columns);
-            unset($columns['id']);
-
-            // Not necessary in urise, we only need this if we support different viewparams for the same template.
-            // phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-            /* $table->unset_template_data(); */
-
-            switch ($template) {
-                case 'local_urise/table_list':
-                    shortcodes::generate_table_for_list($table);
-                    break;
-                case 'local_urise/table_listtext':
-                    shortcodes::generate_table_for_textlist($table);
-                    break;
-                case 'local_urise/table_card':
-                default:
-                    shortcodes::generate_table_for_cards($table);
-                    break;
-            }
-            $table->return_encoded_table(true);
-        }
+        // Nothing to do. The choice is stored for the user by the table itself, and the columns are
+        // arranged for the chosen template on every request, see urise_table::apply_template_layout().
+        // The cached table definition is shared by all users and must not be changed here.
     }
 }
